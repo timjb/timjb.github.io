@@ -1,0 +1,12 @@
+language: haskell
+branches:
+  only:
+    - source
+install:
+  - cabal install hakyll
+before_script:
+  - git submodule update --init
+script: ./site build
+after_script:
+  - cd _site
+  - git status
