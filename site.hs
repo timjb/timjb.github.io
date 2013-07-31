@@ -10,6 +10,7 @@ import Control.Monad.IO.Class
 main :: IO ()
 main = hakyll $ do
   let copyRule = route idRoute >> compile copyFileCompiler
+  match ".travis.yml"    copyRule
   match "CNAME"          copyRule
   match "images/*"       copyRule
   match "cv/*"           copyRule
