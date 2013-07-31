@@ -2,11 +2,16 @@ language: haskell
 branches:
   only:
     - source
+secure: "R8VRenmnhdK2ZyFIDfXXIQysbv22j+k22Ar6/zsSFeU8W14Ve+F7qRGLHxfGEiwsOaUfSIHa+TcYTpRRmm4oyFltJhZ1rSahLAB6G98mbgb5O1kvLzC4x+ogGjuMP0mErIk9p6PccE7T3MEgzg8mQYPHkrt5KE9Kop8NMwGhhbs="
 install:
   - cabal install hakyll
+  - ghc --make site.hs
 before_script:
   - git submodule update --init
 script: ./site build
 after_script:
   - cd _site
   - git status
+  - git add --all
+  - git commit "snapshot $(date '+%m/%d/%y %H:%M')"
+  - git push "$REPO_URL" master
