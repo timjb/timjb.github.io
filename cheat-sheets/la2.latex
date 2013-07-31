@@ -1,0 +1,569 @@
+\documentclass[a4paper,10pt,landscape]{article}
+\usepackage{multicol}
+\usepackage{calc}
+\usepackage{ifthen}
+\usepackage[landscape]{geometry}
+\usepackage{amsmath,amsthm,amsfonts,amssymb}
+\usepackage{color,graphicx,overpic}
+\usepackage{hyperref}
+\usepackage[utf8]{inputenc}
+\usepackage[ngerman]{babel}
+\usepackage{enumitem}
+\usepackage{mathtools}
+\usepackage{pifont}
+\usepackage{stmaryrd} % \varoplus
+
+\setitemize[0]{leftmargin=10pt,itemindent=0pt,itemsep=0pt}
+\setenumerate[0]{leftmargin=10pt,itemindent=0pt,itemsep=0pt}
+
+\newcommand{\cmark}{\ding{51}}
+\newcommand{\xmark}{\ding{55}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\GL}{\mathrm{GL}}
+\newcommand{\End}{\mathrm{End}}
+\newcommand{\Eig}{\mathrm{Eig}}
+\newcommand{\VEig}{\mathrm{VEig}}
+\newcommand{\id}{\mathrm{id}}
+\newcommand{\spur}{\mathrm{spur}}
+
+% Differentiator
+\renewcommand{\d}{\mathrm{d}}
+
+\pdfinfo{
+  /Title (la2.pdf)
+  /Creator (TeX)
+  /Producer (pdfTeX 1.40.0)
+  /Author (Tim Baumann)
+  /Subject (Lineare Algebra 2 Zusammenfassung)
+  /Keywords (linear-algebra,overview)}
+
+% This sets page margins to .5 inch if using letter paper, and to 1cm
+% if using A4 paper. (This probably isn't strictly necessary.)
+% If using another size paper, use default 1cm margins.
+\ifthenelse{\lengthtest { \paperwidth = 11in}}
+    { \geometry{top=.5in,left=.5in,right=.5in,bottom=.5in} }
+    {\ifthenelse{ \lengthtest{ \paperwidth = 297mm}}
+        {\geometry{top=1cm,left=1cm,right=1cm,bottom=1cm} }
+        {\geometry{top=1cm,left=1cm,right=1cm,bottom=1cm} }
+    }
+
+\theoremstyle{definition}
+
+\newtheorem*{nota}{Notation}
+\newtheorem*{defn}{Definition}
+\newtheorem*{bsp}{Beispiel}
+\newtheorem*{satz}{Satz}
+\newtheorem*{kor}{Korollar}
+\newtheorem*{acht}{Achtung}
+\newtheorem*{strat}{Strategie}
+
+\theoremstyle{remark}
+\newtheorem*{bem}{Bemerkung}
+
+% Römische Ziffern
+\makeatletter
+\newcommand*{\rom}[1]{\expandafter\@slowromancap\romannumeral #1@}
+\makeatother
+
+% Ober- und Unterintegral, siehe
+% http://tex.stackexchange.com/questions/44237/lower-and-upper-riemann-integrals
+\def\upint{\mathchoice%
+    {\mkern13mu\overline{\vphantom{\intop}\mkern7mu}\mkern-20mu}%
+    {\mkern7mu\overline{\vphantom{\intop}\mkern7mu}\mkern-14mu}%
+    {\mkern7mu\overline{\vphantom{\intop}\mkern7mu}\mkern-14mu}%
+    {\mkern7mu\overline{\vphantom{\intop}\mkern7mu}\mkern-14mu}%
+  \int}
+\def\lowint{\mkern3mu\underline{\vphantom{\intop}\mkern7mu}\mkern-10mu\int}
+
+% Offene und abgeschlossene Teilmengen
+% http://tex.stackexchange.com/questions/22371/subseteq-circ-as-a-single-symbol-open-subset
+\newcommand\opn{\mathrel{\ooalign{$\subset$\cr
+  \hidewidth\raise.1ex\hbox{$\circ\mkern.5mu$}\cr}}}
+\newcommand\cls{\mathrel{\ooalign{$\subset$\cr
+  \hidewidth\raise.1ex\hbox{$\bullet\mkern.5mu$}\cr}}}
+
+% Färbe \emph{}
+\definecolor{Emph}{rgb}{0.2,0.2,0.8}  %softer red for display
+\renewcommand{\emph}[1]{\textcolor{Emph}{\bf{#1}}}
+
+% Display style überall!
+\everymath{\displaystyle}
+
+% Turn off header and footer
+\pagestyle{empty}
+
+% Redefine section commands to use less space
+\makeatletter
+\renewcommand{\section}{\@startsection{section}{1}{0mm}%
+                                {-1ex plus -.5ex minus 2ex}%
+                                {2.5ex plus .2ex}%x
+                                {\normalfont\large\bfseries}}
+\renewcommand{\subsection}{\@startsection{subsection}{2}{0mm}%
+                                {-1explus -.5ex minus -.2ex}%
+                                {0.5ex plus .2ex}%
+                                {\normalfont\normalsize\bfseries}}
+\renewcommand{\subsubsection}{\@startsection{subsubsection}{3}{0mm}%
+                                {-1ex plus -.5ex minus -.2ex}%
+                                {1ex plus .2ex}%
+                                {\normalfont\small\bfseries}}
+\makeatother
+
+% Don't print section numbers
+\setcounter{secnumdepth}{0}
+
+\DeclarePairedDelimiterX\Set[2]{\lbrace}{\rbrace}%
+ { #1 \,\delimsize|\, #2 }
+
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0pt plus 10ex}
+
+% -----------------------------------------------------------------------
+
+\begin{document}
+\raggedright
+\footnotesize
+\begin{multicols}{3}
+
+% multicol parameters
+% These lengths are set only within the two main columns
+%\setlength{\columnseprule}{0.25pt}
+\setlength{\premulticols}{1pt}
+\setlength{\postmulticols}{1pt}
+\setlength{\multicolsep}{1pt}
+\setlength{\columnsep}{2pt}
+
+\begin{center}
+  \Large{\underline{Zusammenfassung Lineare Algebra \rom{2}}} \\
+\end{center}
+
+\begin{nota}
+Sofern nicht anders angegeben, bezeichne $K$ im folgenden einen beliebigen Körper, $V$ einen (möglicherweise unendlichdim.) $K$-Vektorraum und $f$ einen Endomorphismus $V \to V$.
+\end{nota}
+
+\begin{defn}
+Zwei Matrizen $A, B \in K^{n \times n}$ heißen zueinander \emph{ähnlich}, falls es eine Matrix $S \in \GL(n, K)$ gibt mit $B = SAS^{-1}$.
+\end{defn}
+
+\begin{bem}
+Dies definiert eine Äquivalenzrelation auf $K^{n \times n}$.
+\end{bem}
+
+\begin{defn}
+Eine Matrix $A \in K^{n \times n}$
+\begin{itemize}
+  \item ist in \emph{Diagonalform}, wenn $A$ nur auf der Diagonalen von Null verschiedene Einträge besitzt.
+  \item ist in \emph{Triagonalform}, wenn $A$ nur auf und oberhalb der Diagonalen von Null verschiedene Einträge besitzt.
+  \item heißt \emph{diagonalisierbar} bzw. \emph{triagonalisierbar}, wenn $A$ ähnlich zu einer Diagonal- bzw. Triagonalmatrix ist.
+\end{itemize}
+Ein Endomorphismus $f \in \End(V)$ heißt \emph{diagonalisierbar} bzw. \emph{triagonalisierbar}, wenn es eine Basis von $V$ gibt, sodass die darstellende Matrix von $f$ bzgl. dieser Basis eine Diagonalmatrix ist.
+\end{defn}
+
+\begin{satz}
+Es sei $A \in K^{n \times n}$. Dann ist $A$ als Matrix genau dann diagonalisierbar (triagonalisierbar), wenn der durch $A$ beschriebene Endomorphismus $K^n \to K^n$ diagonalisierbar (triagonalisierbar) ist.
+\end{satz}
+
+\begin{defn}
+Sei $f \in \End(V)$. Falls es ein $\lambda \in K$ und einen Vektor $v \in V \backslash \{ 0 \}$ gibt, sodass $f(v) = \lambda v$, so heißt $\lambda$ \emph{Eigenwert} von $f$ zum \emph{Eigenvektor} $v$.
+\end{defn}
+
+\begin{satz}
+Sei $f \in \End(V)$ und $(v_i)_{i \in I}$ eine Familie von Eigenvektoren von $f$ zu paarweise verschiedenen Eigenwerten. Dann ist diese Familie linear unabhängig.
+\end{satz}
+
+\begin{defn}
+Ist $\lambda \in K$, so setzen wir
+\begin{align*}
+\Eig(f; \lambda) &:= \Set{ v \in V }{ f(v) = \lambda v }\\
+&= \ker(f - \lambda \cdot \id_V).
+\end{align*}
+Dies ist der zu $\lambda$ gehörende \emph{Eigenraum}, ein UVR von $V$.
+\end{defn}
+
+\begin{satz}
+Sei $V$ endlichdim. und $f \in \End(V)$ mit Eigenwerten $\lambda_1, ..., \lambda_k$. Dann ist $f$ genau dann diagonalisierbar, wenn
+\[ \dim \Eig(f; \lambda_1) + ... + \dim \Eig(f; \lambda_k) = \dim V. \]
+\end{satz}
+
+\begin{satz}
+$\lambda \in K \text{ ist ein EW von } f \iff \det(f - \lambda \id_V) = 0$.
+\end{satz}
+
+\begin{defn}
+Sei $A \in K^{n \times n}$. Das Polynom $P_A(X) = \chi_A(X) := \det(A - X \cdot E_n) \in K[X]$ heißt \emph{charakteristisches Polynom} von $A$. Für die darstellende Matrix $A$ von $f$ bzgl. einer beliebigen Basis von $V$ setzen wir
+\[ P_f(X) := P_A(X) \in K[X]. \]
+Dieses Polynom ist von der gewählten Basis von $V$ unabhängig.
+\end{defn}
+
+\begin{satz}
+$\lambda \in K \text{ ist ein EW von } f \iff \lambda \text{ ist Nullstelle von } P_f \in K[X]$
+\end{satz}
+
+% TODO: Verfahren: Bestimmung von Eigenwerten und Eigenräumen
+
+\begin{defn}
+Sei $A = (a_{ij}) \in K^{n \times n}$. Dann heißt
+\[ \spur(A) := \sum_{k=1}^n a_{kk} \in K \]
+die \emph{Spur} von $A$.
+\end{defn}
+
+\begin{satz}
+Seien $A, B \in K^{n \times n}$. Dann gilt $\spur(AB) = \spur(BA)$.
+\end{satz}
+
+\begin{kor}
+Ähnliche Matrizen haben die gleiche Spur.
+\end{kor}
+
+\begin{satz}
+Für diagonalisierbare $f \in \End(V)$ zerfällt $P_f$ in Linearfaktoren. Zerfalle umgekehrt $P_f$ in Linearfaktoren, wobei jede Nullstelle nur mit Vielfachheit $1$ auftrete. Dann ist $f$ diagonalisierbar.
+\end{satz}
+
+\begin{defn}
+Sei $\lambda$ ein EW von $f$.
+\begin{itemize}
+  \item Dann heißt die Ordnung der Nullstelle $\lambda$ von $P_f$ \emph{algebraische Vielfachheit} von $\lambda$ (wird bezeichnet mit $\mu(f; \lambda)$).
+  \item Die Dimension $d(f; \lambda) := \dim \Eig(f; \lambda)$ heißt \emph{geometrische Vielfachheit} von $\lambda$.
+\end{itemize}
+\end{defn}
+
+\begin{satz}
+Für alle EW $\lambda \in K$ von $f$ gilt
+\[ 1 \le \dim \Eig(f; \lambda) \le \mu(P_f; \lambda). \]
+\end{satz}
+
+\begin{defn}
+\[ J(\lambda, n) := \begin{pmatrix} \lambda & 1 & & 0 \\ & \ddots & \ddots & \\ & & \ddots & 1 \\ 0 & & & \lambda \end{pmatrix} \]
+heißt der \emph{Jordanblock} der Größe $n$ zum EW $\lambda$.
+\end{defn}
+
+\begin{bem}
+Es gilt $P_{J(\lambda, n)} = (\lambda - X)^n$ aber nur $\Eig(f; \lambda) = \langle e_1 \rangle$.
+\end{bem}
+
+\begin{satz}
+Es sind äquivalent:
+\begin{itemize}
+  \item $f$ ist diagonalisierbar
+  \item $P_f$ zerfällt in Linearfaktoren und für alle Nullstellen $\lambda$ von $P_f$ gilt $\mu(f; \lambda) = \dim \Eig(f; \lambda)$.
+  \item Sind $\lambda_1, ..., \lambda_k$ die paarweise verschiedenen EW von $f$, so gilt
+  \[ V = \Eig(f; \lambda_1) \varoplus ... \varoplus \Eig(f; \lambda_k). \]
+\end{itemize}
+\end{satz}
+
+% TODO: Verfahren: Bestimmung, ob $f$ diagonalisierbar ist
+
+\begin{satz}
+$P_f \text{ zerfällt in Linearfaktoren } \iff f \text{ ist trigonalisierbar }$
+\end{satz}
+
+% TODO: Verfahren "=>"
+% Bemerkung 1.13
+
+\begin{kor}
+Jeder Endomorphismus eines endlichdim. $\C$-VR ist trigonalisierbar (Fundamentalsatz der Algebra).
+\end{kor}
+
+% TODO: Theorie der gewöhnlichen Differentialgleichungen
+
+\begin{satz}[Cayley-Hamilton]
+Sei $V$ endlichdim. und $f \in \End(V)$ mit charakteristischem Polynom $P_f(X) \in K[X]$. Dann gilt $P_f(f) = 0$.
+\end{satz}
+
+\begin{defn}
+Sei $\lambda \in K$ ein EW von $f$ mit alg. Vielfachheit $\mu := \mu(P_f, \lambda)$. Dann heißt
+\[ \VEig(f, \lambda) := \ker(f - \lambda \cdot \id_V)^{\mu} \]
+der \emph{verallgemeinerte Eigenraum} zum EW $\lambda$.
+\end{defn}
+
+\begin{satz}
+Es zerfalle $P_f$ in Linearfaktoren, also
+\[ P_f = \pm (X - \lambda_1)^{\mu_1} \cdot ... \cdot (X - \lambda_k)^{\mu_k}. \]
+Dann gilt
+\[ V = \VEig(f, \lambda_1) \varoplus ... \varoplus \VEig(f, \lambda_k). \]
+\end{satz}
+
+\begin{nota}
+Es bezeichne $R$ einen kommutativen Ring mit $1$.
+\end{nota}
+
+\begin{defn}
+Eine Teilmenge $I \subset R$ heißt \emph{Ideal}, falls $I$ eine additive Untergruppe von $R$ ist und ür alle $r \in R$ und $x \in I$ gilt, dass $r \cdot x \in I$.
+\end{defn}
+
+\begin{defn}
+Ist $S \subset R$ eine Teilmenge, so ist die Menge
+\[ \Set{ r_1s_1 + ... + r_ks_k }{ k \ge 0, s_1, ..., s_k \in S, r_1, ..., r_k \in R } \]
+ein Ideal in $R$ und wird \emph{von $S$ erzeugtes Ideal} genannt.
+\end{defn}
+
+\begin{defn}
+Ein Ideal $I \subset R$ heißt \emph{Hauptideal}, falls $I$ von einem einzigen Element erzeugt wird. Ein Ring, in dem jedes Ideal ein Hauptideal ist, heißt \emph{Hauptidealring}.
+\end{defn}
+
+\begin{satz}
+Für jeden Körper $K$ ist $K[X]$ ein Hauptidealring.
+\end{satz}
+
+% TODO: Definition ggT
+% fehlende Eindeutigkeit
+
+\begin{satz}
+Es sei $R$ ein Hauptidealring und $a_1, ..., a_k \in R$. Dann existiert ein ggT von $a_1, ..., a_k$.
+\end{satz}
+
+\begin{satz}[Jordan-Chevalley-Zerlegung]
+Sei $V$ endlichdim. und zerfalle $P_f$ in Linearfaktoren. Dann gibt es einen diagonalisierbaren Endomorphismus $D : V \to V$ und einen nilpotenten Endomorphismus $N : V \to V$ mit
+\begin{itemize}
+  \item $f = N + D$
+  \item $D \circ N = N \circ D$
+\end{itemize}
+\end{satz}
+
+% TODO: Verfahren
+
+\begin{satz}
+Zerfalle $P_f$ in Linearfaktoren. Für alle EW $\lambda_1, ..., \lambda_k$ gilt dann:
+\[ \dim \VEig(f, \lambda_i) = \mu(f, \lambda_i). \]
+\end{satz}
+
+\begin{satz}[Normalform nilpotenter Matrizen]
+Sei $N \in K^{n \times n}$ nilpotent. Dann ist $N$ ähnlich zu einer Matrix der Form
+\[ \begin{pmatrix}
+J(0, n_1) & 0 & 0 & 0 \\
+0 & J(0, n_2) & 0 & 0 \\
+& & \ddots & \\
+0 & 0 & 0 & J(0, n_r)
+\end{pmatrix} \]
+\end{satz}
+
+% TODO: Verfahren
+
+\begin{satz}[Jordansche Normalform]
+Sei $V$ endlichdim. und zerfalle $P_f$ in Linearfaktoren. Dann gibt es eine Basis von $V$, sodass die darstellende Matrix von $f$ folgende Form hat:
+\[ \begin{pmatrix}
+J(\lambda_1, m_1) & 0 & \cdots & 0 \\
+0 & J(\lambda_2, m_2) & \cdots & 0 \\
+\vdots & \vdots & \ddots & \vdots \\
+0 & 0 & \cdots & J(\lambda_q, m_q)
+\end{pmatrix} \]
+Dabei sind $m_1, ..., m_q \in \N$ mit $m_1 + ... + m_q = \dim V$ und $\lambda_1, ..., \lambda_q$ EWe von $f$ (mit Vielfachheiten).
+\end{satz}
+
+% TODO: Verfahren
+
+\begin{defn}
+\begin{itemize}
+  \item \emph{Euklidische Norm:} Für $x = (x_1, ..., x_n) \in \C^n$ setzen wir $\| x \| := \sqrt{|x_1|^2 + ... + |x_n|^2}$
+  \item \emph{Operatornorm:} Für $A \in \C^{n \times n}$ setzen wir $\| A \| := \max \Set{ \| Av \| }{ v \in \C^n, \| v \| = 1 }$
+\end{itemize}
+\end{defn}
+
+% TODO: Lemma 3.1
+
+\begin{satz}
+Für alle $A \in \C^{n \times n}$ konvergiert die Reihe
+\[ \sum_{k=0}^\infty \frac{1}{k!} \cdot A^k \]
+absolut.
+\end{satz}
+
+\begin{defn}
+Die Funktion
+\[ \exp : \C^{n \times n} \to \C^{n \times n}, \quad A \mapsto \sum_{k=0}^{\infty} \frac{1}{k!} \cdot A^k \]
+heißt \emph{Exponentialfunktion} für Matrizen.
+\end{defn}
+
+\begin{bem}
+Es gilt:
+\begin{itemize}
+  \item $\exp(0) = E_n$
+  \item $\exp(\lambda \cdot E_n) = e^\lambda \cdot E_n$ für $\lambda \in \C$
+  \item $\exp \begin{pmatrix} 0 & -t \\ t & 0 \end{pmatrix} = \begin{pmatrix} \cos(t) & -\sin(t) \\ \sin(t) & \cos(t) \end{pmatrix}$
+  \item $\exp$ ist stetig.
+\end{itemize}
+\end{bem}
+
+\begin{satz}
+Für zwei Matrizen $A, B \in \C^{n \times n}$ mit $AB = BA$ gilt
+\[ \exp(A + B) = \exp(A) \cdot \exp(B). \]
+\end{satz}
+
+\begin{defn}
+Für eine Matrix $A \in \C^{n \times n}$ sei
+\[ \phi_A : \R \to \C^{n \times n},\quad t \mapsto \exp(t \cdot A) \]
+\end{defn}
+
+% Was heißt es, dass eine Funktion \R \to \C^{n \times n} differenzierbar ist?
+
+\begin{satz}
+Die Abbildung $\phi_A : \R \to \C^{n \times n}$ ist differenzierbar mit Ableitung
+\[ \phi'_A(t) = A \cdot \phi_A(t). \]
+\end{satz}
+
+% Proposition 3.6
+
+\begin{satz}
+Es gilt:
+\[ \exp(t \cdot J(\lambda, n)) = \exp(t \lambda) \cdot \begin{pmatrix}
+1 & t & \tfrac{t^2}{2!} & \cdots & \tfrac{t^{n-1}}{(n-1)!} \\
+0 & 1 & t & \cdots & \tfrac{t^{n-2}}{(n-2)!} \\
+\vdots & \ddots & \ddots & \ddots & \vdots \\
+0 & \cdots & 0 & 1 & t \\
+0 & \cdots & \cdots & 0 & 1
+\end{pmatrix} \]
+\end{satz}
+
+% Anwendung auf Systeme linearer Differentialgleichungen
+
+\begin{defn}
+Für $x = (x_1, ..., x_n) \in \R^n$ und $y = (y_1, ..., y_n) \in \R^n$ definieren wir
+\[ \langle x , y \rangle := x_1y_2 + ... + x_ny_n. \]
+Dies ist das \emph{Skalarprodukt} im $\R^n$.
+\end{defn}
+
+\begin{defn}
+Für
+\[ A = \begin{pmatrix}
+a_{11} & \cdots & a_{1n} \\
+\vdots & \ddots & \vdots \\
+a_{m1} & \cdots & a_{mn}
+\end{pmatrix} \in K^{m \times n} \]
+definieren wir die \emph{transponierte Matrix} durch
+\[ A^{T} := \begin{pmatrix}
+a_{11} & \cdots & a_{m1} \\
+\vdots & \ddots & \vdots \\
+a_{1n} & \cdots & a_{mn}
+\end{pmatrix} \in K^{m \times n}. \]
+\end{defn}
+
+\begin{defn}
+Es sei $K$ ein Körper und $V$ ein $K$-VR. Eine \emph{Bilinearform} auf $V$ ist eine Abbildung
+\[ \gamma : V \times V \to K, \]
+sodass $\gamma$ linear in jedem Argument, d.\,h. die Abbildungen
+\begin{alignat*}{2}
+\gamma(v, -) &: V \to K, \quad w & \mapsto \gamma(v, w) \\
+\gamma(-, w) &: V \to K, \quad v & \mapsto \gamma(v, w)
+\end{alignat*}
+für beliebige $v, w \in V$ linear sind.
+\end{defn}
+
+\begin{defn}
+Für eine Bilinearform $\gamma$ auf einem Vektorraum $V$ und eine Basis $\mathcal{B} = (b_1, ..., b_n)$ von $V$ definieren wir die \emph{darstellende Matrix} von $\gamma$ bzgl. $\mathcal{B}$ durch
+\[ M_B(\gamma)_{ij} := \gamma(b_i, b_j). \]
+\end{defn}
+
+\begin{satz}
+Sei $A \in K^{n \times n}$ die darstellende Matrix einer Bilinearform $\gamma$ bezüglich einer Basis $\mathcal{B} = (b_1, ..., b_n)$. Für $v, w \in V$ mit Koordinatenvektoren
+\[ x = \begin{pmatrix} x_1 \\ \vdots \\ x_n \end{pmatrix},
+y = \begin{pmatrix} y_1 \\ \vdots \\ y_n \end{pmatrix} \]
+gilt
+\[ \gamma(v, w) = x^{T}Ay. \]
+\end{satz}
+
+\begin{kor}
+Sind $\gamma$ und $\gamma'$ zwei Bilinearformen mit $M_B(\gamma) = M_B(\gamma')$, so gilt $\gamma = \gamma'$.
+\end{kor}
+
+\begin{satz}
+Sei $\mathcal{C}$ eine weitere Basis von $V$ und $T^{\mathcal{B}}_{\mathcal{C}}$ die Koordinatentransformations von $\mathcal{B}$ nach $\mathcal{C}$. Dann gilt
+\[ M_\mathcal{B}(\gamma) = (T_{\mathcal{C}}^{\mathcal{B}})^{T} \cdot M_{\mathcal{C}}(\gamma) \cdot T_{\mathcal{C}}^{\mathcal{B}}. \]
+\end{satz}
+
+\begin{defn}
+Eine Bilinearform $\gamma : V \times V \to K$ heißt symmetrisch, falls $\gamma(v, w) = \gamma(w, v)$ für alle $v, w \in V$ gilt. Äquivalent dazu ist eine Bilinearform auf einem endlichdim. VR $V$ symmetrisch, wenn $M_{\mathcal{B}}(\gamma)^{T} = M_{\mathcal{B}}(\gamma)$ gilt.
+\end{defn}
+
+\begin{defn}
+Sei $V$ ein $\R$-Vektorraum.
+\begin{itemize}
+  \item Eine symmetrische Bilinearform $\gamma : V \times V \to \R$ heißt \emph{positiv definit}, falls $\gamma(v, v) > 0$ für alle $v \in V \backslash \{ 0 \}$ gilt.
+  \item Eine symmetrische, positive definite Bilinearform auf einem $\R$-VR heißt \emph{(euklidisches) Skalarprodukt}.
+  \item Ein $\R$-VR, auf dem ein euklidisches Skalarprodukt definiert ist, heißt \emph{(euklidischer) Vektorraum}.
+\end{itemize}
+\end{defn}
+
+\begin{defn}
+Sei $V$ ein $\C$-Vektorraum.
+\begin{itemize}
+  \item Eine Abbildung $\gamma : V \times V \to \C$ heißt \emph{Sesquilinearform}, falls $\gamma$ linear im ersten Argument, jedoch konjugiert-linear im zweiten Argument ist, d.\,h. für alle $v, w_1, w_2 \in V$ und $\lambda_1, \lambda_2 \in \C$ gilt
+  \[ \gamma(v, \lambda_1 w_1 + \lambda_2 w_2) = \overline{\lambda_1} \gamma(v, w_1) + \overline{\lambda_2} \gamma(v, w_2). \]
+  \item Eine Sesquilinearform $\gamma$ heißt \emph{hermitesch}, falls
+  \[ \gamma(v, w) = \overline{\gamma(w, v)} \]
+  für alle $v, w \in V$. Für alle $v \in V$ gilt dann $\gamma(v, v) = \overline{\gamma(v, v)}$, also $\gamma(v, v) \in \R$.
+  \item Eine hermitische Sesquilinearform $\gamma$ heißt \emph{(unitäres) Skalarprodukt}, falls $\gamma$ positiv definit ist, d.\,h. $\gamma(v, v) > 0$ für alle $v \in V$ ist.
+\end{itemize}
+\end{defn}
+
+\begin{defn}
+Sei $\gamma : V \times V \to \C$ eine Sesquilinearform auf einem $\C$-VR $V$ und $\mathcal{B} = (b_1, ..., b_n)$ eine Basis von $V$. Dann ist die \emph{darstellende Matrix} von $\gamma$
+\[ (M_{\mathcal{B}})_{ij} := \gamma(b_i, b_j). \]
+\end{defn}
+
+\begin{bem}
+Eine Bilinearform auf einem endlichdim. $\C$-VR ist genau dann hermitisch, wenn $M_{\mathcal{B}}(\gamma)^{T} = \overline{M_{\mathcal{B}}(\gamma)}$ gilt. 
+\end{bem}
+
+\begin{defn}
+Für euklidische bzw. euklidische VR $V$ und $v \in V$ setzen wir
+\[ \| v \| := \sqrt{ \langle v , v \rangle }. \]
+\end{defn}
+
+\begin{defn}
+Sei $V$ ein euklidischer/unitärer VR.
+\begin{itemize}
+  \item Zwei Vektoren $v, w \in V$ heißen \emph{orthogonal} (geschrieben $v \perp w$), falls $\langle v , w \rangle = 0$ gilt.
+  \item Eine Familie $(v_i)_{i \in I}$ von Vektoren heißt \emph{orthogonal}, falls $v_i \perp v_j$ für alle $i, j \in I$ mit $ \not= j$ gilt.
+  \item Eine Familie $(v_i)_{i \in I}$ heißt \emph{orthonormal}, falls sie orthogonal ist und zusätzlich $\| v_i \| = 1$ für alle $i \in I$ erfüllt.
+  \item Eine orthogonale Familie, die eine Basis von $V$ ist, heißt \emph{Orthonormalbasis}.
+\end{itemize}
+\end{defn}
+
+\begin{satz}
+Für $v, w \in V$ mit $v \perp w$ gilt $\| v + w \|^2 = \| v \|^2 + \| w \|^2$.
+\end{satz}
+
+\begin{satz}[Cauchy-Schwarzsche Ungleichung]
+Es sei $V$ ein euklidischer oder unitärer Vektorraum. Dann gilt für alle $v, w \in V$
+\[ | \langle v, w \rangle | \le \| v \| \cdot \| w \|. \]
+\end{satz}
+
+\begin{satz}
+Sei $V$ ein euklidischer/unitärer VR. Dann definiert die Funktion
+\[ \| - \| : V \to \R, \quad v \mapsto \sqrt{ \langle v , v \rangle } \]
+eine Norm auf $V$.
+\end{satz}
+
+\begin{satz}
+Sei $V$ ein euklidischer/unitärer VR, $(v_i)_{i \in I}$ eine orthogonale Familie und $v_i \not= 0$ für alle $i \in I$. Dann ist die Familie $(v_i)$ linear unabhängig.
+\end{satz}
+
+\begin{defn}
+Zwei UVR $U, W \subset V$ heißen \emph{orthogonal} (geschrieben $U \perp W$), falls $u \perp w$ für alle $u \in U$ und $w \in W$ gilt.
+\end{defn}
+
+\begin{defn}
+Ist $U \subset V$ ein UVR, so ist
+\[ U^{\perp} := \Set{ v \in V }{ v \perp u \text{ für alle } u \in U } \]
+ein UVR von $V$ und heißt das \emph{orthogonale Komplement} von $U$ in $V$
+\end{defn}
+
+\begin{bem}
+Es gilt: $U \perp U^{\perp}$.
+\end{bem}
+
+\begin{satz}
+Jeder endlichdimensionale euklidische/unitäre VR besitzt eine Orthonormalbasis.
+\end{satz}
+
+ % TODO: Gram-Schmidtsches Orthonormalisierungsverfahren
+ % Definition: Orthogonale Projektion
+
+ \begin{kor}
+ Sei $V$ ein euklidischer/unitärer VR und $W \subset V$ ein endlichdim. UVR. Dann gilt
+ \[ V = W \varoplus W^{\perp}. \]
+ \end{kor}
+
+\end{multicols}
+\end{document}

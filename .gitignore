@@ -1,0 +1,8 @@
+/_cache
+/site
+/site.hi
+/site.o
+
+*.aux
+*.log
+*.out
