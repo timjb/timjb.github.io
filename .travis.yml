@@ -9,8 +9,8 @@ install:
   - cabal install hakyll
   - ghc --make site.hs
 before_script:
-  - git submodule update --init
   - cd _site
+  - git checkout master
   - git pull origin master
   - cd ..
 script: ./site build
@@ -22,3 +22,4 @@ after_script:
   - git config --global user.name "Travis"
   - git commit -m "snapshot $(date '+%m/%d/%y %H:%M')"
   - git push "$REPO_URL" master
+  - cd ..
