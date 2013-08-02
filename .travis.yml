@@ -4,7 +4,7 @@ branches:
     - source
 env:
   global:
-    - secure: "R8VRenmnhdK2ZyFIDfXXIQysbv22j+k22Ar6/zsSFeU8W14Ve+F7qRGLHxfGEiwsOaUfSIHa+TcYTpRRmm4oyFltJhZ1rSahLAB6G98mbgb5O1kvLzC4x+ogGjuMP0mErIk9p6PccE7T3MEgzg8mQYPHkrt5KE9Kop8NMwGhhbs="
+    - secure: "FEsCB2nrnBN8Nm2UZJoUfLQOFqdIAlB5+Tlt6ORUhVdpGpKn2bQ5rOPB0Fd/aEGcgWf09Rg38VB4ZajwUoNeC0zOv6aX5M6Fwa6yvkQEO4jhmWw/snpuGaff1CFSTO8VNeZPLnx3KjjW7Y4H5mTKGK6w16kR+jQLHgiA8lCup/I="
 install:
   - cabal install hakyll
   - ghc --make site.hs
@@ -21,5 +21,5 @@ after_script:
   - git config --global user.email "tim@timbaumann.info"
   - git config --global user.name "Travis"
   - git commit -m "snapshot $(date '+%m/%d/%y %H:%M')"
-  - git push "$REPO_URL" master
+  - git push "$REPO_URL" master | grep -v http
   - cd ..
