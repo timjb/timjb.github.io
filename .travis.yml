@@ -6,7 +6,7 @@ env:
   global:
     - secure: "FEsCB2nrnBN8Nm2UZJoUfLQOFqdIAlB5+Tlt6ORUhVdpGpKn2bQ5rOPB0Fd/aEGcgWf09Rg38VB4ZajwUoNeC0zOv6aX5M6Fwa6yvkQEO4jhmWw/snpuGaff1CFSTO8VNeZPLnx3KjjW7Y4H5mTKGK6w16kR+jQLHgiA8lCup/I="
 install:
-  - sudo apt-get install libghc-hakyll-dev/unstable
+  - cabal install hakyll
   - ghc --make site.hs
 before_script:
   - cd _site
