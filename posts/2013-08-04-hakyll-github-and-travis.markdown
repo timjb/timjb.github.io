@@ -1,12 +1,12 @@
 ---
-title: Hakyll, Github and building a static site with Travis.ci
+title: Hakyll, Github and building a static site with Travis CI
 ---
 
 Hello World! Here I am, I've got a blog now!
 There's still a lot missing: a decent design, code highlighting, comments etc. But I can add these later. After all, what's the most important thing about blogging? Right, content.
 
 So, for a first post, I'll share my blogging setup. Being a Haskell fan and proponent of simple systems, I had no other choice but to use Jasper van der Jeugt's excellent [Hakyll](http://jaspervdj.be/hakyll/) static site generator.
-And since I like version control and Github, I'm hosting my site on [Github Pages](http://pages.github.com/).
+And since I like version control and Github, I'm hosting both the [source](https://github.com/timjb/timjb.github.com) and the generated site on Github using [Github Pages](http://pages.github.com/).
 
 
 ## The basic setup
@@ -87,7 +87,7 @@ Specifically, we will make Travis install Hakyll, build the `site` executable, g
 For the last step, we will need to authorize Travis to publish changes to the Github repository.
 We will use a url to the Github repository with HTTP authentication information to do this. To make sure nobody sees your password, run
 
-[^1]: Apparently, I'm [not the first one](http://wesleyhales.com/blog/2013/03/29/Fun-with-Static-Site-Generators-and-Travis/) who has the idea of using Travis CI for this purpose.
+[^1]: Apparently, I'm [not the first one](http://wesleyhales.com/blog/2013/03/29/Fun-with-Static-Site-Generators-and-Travis/) to have the idea of using Travis CI for this purpose.
 
    $ gem install travis
    $ travis encrypt "REPO_URL=https://your-name:password@github.com/your-name/your-name.github.com.git"
@@ -128,4 +128,18 @@ Some details requiring some explaining about this:
 * Git requires us to configure a user name and email address before making a commit.
 * The tool `grep` is used to hide the line with the repository url and the HTTP authentication information.
 
-Commit this file, and [set up](http://about.travis-ci.org/docs/user/getting-started/) Travis. Now you should be ready to go! Edit some file, push it to Github and your changes should be live ... about 15 Minutes later. Yeah, that's a bit long, but installing Hakyll on Travis takes some time. I'll try to reduce that time and will let you know when I have found out how to do so. In the meantime: Happy publishing and Haskell hacking!
+![A build on Travis CI](/images/blog-travis.png)
+
+Commit this file, and [set up](http://about.travis-ci.org/docs/user/getting-started/) Travis. Now you should be ready to go! Edit some file, push it to Github and your changes should be live ... about 15 Minutes later. Yeah, that's a bit long, but installing Hakyll on Travis takes some time. I'll try to reduce that time and will let you know when I have found out how to do so.
+
+
+## Bonus: Editing on Github
+
+![Editing this post on Github](/images/blog-github.png)
+
+Since Github supports
+[creating](https://github.com/blog/1327-creating-files-on-github),
+[renaming](https://github.com/blog/1436-moving-and-renaming-files-on-github) and
+[removing](https://github.com/blog/1545-deleting-files-on-github)
+files, I can now update my site from any computer in the world which has a web browser,
+without needing to have Git or Hakyll installed.
