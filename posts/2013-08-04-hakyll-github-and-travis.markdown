@@ -13,8 +13,10 @@ And since I like version control and Github, I'm hosting both the [source](https
 
 After [installing Hakyll](http://jaspervdj.be/hakyll/tutorials/01-installation.html), you can create a simple site by running
 
-    $ hakyll-init your-name.github.com
-    $ cd your-name.github.com
+```bash
+$ hakyll-init your-name.github.com
+$ cd your-name.github.com
+```
 
 This generates a directory structure that looks like this:
 
@@ -41,13 +43,17 @@ This generates a directory structure that looks like this:
 
 The file `site.hs` contains the rules for building the site, specified in Hakyll's DSL. I won't go into the details of this, as there are [already](http://yannesposito.com/Scratch/en/blog/Hakyll-setup/) [many](http://jaspervdj.be/hakyll/) [tutorials](http://mark.reid.name/blog/switching-to-hakyll.html) [explaining](https://benjeffrey.com/posts/building-benjeffrey.com-with-hakyll) how to set up routes and build rules. Let's quickly initialize a git repository and set up synchronization with it's github counterpart with
 
-    $ git init
-    $ git remote add origin https://github.com/your-name/your-name.github.com.git
+```bash
+$ git init
+$ git remote add origin https://github.com/your-name/your-name.github.com.git
+```
 
 You can now build the site with 
 
-    $ ghc --make site.hs
-    $ ./site build
+```bash
+$ ghc --make site.hs
+$ ./site build
+```
 
 This outputs the final site in the directory `_site`.
 But here we have a problem.
@@ -57,23 +63,27 @@ One neat trick that I learned from [Agam Brahma](http://agam.github.io/posts/beg
 The static site itself will reside in the default `main` branch.
 To synchronize them, you add your repository (the `main` branch) as a git submodule under the directory `_site` to the `source` branch of the same repository. If you didn't understand the last sentence, no problem. Just run the following:
 
-    $ git commit --allow-empty -m "dummy first commit"
-    $ git push origin master
-    $ git checkout --orphan source
-    $ git remote add https://github.com/your-name/your-name.github.com.git _site
+```bash
+$ git commit --allow-empty -m "dummy first commit"
+$ git push origin master
+$ git checkout --orphan source
+$ git remote add https://github.com/your-name/your-name.github.com.git _site
+```
 
 Now you can build your site and push it to Github:
 
-    $ vim about.rst
-    $ git add --all
-    $ git commit -m "edited about page"
-    $ git push origin source
-    $ ./site build
-    $ cd _site
-    $ git add --all
-    $ git commit -m "new about page"
-    $ git push origin master
-    $ cd ..
+```bash
+$ vim about.rst
+$ git add --all
+$ git commit -m "edited about page"
+$ git push origin source
+$ ./site build
+$ cd _site
+$ git add --all
+$ git commit -m "new about page"
+$ git push origin master
+$ cd ..
+```
 
 The website should now be live at `your-name.github.com`.
 
@@ -89,37 +99,41 @@ We will use a url to the Github repository with HTTP authentication information 
 
 [^1]: Apparently, I'm [not the first one](http://wesleyhales.com/blog/2013/03/29/Fun-with-Static-Site-Generators-and-Travis/) to have the idea of using Travis CI for this purpose.
 
-   $ gem install travis
-   $ travis encrypt "REPO_URL=https://your-name:password@github.com/your-name/your-name.github.com.git"
+```bash
+$ gem install travis
+$ travis encrypt "REPO_URL=https://your-name:password@github.com/your-name/your-name.github.com.git"
+```
 
 Travis uses a configuration file named `.travis.ci` in the main folder of your repository.
 After many trial builds and configuration changes, I arrived at this version of `.travis.ci`:
 
-    language: haskell
-    branches:
-      only:
-        - source
-    env:
-      global:
-        - secure: "the secret you just generated"
-    install:
-      - cabal install hakyll
-      - ghc --make site.hs
-    before_script:
-      - cd _site
-      - git checkout master
-      - git pull origin master
-      - cd ..
-    script: ./site build
-    after_script:
-      - cd _site
-      - git status
-      - git add --all
-      - git config --global user.email "your@mailaddress.com"
-      - git config --global user.name "Travis"
-      - git commit -m "snapshot $(date '+%m/%d/%y %H:%M')"
-      - git push "$REPO_URL" master | grep -v http
-      - cd ..
+```yaml
+language: haskell
+branches:
+  only:
+    - source
+env:
+  global:
+    - secure: "the secret you just generated"
+install:
+  - cabal install hakyll
+  - ghc --make site.hs
+before_script:
+  - cd _site
+  - git checkout master
+  - git pull origin master
+  - cd ..
+script: ./site build
+after_script:
+  - cd _site
+  - git status
+  - git add --all
+  - git config --global user.email "your@mailaddress.com"
+  - git config --global user.name "Travis"
+  - git commit -m "snapshot $(date '+%m/%d/%y %H:%M')"
+  - git push "$REPO_URL" master | grep -v http
+  - cd ..
+```
 
 Some details requiring some explaining about this:
 
