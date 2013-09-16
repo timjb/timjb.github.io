@@ -67,7 +67,7 @@ To synchronize them, you add your repository (the `main` branch) as a git submod
 $ git commit --allow-empty -m "dummy first commit"
 $ git push origin master
 $ git checkout --orphan source
-$ git remote add https://github.com/your-name/your-name.github.com.git _site
+$ git submodule add https://github.com/your-name/your-name.github.com.git _site
 ```
 
 Now you can build your site and push it to Github:
