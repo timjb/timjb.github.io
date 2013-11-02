@@ -1,0 +1,341 @@
+\documentclass[a4paper,10pt,landscape]{article}
+\usepackage{multicol}
+\usepackage{calc}
+\usepackage{ifthen}
+\usepackage[landscape]{geometry}
+\usepackage{amsmath,amsthm,amsfonts,amssymb}
+\usepackage{color,graphicx,overpic}
+\usepackage{hyperref}
+\usepackage[utf8]{inputenc}
+\usepackage[ngerman]{babel}
+\usepackage{enumitem}
+\usepackage{mathtools}
+\usepackage{pifont}
+
+\setitemize[0]{leftmargin=10pt,itemindent=0pt,itemsep=0pt}
+\setenumerate[0]{leftmargin=10pt,itemindent=0pt,itemsep=0pt}
+
+\newcommand{\cmark}{\ding{51}}
+\newcommand{\xmark}{\ding{55}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\PS}{\mathcal{P}} % Powerset
+\newcommand{\PSO}{\PS(\Omega)} % Powerset
+\newcommand{\Alg}{\mathfrak{A}}
+\newcommand{\Ring}{\mathfrak{R}}
+
+% Differentiator
+\renewcommand{\d}{\mathrm{d}}
+
+\pdfinfo{
+  /Title (ana3.pdf)
+  /Creator (TeX)
+  /Producer (pdfTeX 1.40.0)
+  /Author (Tim Baumann)
+  /Subject (Analysis 3 Zusammenfassung)
+  /Keywords (analysis,overview)}
+
+% This sets page margins to .5 inch if using letter paper, and to 1cm
+% if using A4 paper. (This probably isn't strictly necessary.)
+% If using another size paper, use default 1cm margins.
+\ifthenelse{\lengthtest { \paperwidth = 11in}}
+    { \geometry{top=.5in,left=.5in,right=.5in,bottom=.5in} }
+    {\ifthenelse{ \lengthtest{ \paperwidth = 297mm}}
+        {\geometry{top=1cm,left=1cm,right=1cm,bottom=1cm} }
+        {\geometry{top=1cm,left=1cm,right=1cm,bottom=1cm} }
+    }
+
+\theoremstyle{definition}
+
+\newtheorem*{nota}{Notation}
+\newtheorem*{defn}{Definition}
+\newtheorem*{prob}{Problem}
+\newtheorem*{bsp}{Beispiel}
+\newtheorem*{satz}{Satz}
+\newtheorem*{kor}{Korollar}
+\newtheorem*{acht}{Achtung}
+\newtheorem*{strat}{Strategie}
+
+\theoremstyle{remark}
+\newtheorem*{bem}{Bemerkung}
+
+% Römische Ziffern
+\makeatletter
+\newcommand*{\rom}[1]{\expandafter\@slowromancap\romannumeral #1@}
+\makeatother
+
+% Ober- und Unterintegral, siehe
+% http://tex.stackexchange.com/questions/44237/lower-and-upper-riemann-integrals
+\def\upint{\mathchoice%
+    {\mkern13mu\overline{\vphantom{\intop}\mkern7mu}\mkern-20mu}%
+    {\mkern7mu\overline{\vphantom{\intop}\mkern7mu}\mkern-14mu}%
+    {\mkern7mu\overline{\vphantom{\intop}\mkern7mu}\mkern-14mu}%
+    {\mkern7mu\overline{\vphantom{\intop}\mkern7mu}\mkern-14mu}%
+  \int}
+\def\lowint{\mkern3mu\underline{\vphantom{\intop}\mkern7mu}\mkern-10mu\int}
+
+% Färbe \emph{}
+\definecolor{Emph}{rgb}{0.2,0.2,0.8}  %softer red for display
+\renewcommand{\emph}[1]{\textcolor{Emph}{\bf{#1}}}
+
+% Display style überall!
+\everymath{\displaystyle}
+
+% Turn off header and footer
+\pagestyle{empty}
+
+% Redefine section commands to use less space
+\makeatletter
+\renewcommand{\section}{\@startsection{section}{1}{0mm}%
+                                {-1ex plus -.5ex minus 2ex}%
+                                {2.5ex plus .2ex}%x
+                                {\normalfont\large\bfseries}}
+\renewcommand{\subsection}{\@startsection{subsection}{2}{0mm}%
+                                {-1explus -.5ex minus -.2ex}%
+                                {0.5ex plus .2ex}%
+                                {\normalfont\normalsize\bfseries}}
+\renewcommand{\subsubsection}{\@startsection{subsubsection}{3}{0mm}%
+                                {-1ex plus -.5ex minus -.2ex}%
+                                {1ex plus .2ex}%
+                                {\normalfont\small\bfseries}}
+\makeatother
+
+% Don't print section numbers
+\setcounter{secnumdepth}{0}
+
+\DeclarePairedDelimiterX\Set[2]{\lbrace}{\rbrace}%
+ { #1 \,\delimsize|\, #2 }
+
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0pt plus 10ex}
+
+% -----------------------------------------------------------------------
+
+\begin{document}
+\raggedright
+\footnotesize
+\begin{multicols}{3}
+
+% multicol parameters
+% These lengths are set only within the two main columns
+%\setlength{\columnseprule}{0.25pt}
+\setlength{\premulticols}{1pt}
+\setlength{\postmulticols}{1pt}
+\setlength{\multicolsep}{1pt}
+\setlength{\columnsep}{2pt}
+
+\begin{center}
+  \Large{\underline{Zusammenfassung Analysis \rom{3}}} \\
+\end{center}
+
+\section{Maßtheorie}
+
+\begin{prob}[Schwaches Maßproblem]
+  Gesucht: Abbildung $\mu : \PS(\R^n) \to [\R, \infty]$ mit folgenden Eigenschaften:
+  \begin{itemize}
+    \item Normierung: $\mu([0, 1]^n) = 1$
+    \item Endliche Additivität: Sind $A, B \subset \R^n$ disjunkt, so gilt $\mu(A \cup B) = \mu(A) + \mu(B)$
+    \item Bewegungsinvarianz: Für eine euklidische Bewegung $f : \R^n \to \R^n$ und $A \subset \R^n$ gilt $\mu(f(A)) = \mu(A)$.
+  \end{itemize}
+\end{prob}
+
+\begin{satz}[Hausdorff]
+  Das schwache Maßproblem ist für $n \geq 3$ nicht lösbar.
+\end{satz}
+
+\begin{satz}[Banach]
+  Das schwache Maßproblem ist für $n = 1, 2$ lösbar, aber nicht eindeutig lösbar.
+\end{satz}
+
+\begin{prob}[Starkes Maßproblem]
+  Gesucht ist eine Abbildung $\mu : \PS(\R^n) \to [0, \infty]$ wie im schwachen Maßproblem, die anstelle der endlichen Additivität die Eigenschaft der $\sigma$-Additivität besitzt:
+  \begin{itemize}
+    \item Für eine Folge $(A_n)_{n \in \N}$ paarweise disjunkter Teilmengen des $\R^n$ ist
+      \[ \mu\left(\bigcup_{n \in \N} A_n\right) = \sum_{n=0}^\infty \mu(A_n) \]
+  \end{itemize}
+\end{prob}
+
+\begin{satz}
+  Das starke Maßproblem besitzt keine Lösung.
+\end{satz}
+
+\begin{nota}
+  Sei im Folgenden $\Omega$ eine Menge.
+\end{nota}
+
+\begin{defn}
+  Eine Teilmenge $\Ring \subset \PSO$ heißt \emph{Ring}, wenn für $A, B \in \Ring$ gilt:
+  \begin{itemize}
+    \item $\emptyset \in \Ring$
+    \item Abgeschlossenheit unter Differenzbildung: $A \setminus B \in \Ring$
+    \item Abgeschlossenheit unter endlichen Vereinigungen: $A \cup B \in \Ring$
+  \end{itemize}
+\end{defn}
+
+\begin{defn}
+  Eine Teilmenge $\Alg \subset \PSO$ heißt \emph{Algebra}, wenn für $A, B \in \Alg$ gilt:
+  \begin{itemize}
+    \item $\emptyset \in \Alg$
+    \item Abgeschlossenheit unter Komplementbildung: $A^c = \Omega \setminus A \in \Alg$
+    \item Abgeschlossenheit unter endlichen Vereinigungen: $A \cup B \in \Alg$
+  \end{itemize}
+\end{defn}
+
+\begin{defn}
+  Eine Algebra $\Alg \subset \PSO)$ heißt \emph{$\sigma$-Algebra}, wenn $\Alg$ unter abzählbaren Vereinigungen abgeschlossen ist, d.\,h. für jede Folge $(A_n)_{n \in \N}$ in $\Alg$ gilt
+
+  \[ \bigcup_{n \in \N} A_n \in \Alg \]
+\end{defn}
+
+\begin{bem}
+  \begin{itemize}
+    \item Jede Algebra ist auch ein Ring.
+    \item Ein Ring $\Ring \subset \PSO$ ist auch unter endlichen Schnitten abgeschlossen, da $A \cap B = A \setminus (B \setminus A) \in \Ring$
+    \item Ein Ring $\Ring \subset \PSO$ ist genau dann eine Algebra, wenn $\Omega \in \Ring$
+    \item Eine $\sigma$-Algebra $\Alg \subset \PSO$ ist auch unter abzählbaren Schnitten abgeschlossen: Sei $(A_n)_{n \in \N}$ eine Folge in $\Alg$, dann gilt
+      \[ \bigcap_{n \in \N} A_n = \left( \bigcup_{n \in \N} (A_n)^c \right)^c \in \Alg \]
+  \end{itemize}
+\end{bem}
+
+\begin{nota}
+  Sei im Folgenden $\Ring \subset \PSO$ ein Ring.
+\end{nota}
+
+% Lemma 1.10 (Urbildalgebra)
+
+\begin{satz}
+  Sei $(A_i)_{i \in I}$ eine Familie von Ringen / Algebren / $\sigma$-Algebren über $\Omega$. Dann ist auch $\cap_{i \in I} A_i$ ein Ring / eine Algebra / eine $\sigma$-Algebra über $\Omega$.
+\end{satz}
+
+\begin{defn}
+  Sei $E \subset \PSO$. Setze
+  \begin{align*}
+    \mathcal{R}(E) &:= \Set{ \Ring \subset \PSO }{ E \subset \Ring, \Ring \text{ Ring} } \text{ und} \\
+    \mathcal{A}(E) &:= \Set{ \Alg \subset \PSO }{ E \subset \Alg, \Alg \text{ $\sigma$-Algebra} }.
+  \end{align*}
+  Dann heißen
+  \[
+    \Ring(E) :=\!\bigcap_{\Ring \in \mathcal{R}(E)}\!\Ring, \qquad
+    \Alg(E)  :=\!\bigcap_{\Alg  \in \mathcal{A}(E)}\!\Alg
+  \]
+  von $E$ \emph{erzeugter Ring} bzw. von $E$ \emph{erzeugte $\sigma$-Algebra}.
+\end{defn}
+
+\begin{defn}
+  Ist $(\Omega, \mathcal{O})$ ein topologischer Raum, dann heißt $\mathfrak{B} = \mathfrak{B}(\Omega, \mathcal{O}) := \Alg(\mathcal{O})$ \emph{Borelsche $\sigma$-Algebra} von $(\Omega, \mathcal{O})$.
+\end{defn}
+
+\begin{bem}
+  Die Borelsche $\sigma$-Algebra $\mathfrak{B}(\R)$ wird auch erzeugt von $\Set{I \subset \R }{ I \text{ Intervall } }$. Dabei spielt es keine Rolle, ob man nur geschlossene, nur offene, beliebig halboffene Intervalle oder gar nur Intervalle mit Endpunkten in $\Q$ zulässt.
+\end{bem}
+
+\begin{defn}
+  Eine Funktion $\mu : \Ring \to [0, \infty]$ heißt \emph{Inhalt} auf $\Ring$, falls
+  \begin{itemize}
+    \item $\mu(\emptyset) = 0$ und
+    \item $\mu(A \sqcup B) = \mu(A) + \mu(B)$ für disjunkte $A, B \in \Ring$.
+  \end{itemize}
+\end{defn}
+
+\begin{defn}
+  Ein Inhalt $\mu : \Ring \to [0, \infty]$ heißt \emph{Prämaß} auf $\Ring$, wenn $\mu$ $\sigma$-additiv ist, d.\,h. wenn für jede Folge $(A_n)_{n \in \N}$ paarweise disjunkter Elemente von $\Ring$ mit $\sqcup_{n \in \N} A_n \in \Ring$ gilt:
+  \[ \mu\left(\bigsqcup_{n \in \N} A_n\right) = \sum_{n=0}^\infty \mu(A_n) \]
+\end{defn}
+
+\begin{defn}
+  Ein Maß ist ein Prämaß auf einer $\sigma$-Algebra.
+\end{defn}
+
+\begin{satz}
+  Für einen Inhalt $\mu$ auf $\Ring$ gilt für alle $A, B \in \Ring$:
+  \begin{itemize}
+    \item $\mu(A \cup B) + \mu(A \cap B) = \mu(A) + \mu(B)$
+    \item Monotonie: $A \subset B \implies \mu(A) \leq \mu(B)$
+    \item Aus $A \subset B$ und $\mu(B) < \infty$ folgt $\mu(B \setminus A) = \mu(B) - \mu(A)$
+    \item Subadditivität: Für $A_1, ..., A_n \in \Ring$ ist $\mu\left(\bigcup_{i = 1}^n A_i \right) \leq \sum_{i = 1}^n \mu(A_i)$
+    \item Ist $(A_n)_{n \in \N}$ eine Folge disjunkter Elemente aus $\Ring$, sodass $\bigsqcup_{n \in \N} A_n \in \Ring$, so gilt $\mu(\bigsqcup_{n \in \N} A_n) \geq \sum_{n=0}^\infty \mu(A_n)$.
+  \end{itemize}
+\end{satz}
+
+\begin{defn}
+  Ein Inhalt / Maß auf einem Ring~$\Ring$ / einer $\sigma$-Algebra~$\Alg$ heißt \emph{endlich}, falls $\mu(A) < \infty$ für alle $A \in \Ring$ bzw. $A \in \Alg$.
+\end{defn}
+
+\begin{satz}
+  Ein Maß auf einer $\sigma$-Algebra~$\Alg$ ist $\sigma$-subadditiv, d.\,h. für alle Folgen $(A_n)_{n \in \N}$ in $\Alg$ gilt
+  \[ \mu(\bigcup_{n \in \N} A_n) \leq \sum_{n=0}^\infty \mu(A_n). \]
+\end{satz}
+
+\begin{defn}
+  Sei $A \subset \Omega$. Dann heißt die Abbildung
+  \[ 1_A : \Omega \to \R, \quad \omega \mapsto \begin{cases} 1, & \text{ falls } \omega \in A \\ 0, & \text{ falls } \omega \not\in A \end{cases} \]
+  \emph{Indikatorfunktion} oder \emph{charakteristische Funktion} von $A$.
+\end{defn}
+
+\begin{defn}
+  Wir sagen eine Folge $(A_n)_{n \in \N}$ \emph{konvergiert} gegen $A \subset \Omega$, notiert $\lim_{n \to \infty} A_n = A$, wenn $(1_{A_n})_{n \in \N}$ punktweise gegen $1_A$ konvergiert.
+\end{defn}
+
+\begin{defn}
+  Für eine Folge $(A_n)_{n \in \N}$ in $\PS(\Omega)$ heißen
+  \begin{align*}
+    \limsup_{n \to \infty} A_n :=&~\Set{ \omega \in \Omega }{ \omega \text{ liegt in undendlich vielen } A_n } \\
+    =&~\bigcap_{n = 0}^\infty \bigcup_{k = n}^\infty A_n \\
+    \liminf_{n \to \infty} A_n :=&~\Set{ \omega \in \Omega }{ \omega \text{ liegt in allen bis auf endlich vielen } A_n } \\
+    =&~\bigcup_{n = 0}^\infty \bigcap_{k = n}^\infty A_n
+  \end{align*}
+  \emph{Limes Superior} bzw. \emph{Limes Inferior} der Folge $A_n$.
+\end{defn}
+
+% TODO: Lemmas zum Limes Inferior, Limes Superior
+
+\begin{satz}
+  Es gilt $\lim_{n \to \infty} A_n = A \iff \liminf_{n \to \infty} A_n = \limsup_{n \to \infty} A_n = A$.
+\end{satz}
+
+\begin{defn}
+  Eine Folge $(A_n)_{n \in \N}$ in $\PSO$ heißt
+  \begin{itemize}
+    \item \emph{monoton wachsend}, wenn für alle $n \in \N$ gilt $A_n \subset A_{n+1}$,
+    \item \emph{monoton fallend}, wenn für alle $n \in \N$ gilt $A_n \supset A_{n+1}$.
+  \end{itemize}
+\end{defn}
+
+\begin{satz}
+  Sei $(A_n)_{n \in \N}$ eine Folge in $\PSO$.
+  \begin{itemize}
+    \item Ist $(A_n)$ monoton wachsend, so gilt $\lim_{n \to \infty} A_n = \bigcup_{n \in \N} A_n$.
+    \item Ist $(A_n)$ monoton fallend, so gilt $\lim_{n \to \infty} A_n = \bigcap_{n \in \N} A_n$.
+  \end{itemize}
+\end{satz}
+
+\begin{satz}
+  Sei $\mu$ ein Inhalt auf $\Ring \subset \PSO$. Wir betrachten folgende Aussagen:
+
+  \begin{enumerate}[label=(\roman*),leftmargin=2em]
+    \item $\mu$ ist ein Prämaß auf $\Ring$.
+    \item Stetigkeit von unten: Für jede monoton wachsende Folge $(A_n)_{n \in \N}$ in $\Ring$ mit $A := \lim_{n \to \infty} A_n = \bigcup_{n = 0}^\infty A_n \in \Ring$ gilt $\lim_{n \to \infty} \mu(A_n) = \mu(A)$.
+    \item Stetigkeit von oben: Für jede monoton fallende Folge $(A_n)_{n \in \N}$ in $\Ring$ mit $\mu(A_0) < \infty$ und $A := \lim_{n \to \infty} A_n = \bigcap_{n = 0}^\infty A_n \in \Ring$ gilt $\lim_{n \to \infty} \mu(A_n) = \mu(A)$.
+    \item Für jede monoton fallende Folge $(A_n)_{n \in \N}$ in $\Ring$ mit $\mu(A_0) < \infty$ und $\lim_{n \to \infty} A_n = \bigcap_{n = 0}^\infty A_n = \emptyset$ gilt $\lim_{n \to \infty} \mu(A_n) = 0$.
+  \end{enumerate}
+
+  Dann gilt $(i) \iff (ii) \implies (iii) \iff (iv)$.\\
+  Falls $\mu$ endlich, gilt auch $(iii) \implies (ii)$.
+\end{satz}
+
+\begin{satz}
+  Sei $\mu$ ein Maß auf einer $\sigma$-Algebra $\Alg \subset \PSO$. Dann gilt:
+  \begin{itemize}
+    \item Für eine Folge $(A_n)_{n \in \N}$ in $\Alg$ gilt $\mu\left(\liminf_{n \to \infty} A_n\right) \leq \liminf_{n \to \infty}(\mu(A_n))$.
+    \item Sei $(A_n)_{n \in \N}$ eine Folge in $\Alg$, sodass es ein $N \in \N$ gibt mit $\mu\left(\bigcup_{n = N}^\infty A_n \right) < \infty$, dann gilt $\mu\left(\limsup_{n \to \infty} A_n \right) \geq \limsup_{n \to \infty} \mu(A_n)$.
+    \item Sei $\mu$ endlich und $(A_n)_{n \in \N}$ eine Folge in $\Alg$, dann gilt
+    \[ \mu\left(\liminf_{n \to \infty} A_n\right) \leq \liminf_{n \to \infty} \mu(A_n) \leq \limsup_{n \to \infty} \mu(A_n) \leq \mu\left(\limsup_{n \to \infty} A_n\right). \]
+    \item Sei $\mu$ endlich und $(A_n)_{n \in \N}$ eine gegen $A$ konvergente Folge in $\Alg$, dann gilt $A \in \Alg$ und $\mu(A) = \lim_{n \to \infty} \mu(A_n)$.
+  \end{itemize}
+\end{satz}
+
+\end{multicols}
+\end{document}
