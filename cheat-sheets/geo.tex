@@ -1,0 +1,267 @@
+\documentclass[a4paper,10pt,landscape]{article}
+\usepackage{multicol}
+\usepackage{calc}
+\usepackage{ifthen}
+\usepackage[landscape]{geometry}
+\usepackage{amsmath,amsthm,amsfonts,amssymb}
+\usepackage{color,graphicx,overpic}
+\usepackage{hyperref}
+\usepackage[utf8]{inputenc}
+\usepackage[ngerman]{babel}
+\usepackage{enumitem}
+\usepackage{mathtools}
+\usepackage{pifont}
+
+\setitemize[0]{leftmargin=10pt,itemindent=0pt,itemsep=0pt}
+\setenumerate[0]{leftmargin=10pt,itemindent=0pt,itemsep=0pt}
+
+\newcommand{\cmark}{\ding{51}}
+\newcommand{\xmark}{\ding{55}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\PS}{\mathcal{P}} % Powerset
+\newcommand{\PSO}{\PS(\Omega)} % Powerset
+\newcommand{\Alg}{\mathfrak{A}}
+\newcommand{\Ring}{\mathfrak{R}}
+
+% Differentiator
+\renewcommand{\d}{\mathrm{d}}
+
+\pdfinfo{
+  /Title (geo3.pdf)
+  /Creator (TeX)
+  /Producer (pdfTeX 1.40.0)
+  /Author (Tim Baumann)
+  /Subject (Geometrie Zusammenfassung)
+  /Keywords (geometry,overview)}
+
+% This sets page margins to .5 inch if using letter paper, and to 1cm
+% if using A4 paper. (This probably isn't strictly necessary.)
+% If using another size paper, use default 1cm margins.
+\ifthenelse{\lengthtest { \paperwidth = 11in}}
+    { \geometry{top=.5in,left=.5in,right=.5in,bottom=.5in} }
+    {\ifthenelse{ \lengthtest{ \paperwidth = 297mm}}
+        {\geometry{top=1cm,left=1cm,right=1cm,bottom=1cm} }
+        {\geometry{top=1cm,left=1cm,right=1cm,bottom=1cm} }
+    }
+
+\theoremstyle{definition}
+
+\newtheorem*{nota}{Notation}
+\newtheorem*{defn}{Definition}
+\newtheorem*{prob}{Problem}
+\newtheorem*{bsp}{Beispiel}
+\newtheorem*{satz}{Satz}
+\newtheorem*{kor}{Korollar}
+\newtheorem*{acht}{Achtung}
+\newtheorem*{strat}{Strategie}
+
+\theoremstyle{remark}
+\newtheorem*{bem}{Bemerkung}
+
+% Römische Ziffern
+\makeatletter
+\newcommand*{\rom}[1]{\expandafter\@slowromancap\romannumeral #1@}
+\makeatother
+
+% Ober- und Unterintegral, siehe
+% http://tex.stackexchange.com/questions/44237/lower-and-upper-riemann-integrals
+\def\upint{\mathchoice%
+    {\mkern13mu\overline{\vphantom{\intop}\mkern7mu}\mkern-20mu}%
+    {\mkern7mu\overline{\vphantom{\intop}\mkern7mu}\mkern-14mu}%
+    {\mkern7mu\overline{\vphantom{\intop}\mkern7mu}\mkern-14mu}%
+    {\mkern7mu\overline{\vphantom{\intop}\mkern7mu}\mkern-14mu}%
+  \int}
+\def\lowint{\mkern3mu\underline{\vphantom{\intop}\mkern7mu}\mkern-10mu\int}
+
+% Färbe \emph{}
+\definecolor{Emph}{rgb}{0.2,0.2,0.8}  %softer red for display
+\renewcommand{\emph}[1]{\textcolor{Emph}{\bf{#1}}}
+
+% Display style überall!
+\everymath{\displaystyle}
+
+% Turn off header and footer
+\pagestyle{empty}
+
+% Redefine section commands to use less space
+\makeatletter
+\renewcommand{\section}{\@startsection{section}{1}{0mm}%
+                                {-1ex plus -.5ex minus 2ex}%
+                                {2.5ex plus .2ex}%x
+                                {\normalfont\large\bfseries}}
+\renewcommand{\subsection}{\@startsection{subsection}{2}{0mm}%
+                                {-1explus -.5ex minus -.2ex}%
+                                {0.5ex plus .2ex}%
+                                {\normalfont\normalsize\bfseries}}
+\renewcommand{\subsubsection}{\@startsection{subsubsection}{3}{0mm}%
+                                {-1ex plus -.5ex minus -.2ex}%
+                                {1ex plus .2ex}%
+                                {\normalfont\small\bfseries}}
+\makeatother
+
+% Don't print section numbers
+\setcounter{secnumdepth}{0}
+
+\DeclarePairedDelimiterX\Set[2]{\lbrace}{\rbrace}%
+ { #1 \,\delimsize|\, #2 }
+
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0pt plus 10ex}
+
+% -----------------------------------------------------------------------
+
+\begin{document}
+\raggedright
+\footnotesize
+\begin{multicols}{3}
+
+% multicol parameters
+% These lengths are set only within the two main columns
+%\setlength{\columnseprule}{0.25pt}
+\setlength{\premulticols}{1pt}
+\setlength{\postmulticols}{1pt}
+\setlength{\multicolsep}{1pt}
+\setlength{\columnsep}{2pt}
+
+\begin{center}
+  \Large{\underline{Zusammenfassung Geometrie}} \\
+\end{center}
+
+% Erinnerung: Skalarprodukt, Isometrie, Winkel, Orthogonalität
+
+\begin{nota}
+  Sei im Folgenden $I$ ein Intervall, d.\,h. eine zusammenhängende Teilmenge von $\R$.
+\end{nota}
+
+\begin{defn}
+  Eine Abbildung $c : I \to \R^n$ heißt \emph{reguläre Kurve}, wenn $c$ beliebig oft differenzierbar ist und $c'(t) \not= 0$ für alle $t \in I$ gilt.
+
+  Der affine Unterraum $\tau_{c,t} := c(t) + \R(c'(t))$ heißt \emph{Tangente} an $c$ im Punkt $c(t)$ bzw. Tangente an $c$ zum Zeitpunkt $t$.
+\end{defn}
+
+% Lemma 1.2: Tangenten ändern sich unter Parameterwechseln nicht
+
+\begin{defn}
+  Die \emph{Bogenlänge} (BL) einer regulären Kurve $c : [a, b] \to \R^n$ ist
+  \[ L(c) := \int_a^b\! \| c'(t) \|\,\d t. \]
+\end{defn}
+
+\begin{satz}
+  Die Bogenlänge ist invariant unter Umparametrisierung, d.\,h. sei $c : [a_2, b_2] \to \R^n$ eine reguläre Kurve und $\phi : [a_1, b_1] \to [a_2, b_2]$ ein Diffeomorphismus, dann gilt $L(c) = L(c \circ \phi)$.
+\end{satz}
+
+\begin{defn}
+  Eine reguläre Kurve $c : I \to \R^n$ heißt \emph{nach Bogenlänge parametrisiert}, wenn $\| c'(t) \| = 1$ für alle $t \in I$.
+\end{defn}
+
+\begin{satz}
+  Jede reguläre Kurve $c : I \to \R$ lässt sich nach BL parametrisieren, d.\,h. es existiert ein Intervall $J$ und ein Diffeomorphismus $\phi : J \to I$, welcher sogar orientierungserhaltend ist, sodass $\tilde{c} := c \circ \phi$ nach BL parametrisiert ist.
+\end{satz}
+
+\begin{defn}
+  Zwei Vektoren $a, b \in \R^n$ heißen gleichgerichtet, falls $a = \lambda b$ für ein $\lambda \geq 0$.
+\end{defn}
+
+\begin{satz}
+  Sei $v : [a, b] \to \R^n$ stetig, dann gilt
+  \[ \| \int_a^b\!v(t)\,\d t \| \leq \int_a^b\!\|v(t)\|\,\d t, \]
+  wobei Gleichheit genau dann gilt, falls alle $v(t)$ gleichgerichtet sind.
+\end{satz}
+
+\begin{satz}
+  Sei $c : [a, b] \to \R^n$ eine reguläre Kurve und $x := c(a), y := c(b)$. Dann gilt $L(c) \geq d(x, y)$. Wenn $L(c) = d(x, y)$, dann gibt es einen Diffeomorphismus $\phi : [a, b] \to [0, 1]$, sodass
+  \[ c = c_{xy} \circ \phi, \]
+  wobei $c_{xy} : [0, 1] \to \R^n,\,t \mapsto x + t (y - x)$.
+\end{satz}
+
+% TODO: Definition Feinheit
+
+\begin{defn}
+  Sei $c : [a, b] \to \R^n$ eine stetige Kurve und $a = t_0 < t_1 < ... < t_k = b$ eine Zerteilung von $[a, b]$. Dann ist die Länge des \emph{Polygonzugs} durch die Punkte $c(t_i)$ gegeben durch
+  \[ \hat{L}_c(t_0, ..., t_k) = \sum_{j=1}^k \| c(t_j) - c(t_{j-1}) \|. \]
+\end{defn}
+
+\begin{defn}
+  Eine stetige Kurve $c$ heißt \emph{rektifizierbar} von Länge $\hat{L}_c$, wenn gilt: Für alle $\epsilon > 0$ gibt es ein $\delta > 0$, sodass für alle Unterteilungen $a = t_0 < t1 < ... < t_k = b$ der Feinheit mindestens $\delta$ gilt:
+  \[ \| \hat{L}_c - \hat{L}_c(t_0, t_1, ..., t_k) \| < \epsilon. \]
+\end{defn}
+
+\begin{defn}
+  Sei $c : I \to \R^n$ regulär und nach BL parametrisiert. Dann heißt der Vektor $c''(t)$ \emph{Krümmungsvektor} von $c$ in $t \in I$ und die Abbildung $\kappa : I \to \R, \quad t \mapsto \| c''(t) \|$ heißt \emph{Krümmung} der nach BL parametrisierten Kurve.
+\end{defn}
+
+\begin{defn}
+  Eine Kurve $c : I \to \R^2$ wird \emph{ebene Kurve} genannt.
+\end{defn}
+
+\begin{defn}
+  Sei $c$ eine reguläre, nach BL parametrisierte, ebene Kurve. Dann heißt
+  \[ n = n_c : I \to \R^2, \quad t \mapsto J \cdot c'(t) \text{ mit } J := \begin{pmatrix} 0 & -1 \\ 1 & 0 \end{pmatrix}  \]
+  das \emph{Normalenfeld} von $c$.
+\end{defn}
+
+\begin{bem}
+  Für alle $t \in I$ bildet $(c'(t), n_c(t))$ eine positiv orientierte Orthonormalbasis des $\R^2$.
+  Es gilt außerdem $c''(t) \perp c'(t)$, also $c''(t) = \kappa(t) \cdot n_c(t)$, d.\,h. die Krümmung ist im $\R^2$ vorzeichenbehaftet.
+\end{bem}
+
+\begin{satz}[\emph{Frenet-Gleichungen} ebener Kurven]
+  Sei $c : I \to \R^2$ regulär, nach BL parametrisiert und $v = c'$, dann gilt
+  \[ c'' = \kappa \cdot n \quad \text{ und } \quad n' = -\kappa \cdot v. \]
+\end{satz}
+
+% Matrixschreibweise?
+% Beispiel: Kreis
+
+\begin{bsp}
+  Die nach BL parametriesierte gegen den UZS durchlaufene Kreislinie mit Mittelpunkt $m \in \R^2$ und Radius $r > 0$
+  \[ c : \R \to \R^2, \quad t \mapsto m + r \begin{pmatrix} \cos(t/r) \\ \sin(t/r) \end{pmatrix} \]
+  hat konstante Krümmung $\kappa(t) = \tfrac{1}{r}$.
+\end{bsp}
+
+\begin{satz}
+  Sei $c : I \to \R^2$ glatte, nach BL parametrisiert mit konstanter Krümmung $\kappa(t) = R \not= 0$. Dann ist $c$ Teil eines Kreisbogens mit Radius $\tfrac{1}{|R|}$.
+\end{satz}
+
+\begin{defn}
+  Für $c : I \to \R^2$ regulär, nicht notwendigerweiße nach BL parametrisiert, ist die Krümmung zur Zeit $t$ definiert als
+  \[ \frac{\det(c'(t), c''(t))}{ \| c'(t) \|^3 } \]
+\end{defn}
+
+\begin{bem}
+  Obige Definition ist invariant unter orientierungserhaltenden Umparametrisierungen, und stimmt für nach BL parametrisierte Kurven mit der vorhergehenden Definition überein.
+\end{bem}
+
+\begin{satz}[Hauptsatz der lokalen ebenen Kurventheorie]
+  Sei $\kappa : I \to \R$ eine stetige Funktion und $t_0 \in I$ und $x_0, v_0 \in \R^2$ mit $\| v_0 \| = 1$. Dann gibt es ganu eine nach BL parametrisierte zweimal stetig differenzierbare Kurve $c : I \to \R^2$ mit Krümmung $\kappa$, $c(t_0) = x_0$ und $c'(t_0) = v(t_0) = v_0$.
+\end{satz}
+
+\begin{defn}
+  Eine reguläre Kurve $c : [a, b] \to \R^n$ heißt \emph{geschlossen}, wenn gilt
+  \begin{itemize}
+    \item $c(a) = c(b)$ und
+    \item $c'(a) = c'(b)$.
+  \end{itemize}
+  Eine reguläre geschlossene Kurve $c$ heißt \emph{einfach geschlossen}, wenn $c|_{[a, b[}$ injektiv ist.
+\end{defn}
+
+\begin{defn}
+  Für eine geschlossene reguläre ebene Kurve $c : [a, b] \to \R^2$ heißt die Zahl
+  \[ \overline{\kappa}(c) := \int_a^b\!\kappa(t) \| c'(t) \| \,\d t \]
+  \emph{Totalkrümmung} von $c$.
+\end{defn}
+
+\begin{bem}
+  Ist $c$ nach BL parametrisiert, so ist $\overline{\kappa}(c) = \int_a^b\!\kappa(t) \,\d t$.
+\end{bem}
+
+\begin{satz}
+  Die Totalkrümmung ist invariant unter orientierungserhaltenden Umparametrisierungen, d.\,h. ist $c : [a_2, b_2] \to \R^2$ eine reguläre Kurve und $\phi : [a_1, b_1] \to [a_2, b_2]$ eine Diffeomorphismus mit $\phi' > 0$, dann gilt $\overline\kappa(c) = \overline\kappa(c \circ \phi)$.
+\end{satz}
+
+\end{multicols}
+\end{document}
