@@ -246,7 +246,7 @@
 \end{defn}
 
 \begin{defn}
-  Ein Maß ist ein Prämaß auf einer $\sigma$-Algebra.
+  Ein \emph{Maß} ist ein Prämaß auf einer $\sigma$-Algebra.
 \end{defn}
 
 \begin{satz}
@@ -336,6 +336,130 @@
     \item Sei $\mu$ endlich und $(A_n)_{n \in \N}$ eine gegen $A$ konvergente Folge in $\Alg$, dann gilt $A \in \Alg$ und $\mu(A) = \lim_{n \to \infty} \mu(A_n)$.
   \end{itemize}
 \end{satz}
+
+\begin{defn}
+  Ein Inhalt auf einem Ring $\Ring \subset \PSO$ heißt \emph{$\sigma$-endlich}, wenn gilt: Es gibt eine Folge $(S_n)_{n \in \N}$ in $\Ring$, sodass
+  \begin{itemize}
+    \item $\Omega = \bigcup_{n \in \N} S_n$ und
+    \item $\mu(S_n) < \infty$ für alle $n \in \N$
+  \end{itemize}
+\end{defn}
+
+\begin{defn}
+  Eine Funktion $f : \Omega \to \overline{\R} = \R \cup \{ \pm \infty \}$ wird \emph{numerische Funktion} genannt.
+\end{defn}
+
+\begin{defn}
+  Eine numerische Funktion $\mu^* : \PSO \to \overline{\R}$ heißt \emph{äußeres Maß} auf $\Omega$, wenn gilt:
+  \begin{itemize}
+    \item $\mu^*(\emptyset) = 0$
+    \item Monotonie: $A \subset B \implies \mu^*(A) \leq \mu^*(B)$
+    \item $\sigma$-Subadditivität: Ist $(A_n)_{n \in \N}$ eine Folge von Teilmengen von $\Omega$, dann gilt $\mu^*\left(\bigcup_{n \in \N} A_n \right) \leq \sum_{n = 0}^\infty \mu^*(A_n)$
+  \end{itemize}
+\end{defn}
+
+\begin{bem}
+  Wegen $\mu^*(\emptyset) = 0$ und der Monotonie nimmt ein äußeres Maß nur Werte in $[0, \infty]$ an.
+\end{bem}
+
+\begin{defn}
+  Eine Teilmenge $A \subset \Omega$ heißt \emph{$\mu^*$-messbar}, falls für alle $Q \subset \Omega$ gilt
+  \[ \mu^*(Q) = \mu^*(Q \cap A) + \mu^*(Q \setminus A). \]
+\end{defn}
+
+\begin{satz}[Carathéodory]
+  Sei $\mu^* : \PSO \to [0, \infty]$ ein äußeres Maß, dann gilt
+  \begin{itemize}
+    \item Die Menge $\Alg^* := \Set{ A \subset \Omega }{ A \text{ ist $\mu^*$-messbar } }$ ist eine $\sigma$-Algebra.
+    \item $\mu^*|_{\Alg^*}$ ist ein Maß auf $\Alg^*$.
+  \end{itemize}
+\end{satz}
+
+\begin{satz}[\emph{Fortsetzungssatz}]
+  Sei $\mu$ ein Prämaß auf einem Ring $\Ring$, dann gibt es ein Maß $\tilde{\mu}$ auf der von $\Ring$ erzeugten $\sigma$-Algebra $\Alg(\Ring)$ mit $\tilde{\mu}|_\Ring = \mu$. Falls $\mu$ $\sigma$-endlich, so ist $\tilde{\mu}$ eindeutig bestimmt.
+\end{satz}
+
+\begin{bem}
+  Im Beweis wird ein äußeres Maß auf $\Omega$ wie folgt definiert:
+
+  \[ \mu^*(Q) := \inf \left\{ \sum_{i = 0}^\infty \mu(A_n) \,\middle|\, (A_n)_{n \in \N} \in \mathfrak{U}(Q) \right\}, \]
+
+  wobei $\inf \emptyset := \infty$ und
+
+  \[ \mathfrak{U}(Q) := \left\{ (A_n)_{n \in \N} \middle| Q \subset \bigcup_{n = 0}^\infty A_n \text{ und } A_n \text{ Folge in } \Ring \right\}. \]
+
+  Das Prämaß $\mu^*$ eingeschränkt auf $\Alg^* \supset \Alg(\Ring)$ ist ein Maß.
+\end{bem}
+
+
+\subsection{Das Lebesgue-Borel-Maß}
+
+\begin{nota}
+  Für zwei Elemente $a = (a_1, ..., a_n)$ und $b = (b_1, ..., b_n)$ schreibe
+  \begin{itemize}
+    \item $a \lhd b$, falls $a_j < b_j$ für alle $j = 1, ..., n$.
+    \item $a \unlhd b$, falls $a_j \leq b_j$ für alle $j = 1, ..., n$.
+  \end{itemize}
+\end{nota}
+
+\begin{defn}
+  Für $a, b \in \R^n$ heißen
+  \begin{align*}
+    ]a, b[\,:=& \Set{ x \in \R^n }{ a \lhd x \lhd b }\\
+    \mu(]a, b[) :=& \prod_{j = 1}^{n} (b_j - a_j)
+  \end{align*}
+  \emph{Elementarquader} und \emph{Elementarinhalt}. Sei im Folgenden $\mathcal{E}$ die Menge aller Elementarquader.
+\end{defn}
+
+\begin{satz}
+  Für alle $A \in \Ring(\mathcal{E})$ gibt es paarweise disjunkte Elementarquader $Q_1, ..., Q_p \in \mathcal{E}$ sodass $A = \bigsqcup_{i = 1}^p Q_i$.
+\end{satz}
+
+\begin{defn}
+  Für $A \in \Ring(\mathcal{E})$ setze $\mu(A) := \sum_{i = 1}^p \mu(Q_i)$, wenn $A = \bigsqcup_{i = 1}^p Q_i$ für paarweise disjunkte $Q_1, ..., Q_p$.
+\end{defn}
+
+\begin{satz}
+  $\mu$ definiert ein Prämaß auf $\Ring(\mathcal{E})$, genannt das \emph{Lebesgue-Borel-Prämaß} auf $\R^n$.
+\end{satz}
+
+\begin{defn}
+  Die eindeutige (da $\mu$ $\sigma$-endlich) Fortsetzung $\tilde{\mu}$ von $\mu$ auf $\Alg(\mathcal{E}) = \mathfrak{B}(\R^n)$ wird \emph{Lebesgue-Borel-Maß} genannt.
+\end{defn}
+
+\begin{bem}
+  Das Lebesgue-Borel-Maß ist das einzige Maß auf $\mathfrak{B}(\R^n)$, welches jedem Elementarquader seinen Elementarinhalt zuordnet.
+\end{bem}
+
+\begin{defn}
+  Sei $\mu$ ein Maß auf einer $\sigma$-Algebra $\Alg \subset \PSO$. Eine Menge $N \subset \Omega$ heißt \emph{Nullmenge}, wenn es eine Menge $A \in \Alg$ gibt mit $N \subset A$ und $\mu(A) = 0$. Die Menge aller Nullmengen wird mit $\mathfrak{N}_\mu$ bezeichnet.
+\end{defn}
+
+\begin{defn}
+  Sei $\mu$ ein Maß auf einer $\sigma$-Algebra $\Alg$. Setze
+  \[ \tilde{\Alg}_\mu := \Set{ A \cup N }{ A \in \Alg, N \in \mathfrak{N}_\mu }. \]
+  Dann gilt:
+  \begin{itemize}
+    \item $\tilde{\Alg}_\mu = \Alg(\mathfrak{N}_\mu \cup \Alg)$, ist also eine $\sigma$-Algebra.
+    \item Die Funktion $\mu : \tilde{\Alg}_\mu \to [0, \infty]$ definiert durch $\tilde\mu(\tilde{A}) := \mu(A)$, wenn $\tilde{\Alg}_\mu \ni A \cup N$ mit $A \in \Alg$ und $N \in \mathfrak{N}$, ist ein Maß.
+  \end{itemize}
+\end{defn}
+
+\begin{defn}[Fortsetzung auf Nullmengen]
+  Sei $\mu$ das Lebesgue-Borel-Maß auf $\mathfrak{B}(\R^n)$. Dann heißt die von $\mathfrak{B}(\R^n)$ und den entsprechenden Nullmengen erzeugte $\sigma$-Algebra $\tilde{\Alg}_\mu$ \emph{Lebesguesche $\sigma$-Algebra}, notiert $\mathfrak{L}(\R^n)$, und das fortgesesetzte Maß \emph{Lebesgue-Maß}.
+\end{defn}
+
+\begin{defn}
+  Sei $\Omega$ eine Menge und $\Alg \subset \PSO$ eine $\sigma$-Algebra auf $\Omega$, sowie ggf. $\mu$ ein Maß auf $\Alg$. Dann heißt
+  \begin{itemize}
+    \item das Tupel $(\Omega, \Alg)$ \emph{messbarer Raum},
+    \item das Tripel $(\Omega, \Alg, \mu)$ \emph{Maßraum}.
+  \end{itemize}
+\end{defn}
+
+\begin{defn}
+  Seien $(\Omega, \Alg)$ und $(\Omega', \Alg')$ zwei messbare Räume. Eine Abbildung $f : \Omega \to \Omega'$ heißt \emph{messbar} oder genauer $(\Alg, \Alg')$-messbar, wenn für alle $A' \in \Omega'$ gilt $f^{-1}(A') \in \Omega$ oder, kürzer, $f^{-1}(\Alg') \subset \Alg$.
+\end{defn}
 
 \end{multicols}
 \end{document}
