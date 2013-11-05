@@ -218,7 +218,7 @@
 % Beispiel: Kreis
 
 \begin{bsp}
-  Die nach BL parametriesierte gegen den UZS durchlaufene Kreislinie mit Mittelpunkt $m \in \R^2$ und Radius $r > 0$
+  Die nach BL parametrisierte gegen den UZS durchlaufene Kreislinie mit Mittelpunkt $m \in \R^2$ und Radius $r > 0$
   \[ c : \R \to \R^2, \quad t \mapsto m + r \begin{pmatrix} \cos(t/r) \\ \sin(t/r) \end{pmatrix} \]
   hat konstante Krümmung $\kappa(t) = \tfrac{1}{r}$.
 \end{bsp}
@@ -261,6 +261,119 @@
 
 \begin{satz}
   Die Totalkrümmung ist invariant unter orientierungserhaltenden Umparametrisierungen, d.\,h. ist $c : [a_2, b_2] \to \R^2$ eine reguläre Kurve und $\phi : [a_1, b_1] \to [a_2, b_2]$ eine Diffeomorphismus mit $\phi' > 0$, dann gilt $\overline\kappa(c) = \overline\kappa(c \circ \phi)$.
+\end{satz}
+
+\begin{satz}[\emph{Polarwinkelfunktion}]
+  Sei $\gamma = \begin{psmallmatrix} \gamma_1 \\ \gamma_2 \end{psmallmatrix} : [a, b] \to S^1$ stetig (glatt) und $\omega_a \in \R$, sodass $\gamma(a) = e^{i \omega_a}$. Dann gibt es eine eindeutige stetige (glatte) Abbildung $\omega : [a, b] \to \R$, genannt Polarwinkelfunktion von $\gamma$ mit $\omega(a) = \omega_a$ und $\gamma(t) = e^{i \omega(t)} = \begin{pmatrix} \cos(\omega(t)) \\ \sin(\omega(t)) \end{pmatrix}$ für alle $t \in [a, b]$.
+\end{satz}
+
+\begin{satz}
+  Seien $\omega$ und $\tilde\omega$ zwei stetige Polarwinkelfunktionen zu einer stetigen Abbildung $\gamma : [a, b] \to S^1$. Dann gibt es ein $k \in \Z$, sodass $\omega(t) - \tilde\omega(t) = 2 \pi k$ für alle $t \in [a, b]$.
+\end{satz}
+
+\begin{satz}
+  Sei $c : [a, b] \to \R^2$ eine ebene reguläre geschlossene Kurve, dann heißt die ganze Zahl
+  \[ U_c := \frac{1}{2 \pi} \overline\kappa(c) = \frac{1}{2 \pi} \int_a^b\! \kappa(t) \| c'(t) \| \,\d t \]
+  \emph{Tangentendrehzahl} oder \emph{Umlaufzahl} von $c$.
+\end{satz}
+
+\begin{satz}[Umlaufsatz von Hopf]
+  Die Tangentendrehzahl einer einfach geschlossenen regulären Kurve ist $\pm 1$.
+\end{satz}
+
+\begin{satz}
+  Für die Absolutkrümmung einer einfach geschlossenen regulären Kurve $c : [a, b] \to \R^2$ gilt $\kappa_{\text{abs}} \geq 2 \pi$, wobei Gleichheit genau dann gilt, wenn $\kappa_c$ das Vorzeichen nicht wechselt.
+\end{satz}
+
+\begin{satz}[Whitney-Graustein]
+  Für zwei glatte reguläre geschlossene ebene Kurven $c, d : [0, 1] \to \R^2$ sind folgende Aussagen äquivalent:
+  \begin{enumerate}[label=(\roman*),leftmargin=2em]
+    \item $c$ ist zu $d$ regulär homotop
+    \item $U_c = U_d$
+  \end{enumerate}
+\end{satz}
+
+\begin{defn}
+  Eine glatte reguläre Kurve $c : I \to \R^n$ ($n \geq 3$) heißt \emph{Frenet-Kurve}, wenn für alle $t \in I$ die Ableitungen $c'(t), c''(t), ..., c^{(n-1)}(t)$ linear unabhängig sind.
+\end{defn}
+
+\begin{defn}
+  Sei $c : I \to \R^n$ eine Frenet-Kurve und $t \in I$. Wende das Gram-Schmidtsche Orthogonalisierungsverfahren auf $\{ c'(t), c''(t), ..., c^{(n-1)}(t) \}$ an und ergänze das resultierende Orthonormalsystem $(b_1(t), ..., b_{n-1}(t))$ mit einem passenden Vektor $b_n(t)$ zu einer Orthonormalbasis, die positiv orientiert ist. Die so definierten Funktionen $b_1, ..., b_n : I \to \R^n$ sind stetig und werden zusammen das \emph{Frenet-$n$-Bein} von $c$ genannt.
+\end{defn}
+
+\begin{defn}
+  Sei $(b_1, ..., b_n)$ das Frenet-$n$-Bein einer Frenet-Kurve $c$. Dann gilt:
+  \[ A := (\langle b_j' , b_k \rangle)_{jk} = \begin{pmatrix}
+    0 & \kappa_1 &&& 0 \\
+    - \kappa_1 & 0 & \kappa_2 \\
+    & \ddots & \ddots & \ddots \\
+    && - \kappa_{n-2} & 0 & \kappa_{n-1} \\
+    0 &&& - \kappa_{n-1} & 0
+  \end{pmatrix} \]
+  Die Funktion $\kappa_j : I \to \R, t \mapsto \langle b_j'(t) , b_{j+1}(t) \rangle, j = 1, ..., n - 1$ heißt $j-te$ \emph{Frenet-Krümmung} von $c$.
+\end{defn}
+
+% Aufgabe 1.23
+
+\begin{satz}[Hauptsatz der lokalen Raumkurventheorie]
+  Seien $\kappa_1, ..., \kappa_{n-1} : I \to \R$ glatte Funktionen mit $\kappa_1, ..., \kappa_{n-2} > 0$ und $t_0 \in I$ und $\{ v_1, ..., v_n \}$ eine positiv orientierte Orthonormalbasis, sowie $x_0 \in \R^n$. Dann gibt es genau eine nach BL parametrisierte Frenet-Kurve $c : I \to \R^n$, sodass gilt
+  \begin{itemize}
+    \item $c(t_0) = x_0$,
+    \item das Frenet-$n$-Bein von $c$ in $t_0$ ist $\{ v_1, ..., v_n \}$ und
+    \item die $j$-te Frenet-Krümmung von $c$ ist $\kappa_j$.
+  \end{itemize}
+\end{satz}
+
+\begin{defn}[Frenet-Kurven im $\R^3$]
+  Sei $c : I \to \R^3$ eine nach BL parametrisierte Frenet-Kurve und $t \in I$. Dann heißt
+  \begin{itemize}
+    \item $b_1(t) = v(t) = c'(t)$ der \emph{Tangentenvektor} an $c$ in $t$,
+    \item $b_2(t) = \frac{c''(t)}{\| c''(t) \|}$ \emph{Normalenvektor} an $c$ in $t$,
+    \item $\mathrm{span}{b_1(t), b_2(t)}$ \emph{Schmiegebene} an $c$ in $t$,
+    \item $b_3(t) = b_1(t) \times b_2(t)$ \emph{Binormalenvektor} an $c$ in $t$,
+    \item $\tau_c(t) = \tau(t) := \kappa_2(t) = \langle b_2'(t) , b_3(t) \rangle$ \emph{Torsion} oder \emph{Windung} von $c$.
+  \end{itemize}
+\end{defn}
+
+\begin{bem}
+  Die Frenet-Gleichungen für nach BL parametrisierte Frenet-Kurven im $\R^3$ lauten
+  \begin{align*}
+    b_1' &= \kappa_2 b_2 \\
+    b_2' &= - \kappa_c b_1 + \tau_c b_3 \\
+    b_3' &= - \tau_c b_2.
+  \end{align*}
+\end{bem}
+
+% Nach Theorem 1.24 bestimmt die Kru ̈mmung und die Torsion eine nach Bogenla ̈nge
+% parametrisierte Frenet-Kurve im R3 bis auf eine euklidische Bewegung eindeutig
+
+\begin{bem}
+  Für eine nicht nach BL parametrisierte Frenet-Kurve $c : I \to \R^3$ gilt für Krümmung und Torsion
+  \[ \kappa_c := \frac{\| c' \times c'' \|}{\| c' \|^3} \quad \text{und} \quad \tau_c := \frac{\det(c', c'', c''')}{\| c' \times c'' \|^2}. \]
+\end{bem}
+
+% TODO: Redundant?
+
+\begin{defn}
+  Für eine glatte geschlossene reguläre Kurve $c : [a, b] \to \R^n$ ist die \emph{Totalkrümmung} definiert durch
+  \[ \overline\kappa(c) := \int_a^b\!\kappa_c(t) \cdot \| c'(t) \|\,\d t. \]
+
+  Hierbei ist die Krümmung einer regulären Raumkurve $c : I \to \R^n$ wie folgt definiert:
+  Sei $\phi : I \to J$ orientierungserhaltend
+  (d.\,h. $\phi' > 0$) und so gewählt,
+  dass $\tilde{c} := c \circ \phi^{-1} : J \to \R^n$ nach
+  BL parametrisiert ist, dann definieren wir $\kappa_c(t) := \kappa_{\tilde{c}}(\phi(t))$.
+\end{defn}
+
+\begin{satz}[Fenchel]
+  Für eine geschlossene reguläre glatte (oder $\mathcal{C}^2$) Kurve $c : [a, b] \to \R^3$ gilt
+  \[ \overline\kappa(c) \geq 2 \pi. \]
+  Gleichheit tritt genau dann ein, wenn $c$ eine einfach geschlossene konvexe reguläre glatte (oder $\mathcal{C}^2$) Kurve ist, die in einer affinen Ebene des $\R^3$ liegt.
+\end{satz}
+
+\begin{satz}
+  Sei $v : [0, b] \to S^2 \subset \R^3$ eine stetige rektifizierbare Kurve der Länge $L < 2 \pi$
+mit $c(0) = c(b)$, so liegt das Bild von $v$ ganz in einer offenen Hemisphäre.
 \end{satz}
 
 \end{multicols}
