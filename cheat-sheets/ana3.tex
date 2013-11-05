@@ -461,5 +461,68 @@
   Seien $(\Omega, \Alg)$ und $(\Omega', \Alg')$ zwei messbare Räume. Eine Abbildung $f : \Omega \to \Omega'$ heißt \emph{messbar} oder genauer $(\Alg, \Alg')$-messbar, wenn für alle $A' \in \Omega'$ gilt $f^{-1}(A') \in \Omega$ oder, kürzer, $f^{-1}(\Alg') \subset \Alg$.
 \end{defn}
 
+\begin{bem}
+  Die messbaren Räume bilden eine Kategorie mit messbaren Abbildungen als Morphismen, d.\,h. die Identitätsabbildung von einem messbaren Raum zu sich selbst ist messbar und die Verkettung zweier messbaren Abbildungen ist messbar.
+\end{bem}
+
+% Aufgabe 1.55
+\begin{satz}
+  \begin{itemize}
+    \item Seien $(\Omega, \Alg)$ ein messbarer Raum, $\Omega'$ eine Menge und $f : \Omega \to \Omega'$ eine Abbildung. Dann ist $\Alg' := \Set{ A' \subset \Omega' }{ f^{-1}(A') \in \Alg }$ die größte $\sigma$-Algebra auf $\Omega'$, sodass $f$ messbar ist.
+    \item Ist $\Omega$ eine Menge und $(\Omega', \Alg')$ ein messbarer Raum sowie $f : \Omega \to \Omega'$ eine Abbildung. Dann ist $f^{-1}(\Alg')$ eine $\sigma$-Algebra.
+    \item Seien $I$ eine Indexmenge, $\Omega$ eine Menge, $(\Omega_i, \Alg_i), i \in I$ messbare Räume und $f_i : \Omega \to \Omega_i$ Abbildungen, dann ist
+    \[ \Alg := \Alg\left( \bigcup_{i \in I} f_i^{-1}(\Alg_i) \right) \]
+    die kleinste $\sigma$-Algebra auf $\Omega$, sodass alle Abbildungen $f_i$, $i \in I$, messbar sind. Diese $\sigma$-Algebra wird die von der Familie $\Set{ f_i }{i \in I}$ \emph{erzeugte $\sigma$-Algebra} genannt.
+  \end{itemize}
+\end{satz}
+
+\begin{satz}
+  Sei $f : \Omega \to \Omega'$ eine Abbildung und $\mathcal{E}' \subset \mathcal{P}(\Omega')$, dann gilt
+  \[ \Alg(f^{-1}(\mathcal{E}')) = f^{-1}(\Alg(\mathcal{E}')) \]
+\end{satz}
+
+\begin{satz}
+  Sei $(\Omega, \Alg)$ ein messbarer Raum und $f : \Omega \to \Omega'$ eine Abbildung, sowie $\mathcal{E'} \subset \mathcal{P}(\Omega')$. Dann sind folgende Aussagen äquivalent:
+  \begin{itemize}
+    \item $f$ ist $(\Alg, \Alg(\mathcal{E}'))$-messbar
+    \item $f^{-1}(\mathcal{E}) \subset \Alg$
+  \end{itemize}
+\end{satz}
+
+\begin{satz}
+  Seien $(\Omega, \mathcal{O})$ und $(\Omega', \mathcal{O}')$ zwei topologische Räume und $\Alg := \Alg(\mathcal{O})$ bzw. $\Alg' := \Alg(\mathcal{O}')$ die dazugehörigen Borelschen $\sigma$-Algebren. Dann ist jede stetige Abbildung $f : \Omega \to \Omega'$ $(\Alg, \Alg')$-messbar.
+\end{satz}
+
+% Bildchen zum Projektionssatz?
+
+\begin{satz}[Projektionssatz]
+  Seien $I$ eine Indexmenge, $(\Omega_0, \Alg_0)$ sowie $(\Omega_i, \Alg_i)$, $i \in I$ messbare Räume und $\Omega$ eine Menge. Seien $g_i : \Omega \to \Omega_i, i \in I$ und $f : \Omega_0 \to \Omega$ Abbildungen. Wir setzen $\Alg := \Alg\left( \bigcup_{i \in I} g_i^{-1}(\Alg_i) \right)$. Dann sind folgende Aussagen äquivalent:
+  \begin{itemize}
+    \item $f$ ist $(\Alg_0, \Alg)$-messbar.
+    \item Für alle $i \in I$ sind die Abbildungen $g_i \circ f$ $(\Alg_0, \Alg_i)$-messbar.
+  \end{itemize}
+\end{satz}
+
+\begin{satz}
+  Sei $(\Omega, \Alg, \mu)$ ein Maßraum und $(\Omega', \Alg')$ ein messbarer Raum und $f : \Omega \to \Omega'$ eine messbare Abbildung, dann ist
+  \[ \mu' = f_*(\mu) = \mu \circ f^{-1} : \Alg' \to [0, \infty], \quad A' \mapsto \mu(f^{-1}(A')) \]
+  ein Maß auf $\Alg'$, genannt das \emph{Bildmaß} von $f$.
+\end{satz}
+
+\begin{defn}
+  Die $\sigma$-Algebra der Borelmengen auf $\overline\R = \R \cup \{ \pm \infty \}$ ist
+  \[ \mathfrak{B}(\overline\R) = \Set{ A, A \cup \{ +\infty \}, A \cup \{ -\infty \}, A \cup \{ \pm \infty \} }{ A \in \mathfrak{B}(\R) }. \]
+\end{defn}
+
+\begin{satz}
+  $\mathfrak{B}(\overline\R) = \Alg(\Set{ [a, \infty] }{ a \in \R })$
+\end{satz}
+
+\begin{nota}
+  Seien $f, g : \Omega \to \overline{R}$ zwei numerische Funktionen. Setze
+    \[ \{ f \leq g \} := \Set{ \omega \in \Omega }{ f(\omega) \leq g(\omega) } \subset \Omega \]
+  und definiere analog $\{ f < g \}$, $\{ f \geq g \}$, $\{ f > g \}$, $\{ f = g \}$, $\{ f \not= g \}$.
+\end{nota}
+
 \end{multicols}
 \end{document}
