@@ -1,0 +1,261 @@
+\documentclass[a4paper,10pt,landscape]{article}
+\usepackage{multicol}
+\usepackage{calc}
+\usepackage{ifthen}
+\usepackage[landscape]{geometry}
+\usepackage{amsmath,amsthm,amsfonts,amssymb}
+\usepackage{color,graphicx,overpic}
+\usepackage{hyperref}
+\usepackage[utf8]{inputenc}
+\usepackage[ngerman]{babel}
+\usepackage{enumitem}
+\usepackage{mathtools}
+\usepackage{pifont}
+\usepackage{syntax}
+
+\setitemize[0]{leftmargin=10pt,itemindent=0pt,itemsep=0pt}
+\setenumerate[0]{leftmargin=10pt,itemindent=0pt,itemsep=0pt}
+
+\newcommand{\cmark}{\ding{51}}
+\newcommand{\xmark}{\ding{55}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\PS}{\mathcal{P}} % Powerset
+\newcommand{\PSO}{\PS(\Omega)} % Powerset
+\newcommand{\Alg}{\mathfrak{A}}
+\newcommand{\Ring}{\mathfrak{R}}
+
+% Differentiator
+\renewcommand{\d}{\mathrm{d}}
+
+\pdfinfo{
+  /Title (info3.pdf)
+  /Creator (TeX)
+  /Producer (pdfTeX 1.40.0)
+  /Author (Tim Baumann)
+  /Subject (Informatik 3 Zusammenfassung)
+  /Keywords (overview)}
+
+% This sets page margins to .5 inch if using letter paper, and to 1cm
+% if using A4 paper. (This probably isn't strictly necessary.)
+% If using another size paper, use default 1cm margins.
+\ifthenelse{\lengthtest { \paperwidth = 11in}}
+    { \geometry{top=.5in,left=.5in,right=.5in,bottom=.5in} }
+    {\ifthenelse{ \lengthtest{ \paperwidth = 297mm}}
+        {\geometry{top=1cm,left=1cm,right=1cm,bottom=1cm} }
+        {\geometry{top=1cm,left=1cm,right=1cm,bottom=1cm} }
+    }
+
+\theoremstyle{definition}
+
+\newtheorem*{nota}{Notation}
+\newtheorem*{defn}{Definition}
+\newtheorem*{prob}{Problem}
+\newtheorem*{bsp}{Beispiel}
+\newtheorem*{satz}{Satz}
+\newtheorem*{kor}{Korollar}
+\newtheorem*{acht}{Achtung}
+\newtheorem*{strat}{Strategie}
+\newtheorem*{alg}{Algorithmus}
+\newtheorem*{abk}{Abkürzung}
+
+\theoremstyle{remark}
+\newtheorem*{bem}{Bemerkung}
+
+% Römische Ziffern
+\makeatletter
+\newcommand*{\rom}[1]{\expandafter\@slowromancap\romannumeral #1@}
+\makeatother
+
+% Ober- und Unterintegral, siehe
+% http://tex.stackexchange.com/questions/44237/lower-and-upper-riemann-integrals
+\def\upint{\mathchoice%
+    {\mkern13mu\overline{\vphantom{\intop}\mkern7mu}\mkern-20mu}%
+    {\mkern7mu\overline{\vphantom{\intop}\mkern7mu}\mkern-14mu}%
+    {\mkern7mu\overline{\vphantom{\intop}\mkern7mu}\mkern-14mu}%
+    {\mkern7mu\overline{\vphantom{\intop}\mkern7mu}\mkern-14mu}%
+  \int}
+\def\lowint{\mkern3mu\underline{\vphantom{\intop}\mkern7mu}\mkern-10mu\int}
+
+% Färbe \emph{}
+\definecolor{Emph}{rgb}{0.2,0.2,0.8}  %softer red for display
+\renewcommand{\emph}[1]{\textcolor{Emph}{\bf{#1}}}
+
+% Display style überall!
+\everymath{\displaystyle}
+
+% Turn off header and footer
+\pagestyle{empty}
+
+% Redefine section commands to use less space
+\makeatletter
+\renewcommand{\section}{\@startsection{section}{1}{0mm}%
+                                {-1ex plus -.5ex minus 2ex}%
+                                {2.5ex plus .2ex}%x
+                                {\normalfont\large\bfseries}}
+\renewcommand{\subsection}{\@startsection{subsection}{2}{0mm}%
+                                {-1explus -.5ex minus -.2ex}%
+                                {0.5ex plus .2ex}%
+                                {\normalfont\normalsize\bfseries}}
+\renewcommand{\subsubsection}{\@startsection{subsubsection}{3}{0mm}%
+                                {-1ex plus -.5ex minus -.2ex}%
+                                {1ex plus .2ex}%
+                                {\normalfont\small\bfseries}}
+\makeatother
+
+% Don't print section numbers
+\setcounter{secnumdepth}{0}
+
+\DeclarePairedDelimiterX\Set[2]{\lbrace}{\rbrace}%
+ { #1 \,\delimsize|\, #2 }
+
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0pt plus 10ex}
+
+% -----------------------------------------------------------------------
+
+\begin{document}
+\raggedright
+\footnotesize
+\begin{multicols}{3}
+
+% multicol parameters
+% These lengths are set only within the two main columns
+%\setlength{\columnseprule}{0.25pt}
+\setlength{\premulticols}{1pt}
+\setlength{\postmulticols}{1pt}
+\setlength{\multicolsep}{1pt}
+\setlength{\columnsep}{2pt}
+
+\begin{center}
+  \Large{\underline{Zusammenfassung Informatik \rom{3}}} \\
+\end{center}
+
+\begin{abk}
+  \begin{tabular}{r l}
+    \textbf{WC} & Worst Case \\
+    \textbf{AC} & Worst Case \\
+    \textbf{BC} & Best Case
+  \end{tabular}
+\end{abk}
+
+\begin{alg}[Insertion Sort]
+  BC: $O(n)$; AC, WC: $O(n^2)$
+\end{alg}
+
+\begin{nota}
+  Sei $\mathcal{F}$ die Menge der Funktionen von $\N$ nach $\R_{\geq 0}$. Ist $g \in \mathcal{F}$, dann definieren wir
+  \begin{align*}
+    O(f) :=& \, \Set{ g \in \mathcal{F} }{ \exists\,c > 0\,\exists\,n_0 \in \N\,\forall\,n \geq n_0 : g(n) \leq c \cdot f(n) } \\
+    \Omega(f) :=& \, \Set{ g \in \mathcal{F} }{ \exists\,c > 0\,\exists\,n_0 \in \N\,\forall\,n \geq n_0 : g(n) \leq c \cdot f(n) } \\
+    o(f) :=& \, \Set{ g \in \mathcal{F} }{ \forall\,c > 0\,\exists\,n_0 \in \N\,\forall\,n \geq n_0 : g(n) \leq c \cdot f(n) } \\
+    \omega(f) :=& \, \Set{ g \in \mathcal{F} }{ \forall\,c > 0\,\exists\,n_0 \in \N\,\forall\,n \geq n_0 : g(n) \leq c \cdot f(n) } \\
+    \Theta(f) :=& \, \{ g \in \mathcal{F} \,|\, \exists\,c_1, c_2 > 0\,\exists\,n_0 \in \N\,\forall\,n \geq n_0 : \\
+    & \qquad \qquad \qquad c_1 \cdot f(n) \leq g(n) \leq c_2 \cdot f(n) \}
+              = O(f) \cap \Omega(f) \\
+  \end{align*}
+\end{nota}
+
+\begin{satz}
+  Seien $0 < \alpha < \beta$, $0 < a < b$ und $1 < A < B$. Betrachte
+  \begin{multicols}{3}
+    \begin{itemize}
+      \item $f_1(n) := \log \log n$
+      \item $f_2(n) := (\log n)^\alpha$
+      \item $f_3(n) := (\log n)^\beta$
+      \item $f_4(n) := n^a$
+      \item $f_5(n) := n^a (\log n)^\alpha$
+      \item $f_6(n) := n^b (\log n)^\alpha$
+      \item $f_7(n) := n^b$
+      \item $f_8(n) := A^n$
+      \item $f_9(n) := A^n \cdot n^a$
+      \item $f_{10}(n) := A^n \cdot n^b$
+      \item $f_{11}(n) := B^n$
+    \end{itemize}
+  \end{multicols}
+  Es gilt: $f_i \in o(f_{i+1})$ für $i = 1, ..., 10$.
+\end{satz}
+
+% TODO: Definition RAM
+
+\begin{defn}[RAM]
+  Die Random Access Access Machine besitzt eine unendlich lange Liste von aufsteigend nummerierten Speicherzellen R[0], R[1], ..., die jeweils eine ganze Zahl beinhalten und einen Programmzähler. Sie kann mittels der folgenden Sprache programmiert werden:
+  \begin{grammar}
+    <Zieladresse> ::= <Adresse> | R[<Adresse>]
+
+    <Operand> ::= <Literal> | R[<Adresse>]
+
+    <Befehl> ::= <Zieladresse> `:=' <Operand> $\odot$ <Operand>
+    \alt `if' <Operand> $\bowtie$ <Operand> `goto' <Label>
+
+    <Programm> ::= <Befehl> `;' <Programm> | `End'
+  \end{grammar}
+  wobei $\odot \in \{ +, -, *, \div \}$ und $\bowtie \, \in \{ <, \leq, =, \geq, >, \not= \}$. Diese einfache Grammatik lässt sich auch für unbedingte Sprünge nutzen (mittels Bedingung $0 = 0$). Ein Sprung über das Ende des Programms hinaus lässt das Programm anhalten. Per Konvention steht die Größe der Eingabe in der Speicherzelle R[1], während die tatsächliche Eingabe in R[2], ..., R[R[1] + 1] abgelegt wird.
+\end{defn},
+
+% TODO: Einführung Bäume / gerichtete Graphen
+% TODO: Einführung Stochastik
+
+\begin{alg}
+  Zwei sortierte Folgen der Gesamtlänge $n$ können in $O(n)$ Zeit gemischt werden.
+\end{alg}
+
+\begin{alg}[Sortieren durch Mischen / Mergesort]
+  $n$ Elemente mit Schlüsseln aus einem total geordneten Universum können in $O(n \log n)$ Zeit nach ihren Schlüsseln sortiert werden.
+\end{alg}
+
+\begin{satz}[Master-Theorem]
+  Seien $a, b, c, k, N$ reelle Zahlen mit $a, c > 0$, $k \geq 0$, $b, N \in \N$ und $b \geq 2$ und sei $T : \N \to \R_{\geq 0}$ eine Funktion, die folgende Rekursionsungleichung erfüllt:
+  \[ T(n) \leq \begin{cases}
+    c, & \text{ für } n \leq N \\
+    c n^k + a T(\lceil n / b \rceil), & \text{ für } n > N
+  \end{cases} \]
+  Sei ferner $\lambda := \log_b a$. Dann gilt
+  \[ T(n) = \begin{cases}
+    O(n^k), & \text{ falls } \lambda < k \\
+    O(n^k \log n), & \text{ falls } \lambda = k \\
+    O(n^\lambda), & \text{ falls } \lambda > k.
+  \end{cases} \]
+\end{satz}
+
+\begin{satz}
+  Seien $a, b, c, k, N$ reelle Zahlen mit $a, c > 0$, $k \geq 0$, $b, N \in \N$ und $b \geq 2$ und sei $T : \N \to \R_{\geq 0}$ eine Funktion, die folgende Rekursionsungleichung erfüllt:
+  \[ T(n) \geq \begin{cases}
+    c, & \text{ für } n \leq N \\
+    c n^k + a T(\lceil n / b \rceil), & \text{ für } n > N
+  \end{cases} \]
+  Sei ferner $\lambda := \log_b a$. Dann gilt
+  \[ T(n) = \begin{cases}
+    \Omega(n^k), & \text{ falls } \lambda < k \\
+    \Omega(n^k \log n), & \text{ falls } \lambda = k \\
+    \Omega(n^\lambda), & \text{ falls } \lambda > k.
+  \end{cases} \]
+\end{satz}
+
+% Wichtigkeit?
+\begin{satz}
+  Seien $\beta, c, k, n$ reelle Zahlen mit $c, k > 0$, $n \in \N_0$ und $0 < \beta < 1$ und sei $T : \N_0 \to \R_{\geq 0}$ eine Funktion, die folgende Rekursionsungleichung erfüllt:
+  \[ T(n) \leq \begin{cases}
+    c, & \text{ für } n \leq N \\
+    c n^k + T(\lfloor \beta n \rfloor), & \text{ für } n > N.
+  \end{cases} \]
+  Dann ist $T(n) = O(n^k)$
+\end{satz}
+
+% TODO: Algorithmus beschreiben?
+
+\begin{satz}[Karatsuba und Ofman]
+  Zwei $n$-stellige Zahlen können in $O(n^{\log_2 3})$ Zeit multipliziert werden.
+\end{satz}
+
+% TODO: Algorithmus beschreiben?
+
+\begin{satz}[Selektion]
+  Gegeben seien eine Menge $X$ von $n$ Elementen aus einem total geordneten Universum und eine ganze Zahl $k$ mit $1 \leq k \leq n$. Dann können wir (deterministisch) in $O(n)$ Zeit das $k$-kleinste Element aus $X$ bestimmen.
+\end{satz}
+
+\end{multicols}
+\end{document}
