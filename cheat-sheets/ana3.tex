@@ -5,6 +5,7 @@
 \usepackage[landscape]{geometry}
 \usepackage{amsmath,amsthm,amsfonts,amssymb}
 \usepackage{color,graphicx,overpic}
+\usepackage{bbm}
 \usepackage{hyperref}
 \usepackage[utf8]{inputenc}
 \usepackage[ngerman]{babel}
@@ -18,6 +19,7 @@
 \newcommand{\cmark}{\ding{51}}
 \newcommand{\xmark}{\ding{55}}
 \newcommand{\R}{\mathbb{R}}
+\newcommand{\ER}{\overline\R} % extended reals
 \newcommand{\N}{\mathbb{N}}
 \newcommand{\Z}{\mathbb{Z}}
 \newcommand{\C}{\mathbb{C}}
@@ -26,6 +28,7 @@
 \newcommand{\PSO}{\PS(\Omega)} % Powerset
 \newcommand{\Alg}{\mathfrak{A}}
 \newcommand{\Ring}{\mathfrak{R}}
+\newcommand{\Bor}{\mathfrak{B}} % Borel
 
 % Differentiator
 \renewcommand{\d}{\mathrm{d}}
@@ -137,7 +140,7 @@
   Gesucht: Abbildung $\mu : \PS(\R^n) \to [\R, \infty]$ mit folgenden Eigenschaften:
   \begin{itemize}
     \item Normierung: $\mu([0, 1]^n) = 1$
-    \item Endliche Additivität: Sind $A, B \subset \R^n$ disjunkt, so gilt $\mu(A \cup B) = \mu(A) + \mu(B)$
+    \item Endliche Additivität: Sind $A, B \subset \R^n$ disjunkt, so gilt $\mu(A \cup B) = \mu(A) + \mu(B)$.
     \item Bewegungsinvarianz: Für eine euklidische Bewegung $f : \R^n \to \R^n$ und $A \subset \R^n$ gilt $\mu(f(A)) = \mu(A)$.
   \end{itemize}
 \end{prob}
@@ -225,11 +228,11 @@
 \end{defn}
 
 \begin{defn}
-  Ist $(\Omega, \mathcal{O})$ ein topologischer Raum, dann heißt $\mathfrak{B} = \mathfrak{B}(\Omega, \mathcal{O}) := \Alg(\mathcal{O})$ \emph{Borelsche $\sigma$-Algebra} von $(\Omega, \mathcal{O})$.
+  Ist $(\Omega, \mathcal{O})$ ein topologischer Raum, dann heißt $\Bor = \Bor(\Omega, \mathcal{O}) := \Alg(\mathcal{O})$ \emph{Borelsche $\sigma$-Algebra} von $(\Omega, \mathcal{O})$.
 \end{defn}
 
 \begin{bem}
-  Die Borelsche $\sigma$-Algebra $\mathfrak{B}(\R)$ wird auch erzeugt von $\Set{I \subset \R }{ I \text{ Intervall } }$. Dabei spielt es keine Rolle, ob man nur geschlossene, nur offene, beliebig halboffene Intervalle oder gar nur Intervalle mit Endpunkten in $\Q$ zulässt.
+  Die Borelsche $\sigma$-Algebra $\Bor(\R)$ wird auch erzeugt von $\Set{I \subset \R }{ I \text{ Intervall } }$. Dabei spielt es keine Rolle, ob man nur geschlossene, nur offene, nur nach einer Seite halboffene Intervalle oder gar nur Intervalle obiger Art mit Endpunkten in $\Q$ zulässt.
 \end{bem}
 
 \begin{defn}
@@ -271,7 +274,7 @@
 
 \begin{defn}
   Sei $A \subset \Omega$. Dann heißt die Abbildung
-  \[ 1_A : \Omega \to \R, \quad \omega \mapsto \begin{cases} 1, & \text{ falls } \omega \in A \\ 0, & \text{ falls } \omega \not\in A \end{cases} \]
+  \[ \chi_A = \mathbbm{1}_A : \Omega \to \R, \quad \omega \mapsto \begin{cases} 1, & \text{ falls } \omega \in A \\ 0, & \text{ falls } \omega \not\in A \end{cases} \]
   \emph{Indikatorfunktion} oder \emph{charakteristische Funktion} von $A$.
 \end{defn}
 
@@ -379,6 +382,8 @@
   Sei $\mu$ ein Prämaß auf einem Ring $\Ring$, dann gibt es ein Maß $\tilde{\mu}$ auf der von $\Ring$ erzeugten $\sigma$-Algebra $\Alg(\Ring)$ mit $\tilde{\mu}|_\Ring = \mu$. Falls $\mu$ $\sigma$-endlich, so ist $\tilde{\mu}$ eindeutig bestimmt.
 \end{satz}
 
+\begin{samepage} % Hack
+
 \begin{bem}
   Im Beweis wird ein äußeres Maß auf $\Omega$ wie folgt definiert:
 
@@ -391,8 +396,9 @@
   Das Prämaß $\mu^*$ eingeschränkt auf $\Alg^* \supset \Alg(\Ring)$ ist ein Maß.
 \end{bem}
 
-
 \subsection{Das Lebesgue-Borel-Maß}
+
+\end{samepage}
 
 \begin{nota}
   Für zwei Elemente $a = (a_1, ..., a_n)$ und $b = (b_1, ..., b_n)$ schreibe
@@ -404,19 +410,19 @@
 
 \begin{defn}
   Für $a, b \in \R^n$ heißen
-  \begin{align*}
-    ]a, b[\,:=& \Set{ x \in \R^n }{ a \lhd x \lhd b }\\
-    \mu(]a, b[) :=& \prod_{j = 1}^{n} (b_j - a_j)
-  \end{align*}
+  \[
+    ]a, b[\,:= \Set{ x \in \R^n }{ a \lhd x \lhd b }, \qquad
+    \mu(]a, b[) := \prod_{j = 1}^{n} (b_j - a_j)
+  \]
   \emph{Elementarquader} und \emph{Elementarinhalt}. Sei im Folgenden $\mathcal{E}$ die Menge aller Elementarquader.
 \end{defn}
 
 \begin{satz}
-  Für alle $A \in \Ring(\mathcal{E})$ gibt es paarweise disjunkte Elementarquader $Q_1, ..., Q_p \in \mathcal{E}$ sodass $A = \bigsqcup_{i = 1}^p Q_i$.
+  Für alle $A \in \Ring(\mathcal{E})$ gibt es paarweise disjunkte Elementarquader $Q_1, ..., Q_p \in \mathcal{E}$ sodass $A = \sqcup_{i = 1}^p Q_i$.
 \end{satz}
 
 \begin{defn}
-  Für $A \in \Ring(\mathcal{E})$ setze $\mu(A) := \sum_{i = 1}^p \mu(Q_i)$, wenn $A = \bigsqcup_{i = 1}^p Q_i$ für paarweise disjunkte $Q_1, ..., Q_p$.
+  Für $A \in \Ring(\mathcal{E})$ setze $\mu(A) := \textstyle\sum_{i = 1}^p \mu(Q_i)$, wenn $A = \sqcup_{i = 1}^p Q_i$ für paarweise disjunkte $Q_1, ..., Q_p$.
 \end{defn}
 
 \begin{satz}
@@ -424,11 +430,11 @@
 \end{satz}
 
 \begin{defn}
-  Die eindeutige (da $\mu$ $\sigma$-endlich) Fortsetzung $\tilde{\mu}$ von $\mu$ auf $\Alg(\mathcal{E}) = \mathfrak{B}(\R^n)$ wird \emph{Lebesgue-Borel-Maß} genannt.
+  Die eindeutige (da $\mu$ $\sigma$-endlich) Fortsetzung $\tilde{\mu}$ von $\mu$ auf $\Alg(\mathcal{E}) = \Bor(\R^n)$ wird \emph{Lebesgue-Borel-Maß} genannt.
 \end{defn}
 
 \begin{bem}
-  Das Lebesgue-Borel-Maß ist das einzige Maß auf $\mathfrak{B}(\R^n)$, welches jedem Elementarquader seinen Elementarinhalt zuordnet.
+  Das Lebesgue-Borel-Maß ist das einzige Maß auf $\Bor(\R^n)$, welches jedem Elementarquader seinen Elementarinhalt zuordnet.
 \end{bem}
 
 \begin{defn}
@@ -446,7 +452,7 @@
 \end{defn}
 
 \begin{defn}[Fortsetzung auf Nullmengen]
-  Sei $\mu$ das Lebesgue-Borel-Maß auf $\mathfrak{B}(\R^n)$. Dann heißt die von $\mathfrak{B}(\R^n)$ und den entsprechenden Nullmengen erzeugte $\sigma$-Algebra $\tilde{\Alg}_\mu$ \emph{Lebesguesche $\sigma$-Algebra}, notiert $\mathfrak{L}(\R^n)$, und das fortgesesetzte Maß \emph{Lebesgue-Maß}.
+  Sei $\mu$ das Lebesgue-Borel-Maß auf $\Bor(\R^n)$. Dann heißt die von $\Bor(\R^n)$ und den entsprechenden Nullmengen erzeugte $\sigma$-Algebra $\tilde{\Alg}_\mu$ \emph{Lebesguesche $\sigma$-Algebra}, notiert $\mathfrak{L}(\R^n)$, und das fortgesesetzte Maß \emph{Lebesgue-Maß}.
 \end{defn}
 
 \begin{defn}
@@ -462,7 +468,7 @@
 \end{defn}
 
 \begin{bem}
-  Die messbaren Räume bilden eine Kategorie mit messbaren Abbildungen als Morphismen, d.\,h. die Identitätsabbildung von einem messbaren Raum zu sich selbst ist messbar und die Verkettung zweier messbaren Abbildungen ist messbar.
+  Die messbaren Räume bilden eine Kategorie mit messbaren Abbildungen als Morphismen, d.\,h. die Identitätsabbildung von einem messbaren Raum zu sich selbst ist messbar und die Verkettung zweier messbarer Abbildungen ist messbar.
 \end{bem}
 
 % Aufgabe 1.55
@@ -482,11 +488,8 @@
 \end{satz}
 
 \begin{satz}
-  Sei $(\Omega, \Alg)$ ein messbarer Raum und $f : \Omega \to \Omega'$ eine Abbildung, sowie $\mathcal{E'} \subset \mathcal{P}(\Omega')$. Dann sind folgende Aussagen äquivalent:
-  \begin{itemize}
-    \item $f$ ist $(\Alg, \Alg(\mathcal{E}'))$-messbar
-    \item $f^{-1}(\mathcal{E}) \subset \Alg$
-  \end{itemize}
+  Sei $(\Omega, \Alg)$ ein messbarer Raum und $f : \Omega \to \Omega'$ eine Abbildung, sowie $\mathcal{E'} \subset \mathcal{P}(\Omega')$. Dann gilt:
+  \[ f \text{ ist } (\Alg, \Alg(\mathcal{E}')) \text{-messbar} \iff f^{-1}(\mathcal{E}) \subset \Alg \]
 \end{satz}
 
 \begin{satz}
@@ -510,12 +513,12 @@
 \end{satz}
 
 \begin{defn}
-  Die $\sigma$-Algebra der Borelmengen auf $\overline\R = \R \cup \{ \pm \infty \}$ ist
-  \[ \mathfrak{B}(\overline\R) = \Set{ A, A \cup \{ +\infty \}, A \cup \{ -\infty \}, A \cup \{ \pm \infty \} }{ A \in \mathfrak{B}(\R) }. \]
+  Die $\sigma$-Algebra der Borelmengen auf $\ER = \R \cup \{ \pm \infty \}$ ist
+  \[ \Bor(\ER) = \Set{ A, A \cup \{ +\infty \}, A \cup \{ -\infty \}, A \cup \{ \pm \infty \} }{ A \in \Bor(\R) }. \]
 \end{defn}
 
 \begin{satz}
-  $\mathfrak{B}(\overline\R) = \Alg(\Set{ [a, \infty] }{ a \in \R })$
+  $\Bor(\ER) = \Alg(\Set{ [a, \infty] }{ a \in \R })$
 \end{satz}
 
 \begin{nota}
@@ -523,6 +526,121 @@
     \[ \{ f \leq g \} := \Set{ \omega \in \Omega }{ f(\omega) \leq g(\omega) } \subset \Omega \]
   und definiere analog $\{ f < g \}$, $\{ f \geq g \}$, $\{ f > g \}$, $\{ f = g \}$, $\{ f \not= g \}$.
 \end{nota}
+
+\begin{satz}
+  Für eine numerische Funktion $f : (\Omega, \Alg) \to (\ER, \overline{\Bor})$ sind äquivalent:
+  \begin{itemize}
+    \item $f$ ist messbar
+    \item für alle $\forall a \in \R : \{ f \geq a \} = f^{-1}([a, \infty]) \in \Alg$
+    \item für alle $\forall a \in \R : \{ f > a \} = f^{-1}(]a, \infty]) \in \Alg$
+    \item für alle $a \in \R$ gilt $\{ f \leq a \} = f^{-1}([-\infty, a]) \in \Alg$
+    \item für alle $a \in \R$ gilt $\{ f < a \} = f^{-1}([-\infty, a[) \in \Alg$
+  \end{itemize}
+\end{satz}
+
+\begin{satz}
+  Für zwei numerische Funktionen $f, g : (\Omega, \Alg) \to (\ER, \overline{\Bor})$ gilt:
+  \begin{multicols}{3}
+    \begin{itemize}
+      \item $\{ f < g \} \in \Alg$
+      \item $\{ f \leq g \} \in \Alg$
+      \item $\{ f > g \} \in \Alg$
+      \item $\{ f \geq g \} \in \Alg$
+      \item $\{ f = g \} \in \Alg$
+      \item $\{ f \not= g \} \in \Alg$
+    \end{itemize}
+  \end{multicols}
+\end{satz}
+
+\begin{satz}
+  Seien $f, g : (\Omega, \Alg) \to (\ER, \overline{\Bor})$ messbare numerische Funktionen und $\lambda, \mu \in \R$. Dann auch messbar (\ddag: falls $0 \not\in \mathrm{Bild}(f)$):
+  \begin{multicols}{5}
+    \begin{itemize}
+      \item $\lambda \cdot f$
+      \item $f + \mu \cdot g$
+      \item $f \cdot g$
+      \item $\tfrac{1}{f}$ (\ddag)
+      \item $\tfrac{g}{f}$ (\ddag)
+    \end{itemize}
+  \end{multicols}
+\end{satz}
+
+\begin{satz}
+  Seien $f_n : (\Omega, \Alg) \to (\ER, \overline\Bor), n \in \N$ messbare numerische Funktionen, dann auch messbar:
+  \begin{multicols}{4}
+    \begin{itemize}
+      \item $\sup_{n \in \N} f_n$
+      \item $\inf_{n \in \N} f_n$
+      \item $\liminf_{n \in \N} f_n$
+      \item $\limsup_{n \in \N} f_n$
+    \end{itemize}
+  \end{multicols}
+  Dabei werden Infimum, Supremum, usw. punktweise gebildet.
+\end{satz}
+
+\begin{satz}
+  Seien $f_1, ..., f_n : (\Omega, \Alg) \to (\ER, \overline\Bor)$ messbare numerische Funktionen, dann auch messbar:
+  \begin{multicols}{2}
+    \begin{itemize}
+      \item $\max(f_1, ..., f_n)$
+      \item $\min(f_1, ..., f_n)$
+    \end{itemize}
+  \end{multicols}
+\end{satz}
+
+\begin{defn}
+  Für $f : \Omega \to \ER$ heißen die Funktionen
+  \begin{itemize}
+    \item $|f| := \max(f, -f) : \Omega \to [0, \infty]$ \emph{Betrag} von $f$
+    \item $f^+ := \,\,\,\, \max(f, 0) : \Omega \to [0, \infty]$ \emph{Positivteil} von $f$
+    \item $f^- := - \min(f, 0) : \Omega \to [0, \infty]$ \emph{Negativteil} von $f$
+  \end{itemize}
+\end{defn}
+
+\begin{bem}
+  $f = f^+ - f^-$
+\end{bem}
+
+\begin{satz}
+  Falls $f : (\Omega, \Alg) \to (\ER, \overline\Bor)$ messbar, dann auch $|f|$, $f^+$ und $f^-$.
+\end{satz}
+
+\subsection{Das Lebesguesche Integral}
+
+\begin{defn}
+  Eine Funktion $f : (\Omega, \Alg) \to (\R, \Bor)$ heißt \emph{einfache Funktion} oder \emph{Elementarfunktion} auf $(\Omega, \Alg)$, wenn gilt:
+  \begin{multicols}{3}
+    \begin{itemize}
+      \item $f$ ist messbar
+      \item $f(\Omega) \subset [0, \infty[$
+      \item $f(\Omega)$ ist endlich
+    \end{itemize}
+  \end{multicols}
+  Die Menge aller einfachen Funktionen auf $(\Omega, \Alg)$ ist $\mathbb{E}(\Omega, \Alg)$.
+\end{defn}
+
+\begin{defn}
+  Sei $f \in \mathbb{E}(\Omega, \Alg)$ und $\Omega = \sqcup_{j=1}^k A_j$ eine disjunkte Vereinigung von Mengen mit $A_j \in \Alg$ für alle $j = 1, ..., k$, sodass $f(A_j) = \{ y_j \}$, dann heißt die Darstellung
+  \[ f = \sum_{j=1}^k y_j \cdot \mathbbm{1}_{A_j} \]
+  \emph{kanonische Darstellung} von $f$.
+\end{defn}
+
+\begin{bem}
+  Die kanonische Darstellung ist nicht eindeutig.
+\end{bem}
+
+\begin{satz}
+  Seien $f, g \in \mathbb{E}(\Omega, \Alg)$ und $a \geq 0$. Dann auch in $\mathbb{E}(\Omega, \Alg)$:
+  \begin{multicols}{5}
+    \begin{itemize}
+      \item $f + g$
+      \item $f \cdot g$
+      \item $\max(f, g)$
+      \item $\min(f, g)$
+      \item $a \cdot f$
+    \end{itemize}
+  \end{multicols}
+\end{satz}
 
 \end{multicols}
 \end{document}
