@@ -131,6 +131,9 @@
   \Large{\underline{Zusammenfassung Geometrie}} \\
 \end{center}
 
+
+\section{Geometrie von Kurven}
+
 % Erinnerung: Skalarprodukt, Isometrie, Winkel, Orthogonalität
 
 \begin{nota}
@@ -375,6 +378,81 @@
   Sei $v : [0, b] \to S^2 \subset \R^3$ eine stetige rektifizierbare Kurve der Länge $L < 2 \pi$
 mit $c(0) = c(b)$, so liegt das Bild von $v$ ganz in einer offenen Hemisphäre.
 \end{satz}
+
+
+\section{Lokale Flächentheorie}
+
+\begin{nota}
+  Sei im Folgenden $m \in \N$ und $U \subset \R^m$ offen.
+\end{nota}
+
+\begin{defn}
+  Sei $f : U \to \R^n$ eine Abbildung und $v \in \R^m \setminus \{ 0 \}$. Dann heißt
+  \[ \partial_v f(u) := \lim_{h \to 0} \frac{f(u + hv) - f(u)}{ h } \]
+  \emph{Richtungsableitung} von $f$ im Punkt $u$ (falls der Limes existiert). Für $v = e_j$ heißt
+  \[ \partial_j f(u) := \partial_{e_j} f(u) \]
+  \emph{partielle Ableitung} nach der $j$-ten Variable. Falls die partielle Ableitung für alle $u \in U$ existiert, erhalten wir eine Funktion $\partial_j : U \to \R^n, u \mapsto \partial_j f(u)$. Definiere
+  \[ \partial_{j_1, j_2, ..., j_k} f := \partial_{j_1} ( \partial_{j_2} ( ... ( \partial_{j_k} f) ) ). \]
+\end{defn}
+
+\begin{defn}
+  Eine Abbildung $f : U \to \R^n$ heißt $\mathcal{C}^k$-Abbildung, wenn alle $k$-ten partiellen Ableitungen von $f$ existieren und stetig sind. Wenn $f \in \mathcal{C}^k$ für beliebiges $k \in \N$, so heißt $f$ \emph{glatt}.
+\end{defn}
+
+\begin{satz}[Schwarz]
+  Ist $f$ eine $\mathcal{C}^k$-Abbildung, so kommt es bei allen $l$-ten partiellen Ableitungen mit $l \leq k$ nicht auf die Reihenfolge der partiellen Ableitungen an.
+\end{satz}
+
+\begin{defn}
+  Eine Abbildung $f : U \to \R^n$ heißt in $u \in U$ \emph{total differenzierbar}, wenn gilt: Es gibt eine lineare Abbildung $D_u f = \partial f_u : \R^m \to \R^n$, genannt das \emph{totale Differential} von $f$ in $u$, sodass für genügend kleine $h \in \R^n$ gilt:
+  \[ f(u + h) = f(u) + \partial f_u(h) + o(h) \]
+  für eine in einer Umgebung von $0$ definierten Funktion $o : \R^n \to \R^m$ mit $\lim_{h \to 0} \tfrac{o(h)}{\| h \|} = 0$.
+\end{defn}
+
+\begin{defn}
+  Für eine total differenzierbare Funktion $f$ heißt die Matrix $J_u f = (D_u f(e_1), ..., D_u f(e_n))$ \emph{Jacobi-Matrix} von $f$ in $u$.
+\end{defn}
+
+\begin{bem}
+Es gelten folgende Implikationen:\\
+$\quad\quad\,\,\, f$ ist stetig partiell differenzierbar\\
+$\implies$ $f$ ist total differenzierbar ($\implies f$ ist stetig)\\
+$\implies$ $f$ ist partiell differenzierbar
+\end{bem}
+
+% TODO: Kettenregel
+
+\begin{defn}
+  Eine total differenzierbare Abbildung $f : U \to \R^n$ heißt regulär oder Immersion, wenn für alle $u \in U$ gilt: $\mathrm{Rang}(J_u f) = m$, d.\,h. alle partiellen Ableitungen sind in jedem Punkt linear unabhängig und $J_u f$ ist injektiv. Insbesondere muss $m \leq n$ gelten.
+\end{defn}
+
+\begin{defn}
+  Sei $X : U \to \R^n$ eine (glatte) Immersion. Dann heißt das Bild $f(U)$ \emph{immergierte Fläche}, immersierte Fläche oder parametrisiertes Flächenstück. Sei $\tilde{U}$ offen in $\R^n$ und $\phi : \tilde{U} \to U$ ein Diffeomorphismus, dann heißt $\tilde{X} := X \circ \phi : \tilde{U} \to \R^n$ \emph{Umparametrisierung} von $X$.
+\end{defn}
+
+\begin{defn}
+  Sei $f : U \to \R^n$ eine Immersion und $u \in U$. Dann heißt der Untervektorraum
+  \[ T_u X := \mathrm{span}(\partial_1 X(u), ..., \partial_m X(u)) = \mathrm{Bild}(D_u X) \subset \R^n \]
+  \emph{Tangentialraum} von $X$ in $u$ und sein orthogonales Komplement $N_u X := (T_u X)^\perp \subset \R^n$ \emph{Normalraum} an $X$ in $u$.
+\end{defn}
+
+\begin{bem}
+  Sei $X : U \to \R^n$ eine Immersion und $u \in U$. Dann definiert
+  \[ \langle v, w \rangle_u := \langle D_u X(v), D_u X(w) \rangle_{\mathrm{eukl}} \]
+  ein Skalarprodukt auf dem $\R^m$. Die Positiv-Definitheit folgt dabei aus der Injektivität von $D_u$.
+\end{bem}
+
+\begin{bem}
+  Bezeichne mit $\mathrm{SymBil}(\R^m)$ die Menge der symmetrischen Bilinearformen auf $\R^m$.
+\end{bem}
+
+\begin{defn}
+  Die \emph{erste Fundamentalform} einer Immersion $X$ ist die Abbildung
+  \[ I : U \to \mathrm{SymBild(\R^m)}, \quad u \mapsto I_u := \langle \cdot , \cdot \rangle_u. \]
+  Äquivalent dazu wird auch die Abbildung
+  \[ g : U \to \R^{m \times m}, \quad u \mapsto g_u := (J_u X)^T (J_u X) \]
+  manchmal als erste Fundamentalform bezeichnet.
+\end{defn}
 
 \end{multicols}
 \end{document}
