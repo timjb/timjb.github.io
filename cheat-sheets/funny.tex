@@ -1,0 +1,250 @@
+\documentclass[a4paper,10pt,landscape]{article}
+\usepackage{multicol}
+\usepackage{calc}
+\usepackage{ifthen}
+\usepackage[landscape]{geometry}
+\usepackage{amsmath,amsthm,amsfonts,amssymb}
+\usepackage{color,graphicx,overpic}
+\usepackage{hyperref}
+\usepackage[utf8]{inputenc}
+\usepackage[ngerman]{babel}
+\usepackage{enumitem}
+\usepackage{mathtools}
+\usepackage{pifont}
+
+\setitemize[0]{leftmargin=10pt,itemindent=0pt,itemsep=0pt}
+\setenumerate[0]{leftmargin=10pt,itemindent=0pt,itemsep=0pt}
+
+\newcommand{\cmark}{\ding{51}}
+\newcommand{\xmark}{\ding{55}}
+\newcommand{\K}{\mathbb{K}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\PS}{\mathcal{P}} % Powerset
+\newcommand{\PSO}{\PS(\Omega)} % Powerset
+\newcommand{\Alg}{\mathfrak{A}}
+\newcommand{\Ring}{\mathfrak{R}}
+
+% Differentiator
+\renewcommand{\d}{\mathrm{d}}
+
+\pdfinfo{
+  /Title (funny3.pdf)
+  /Creator (TeX)
+  /Producer (pdfTeX 1.40.0)
+  /Author (Tim Baumann)
+  /Subject (Funktionalanalysis Zusammenfassung)
+  /Keywords (functional analysis,overview)}
+
+% This sets page margins to .5 inch if using letter paper, and to 1cm
+% if using A4 paper. (This probably isn't strictly necessary.)
+% If using another size paper, use default 1cm margins.
+\ifthenelse{\lengthtest { \paperwidth = 11in}}
+    { \geometry{top=.5in,left=.5in,right=.5in,bottom=.5in} }
+    {\ifthenelse{ \lengthtest{ \paperwidth = 297mm}}
+        {\geometry{top=1cm,left=1cm,right=1cm,bottom=1cm} }
+        {\geometry{top=1cm,left=1cm,right=1cm,bottom=1cm} }
+    }
+
+\theoremstyle{definition}
+
+\newtheorem*{nota}{Notation}
+\newtheorem*{defn}{Definition}
+\newtheorem*{prob}{Problem}
+\newtheorem*{bsp}{Beispiel}
+\newtheorem*{satz}{Satz}
+\newtheorem*{kor}{Korollar}
+\newtheorem*{acht}{Achtung}
+\newtheorem*{strat}{Strategie}
+
+\theoremstyle{remark}
+\newtheorem*{bem}{Bemerkung}
+
+% Römische Ziffern
+\makeatletter
+\newcommand*{\rom}[1]{\expandafter\@slowromancap\romannumeral #1@}
+\makeatother
+
+% Ober- und Unterintegral, siehe
+% http://tex.stackexchange.com/questions/44237/lower-and-upper-riemann-integrals
+\def\upint{\mathchoice%
+    {\mkern13mu\overline{\vphantom{\intop}\mkern7mu}\mkern-20mu}%
+    {\mkern7mu\overline{\vphantom{\intop}\mkern7mu}\mkern-14mu}%
+    {\mkern7mu\overline{\vphantom{\intop}\mkern7mu}\mkern-14mu}%
+    {\mkern7mu\overline{\vphantom{\intop}\mkern7mu}\mkern-14mu}%
+  \int}
+\def\lowint{\mkern3mu\underline{\vphantom{\intop}\mkern7mu}\mkern-10mu\int}
+
+% Färbe \emph{}
+\definecolor{Emph}{rgb}{0.2,0.2,0.8}  %softer red for display
+\renewcommand{\emph}[1]{\textcolor{Emph}{\bf{#1}}}
+
+% Display style überall!
+\everymath{\displaystyle}
+
+% Turn off header and footer
+\pagestyle{empty}
+
+% Redefine section commands to use less space
+\makeatletter
+\renewcommand{\section}{\@startsection{section}{1}{0mm}%
+                                {-1ex plus -.5ex minus 2ex}%
+                                {2.5ex plus .2ex}%x
+                                {\normalfont\large\bfseries}}
+\renewcommand{\subsection}{\@startsection{subsection}{2}{0mm}%
+                                {-1explus -.5ex minus -.2ex}%
+                                {0.5ex plus .2ex}%
+                                {\normalfont\normalsize\bfseries}}
+\renewcommand{\subsubsection}{\@startsection{subsubsection}{3}{0mm}%
+                                {-1ex plus -.5ex minus -.2ex}%
+                                {1ex plus .2ex}%
+                                {\normalfont\small\bfseries}}
+\makeatother
+
+% Don't print section numbers
+\setcounter{secnumdepth}{0}
+
+\DeclarePairedDelimiterX\Set[2]{\lbrace}{\rbrace}%
+ { #1 \,\delimsize|\, #2 }
+
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0pt plus 10ex}
+
+% -----------------------------------------------------------------------
+
+\begin{document}
+\raggedright
+\footnotesize
+\begin{multicols}{3}
+
+% multicol parameters
+% These lengths are set only within the two main columns
+%\setlength{\columnseprule}{0.25pt}
+\setlength{\premulticols}{1pt}
+\setlength{\postmulticols}{1pt}
+\setlength{\multicolsep}{1pt}
+\setlength{\columnsep}{2pt}
+
+\begin{center}
+  \Large{\underline{Zusammenfassung Funktionalanalysis}} \\
+\end{center}
+
+\begin{nota}
+  Sei im Folgenden $\K \in \{ \R, \C \}$.
+\end{nota}
+
+\begin{defn}
+  Ein \emph{Prä-Hilbertraum} ist ein $\K$-Vektorraum mit einem Skalarprodukt $\langle \cdot , \cdot \rangle$.
+\end{defn}
+
+\begin{defn}
+  Sei $V$ ein $\K$-Vektorraum. Eine \emph{Fréchet-Metrik} ist eine Funktion $\rho : V \to \R_{\geq 0}$, sodass für $x, y \in V$ gilt:
+  \begin{itemize}
+    \item $\rho(x) = \rho(-x)$
+    \item $\rho(x) = 0 \iff x = 0$
+    \item $\rho(x + y) \leq \rho(x) + \rho(y)$
+  \end{itemize}
+\end{defn}
+
+\begin{defn}
+  Sei $(X, d)$ ein metrischer Raum und $A_1, A_2 \subset X$. Dann heißt
+  \[ \mathrm{dist}(A_1, A_2) := \inf \Set{ d(x,y) }{ x \in A_1, y \in A_2 } \]
+  \emph{Abstand} zwischen $A_1$ und $A_2$.
+\end{defn}
+
+\begin{defn}
+  Ein \emph{topologischer Raum} ist ein paar $(X, \tau)$, wobei $X$ eine Menge und $\tau \subset \mathcal{P}(X)$ ein System von offenen Mengen, sodass gilt:
+  \begin{itemize}
+    \item $\emptyset \in \tau$
+    \item $\tilde\tau \subset \tau \implies \bigcup_{U \in \tilde\tau} U \in \tau$
+    \item $U_1, U_2 \in \tau \implies U_1 \cap U_2 \in \tau$
+  \end{itemize}
+\end{defn}
+
+\begin{defn}
+  Ein topologischer Raum $(X, \tau)$ heißt \emph{Haussdorff-Raum}, wenn das Trennungsaxiom
+  \[ \forall\, x_1, x_2 \in X : \exists\,U_1, U_2 \in \tau : x_1 \in U_1 \wedge x_2 \in U_2 \wedge U_1 \cap U_2 = \emptyset \]
+  erfüllt ist.
+\end{defn}
+
+\begin{defn}
+  Sei $(X, \tau)$ ein topologischer Raum. Eine Menge $A \subset X$ heißt abgeschlossen, falls $X \setminus A \in \tau$, also das Komplement offen ist.
+\end{defn}
+
+\begin{defn}
+  Sei $(X, \tau)$ ein topologischer Raum und $A \subset X$. Dann heißen
+  \begin{align*}
+    A^{\circ} &:= \Set{ x \in X }{ \exists\,U \in \tau \text{ mit } x \in U \text{ und } U \subset A } \\
+    \overline{A} &:= \Set{ x \in X }{ \forall\,U \in \tau \text{ mit } x \in U \text{ gilt } U \cap A \not= \emptyset }
+  \end{align*}
+  \emph{Abschluss} bzw. \emph{Inneres} von $A$.
+\end{defn}
+
+\begin{defn}
+  Ist $(X, \tau)$ ein topologischer Raum und $A \subset X$, dann ist auch $(A, \tau_A)$ ein topologischer Raum mit der \em{Relativtopologie} $\tau_A := \{ U \cap A \,|\,U \in \tau \}$.
+\end{defn}
+
+\begin{defn}
+  Sei $(X, \tau)$ ein topologischer Raum. Eine Teilmenge $A \subset X$ heißt dicht in $X$, falls $\overline{A} = X$.
+\end{defn}
+
+\begin{defn}
+  Ein topologischer Raum $(X, \tau)$ heißt separabel, falls $X$ eine abzählbare dichte Teilmenge enthält. Eine Teilmenge $A \subset X$ heißt separabel, falls $(A, \tau_A)$ separabel ist.
+\end{defn}
+
+\begin{defn}
+  Seien $\tau_1, \tau_2$ zwei Topologien auf einer Menge $X$. Dann heißt $\tau_2$ \emph{stärker} (oder feiner) als $\tau_1$ bzw. $\tau_1$ \emph{schwächer} (oder gröber) als $\tau_2$, falls $\tau_1 \subset \tau_2$.
+\end{defn}
+
+\begin{defn}
+  Seien $d_1$ und $d_2$ Metriken auf einer Menge $X$ und $\tau_1$ und $\tau_2$ die induzierten Topologien. Dann heißt $d_1$ stärker als $d_2$, falls $\tau_1$ stärker ist als $\tau_2$.
+\end{defn}
+
+\begin{satz}
+  Sind $\| \cdot \|_1$ und $\| \cdot \|_2$ zwei Normen auf dem $\K$-Vektorraum $X$. Dann gilt:
+  \begin{itemize}
+    \item $\| \cdot \|_2 \text{ ist stärker als } \| \cdot \|_1 \iff \exists\,C > 0 : \forall\,x \in X : \| x \|_1 \leq C \| x \|_2$
+    \item $\| \cdot \|_1 \text{ und } \| \cdot \|_2 \text{ sind äquivalent } \iff \exists\,c, C > 0 : \forall\,x \in X : c \| x \|_1 \leq \| x \|_2 \leq C \| x \|_1$
+  \end{itemize}
+\end{satz}
+
+\begin{defn}
+  Die \emph{$p$-Norm} auf dem $\K^n$ ist definiert als
+  \begin{align*}
+    \| x \|_p &:= \left( \sum_{i = 1}^n |x_j|^p \right)^{\frac{1}{p}} \text{ für } 1 \leq p < \infty \\
+    \| x \|_{\infty} &:= \| x \|_max := \max_{1 \leq i \leq n} |x_i|.
+  \end{align*}
+  Alle $p$-Normen sind zueinander äquivalent.
+\end{defn}
+
+\begin{defn}
+  Seien $S \subset X$ eine Menge, $(X, \tau_X)$ und $(Y, \tau_Y)$ Hausdorff-Räume sowie $x_0 \in S$. Eine Funktion $f : S \to Y$ heißt \emph{stetig} in $x_0$, falls gilt:
+  \[ \forall\,V \in \tau_Y : f(x_0) \in V \implies \exists\,U \in \tau_X \text{ mit } x_0 \in U \wedge f(U \cap S) \subset V \]
+  Ist $X = S$, so heißt $f : X \to Y$ stetige Abbildung, falls $f$ stetig in allen Punkten $x_0 \in X$ ist, d.\,h. $V \in \tau_Y \implies f^{-1}(V) \in \tau_X$.
+\end{defn}
+
+\begin{bem}
+  In metrischen Räumen ist diese Definition äquivalent zur üblichen Folgendefinition.
+\end{bem}
+
+\begin{defn}
+  Sei $(X, d)$ ein metrischer Raum. Eine Folge $(x_k)_{k \in \N}$ heißt \emph{Cauchy-Folge}, falls $d(x_k, x_l) \xrightarrow{k, l \to \infty} 0$. Ein Punkt $x \in X$ heißt \emph{Häufungspunkt} der Folge, falls es eine Teilfolge $(x_{k_i})_{i \in \N}$ gibt mit $x_{k_i} - x \xrightarrow{i \to \infty} 0$
+\end{defn}
+
+\begin{defn}
+  Ein metrischer Raum $(X, d)$ heißt \emph{vollständig}, falls jede Cauchy-Folge in $X$ einen Häufungspunkt besitzt.
+\end{defn}
+
+\begin{defn}
+  Ein normierter $\K$-Vektorraum heißt \emph{Banachraum}, falls er vollständig bzgl. der induzierten Metrik ist. Ein Banachraum heißt \emph{Banach-Algebra}, falls er eine Algebra ist mit $\| x \cdot y \|_X \leq \| x \|_x \cdot \| y \|_X$.
+\end{defn}
+
+\begin{defn}
+  Ein \emph{Hilbertraum} ist ein \emph{Prähilbertraum}, der vollständig bzgl. der vom Skalarprodukt induzierten Norm ist.
+\end{defn}
+
+\end{multicols}
+\end{document}
