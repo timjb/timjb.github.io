@@ -1,135 +1,13 @@
-\documentclass[a4paper,10pt,landscape]{article}
-\usepackage{multicol}
-\usepackage{calc}
-\usepackage{ifthen}
-\usepackage[landscape]{geometry}
-\usepackage{amsmath,amsthm,amsfonts,amssymb}
-\usepackage{color,graphicx,overpic}
-\usepackage{hyperref}
-\usepackage[utf8]{inputenc}
-\usepackage[ngerman]{babel}
-\usepackage{enumitem}
-\usepackage{mathtools}
-\usepackage{pifont}
-
-\setitemize[0]{leftmargin=10pt,itemindent=0pt,itemsep=0pt}
-\setenumerate[0]{leftmargin=10pt,itemindent=0pt,itemsep=0pt}
-
-\newcommand{\cmark}{\ding{51}}
-\newcommand{\xmark}{\ding{55}}
-\newcommand{\R}{\mathbb{R}}
-\newcommand{\N}{\mathbb{N}}
-\newcommand{\Z}{\mathbb{Z}}
-\newcommand{\C}{\mathbb{C}}
-\newcommand{\Q}{\mathbb{Q}}
-\newcommand{\PS}{\mathcal{P}} % Powerset
-\newcommand{\PSO}{\PS(\Omega)} % Powerset
-\newcommand{\Alg}{\mathfrak{A}}
-\newcommand{\Ring}{\mathfrak{R}}
-
-% Differentiator
-\renewcommand{\d}{\mathrm{d}}
+\documentclass{cheat-sheet}
 
 \pdfinfo{
-  /Title (geo3.pdf)
-  /Creator (TeX)
-  /Producer (pdfTeX 1.40.0)
+  /Title (Zusammenfassung Differentialgeometrie)
   /Author (Tim Baumann)
-  /Subject (Geometrie Zusammenfassung)
-  /Keywords (geometry,overview)}
-
-% This sets page margins to .5 inch if using letter paper, and to 1cm
-% if using A4 paper. (This probably isn't strictly necessary.)
-% If using another size paper, use default 1cm margins.
-\ifthenelse{\lengthtest { \paperwidth = 11in}}
-    { \geometry{top=.5in,left=.5in,right=.5in,bottom=.5in} }
-    {\ifthenelse{ \lengthtest{ \paperwidth = 297mm}}
-        {\geometry{top=1cm,left=1cm,right=1cm,bottom=1cm} }
-        {\geometry{top=1cm,left=1cm,right=1cm,bottom=1cm} }
-    }
-
-\theoremstyle{definition}
-
-\newtheorem*{nota}{Notation}
-\newtheorem*{defn}{Definition}
-\newtheorem*{prob}{Problem}
-\newtheorem*{bsp}{Beispiel}
-\newtheorem*{satz}{Satz}
-\newtheorem*{kor}{Korollar}
-\newtheorem*{acht}{Achtung}
-\newtheorem*{strat}{Strategie}
-
-\theoremstyle{remark}
-\newtheorem*{bem}{Bemerkung}
-
-% Römische Ziffern
-\makeatletter
-\newcommand*{\rom}[1]{\expandafter\@slowromancap\romannumeral #1@}
-\makeatother
-
-% Ober- und Unterintegral, siehe
-% http://tex.stackexchange.com/questions/44237/lower-and-upper-riemann-integrals
-\def\upint{\mathchoice%
-    {\mkern13mu\overline{\vphantom{\intop}\mkern7mu}\mkern-20mu}%
-    {\mkern7mu\overline{\vphantom{\intop}\mkern7mu}\mkern-14mu}%
-    {\mkern7mu\overline{\vphantom{\intop}\mkern7mu}\mkern-14mu}%
-    {\mkern7mu\overline{\vphantom{\intop}\mkern7mu}\mkern-14mu}%
-  \int}
-\def\lowint{\mkern3mu\underline{\vphantom{\intop}\mkern7mu}\mkern-10mu\int}
-
-% Färbe \emph{}
-\definecolor{Emph}{rgb}{0.2,0.2,0.8}  %softer red for display
-\renewcommand{\emph}[1]{\textcolor{Emph}{\bf{#1}}}
-
-% Display style überall!
-\everymath{\displaystyle}
-
-% Turn off header and footer
-\pagestyle{empty}
-
-% Redefine section commands to use less space
-\makeatletter
-\renewcommand{\section}{\@startsection{section}{1}{0mm}%
-                                {-1ex plus -.5ex minus 2ex}%
-                                {2.5ex plus .2ex}%x
-                                {\normalfont\large\bfseries}}
-\renewcommand{\subsection}{\@startsection{subsection}{2}{0mm}%
-                                {-1explus -.5ex minus -.2ex}%
-                                {0.5ex plus .2ex}%
-                                {\normalfont\normalsize\bfseries}}
-\renewcommand{\subsubsection}{\@startsection{subsubsection}{3}{0mm}%
-                                {-1ex plus -.5ex minus -.2ex}%
-                                {1ex plus .2ex}%
-                                {\normalfont\small\bfseries}}
-\makeatother
-
-% Don't print section numbers
-\setcounter{secnumdepth}{0}
-
-\DeclarePairedDelimiterX\Set[2]{\lbrace}{\rbrace}%
- { #1 \,\delimsize|\, #2 }
-
-\setlength{\parindent}{0pt}
-\setlength{\parskip}{0pt plus 10ex}
-
-% -----------------------------------------------------------------------
+}
 
 \begin{document}
-\raggedright
-\footnotesize
-\begin{multicols}{3}
 
-% multicol parameters
-% These lengths are set only within the two main columns
-%\setlength{\columnseprule}{0.25pt}
-\setlength{\premulticols}{1pt}
-\setlength{\postmulticols}{1pt}
-\setlength{\multicolsep}{1pt}
-\setlength{\columnsep}{2pt}
-
-\begin{center}
-  \Large{\underline{Zusammenfassung Geometrie}} \\
-\end{center}
+\maketitle{Zusammenfassung Geometrie}
 
 
 \section{Geometrie von Kurven}
@@ -143,14 +21,14 @@
 \begin{defn}
   Eine Abbildung $c : I \to \R^n$ heißt \emph{reguläre Kurve}, wenn $c$ beliebig oft differenzierbar ist und $c'(t) \not= 0$ für alle $t \in I$ gilt.
 
-  Der affine Unterraum $\tau_{c,t} := c(t) + \R(c'(t))$ heißt \emph{Tangente} an $c$ im Punkt $c(t)$ bzw. Tangente an $c$ zum Zeitpunkt $t$.
+  Der affine Unterraum $\tau_{c,t} \coloneqq c(t) + \R(c'(t))$ heißt \emph{Tangente} an $c$ im Punkt $c(t)$ bzw. Tangente an $c$ zum Zeitpunkt $t$.
 \end{defn}
 
 % Lemma 1.2: Tangenten ändern sich unter Parameterwechseln nicht
 
 \begin{defn}
   Die \emph{Bogenlänge} (BL) einer regulären Kurve $c : [a, b] \to \R^n$ ist
-  \[ L(c) := \int_a^b\! \| c'(t) \|\,\d t. \]
+  \[ L(c) \coloneqq \int_a^b\! \| c'(t) \|\,\d t. \]
 \end{defn}
 
 \begin{satz}
@@ -162,7 +40,7 @@
 \end{defn}
 
 \begin{satz}
-  Jede reguläre Kurve $c : I \to \R$ lässt sich nach BL parametrisieren, d.\,h. es existiert ein Intervall $J$ und ein Diffeomorphismus $\phi : J \to I$, welcher sogar orientierungserhaltend ist, sodass $\tilde{c} := c \circ \phi$ nach BL parametrisiert ist.
+  Jede reguläre Kurve $c : I \to \R$ lässt sich nach BL parametrisieren, d.\,h. es existiert ein Intervall $J$ und ein Diffeomorphismus $\phi : J \to I$, welcher sogar orientierungserhaltend ist, sodass $\tilde{c} \coloneqq c \circ \phi$ nach BL parametrisiert ist.
 \end{satz}
 
 \begin{defn}
@@ -176,7 +54,7 @@
 \end{satz}
 
 \begin{satz}
-  Sei $c : [a, b] \to \R^n$ eine reguläre Kurve und $x := c(a), y := c(b)$. Dann gilt $L(c) \geq d(x, y)$. Wenn $L(c) = d(x, y)$, dann gibt es einen Diffeomorphismus $\phi : [a, b] \to [0, 1]$, sodass
+  Sei $c : [a, b] \to \R^n$ eine reguläre Kurve und $x \coloneqq c(a), y \coloneqq c(b)$. Dann gilt $L(c) \geq d(x, y)$. Wenn $L(c) = d(x, y)$, dann gibt es einen Diffeomorphismus $\phi : [a, b] \to [0, 1]$, sodass
   \[ c = c_{xy} \circ \phi, \]
   wobei $c_{xy} : [0, 1] \to \R^n,\,t \mapsto x + t (y - x)$.
 \end{satz}
@@ -203,7 +81,7 @@
 
 \begin{defn}
   Sei $c$ eine reguläre, nach BL parametrisierte, ebene Kurve. Dann heißt
-  \[ n = n_c : I \to \R^2, \quad t \mapsto J \cdot c'(t) \text{ mit } J := \begin{pmatrix} 0 & -1 \\ 1 & 0 \end{pmatrix}  \]
+  \[ n = n_c : I \to \R^2, \quad t \mapsto J \cdot c'(t) \text{ mit } J \coloneqq \begin{pmatrix} 0 & -1 \\ 1 & 0 \end{pmatrix}  \]
   das \emph{Normalenfeld} von $c$.
 \end{defn}
 
@@ -244,17 +122,13 @@
 \end{satz}
 
 \begin{defn}
-  Eine reguläre Kurve $c : [a, b] \to \R^n$ heißt \emph{geschlossen}, wenn gilt
-  \begin{itemize}
-    \item $c(a) = c(b)$ und
-    \item $c'(a) = c'(b)$.
-  \end{itemize}
+  Eine reguläre Kurve $c : [a, b] \to \R^n$ heißt \emph{geschlossen}, falls $c(a) = c(b)$ und $c'(a) = c'(b)$.
   Eine reguläre geschlossene Kurve $c$ heißt \emph{einfach geschlossen}, wenn $c|_{[a, b[}$ injektiv ist.
 \end{defn}
 
 \begin{defn}
   Für eine geschlossene reguläre ebene Kurve $c : [a, b] \to \R^2$ heißt die Zahl
-  \[ \overline{\kappa}(c) := \int_a^b\!\kappa(t) \| c'(t) \| \,\d t \]
+  \[ \overline{\kappa}(c) \coloneqq \int_a^b\!\kappa(t) \| c'(t) \| \,\d t \]
   \emph{Totalkrümmung} von $c$.
 \end{defn}
 
@@ -276,7 +150,7 @@
 
 \begin{satz}
   Sei $c : [a, b] \to \R^2$ eine ebene reguläre geschlossene Kurve, dann heißt die ganze Zahl
-  \[ U_c := \frac{1}{2 \pi} \overline\kappa(c) = \frac{1}{2 \pi} \int_a^b\! \kappa(t) \| c'(t) \| \,\d t \]
+  \[ U_c \coloneqq \frac{1}{2 \pi} \overline\kappa(c) = \frac{1}{2 \pi} \int_a^b\! \kappa(t) \| c'(t) \| \,\d t \]
   \emph{Tangentendrehzahl} oder \emph{Umlaufzahl} von $c$.
 \end{satz}
 
@@ -290,10 +164,12 @@
 
 \begin{satz}[Whitney-Graustein]
   Für zwei glatte reguläre geschlossene ebene Kurven $c, d : [0, 1] \to \R^2$ sind folgende Aussagen äquivalent:
-  \begin{enumerate}[label=(\roman*),leftmargin=2em]
-    \item $c$ ist zu $d$ regulär homotop
-    \item $U_c = U_d$
-  \end{enumerate}
+  \begin{multicols}{2}
+    \begin{enumerate}[label=(\roman*),leftmargin=2em]
+      \item $c$ ist zu $d$ regulär homotop
+      \item $U_c = U_d$
+    \end{enumerate}
+  \end{multicols}
 \end{satz}
 
 \begin{defn}
@@ -306,7 +182,7 @@
 
 \begin{defn}
   Sei $(b_1, ..., b_n)$ das Frenet-$n$-Bein einer Frenet-Kurve $c$. Dann gilt:
-  \[ A := (\langle b_j' , b_k \rangle)_{jk} = \begin{pmatrix}
+  \[ A \coloneqq (\langle b_j' , b_k \rangle)_{jk} = \begin{pmatrix}
     0 & \kappa_1 &&& 0 \\
     - \kappa_1 & 0 & \kappa_2 \\
     & \ddots & \ddots & \ddots \\
@@ -331,20 +207,20 @@
   Sei $c : I \to \R^3$ eine nach BL parametrisierte Frenet-Kurve und $t \in I$. Dann heißt
   \begin{itemize}
     \item $b_1(t) = v(t) = c'(t)$ der \emph{Tangentenvektor} an $c$ in $t$,
-    \item $b_2(t) = \frac{c''(t)}{\| c''(t) \|}$ \emph{Normalenvektor} an $c$ in $t$,
-    \item $\mathrm{span}{b_1(t), b_2(t)}$ \emph{Schmiegebene} an $c$ in $t$,
+    \item $b_2(t) = \tfrac{c''(t)}{\| c''(t) \|}$ \emph{Normalenvektor} an $c$ in $t$,
+    \item $\mathrm{span}(b_1(t), b_2(t))$ \emph{Schmiegebene} an $c$ in $t$,
     \item $b_3(t) = b_1(t) \times b_2(t)$ \emph{Binormalenvektor} an $c$ in $t$,
-    \item $\tau_c(t) = \tau(t) := \kappa_2(t) = \langle b_2'(t) , b_3(t) \rangle$ \emph{Torsion} oder \emph{Windung} von $c$.
+    \item $\tau_c(t) = \tau(t) \coloneqq \kappa_2(t) = \langle b_2'(t) , b_3(t) \rangle$ \emph{Torsion} o. \emph{Windung} von~$c$.
   \end{itemize}
 \end{defn}
 
 \begin{bem}
   Die Frenet-Gleichungen für nach BL parametrisierte Frenet-Kurven im $\R^3$ lauten
-  \begin{align*}
-    b_1' &= \kappa_2 b_2 \\
-    b_2' &= - \kappa_c b_1 + \tau_c b_3 \\
-    b_3' &= - \tau_c b_2.
-  \end{align*}
+  \[
+      b_1' = \kappa_2 b_2, \quad
+      b_2' = - \kappa_c b_1 + \tau_c b_3, \quad
+      b_3' = - \tau_c b_2
+  \]
 \end{bem}
 
 % Nach Theorem 1.24 bestimmt die Kru ̈mmung und die Torsion eine nach Bogenla ̈nge
@@ -352,20 +228,20 @@
 
 \begin{bem}
   Für eine nicht nach BL parametrisierte Frenet-Kurve $c : I \to \R^3$ gilt für Krümmung und Torsion
-  \[ \kappa_c := \frac{\| c' \times c'' \|}{\| c' \|^3} \quad \text{und} \quad \tau_c := \frac{\det(c', c'', c''')}{\| c' \times c'' \|^2}. \]
+  \[ \kappa_c \coloneqq \frac{\| c' \times c'' \|}{\| c' \|^3} \quad \text{und} \quad \tau_c \coloneqq \frac{\det(c', c'', c''')}{\| c' \times c'' \|^2}. \]
 \end{bem}
 
 % TODO: Redundant?
 
 \begin{defn}
   Für eine glatte geschlossene reguläre Kurve $c : [a, b] \to \R^n$ ist die \emph{Totalkrümmung} definiert durch
-  \[ \overline\kappa(c) := \int_a^b\!\kappa_c(t) \cdot \| c'(t) \|\,\d t. \]
+  \[ \overline\kappa(c) \coloneqq \int_a^b\!\kappa_c(t) \cdot \| c'(t) \|\,\d t. \]
 
   Hierbei ist die Krümmung einer regulären Raumkurve $c : I \to \R^n$ wie folgt definiert:
   Sei $\phi : I \to J$ orientierungserhaltend
   (d.\,h. $\phi' > 0$) und so gewählt,
-  dass $\tilde{c} := c \circ \phi^{-1} : J \to \R^n$ nach
-  BL parametrisiert ist, dann definieren wir $\kappa_c(t) := \kappa_{\tilde{c}}(\phi(t))$.
+  dass $\tilde{c} \coloneqq c \circ \phi^{-1} : J \to \R^n$ nach
+  BL parametrisiert ist, dann definieren wir $\kappa_c(t) \coloneqq \kappa_{\tilde{c}}(\phi(t))$.
 \end{defn}
 
 \begin{satz}[Fenchel]
@@ -388,11 +264,11 @@ mit $c(0) = c(b)$, so liegt das Bild von $v$ ganz in einer offenen Hemisphäre.
 
 \begin{defn}
   Sei $f : U \to \R^n$ eine Abbildung und $v \in \R^m \setminus \{ 0 \}$. Dann heißt
-  \[ \partial_v f(u) := \lim_{h \to 0} \frac{f(u + hv) - f(u)}{ h } \]
+  \[ \partial_v f(u) \coloneqq \lim_{h \to 0} \frac{f(u + hv) - f(u)}{ h } \]
   \emph{Richtungsableitung} von $f$ im Punkt $u$ (falls der Limes existiert). Für $v = e_j$ heißt
-  \[ \partial_j f(u) := \partial_{e_j} f(u) \]
+  \[ \partial_j f(u) \coloneqq \partial_{e_j} f(u) \]
   \emph{partielle Ableitung} nach der $j$-ten Variable. Falls die partielle Ableitung für alle $u \in U$ existiert, erhalten wir eine Funktion $\partial_j : U \to \R^n, u \mapsto \partial_j f(u)$. Definiere
-  \[ \partial_{j_1, j_2, ..., j_k} f := \partial_{j_1} ( \partial_{j_2} ( ... ( \partial_{j_k} f) ) ). \]
+  \[ \partial_{j_1, j_2, ..., j_k} f \coloneqq \partial_{j_1} ( \partial_{j_2} ( ... ( \partial_{j_k} f) ) ). \]
 \end{defn}
 
 \begin{defn}
@@ -427,18 +303,18 @@ $\implies$ $f$ ist partiell differenzierbar
 \end{defn}
 
 \begin{defn}
-  Sei $X : U \to \R^n$ eine (glatte) Immersion. Dann heißt das Bild $f(U)$ \emph{immergierte Fläche}, immersierte Fläche oder parametrisiertes Flächenstück. Sei $\tilde{U}$ offen in $\R^n$ und $\phi : \tilde{U} \to U$ ein Diffeomorphismus, dann heißt $\tilde{X} := X \circ \phi : \tilde{U} \to \R^n$ \emph{Umparametrisierung} von $X$.
+  Sei $X : U \to \R^n$ eine (glatte) Immersion. Dann heißt das Bild $f(U)$ \emph{immergierte Fläche}, immersierte Fläche oder parametrisiertes Flächenstück. Sei $\tilde{U}$ offen in $\R^n$ und $\phi : \tilde{U} \to U$ ein Diffeomorphismus, dann heißt $\tilde{X} \coloneqq X \circ \phi : \tilde{U} \to \R^n$ \emph{Umparametrisierung} von $X$.
 \end{defn}
 
 \begin{defn}
   Sei $f : U \to \R^n$ eine Immersion und $u \in U$. Dann heißt der Untervektorraum
-  \[ T_u X := \mathrm{span}(\partial_1 X(u), ..., \partial_m X(u)) = \mathrm{Bild}(D_u X) \subset \R^n \]
-  \emph{Tangentialraum} von $X$ in $u$ und sein orthogonales Komplement $N_u X := (T_u X)^\perp \subset \R^n$ \emph{Normalraum} an $X$ in $u$.
+  \[ T_u X \coloneqq \mathrm{span}(\partial_1 X(u), ..., \partial_m X(u)) = \mathrm{Bild}(D_u X) \subset \R^n \]
+  \emph{Tangentialraum} von $X$ in $u$ und sein orthogonales Komplement $N_u X \coloneqq (T_u X)^\perp \subset \R^n$ \emph{Normalraum} an $X$ in $u$.
 \end{defn}
 
 \begin{bem}
   Sei $X : U \to \R^n$ eine Immersion und $u \in U$. Dann definiert
-  \[ \langle v, w \rangle_u := \langle D_u X(v), D_u X(w) \rangle_{\mathrm{eukl}} \]
+  \[ \langle v, w \rangle_u \coloneqq \langle D_u X(v), D_u X(w) \rangle_{\mathrm{eukl}} \]
   ein Skalarprodukt auf dem $\R^m$. Die Positiv-Definitheit folgt dabei aus der Injektivität von $D_u$.
 \end{bem}
 
@@ -448,11 +324,10 @@ $\implies$ $f$ ist partiell differenzierbar
 
 \begin{defn}
   Die \emph{erste Fundamentalform} einer Immersion $X$ ist die Abbildung
-  \[ I : U \to \mathrm{SymBild(\R^m)}, \quad u \mapsto I_u := \langle \cdot , \cdot \rangle_u. \]
+  \[ I : U \to \mathrm{SymBild(\R^m)}, \quad u \mapsto I_u \coloneqq \langle \cdot , \cdot \rangle_u. \]
   Äquivalent dazu wird auch die Abbildung
-  \[ g : U \to \R^{m \times m}, \quad u \mapsto g_u := (J_u X)^T (J_u X) \]
+  \[ g : U \to \R^{m \times m}, \quad u \mapsto g_u \coloneqq (J_u X)^T (J_u X) \]
   manchmal als erste Fundamentalform bezeichnet.
 \end{defn}
 
-\end{multicols}
 \end{document}

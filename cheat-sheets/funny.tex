@@ -1,140 +1,26 @@
-\documentclass[a4paper,10pt,landscape]{article}
-\usepackage{multicol}
-\usepackage{calc}
-\usepackage{ifthen}
-\usepackage[landscape]{geometry}
-\usepackage{amsmath,amsthm,amsfonts,amssymb}
-\usepackage{color,graphicx,overpic}
-\usepackage{hyperref}
-\usepackage[utf8]{inputenc}
-\usepackage[ngerman]{babel}
-\usepackage{enumitem}
-\usepackage{mathtools}
-\usepackage{pifont}
+\documentclass{cheat-sheet}
 
-\setitemize[0]{leftmargin=10pt,itemindent=0pt,itemsep=0pt}
-\setenumerate[0]{leftmargin=10pt,itemindent=0pt,itemsep=0pt}
-
-\newcommand{\cmark}{\ding{51}}
-\newcommand{\xmark}{\ding{55}}
+%\newcommand{\PS}{\mathcal{P}} % Powerset
+%\newcommand{\PSO}{\PS(\Omega)} % Powerset
+%\newcommand{\Alg}{\mathfrak{A}}
+%\newcommand{\Ring}{\mathfrak{R}}
 \newcommand{\K}{\mathbb{K}}
-\newcommand{\R}{\mathbb{R}}
-\newcommand{\N}{\mathbb{N}}
-\newcommand{\Z}{\mathbb{Z}}
-\newcommand{\C}{\mathbb{C}}
-\newcommand{\Q}{\mathbb{Q}}
-\newcommand{\PS}{\mathcal{P}} % Powerset
-\newcommand{\PSO}{\PS(\Omega)} % Powerset
-\newcommand{\Alg}{\mathfrak{A}}
-\newcommand{\Ring}{\mathfrak{R}}
-
-% Differentiator
-\renewcommand{\d}{\mathrm{d}}
+\newcommand{\supp}{\mathrm{supp}}
 
 \pdfinfo{
-  /Title (funny3.pdf)
-  /Creator (TeX)
-  /Producer (pdfTeX 1.40.0)
+  /Title (Zusammenfassung Funktionalanalysis)
   /Author (Tim Baumann)
-  /Subject (Funktionalanalysis Zusammenfassung)
-  /Keywords (functional analysis,overview)}
-
-% This sets page margins to .5 inch if using letter paper, and to 1cm
-% if using A4 paper. (This probably isn't strictly necessary.)
-% If using another size paper, use default 1cm margins.
-\ifthenelse{\lengthtest { \paperwidth = 11in}}
-    { \geometry{top=.5in,left=.5in,right=.5in,bottom=.5in} }
-    {\ifthenelse{ \lengthtest{ \paperwidth = 297mm}}
-        {\geometry{top=1cm,left=1cm,right=1cm,bottom=1cm} }
-        {\geometry{top=1cm,left=1cm,right=1cm,bottom=1cm} }
-    }
-
-\theoremstyle{definition}
-
-\newtheorem*{nota}{Notation}
-\newtheorem*{defn}{Definition}
-\newtheorem*{prob}{Problem}
-\newtheorem*{bsp}{Beispiel}
-\newtheorem*{satz}{Satz}
-\newtheorem*{kor}{Korollar}
-\newtheorem*{acht}{Achtung}
-\newtheorem*{strat}{Strategie}
-
-\theoremstyle{remark}
-\newtheorem*{bem}{Bemerkung}
-
-% Römische Ziffern
-\makeatletter
-\newcommand*{\rom}[1]{\expandafter\@slowromancap\romannumeral #1@}
-\makeatother
-
-% Ober- und Unterintegral, siehe
-% http://tex.stackexchange.com/questions/44237/lower-and-upper-riemann-integrals
-\def\upint{\mathchoice%
-    {\mkern13mu\overline{\vphantom{\intop}\mkern7mu}\mkern-20mu}%
-    {\mkern7mu\overline{\vphantom{\intop}\mkern7mu}\mkern-14mu}%
-    {\mkern7mu\overline{\vphantom{\intop}\mkern7mu}\mkern-14mu}%
-    {\mkern7mu\overline{\vphantom{\intop}\mkern7mu}\mkern-14mu}%
-  \int}
-\def\lowint{\mkern3mu\underline{\vphantom{\intop}\mkern7mu}\mkern-10mu\int}
-
-% Färbe \emph{}
-\definecolor{Emph}{rgb}{0.2,0.2,0.8}  %softer red for display
-\renewcommand{\emph}[1]{\textcolor{Emph}{\bf{#1}}}
-
-% Display style überall!
-\everymath{\displaystyle}
-
-% Turn off header and footer
-\pagestyle{empty}
-
-% Redefine section commands to use less space
-\makeatletter
-\renewcommand{\section}{\@startsection{section}{1}{0mm}%
-                                {-1ex plus -.5ex minus 2ex}%
-                                {2.5ex plus .2ex}%x
-                                {\normalfont\large\bfseries}}
-\renewcommand{\subsection}{\@startsection{subsection}{2}{0mm}%
-                                {-1explus -.5ex minus -.2ex}%
-                                {0.5ex plus .2ex}%
-                                {\normalfont\normalsize\bfseries}}
-\renewcommand{\subsubsection}{\@startsection{subsubsection}{3}{0mm}%
-                                {-1ex plus -.5ex minus -.2ex}%
-                                {1ex plus .2ex}%
-                                {\normalfont\small\bfseries}}
-\makeatother
-
-% Don't print section numbers
-\setcounter{secnumdepth}{0}
-
-\DeclarePairedDelimiterX\Set[2]{\lbrace}{\rbrace}%
- { #1 \,\delimsize|\, #2 }
-
-\setlength{\parindent}{0pt}
-\setlength{\parskip}{0pt plus 10ex}
-
-% -----------------------------------------------------------------------
+}
 
 \begin{document}
-\raggedright
-\footnotesize
-\begin{multicols}{3}
 
-% multicol parameters
-% These lengths are set only within the two main columns
-%\setlength{\columnseprule}{0.25pt}
-\setlength{\premulticols}{1pt}
-\setlength{\postmulticols}{1pt}
-\setlength{\multicolsep}{1pt}
-\setlength{\columnsep}{2pt}
-
-\begin{center}
-  \Large{\underline{Zusammenfassung Funktionalanalysis}} \\
-\end{center}
+\maketitle{Zusammenfassung Funktionalanalysis}
 
 \begin{nota}
   Sei im Folgenden $\K \in \{ \R, \C \}$.
 \end{nota}
+
+% TODO: Sei im Folgenden Y ein Banachraum?
 
 \begin{defn}
   Ein \emph{Prä-Hilbertraum} ist ein $\K$-Vektorraum mit einem Skalarprodukt $\langle \cdot , \cdot \rangle$.
@@ -151,7 +37,7 @@
 
 \begin{defn}
   Sei $(X, d)$ ein metrischer Raum und $A_1, A_2 \subset X$. Dann heißt
-  \[ \mathrm{dist}(A_1, A_2) := \inf \Set{ d(x,y) }{ x \in A_1, y \in A_2 } \]
+  \[ \mathrm{dist}(A_1, A_2) \coloneqq \inf \Set{ d(x,y) }{ x \in A_1, y \in A_2 } \]
   \emph{Abstand} zwischen $A_1$ und $A_2$.
 \end{defn}
 
@@ -177,14 +63,14 @@
 \begin{defn}
   Sei $(X, \tau)$ ein topologischer Raum und $A \subset X$. Dann heißen
   \begin{align*}
-    A^{\circ} &:= \Set{ x \in X }{ \exists\,U \in \tau \text{ mit } x \in U \text{ und } U \subset A } \\
-    \overline{A} &:= \Set{ x \in X }{ \forall\,U \in \tau \text{ mit } x \in U \text{ gilt } U \cap A \not= \emptyset }
+    A^{\circ} &\coloneqq \Set{ x \in X }{ \exists\,U \in \tau \text{ mit } x \in U \text{ und } U \subset A } \\
+    \overline{A} &\coloneqq \Set{ x \in X }{ \forall\,U \in \tau \text{ mit } x \in U \text{ gilt } U \cap A \not= \emptyset }
   \end{align*}
   \emph{Abschluss} bzw. \emph{Inneres} von $A$.
 \end{defn}
 
 \begin{defn}
-  Ist $(X, \tau)$ ein topologischer Raum und $A \subset X$, dann ist auch $(A, \tau_A)$ ein topologischer Raum mit der \em{Relativtopologie} $\tau_A := \{ U \cap A \,|\,U \in \tau \}$.
+  Ist $(X, \tau)$ ein topologischer Raum und $A \subset X$, dann ist auch $(A, \tau_A)$ ein topologischer Raum mit der \em{Relativtopologie} $\tau_A \coloneqq \{ U \cap A \,|\,U \in \tau \}$.
 \end{defn}
 
 \begin{defn}
@@ -214,11 +100,14 @@
 \begin{defn}
   Die \emph{$p$-Norm} auf dem $\K^n$ ist definiert als
   \begin{align*}
-    \| x \|_p &:= \left( \sum_{i = 1}^n |x_j|^p \right)^{\frac{1}{p}} \text{ für } 1 \leq p < \infty \\
-    \| x \|_{\infty} &:= \| x \|_max := \max_{1 \leq i \leq n} |x_i|.
+    \| x \|_p &\coloneqq \left( \sum_{i = 1}^n |x_j|^p \right)^{\frac{1}{p}} \text{ für } 1 \leq p < \infty \\
+    \| x \|_{\infty} &\coloneqq \| x \|_max \coloneqq \max_{1 \leq i \leq n} |x_i|.
   \end{align*}
-  Alle $p$-Normen sind zueinander äquivalent.
 \end{defn}
+
+\begin{bem}
+  Alle $p$-Normen sind zueinander äquivalent.
+\end{bem}
 
 \begin{defn}
   Seien $S \subset X$ eine Menge, $(X, \tau_X)$ und $(Y, \tau_Y)$ Hausdorff-Räume sowie $x_0 \in S$. Eine Funktion $f : S \to Y$ heißt \emph{stetig} in $x_0$, falls gilt:
@@ -231,7 +120,7 @@
 \end{bem}
 
 \begin{defn}
-  Sei $(X, d)$ ein metrischer Raum. Eine Folge $(x_k)_{k \in \N}$ heißt \emph{Cauchy-Folge}, falls $d(x_k, x_l) \xrightarrow{k, l \to \infty} 0$. Ein Punkt $x \in X$ heißt \emph{Häufungspunkt} der Folge, falls es eine Teilfolge $(x_{k_i})_{i \in \N}$ gibt mit $x_{k_i} - x \xrightarrow{i \to \infty} 0$
+  Sei $(X, d)$ ein metrischer Raum. Eine Folge $(x_k)_{k \in \N}$ heißt \emph{Cauchy-Folge}, falls $d(x_k, x_l) \xrightarrow{k, l \to \infty} 0$. Ein Punkt $x \in X$ heißt \emph{Häufungspunkt} der Folge, falls es eine Teilfolge $(x_{k_i})_{i \in \N}$ gibt mit $x_{k_i} - x \xrightarrow{i \to \infty} 0$.
 \end{defn}
 
 \begin{defn}
@@ -246,5 +135,123 @@
   Ein \emph{Hilbertraum} ist ein \emph{Prähilbertraum}, der vollständig bzgl. der vom Skalarprodukt induzierten Norm ist.
 \end{defn}
 
-\end{multicols}
+\begin{defn}
+  Sei $\K^\N \coloneqq \Set{ (x_n)_{n \in \N} }{ \forall\,i \in \N : x_i \in \K }$ die Menge aller Folgen in $\K$. Mit der Fréchet-Metrik
+    \[ \rho(x) \coloneqq \sum_{i = 1}^\infty 2^{-i} \frac{ |x_i| }{ 1 + |x_i| } < 1 \]
+  wird der \emph{Folgenraum} $\K^\N$ zu einem Banachraum.
+\end{defn}
+
+\begin{satz}
+  Sind $(x^k) = (x^k_i)_{i \in \N} \in \K^\N$ und $x = (x_i)_{i \in \N} \in \K^\N$, so gilt
+  \[ \rho(x^k - x) \xrightarrow{k \to \infty} 0 \iff \forall\,i \in \N : x_i^k \xrightarrow{k \to \infty} x_i. \]
+\end{satz}
+
+\begin{defn}
+  Die Norm
+  \begin{align*}
+    \| x \|_{\ell^p} &\coloneqq \left( \sum_{i=1}^\infty |x_i|^p \right)^{\frac{1}{p}} \in [0, \infty], \text{ für } 1 \leq p < \infty \\
+    \| x \|_{\ell^\infty} &\coloneqq \sup_{i \in \N} |x_i| \in [0, \infty]
+  \end{align*}
+  heißt \emph{$\ell^p$-Norm} auf dem Raum $\ell^p(\K) \coloneqq \Set{ x \in \K^\N }{ \| x \|_{\ell^p} < \infty }$.
+\end{defn}
+
+\begin{satz}
+  Der Raum $\ell^p(\K)$ ist vollständig, also ein Banachraum.
+\end{satz}
+
+\begin{bem}
+  Im Fall $p = 2$ wird $\ell^2(\K)$ ein Hilbertraum mit dem Skalarprodukt $\langle x , y \rangle_{\ell^2} \coloneqq \sum_{i = 0}^\infty x_i \overline{y_i}$.
+\end{bem}
+
+\begin{defn}[Vervollständigung]
+  Sei $(X, d)$ ein metrischer Raum. Betrachte die Menge $X^\N$ aller Folgen in $X$ und definiere
+  \[ \tilde{X} \coloneqq \Set{ x \in X^\N }{ x \text{ ist Cauchy-Folge in } X }/\sim \]
+  mit der Äquivalenzrelation
+  \[ x \sim y \text{ in } \tilde{X} \iff d(x_j, y_j) \xrightarrow{j \to \infty} 0. \]
+  Diese Menge wird mit der Metrik
+  \[ \tilde{d}(x, y) \coloneqq \lim_{i \to \infty} d(x_i, y_i) \]
+  zu einem vollständigen metrischen Raum. Die injektive Abbildung $J : X \to \tilde{X}$, welche $x \in X$ auf die konstante Folge $(x)_{i \in \N}$, ist isometrisch, d.\,h. sie erhält. Wir können also $X$ als einen dichten Unterraum von $\tilde{X}$ auffassen. Man nennt $\tilde{X}$ \emph{Vervollständigung} von~$X$.
+\end{defn}
+
+\begin{defn}[\emph{Raum der beschränkten Funktionen}]
+  Sei $S$ eine Menge und $Y$ ein Banachraum über $\K$ mit Norm $y \mapsto |y|$. Dann ist
+  \[ B(S; Y) \coloneqq \Set{ f : S \to Y }{ f(S) \text { ist eine beschränkte Teilmenge von } Y } \]
+  die Menge der beschränkten Funktionen von $B$ nach $Y$. Diese Menge ist ein $\K$-Vektorraum und wird mit der Supremumsnorm $\| f \|_{B(S)} \coloneqq \sup_{x \in S} |f(x)|$ zu einem Banachraum.
+\end{defn}
+
+\begin{satz}
+  Ist $(X, d)$ ein vollständiger metrischer Raum und $Y \subset X$ abgeschlossen, so ist auch $(Y, d)$ ein vollständiger metrischer Raum.
+\end{satz}
+
+\begin{defn}[\emph{Raum stetiger Funktionen auf einem Kompaktum}]
+  Sei $S \subset \R^n$ beschränkt und abgeschlossen (d.\,h. kompakt) und $Y$ ein Banachraum über $\K$ mit Norm $y \mapsto |y|$, so ist
+  \[ \mathcal{C}^0(S; Y) \coloneqq \mathcal{C}(S; Y) \coloneqq \Set{ f : S \to Y }{ f \text{ ist stetig } } \]
+  die Menge der stetigen Funktionen von $S$ nach $Y$. Sie ist ein abgeschlossener Unterraum von $B(S; Y)$ mit der Norm $\| \cdot \|_{\mathcal{C}(S; Y)} = \| \cdot \|_{B(S; Y)}$, also ein Banachraum.
+\end{defn}
+
+\begin{bem}
+  Für $Y = \K$ ist $\mathcal{C}^0(S; \K) = \mathcal{C}(S)$ eine kommutative Banach-Algebra mit dem Produkt $(f \cdot g)(x) \coloneqq f(x) \cdot g(x)$.
+\end{bem}
+
+\begin{defn}
+  Sei $S \subset \R^n$ und $(K_n)_{n \in \N}$ eine Folge kompakter Teilmengen des $\R^n$. Dann heißt $(K_n)$ eine \emph{Ausschöpfung} von $S$, falls
+  \begin{itemize}
+    \item $S = \cup_{n \in \N} K_n$,
+    \item $\emptyset \not= K_i \subset K_{i+1} \subset S$ für alle $i \in \N$ und
+    \item für alle $x \in S$ gibt es ein $\delta > 0$ und $i \in \N$, sodass $B_\delta(x) \subset K_i$.
+  \end{itemize}
+\end{defn}
+
+\begin{bem}
+  Zu offenen und abgeschlossenen $S \subset \R^n$ existiert eine Ausschöpfung.
+\end{bem}
+
+\begin{defn}[\emph{Raum stetiger Funktionen auf Menge mit Ausschöpfung}]
+  Es sei $S \subset \R^n$ so, dass eine Ausschöpfung $(K_i)_{i \in \N}$ von $S$ existiert und $Y$ ein Banachraum. Dann bildet die Menge aller stetigen Funktionen
+  \[ C^0(S; Y) \coloneqq \Set{ f : S \to Y }{ f \text{ ist stetig auf } S } \]
+  einen $K$-Vektorraum und wird mit der Fréchet-Norm
+  \[ \varrho(f) \coloneqq \sum_{i \in \N} 2^{-i} \frac{ \| f \|_{C^0(K_i)} }{ 1 + \| f \|_{C^0(K_i)} } \]
+  zu einem vollständigen metrischen Raum.
+\end{defn}
+
+\begin{bem}
+  \begin{itemize}
+    \item Die von dieser Metrik erzeugte Topologie ist unabhängig von der Wahl der Ausschöpfung.
+    \item Ist $S \subset \R^n$ kompakt, so stimmt die Topologie mit der von $\| \cdot \|_{B(s)}$ überein.
+  \end{itemize}
+\end{bem}
+
+\begin{defn}
+  Sei $S \subset \R^n$ und $Y$ ein Banachraum. Für $f : S \to Y$ heißt
+  \[ \supp f \coloneqq \Set{ x \in S }{ f(x) \not= 0 } \]
+  \emph{Träger} (engl. support) von $f$.
+\end{defn}
+
+\begin{defn}
+  Sei $S \subset \R^n$ und $Y$ ein Banachraum. Dann ist
+  \[ \mathcal{C}_0^0(S; Y) \coloneqq \Set{ f \in \mathcal{C}^0(S; Y) }{ \supp f \text{ ist kompakt in } S } \]
+  die Menge der stetigen Funktionen mit kompaktem Träger von $S$ nach $Y$.
+\end{defn}
+
+\begin{defn}[\emph{Raum differenzierbarer Funktionen}]
+  Sei $\Omega \subset \R^n$ offen und beschränkt und $m \in \N$. Dann ist die Menge der differenzierbaren Funktionen von $\Omega$ nach $Y$
+  \begin{align*}
+    \mathcal{C}^m(\overline\Omega, Y) \coloneqq \{ f : \Omega \to Y \,|\, & f \text{ ist $m$-mal stetig differenzierbar in $\Omega$ } \\
+    & \text{ und für $k \leq m$ und } s_1, ..., s_k \in \{ 1, ..., n \} \\
+    & \text{ ist $\partial_{s_1} ... \partial_{s_k} f$ auf $\overline\Omega$ stetig fortsetzbar } \}
+  \end{align*}
+  ein Vektorraum und mit
+  \[ \| f \|_{\mathcal{C}^m(\overline\Omega)} = \sum_{|s| \leq m} \| \partial^s \|_{\mathcal{C}^0(\overline\Omega)} \]
+  ein Banachraum
+\end{defn}
+
+\begin{bem}
+  In obiger Norm wird die Summe über alle $k$-fache partielle Ableitungen mit $k \leq m$ gebildet.
+\end{bem}
+
+% TODO: Hölder-Räume
+% TODO: Unendlich differenzierbare Funktionen
+% TODO: Lebesgue-Räume
+% TODO: Sobolev-Räume
+
 \end{document}

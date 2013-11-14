@@ -1,65 +1,9 @@
-\documentclass[a4paper,10pt,landscape]{article}
-\usepackage{multicol}
-\usepackage{calc}
-\usepackage{ifthen}
-\usepackage[landscape]{geometry}
-\usepackage{amsmath,amsthm,amsfonts,amssymb}
-\usepackage{color,graphicx,overpic}
-\usepackage{hyperref}
-\usepackage[utf8]{inputenc}
-\usepackage[ngerman]{babel}
-\usepackage{enumitem}
-\usepackage{mathtools}
-\usepackage{pifont}
-
-\setitemize[0]{leftmargin=10pt,itemindent=0pt,itemsep=0pt}
-\setenumerate[0]{leftmargin=10pt,itemindent=0pt,itemsep=0pt}
-
-\newcommand{\cmark}{\ding{51}}
-\newcommand{\xmark}{\ding{55}}
-\newcommand{\R}{\mathbb{R}}
-\newcommand{\N}{\mathbb{N}}
-\newcommand{\Z}{\mathbb{Z}}
-\newcommand{\C}{\mathbb{C}}
-
-% Differentiator
-\renewcommand{\d}{\mathrm{d}}
+\documentclass{cheat-sheet}
 
 \pdfinfo{
-  /Title (ana2.pdf)
-  /Creator (TeX)
-  /Producer (pdfTeX 1.40.0)
+  /Title (Zusammenfassung Analysis 2)
   /Author (Tim Baumann)
-  /Subject (Analysis 2 Zusammenfassung)
-  /Keywords (analysis,overview)}
-
-% This sets page margins to .5 inch if using letter paper, and to 1cm
-% if using A4 paper. (This probably isn't strictly necessary.)
-% If using another size paper, use default 1cm margins.
-\ifthenelse{\lengthtest { \paperwidth = 11in}}
-    { \geometry{top=.5in,left=.5in,right=.5in,bottom=.5in} }
-    {\ifthenelse{ \lengthtest{ \paperwidth = 297mm}}
-        {\geometry{top=1cm,left=1cm,right=1cm,bottom=1cm} }
-        {\geometry{top=1cm,left=1cm,right=1cm,bottom=1cm} }
-    }
-
-\theoremstyle{definition}
-
-\newtheorem*{nota}{Notation}
-\newtheorem*{defn}{Definition}
-\newtheorem*{bsp}{Beispiel}
-\newtheorem*{satz}{Satz}
-\newtheorem*{kor}{Korollar}
-\newtheorem*{acht}{Achtung}
-\newtheorem*{strat}{Strategie}
-
-\theoremstyle{remark}
-\newtheorem*{bem}{Bemerkung}
-
-% Römische Ziffern
-\makeatletter
-\newcommand*{\rom}[1]{\expandafter\@slowromancap\romannumeral #1@}
-\makeatother
+}
 
 % Ober- und Unterintegral, siehe
 % http://tex.stackexchange.com/questions/44237/lower-and-upper-riemann-integrals
@@ -70,6 +14,10 @@
     {\mkern7mu\overline{\vphantom{\intop}\mkern7mu}\mkern-14mu}%
   \int}
 \def\lowint{\mkern3mu\underline{\vphantom{\intop}\mkern7mu}\mkern-10mu\int}
+\newcommand{\Lowint}[4]{{\textstyle \lowint\limits_{#1}^{#2}} #3 \,\d #4}
+\newcommand{\Lowintabdx}[1]{\Lowint{a}{b}{#1}{x}}
+\newcommand{\Upint}[4]{{\textstyle \upint\limits_{#1}^{#2}} #3 \,\d #4}
+\newcommand{\Upintabdx}[1]{\Upint{a}{b}{#1}{x}}
 
 % Offene und abgeschlossene Teilmengen
 % http://tex.stackexchange.com/questions/22371/subseteq-circ-as-a-single-symbol-open-subset
@@ -78,59 +26,10 @@
 \newcommand\cls{\mathrel{\ooalign{$\subset$\cr
   \hidewidth\raise.1ex\hbox{$\bullet\mkern.5mu$}\cr}}}
 
-% Färbe \emph{}
-\definecolor{Emph}{rgb}{0.2,0.2,0.8}  %softer red for display
-\renewcommand{\emph}[1]{\textcolor{Emph}{\bf{#1}}}
-
-% Display style überall!
-\everymath{\displaystyle}
-
-% Turn off header and footer
-\pagestyle{empty}
-
-% Redefine section commands to use less space
-\makeatletter
-\renewcommand{\section}{\@startsection{section}{1}{0mm}%
-                                {-1ex plus -.5ex minus 2ex}%
-                                {2.5ex plus .2ex}%x
-                                {\normalfont\large\bfseries}}
-\renewcommand{\subsection}{\@startsection{subsection}{2}{0mm}%
-                                {-1explus -.5ex minus -.2ex}%
-                                {0.5ex plus .2ex}%
-                                {\normalfont\normalsize\bfseries}}
-\renewcommand{\subsubsection}{\@startsection{subsubsection}{3}{0mm}%
-                                {-1ex plus -.5ex minus -.2ex}%
-                                {1ex plus .2ex}%
-                                {\normalfont\small\bfseries}}
-\makeatother
-
-% Don't print section numbers
-\setcounter{secnumdepth}{0}
-
-\DeclarePairedDelimiterX\Set[2]{\lbrace}{\rbrace}%
- { #1 \,\delimsize|\, #2 }
-
-\setlength{\parindent}{0pt}
-\setlength{\parskip}{0pt plus 10ex}
-
-% -----------------------------------------------------------------------
 
 \begin{document}
-\raggedright
-\footnotesize
-\begin{multicols}{3}
 
-% multicol parameters
-% These lengths are set only within the two main columns
-%\setlength{\columnseprule}{0.25pt}
-\setlength{\premulticols}{1pt}
-\setlength{\postmulticols}{1pt}
-\setlength{\multicolsep}{1pt}
-\setlength{\columnsep}{2pt}
-
-\begin{center}
-  \Large{\underline{Zusammenfassung Analysis \rom{2}}} \\
-\end{center}
+\maketitle{Zusammenfassung Analysis \rom{2}}
 
 \begin{nota}
 Im Folgenden seien $a, b \in \R$ mit $a < b$ und $I, J \subset \R$ offene Intervalle.
@@ -139,7 +38,7 @@ Im Folgenden seien $a, b \in \R$ mit $a < b$ und $I, J \subset \R$ offene Interv
 \section{Integration}
 
 \begin{defn}
-Eine \emph{Zerlegung} eines Intervalls $[a, b] \subset \R, a < b$ ist eine Menge $Z = \{ a = x_{0} < x_{1} < ... < x_{n} = b \}$. Die Zahl $\mu_{Z} := \max\Set{x_{j} - x_{j-1}}{j \in \{1, ..., n\}}$ heißt \emph{Feinheit} der Zerlegung $Z$. Wenn $Z$, $Z'$ zwei Zerlegungen von $[a, b]$ sind mit $Z' \subset Z$, dann heißt $Z'$ Verfeinerung von $Z$.
+Eine \emph{Zerlegung} eines Intervalls $[a, b] \subset \R, a < b$ ist eine Menge $Z = \{ a = x_{0} < x_{1} < ... < x_{n} = b \}$. Die Zahl $\mu_{Z} \coloneqq \max\Set{x_{j} - x_{j-1}}{j \in \{1, ..., n\}}$ heißt \emph{Feinheit} der Zerlegung $Z$. Wenn $Z$, $Z'$ zwei Zerlegungen von $[a, b]$ sind mit $Z' \subset Z$, dann heißt $Z'$ Verfeinerung von $Z$.
 \end{defn}
 
 \begin{defn}
@@ -152,7 +51,7 @@ $\mathcal{T}{[a, b]}$ ist ein UVR des reellen VR aller reellwertigen Funktionen 
 
 \begin{defn}
 Sei $\phi : [a, b] \to \R$ eine Treppenfunktion bezüglich einer Zerlegung $Z = \{ x_0 < ... < x_n \}$. Dann heißt
-\[ \int_{a}^{b} \phi(x) \d x := \sum_{j = 1}^{n} \phi\left(\frac{x_{j-1} + x_j}{2}\right)(x_j - x_{j-1}) \]
+\[ \Intabdx{\phi(x)} \coloneqq \sum_{j = 1}^{n} \phi\left(\tfrac{x_{j-1} + x_j}{2}\right)(x_j - x_{j-1}) \]
 \emph{Integral} von $\phi$.
 \end{defn}
 
@@ -165,15 +64,13 @@ Das Integral von Treppenfunktionen ist linear und monoton.
 \end{satz}
 
 \begin{defn}
-Sei $f : [a, b] \to \R$ beschränkt. Dann heißt
+Sei $f : [a, b] \to \R$ beschränkt. Dann heißen
 
-\[ \upint_{a}^{b}\!f(x)\,\d x := \inf\left\{ \int_{a}^{b}\!\phi(x)\,\d x : \phi \in \mathcal{T}{[a, b]}, \phi \ge f \right\} \]
-
-\emph{Oberintegral} und
-
-\[ \lowint_{a}^{b}\!f(x)\,\d x := \sup\left\{ \int_{a}^{b}\!\phi(x)\,\d x : \phi \in \mathcal{T}{[a, b]}, \phi \le f \right\} \]
-
-\emph{Unterintegral} von $f$.
+\begin{align*}
+  \Upintabdx{f(x)} &\coloneqq \inf\left\{ \Intabdx{\phi(x)} : \phi \in \mathcal{T}{[a, b]}, \phi \ge f \right\} \\
+  \Lowintabdx{f(x)} &\coloneqq \sup\left\{ \Intabdx{\phi(x)} : \phi \in \mathcal{T}{[a, b]}, \phi \le f \right\}
+\end{align*}
+\emph{Oberintegral} bzw. \emph{Unterintegral} von $f$.
 \end{defn}
 
 \begin{bem}
@@ -186,18 +83,17 @@ Das Oberintegral ist immer größer gleich dem Unterintegral.
 Für $f, f_{1}, f_{2} : [a, b] \to \R$ beschränkt und $\lambda \ge 0$ gilt
 
 \begin{enumerate}
-  \item $\lowint_a^b\!f(x)\,\d x = - \upint_a^b\!-f(x)\,\d x$
-  \item $\upint_a^b (f_1 + f_2)(x)\,\d x \le \upint_a^b\!f_1(x)\,\d x  + \upint_a^b\!f_2(x)\,\d x$
-  \item $\lowint_a^b (f_1 + f_2)(x)\,\d x \ge \lowint_a^b\!f_1(x)\,\d x  + \lowint_a^b\!f_2(x)\,\d x$
-  \item $\upint_a^b\!(\lambda f)(x)\,\d x = \lambda \upint_a^b\!f(x)\,\d x$
-  \item $\lowint_a^b\!(\lambda f)(x)\,\d x = \lambda \lowint_a^b\!f(x)\,\d x$
+  \item $\Lowintabdx{f(x)} = - \Upintabdx{-f(x)}$
+  \item $\Upintabdx{(f_1 + f_2)(x)} \le \Upintabdx{f_1(x)}  + \Upintabdx{f_2(x)}$
+  \item $\Lowintabdx{(f_1 + f_2)(x)} \ge \Lowintabdx{f_1(x)}  + \Lowintabdx{f_2(x)}$
+  \item $\Upintabdx{(\lambda f)(x)} = \lambda \Upintabdx{f(x)}$
+  \item $\Lowintabdx{(\lambda f)(x)} = \lambda \Lowintabdx{f(x)}$
 \end{enumerate}
 \end{satz}
 
 \begin{defn}
 Eine Funktion $f : [a, b] \to \R$ heißt genau dann \emph{Riemann-integrierbar}, wenn gilt:
-
-\[ \lowint_a^b\!f(x)\,\d x = \upint_a^b\!f(x)\,\d x. \]
+\[ \Lowintabdx{f(x)} = \Upintabdx{f(x)}. \]
 \end{defn}
 
 \begin{bem}
@@ -208,8 +104,8 @@ Für Treppenfunktionen stimmt das Riemann-Integral mit dem vorher definierten In
 Die Menge aller Riemann-integrierbaren Funktionen auf einem Intervall $[a, b]$ ist ein UVR des $\R$-VR aller Funktionen $f : [a, b] \to \R$ (genannt $\mathcal{R}_{[a, b]}$) und das Riemann-Integral verhält sich linear, dh. es gilt für alle $f, g : \mathcal{R}_{[a, b]}$ und $\lambda \in \R$:
 
 \begin{enumerate}
-  \item $\int_a^b\!(f + g)(x)\,\d x = \int_a^b\!f(x)\,\d x + \int_a^b\!g(x)\,\d x$
-  \item $\int_a^b\!(\lambda f)(x)\,\d x = \lambda \int_a^b\!f(x)\,\d x$
+  \item $\Intabdx{(f + g)(x)} = \Intabdx{f(x)} + \Intabdx{g(x)}$
+  \item $\Intabdx{(\lambda f)(x)} = \lambda \Intabdx{f(x)}$
 \end{enumerate}
 \end{satz}
 
@@ -236,7 +132,7 @@ Seien $f, g : R_{[a, b]}$, dann auch Riemann-integrierbar:
 
 \begin{satz}[Erster MWS für das Riemann-Integral]
   Seien $f, g : [a, b] \to \R$ stetig und $g \ge 0$. Dann gibt es ein $x_0 \in [a, b]$, sodass gilt:
-  \[ \int_a^b f(x)g(x) dx = f(x_0) \int_a^b g(x) dx \]
+  \[ \Intabdx{f(x)g(x)} = f(x_0) \Intabdx{g(x)} \]
 \end{satz}
 
 \begin{defn}
@@ -244,13 +140,13 @@ Sei $f : [a, b] \to \R$ beschränkt und $Z = \{ x_0 < ... < x_n \}$ eine Zerlegu
 
 \begin{enumerate}
   \item
-    $R(f, Z, \xi_1, ..., \xi_n) := \sum_{j=1}^{n}\,f(\xi_j)(x_j - x_{j-1})$\\
+    $R(f, Z, \xi_1, ..., \xi_n) \coloneqq \sum_{j=1}^{n}\,f(\xi_j)(x_j - x_{j-1})$\\
     \emph{Riemannsche Summe} von $f$ bzgl. $Z$ und den Stützstellen $\xi_j \in [x_{j-1}, x_j]$ für $j \in \{ 1, ..., n \}$.
   \item
-    $O(f, Z) := \sum_{j=1}^{n}\,(\sup\Set{f(x)}{x \in [x_{j-1}, x_j]})(x_j - x_{j-1})$\\
+    $O(f, Z) \coloneqq \sum_{j=1}^{n}\,(\sup\Set{f(x)}{x \in [x_{j-1}, x_j]})(x_j - x_{j-1})$\\
     \emph{(Darbouxsche) Obersumme} von $f$ bzgl. $Z$
   \item
-    $U(f, Z) := \sum_{j=1}^{n}\,(\inf\Set{f(x)}{x \in [x_{j-1}, x_j]})(x_j - x_{j-1})$\\
+    $U(f, Z) \coloneqq \sum_{j=1}^{n}\,(\inf\Set{f(x)}{x \in [x_{j-1}, x_j]})(x_j - x_{j-1})$\\
     \emph{(Darbouxsche) Untersumme} von $f$ bzgl. $Z$
 \end{enumerate}
 \end{defn}
@@ -283,20 +179,20 @@ Für eine beschränkte Funktion $f : [a, b] \to \R$ sind folgende vier Aussagen 
 \begin{satz}
 Sei $f : [a, b] \to \R$ und $c \in (a, b)$. Dann ist $f$ genau dann Riemann-integrierbar, wenn $f\mid_{[a, c]}$ und $f\mid_{[c, b]}$ Riemann-integrierbar sind und es gilt in diesem Fall
 
-\[ \int_a^b\!f(x)\d x = \int_a^c\!f(x)\,\d x + \int_c^b\!f(x)\,\d x \]
+\[\Intabdx{f(x)} = \Intdx{a}{c}{f(x)} + \Intdx{c}{b}{f(x)} \]
 \end{satz}
 
 % TODO: Definition Integrationsgrenzen
 % TODO: p-Norm (5.32)
 
 \begin{satz}[Dreiecksungleichung für das Riemann-Integral]
-Für $f, g \in \mathcal{R}_{[a, b]}$ gilt $\int_a^b\!|f(x) + g(x)|\,\d x \le \int_a^b\!|f(x)|\,\d x + \int_a^b\!|g(x)|\,\d x$.
+Für $f, g \in \mathcal{R}_{[a, b]}$ gilt $\Intabdx{|f(x) + g(x)|} \le \Intabdx{|f(x)|} + \Intabdx{|g(x)|}$.
 \end{satz}
 
 \begin{satz}[Vertauschung von Integration und Limes bei glm. Konvergenz]
 Sei $f_n : [a, b] \to \R, n \in \N$ eine Folge Riemann-integrierbarer Funktionen, welche gleichmäßig gegen $f : [a, b] \to \R$ konvergiert. Dann ist $f$ Riemann-integrierbar und es gilt
 
-\[ \int_a^b\!f(x)\,\d x = \lim_{n \to \infty} \left(\int_a^b\!f_n(x)\,\d x \right) \]
+\[ \Intabdx{f(x)} = \lim_{n \to \infty} \left(\Intabdx{f_n(x)} \right) \]
 \end{satz}
 
 \begin{defn}
@@ -309,13 +205,13 @@ Zwei Stammfunktionen einer Funktion $f$ unterscheiden sich nur durch eine additi
 
 \begin{satz}
 Sei $f : I \to \R$ stetig. Dann ist die Funktion
-\[ F : I \to \R,\ x \mapsto \int_a^x\!f(t)\,\d t \]
+\[ F : I \to \R,\ x \mapsto \Int{a}{x}{f(t)}{t} \]
 eine Stammfunktion von $f$.
 \end{satz}
 
 \begin{satz}[\emph{Hauptsatz der Differential- und Integralrechnung}]
 Sei $f : I \to \R$ stetig und $F$ eine Stammfunktion von $f$. Dann gilt für alle $x, y \in I$
-\[ \int_x^y\!f(x)\,\d x = F(y) - F(x) \]
+\[ \Intdx{x}{y}{f(x)} = F(y) - F(x) \]
 \end{satz}
 
 \begin{satz}[Vertauschung von Grenzwerten und Ableitungen]
@@ -326,41 +222,41 @@ Sei $f_n : [a, b] \to \R$ eine Folge stetig differenzierbarer Funktionen, welche
 \begin{tabular}{ | c | c | }
   \hline
   Funktion $f(x)$ & Stammfunktion $F(x)$ \\ \hline \hline
-  $x^n, n \in \Z\backslash\{-1\}$ & $\frac{1}{n+1}x^{n+1}$ \\ \hline
-  $\frac{1}{x}$ & $\ln(|x|)$ \\ \hline
+  $x^n, n \in \Z\backslash\{-1\}$ & $\tfrac{1}{n+1}x^{n+1}$ \\ \hline
+  $\tfrac{1}{x}$ & $\ln(|x|)$ \\ \hline
   $\sin(x)$ & $-\cos(x)$ \\ \hline
   $\cos(x)$ & $\sin(x)$ \\ \hline
-  $\exp(ax)$ & $\frac{1}{a}\exp(ax)$ \\ \hline
-  $\frac{1}{1 + x^2}$ & $\arctan(x)$ \\ \hline
-  $x^n \ln(x)$ & $\frac{x^{n+1}}{n+1}(\ln x - \frac{1}{n+1}),\ n \ge 1$ \\ \hline
-  $\log_a x$ & $\frac{1}{\ln a}(x \ln x - x)$ \\ \hline
+  $\exp(ax)$ & $\tfrac{1}{a}\exp(ax)$ \\ \hline
+  $\tfrac{1}{1 + x^2}$ & $\arctan(x)$ \\ \hline
+  $x^n \ln(x)$ & $\tfrac{x^{n+1}}{n+1}(\ln x - \tfrac{1}{n+1}),\ n \ge 1$ \\ \hline
+  $\log_a x$ & $\tfrac{1}{\ln a}(x \ln x - x)$ \\ \hline
 \end{tabular}
 
 \begin{satz}[\emph{Substitutionsregel}]
 Sei $f : I \to \R$ stetig und sei $g : J \to I$ stetig differenzierbar. Dann gilt für $a, b \in J$:
-\[ \int_a^b\!f(g(t))g'(t)\,\d t = \int_{g(a)}^{g(b)}\!f(x)\,\d x \]
+%\[ \Intab{f(g(t))g'(t)}{t} = \Int{g(a)}{g(b)}{f(x)} \]
 \end{satz}
 
 \begin{satz}[\emph{Partielle Integration}]
 Seien $f, g : [a, b] \to \R$ stetig differenzierbar. Dann gilt für $a, b \in I$:
-\[ \int_a^b\!f(x)g'(x)\,\d x = [f(x)g(x)]_a^b - \int_a^b\!f'(x)g(x)\,\d x \]
+\[ \Intabdx{f(x)g'(x)} = [f(x)g(x)]_a^b - \Intabdx{f'(x)g(x)} \]
 \end{satz}
 
 \begin{defn}[Riemann-Integral für komplexwertige Funktionen]
 Eine komplexwertige Funktion $f : [a, b] \to \C$ heißt Riemann-integrierbar, wenn ihr Realteil $\Re(f)$ und ihr Imaginärteil $\Im(f)$ Riemann-integrierbar sind. Wir setzen
-\[ \int_a^b\!f(x)\,\d x = \int_a^b\!\Re(f)\,\d x + i \int_a^b\!\Im(f)\,\d x. \]
+\[ \Intabdx{f(x)} = \Intabdx{\Re(f)} + i \Intabdx{\Im(f)}. \]
 \end{defn}
 
 \begin{defn}[Uneigentliche Integrale]
 \begin{itemize}
   \item Sei $a < b$ mit $b \in \R \cup \{ \infty \}$ und $f : [a, b) \to \R$ eine Funktion, sodass $f\mid_[a, R]$ für alle $R \in (a, b)$ Riemann-integrierbar ist. Wir setzen
-  \[ \int_a^b\!f(x)\,\d x := \lim_{R \uparrow b} \int_a^R\!f(x)\,\d x \]
+  \[ \Intabdx{f(x)} \coloneqq \lim_{R \uparrow b} \Intdx{a}{R}{f(x)} \]
   falls der Grenzwert existiert.
   \item Sei $a < b$ mit $a \in \R \cup \{ -\infty \}$ und $f : (a, b] \to \R$ eine Funktion, sodass $f\mid_[R, b]$ für alle $R \in (a, b)$ Riemann-integrierbar ist. Wir setzen
-  \[ \int_a^b\!f(x)\,\d x := \lim_{R \downarrow a} \int_R^b\!f(x)\,\d x \]
+  \[ \Intabdx{f(x)} \coloneqq \lim_{R \downarrow a} \Intdx{R}{b}{f(x)} \]
   falls der Grenzwert existiert.
   \item Sei $a < b$ mit $a \in \R \cup \{ -\infty \}$ und $b \in \R \cup \{ \infty \}$ und $c \in (a, b)$. Sei $f : (a, b) \to \R$ eine Funktion, sodass für alle $a < R_1 < c < R_2 < b$ die $f\mid_{[R_1, c]}$ und $f\mid_{[c, R_2]}$ Riemann-integrierbar sind. Wir setzen
-  \[ \int_a^b\!f(x)\,\d x = \lim_{R_1 \downarrow a} \int_{R_1}^c\!f(x)\,\d x + \lim_{R_2 \uparrow b} \int_c^{R_2}\!f(x)\,\d x \]
+  \[ \Intabdx{f(x)} = \lim_{R_1 \downarrow a} \Intdx{R_1}{c}{f(x)} + \lim_{R_2 \uparrow b} \Intdx{c}{R_2}{f(x)} \]
   falls beide Grenzwerte existieren.
 \end{itemize}
 \end{defn}
@@ -369,7 +265,7 @@ Eine komplexwertige Funktion $f : [a, b] \to \C$ heißt Riemann-integrierbar, we
 
 \begin{defn}
 Für zwei Funktionen $f, g : [a, b] \to \R$, eine Zerlegung $Z = \{ a = x_0 < ... < x_n = b \}$ von $[a, b]$ und Stützstellen $\xi_1, ..., \xi_n$ bzgl. $Z$ heißt die Summe
-\[ S(f, \d g, Z, \xi_1, ..., \xi_n) := \sum_{j=1}^{n}\!f(\xi_j)(g(\xi_j) - g(\xi_{j-1})) \]
+\[ S(f, \d g, Z, \xi_1, ..., \xi_n) \coloneqq \sum_{j=1}^{n}\!f(\xi_j)(g(\xi_j) - g(\xi_{j-1})) \]
 \emph{Riemann-Stieltjes-Summe} von $f$ bzgl. $g$ und der Zerlegung $Z$ mit Stützstellen $\xi_1, ..., \xi_n$.
 \end{defn}
 
@@ -391,32 +287,32 @@ Für die Identitätsfunktion $g(x) = x$ stimmt das Riemann-Stieltjes-Integral mi
 \begin{satz}[Linearität des RS-Integrals]
 \begin{itemize}
   \item Seien $f_1, f_2 : [a, b] \to \R$ bzgl. $g : [a, b] \to \R$ RS-integrierbar und $\lambda_1, \lambda_2 \in \R$. Dann ist auch $(\lambda_1 f_1 + \lambda_2 f_2)$ bzgl. $g$ RS-integrierbar mit
-  \[ \int_a^b\!(\lambda_1 f_1 + \lambda_2 f_2)(x)\,\d g(x) = \lambda_1 \int_a^b\!f_1(x) \d g(x) + \lambda_2 \int_a^b\!f_2(x)\,\d g(x) \]
+  \[ \Intab{(\lambda_1 f_1 + \lambda_2 f_2)(x)}{g(x)} = \lambda_1 \Intab{f_1(x)}{g(x)} + \lambda_2 \Intab{f_2(x)}{g(x)} \]
   \item Sei $f : [a, b] \to \R$ bzgl. den Funktionen $g_1, g_2 : [a, b] \to \R$ RS-integrierbar und $\lambda_1, \lambda_2 \in \R$. Dann ist $f$ auch bzgl. $(\lambda_1 g_1 + \lambda_2 g_2)$ RS-integrierbar mit
-  \[ \int_a^b\!f(x)\,\d (\lambda_1 g_1 + \lambda_2 g_2) = \lambda_1 \int_a^b\!f(x)\,\d g_1(x) + \lambda_2 \int_a^b\!f(x)\,\d g_2(x) \]
+  \[ \Intab{f(x)}{(\lambda_1 g_1 + \lambda_2 g_2)} = \lambda_1 \Intab{f(x)}{g_1(x)} + \lambda_2 \Intab{f(x)}{g_2(x)} \]
 \end{itemize}
 \end{satz}
 
 \begin{satz}
 Seien $f, g : [a, b] \to \R$ und $c \in (a, b)$, dann ist $f$ genau dann bzgl. $g$ RS-integrierbar, wenn die Funktionen $f\mid_{[a, c]}$ bzgl $g\mid_{[a, c]}$ und $f\mid_{[c, b]}$ bzgl $g\mid_{[c, b]}$ RS-integrierbar sind und es gilt
-\[ \int_a^b\!f(x)\,\d g(x) = \int_a^c\!f(x)\,\d g(x) + \int_c^b\!f(x)\,\d g(x). \]
+\[ \Intab{f(x)}{g(x)} = \Int{a}{c}{f(x)}{g(x)} + \Int{c}{b}{f(x)}{g(x)}. \]
 \end{satz}
 
 \begin{satz}[Partielle Integration beim RS-Integral]
 Sei $f : [a, b] \to \R$ bzgl. $g : [a, b] \to \R$ RS-integrierbar, dann ist auch $g$ bzgl. $f$ RS-integrierbar und es gilt
-\[ \int_a^b\!f(x)\,\d g(x) = [f(x)g(x)]_a^b - \int_a^b\!g(x)\,\d f(x) \]
+\[ \Intab{f(x)}{g(x)} = [f(x)g(x)]_a^b - \Intab{g(x)}{f(x)} \]
 \end{satz}
 
 \begin{satz}[Riemann-Stieltjes- und Riemann-Integral]
 Sei $f \in \mathcal{R}_{[a, b]}$ und $g : [a, b] \to \R$ stetig differenzierbar, dann ist $f$ bzgl. $g$ RS-integrierbar mit
-\[ \int_a^b\!f(x) \d g(x) = \int_a^b\!f(t)g'(t)\,\d t. \]
+\[ \Intab{f(x)}{g(x)} = \Intab{f(t)g'(t)}{t}. \]
 \end{satz}
 
 \begin{defn}
 Die \emph{Variation} von $g : [a, b] \to \R$ bzgl. einer Zerlegung $Z = \{ x_0 < ... < x_n \}$ von $[a, b]$ ist die nicht-negative Zahl
-\[ V(g, Z) := \sum_{j=1}^{n} |g(x_j) - g(x_{j-1})|. \]
+\[ V(g, Z) \coloneqq \sum_{j=1}^{n} |g(x_j) - g(x_{j-1})|. \]
 Die \emph{Totalvariation} von $g : [a, b] \to \R$ ist
-\[ V_a^b(g) := \sup\left\{ V(g, Z) : Z \text{ Zerlegung von } [a, b] \right\} \in \R_{\ge 0} \cup \{ \infty \}. \]
+\[ V_a^b(g) \coloneqq \sup\left\{ V(g, Z) : Z \text{ Zerlegung von } [a, b] \right\} \in \R_{\ge 0} \cup \{ \infty \}. \]
 Falls $V_a^b(g) < \infty$, so heißt $g$ \emph{von beschränkter Variation}.
 \end{defn}
 
@@ -440,28 +336,28 @@ Die Menge aller Funktionen $g : [a, b] \to \R$ bildet einen UVR des VR der reell
 
 \begin{satz}
 Sei $g : [a, b] \to \R$ von beschränkter Variation, dann ist jede stetige Funktion $f : [a, b] \to \R$ bzgl. $g$ RS-integrierbar mit
-\[ \left| \int_a^b\!f(x)\,\d g(x) \right| \le \| f \|_{\sup} \cdot V_a^b(g). \]
+\[ \left| \Intab{f(x)}{g(x)} \right| \le \| f \|_{\sup} \cdot V_a^b(g). \]
 \end{satz}
 
 \begin{satz}[1. MWS für RS-Integrale]
 Sei $f : [a, b] \to \R$ beschränkt und bzgl einer monoton wachsenden Gewichtsfunktion $g : [a, b] \to \R$ RS-integrierbar. Dann gibt es $\mu \in [\inf f([a, b]), \sup f([a, b])]$ mit
-\[ \int_a^b\!f(x)\,\d g(x) = \mu(g(b) - g(a)). \]
+\[ \Intab{f(x)}{g(x)} = \mu(g(b) - g(a)). \]
 \end{satz}
 
 \begin{satz}[2. MWS für RS-Integrale]
 Sei $f : [a, b] \to \R$ monoton und $g : [a, b] \to \R$ stetig, dann ist $f$ bzgl. $g$ RS-integrierbar und es gibt $c \in [a, b]$, sodass
-\[ \int_a^b\!f(x)\,\d g(x) = f(a)(g(c) - g(a)) + f(b)(g(b) - g(c)). \]
+\[ \Intab{f(x)}{g(x)} = f(a)(g(c) - g(a)) + f(b)(g(b) - g(c)). \]
 \end{satz}
 
 \begin{satz}
 Sei $f_n : [a, b] \to \R$ eine Folge stetiger Funktionen, welche gleichmäßig gegen eine (stetige) Funktion $f : [a, b] \to \R$ konvergiert und $g : [a, b] \to \R$ von beschränkter Variation, dann gilt:
 
-\[ \int_a^b\!f(x)\,\d g(x) = \lim_{n \to \infty} \left(\int_a^b\!f_n(x)\,\d g(x)\right). \]
+\[ \Intab{f(x)}{g(x)} = \lim_{n \to \infty} \left(\Intab{f_n(x)}{g(x)}\right). \]
 \end{satz}
 
 \begin{satz}[Helly-Bray]
 Sie $f : [a, b] \to \R$ stetig und $g_n : [a, b] \to \R$ eine Folge von Funktionen von beschränkter Variation, sodass es eine Konstante $c > 0$ mit $V_a^b(g_n) < c$ für alle $n \in \N$ gibt. Konvergiere $g_n$ pktw. gegen eine Funktion $g : [a, b] \to \R$, dann gilt
-\[ \int_a^b\!f(x)\,\d g(x) = \lim_{n \to \infty} \left(\int_a^b\!f(x)\,\d g_n(x)\right). \]
+\[ \Intab{f(x)}{g(x)} = \lim_{n \to \infty} \left(\Intab{f(x)}{g_n(x)}\right). \]
 \end{satz}
 
 
@@ -516,8 +412,8 @@ Die leere Menge $\emptyset$ und $X$ sind jeweils sowohl offen als auch abgeschlo
 \begin{defn}
 Sei $Y \subset X$. Dann heißt
 \begin{itemize}
-  \item $Y^{\circ} := Y \backslash \partial Y$ das \emph{Innere} oder der \emph{offene Kern} von $Y$.
-  \item $\overline{Y} := Y \cup \partial Y$ der \emph{Abschluss} oder die \emph{abgeschl. Hülle} von $Y$.
+  \item $Y^{\circ} \coloneqq Y \backslash \partial Y$ das \emph{Innere} oder der \emph{offene Kern} von $Y$.
+  \item $\overline{Y} \coloneqq Y \cup \partial Y$ der \emph{Abschluss} oder die \emph{abgeschl. Hülle} von $Y$.
 \end{itemize}
 \end{defn}
 
@@ -529,10 +425,12 @@ Obige Definition ergeben Sinn, d.\,h. es gilt für alle $Y \subset X$: $Y^{\circ
 
 \begin{satz}
 Sei $Y \subset X$. Dann gilt:
-\begin{itemize}
-  \item $(Y \opn X) \iff (Y \cap \partial Y) = \emptyset$
-  \item $(Y \cls X) \iff (\partial Y \subset Y)$
-\end{itemize}
+\begin{multicols}{2}
+  \begin{itemize}
+    \item $(Y \opn X) \iff (Y \cap \partial Y) = \emptyset$
+    \item $(Y \cls X) \iff (\partial Y \subset Y)$
+  \end{itemize}
+\end{multicols}
 \end{satz}
 
 \begin{satz}[Metrische Räume sind hausdorffsch]
@@ -587,22 +485,22 @@ In jedem normierten Raum gilt $\| x \| \ge 0$.
 \begin{bem}[Wichtige Normen]
 \begin{itemize}
   \item Die \emph{euklidische Norm} auf $\R^n$:
-  \[ \left\| \left( \begin{array}{c} x_1 \\ \vdots \\ x_n \end{array} \right) \right\|_{\text{eukl}} := \sqrt{x_1^2 + ... + x_n^2} \]
+  \[ \| (x_1, ..., x_n) \|_{\text{eukl}} \coloneqq \sqrt{x_1^2 + ... + x_n^2} \]
   \item Die \emph{Maximumsnorm} auf $\R^n$:
-  \[ \left\| \left( \begin{array}{c} x_1 \\ \vdots \\ x_n \end{array} \right) \right\|_{\text{max}} := \max\left\{ |x_1|, ..., |x_n| \right\} \]
+  \[ \| (x_1, ..., x_n) \|_{\text{max}} \coloneqq \max\left\{ |x_1|, ..., |x_n| \right\} \]
   \item Sei $X$ eine nichtleere Menge. Dann ist die \emph{Supremumsnorm}
-  \[ \| f \|_{\text{sup}} := \sup\left\{ |f(x)| : x \in X \right\} \]
+  \[ \| f \|_{\text{sup}} \coloneqq \sup\left\{ |f(x)| : x \in X \right\} \]
   eine Norm auf $V = \left\{ f : X \to \R : \sup_{x \in X} |f(x)| < \infty \right\}$.
   \item Sei $V = \mathcal{C}([a, b], \R)$ der VR der reellwertigen stetigen Funktionen auf $[a, b]$ und $p \ge 1$. Dann ist die \emph{$p$-Norm}
-  \[ \|f\|_{p} := \left( \int_a^b |f(x)|^p\,\d x \right)^{\frac{1}{p}} \]
+  \[ \|f\|_{p} \coloneqq \left( \Intabdx{|f(x)|^p} \right)^{\frac{1}{p}} \]
   eine Norm auf $V$.
   % TODO: Umbruch
-  \item Seien $(V, \| ... \|_V)$ und $(W, \| ... \|_W)$ zwei normierte (reelle) VR, dann ist auch $\mathrm{Hom}(V, W) := \{ f : V \to W : f \text{ linear } \}$ ein reeller VR. Die Norm
+  \item Seien $(V, \| ... \|_V)$ und $(W, \| ... \|_W)$ zwei normierte (reelle) VR, dann ist auch $\mathrm{Hom}(V, W) \coloneqq \{ f : V \to W : f \text{ linear } \}$ ein reeller VR. Die Norm
   \begin{align*}
-    \|f\|_{\text{op}} &:= \sup\left\{ \frac{ \| f(x) \|_W }{ \| x \|_V } : x \in V \backslash \{ 0 \} \right\}\\
+    \|f\|_{\text{op}} &\coloneqq \sup\left\{ \frac{ \| f(x) \|_W }{ \| x \|_V } : x \in V \backslash \{ 0 \} \right\}\\
       &= \sup \left\{ \| f(x) \|_W : x \in V, \| x \|_V = 1 \right\}
   \end{align*}
-  %\[ \|f\|_{\text{op}} := \sup\left\{ \frac{ \| f(x) \|_W }{ \| x \|_V } : x \in V \backslash \{ 0 \} \right\} = \sup \left\{ \| f(x) \|_W : x \in V, \| x \|_V = 1 \right\} \]
+  %\[ \|f\|_{\text{op}} \coloneqq \sup\left\{ \frac{ \| f(x) \|_W }{ \| x \|_V } : x \in V \backslash \{ 0 \} \right\} = \sup \left\{ \| f(x) \|_W : x \in V, \| x \|_V = 1 \right\} \]
   auf $\mathrm{Hom}(V, W)$ heißt \emph{Operatornorm}.
 \end{itemize}
 \end{bem}
@@ -729,7 +627,7 @@ Sei $K$ eine kompakte Teilmenge eines metrischen Raumes $(X, d)$ und $A \subset 
 \begin{defn}
 Seien $[a_j, b_j], a_j < b_j, j = 1, ..., n$ kompakte Intervalle in $\R$, dann ist
 \begin{align*}
-  Q &:= [a_1, b_1] \times \cdots \times [a_n, b_n]\\
+  Q &\coloneqq [a_1, b_1] \times \cdots \times [a_n, b_n]\\
   &= \left\{ (x_1, ..., x_n) \in \R^n : \forall\,j \in \{ 1, ..., n \} : a_j \le x_j \le b_j \right\}
 \end{align*}
 ein \emph{abgeschlossener Quader} im $\R^n$.
@@ -765,12 +663,15 @@ Seien $(X, d_X)$ und $(Y, d_Y)$ zwei metrische Räume. Eine Abbildung $f : X \to
 \[ \forall\,\epsilon > 0 : \exists\,\delta > 0 : \forall\,x, y \in X : \left(d_X(x, y) < \delta\right) \implies \left( d_Y(f(x), f(y)) < \epsilon \right) \]
 \end{defn}
 
+\begin{samepage} % Hack
+
 \begin{satz}
 Seien $(X, d_X)$ und $(Y, d_Y)$ zwei metrische Räume wobei $X$ kompakt ist und $f : X \to Y$ stetig. Dann ist $f$ gleichmäßig stetig.
 \end{satz}
 
-
 \section{Kurven}
+
+\end{samepage}
 
 \begin{nota}
 Sei nun $I \subset \R$ ein Intervall, das mindestens zwei Punkte enthält. Wir verwenden in diesem Abschnitt die euklidische Norm.
@@ -805,7 +706,7 @@ Eine Kurve $f = (f_1, ..., f_n) : I \to \R^n$ ist genau dann in $t \in I$ differ
 
 \begin{satz}
 Jede stetig differenzierbare Kurve $f : [a, b] \to \R$ ist rektifizierbar mit Länge
-\[ L = \int_a^b\!\| f'(t) \|\,\d t. \]
+\[ L = \Intab{\| f'(t) \|}{t}. \]
 \end{satz}
 
 % Aufgabe 6.77
@@ -817,13 +718,13 @@ Der Vektor $\iota \in \R^n$ heißt \emph{Riemann-Integral} von $f$.
 
 \begin{bem}
 Eine Funktion $f = (f_1, ..., f_n) : [a, b] \to \R^n$ ist genau dann \emph{Riemann-integrierbar}, wenn jede Komponentenfunktion $f_j, j = 1, ..., n$ Riemann-integrierbar ist. Es gilt in diesem Fall:
-\[ \int_a^b\!f(t)\,\d t = \left( \int_a^b\!f_1(t)\,\d t, ..., \int_a^b\!f_n(t)\,\d t \right) \]
+\[ \Intab{f(t)}{t} = \left( \Intab{f_1(t)}{t}, ..., \Intab{f_n(t)}{t} \right) \]
 Insbesondere sind stetige Funktionen $f : [a, b] \to \R^n$ stets Riemann-integrierbar.
 \end{bem}
 
 \begin{satz}
 Sei $f : [a, b] \to \R^n$ stetig, dann gilt:
-\[ \left\| \int_a^b\!f(t)\,\d t \right\| \le \int_a^b \| f(t) \| \d t. \]
+\[ \left\| \Intab{f(t)}{t} \right\| \le \Intab{\| f(t) \|}{t}. \]
 Es gilt Gleichheit, wenn alle f(t) gleichgerichtet sind, d.\,h. für alle $x_1, x_2 \in [a, b]$ mit $f(x_1) \not= 0$ gibt es ein $\lambda \ge 0$, sodass $f(x_2) = \lambda f(x_1)$.
 \end{satz}
 
@@ -832,7 +733,7 @@ Eine Kurve $f : [a, b] \to \R$ heißt \emph{regulär}, wenn sie stetig differenz
 \end{defn}
 
 \begin{kor}
-Sei $f : [a, b] \to \R^n$ eine reguläre Kurve, $x := f(a)$ und $y := f(b)$. Dann gilt für die Länge $L_f$ von $f$:
+Sei $f : [a, b] \to \R^n$ eine reguläre Kurve, $x \coloneqq f(a)$ und $y \coloneqq f(b)$. Dann gilt für die Länge $L_f$ von $f$:
 \[ L_f \ge \| x - y \|. \]
 Falls hier Gleichheit gilt, dann gibt es eine stetig differenzierbare bijektive Abbildung $\phi : [a, b] \to [0, 1]$, sodass $f = c_{xy} \circ \phi$ wobei
 \[ c_{xy} : [0, 1] \to \R^n,\quad t \mapsto x + t(y - x) \]
@@ -845,7 +746,7 @@ die Strecke von $x$ nach $y$ ist.\\
 
 \begin{defn}
 Sei $U \opn \R^n$ und $v \in \R^n$ mit $\| v \| = 1$. Eine Funktion $f : U \to \R^m$ heißt in einem Punkt $u \in U$ \emph{in Richtung $v$ differenzierbar}, wenn der Grenzwert
-\[ D_v f(u) := \lim_{\substack{h \to 0\\h \not= 0}} \frac{f(u + hv) - f(u)}{h} \]
+\[ D_v f(u) \coloneqq \lim_{\substack{h \to 0\\h \not= 0}} \frac{f(u + hv) - f(u)}{h} \]
 existiert. In diesem Fall heißt $D_v f(u)$ die \emph{Richtungsableitung} von $f$ im Punkt $u \in U$ in Richtung $v \in \R^n$.
 \end{defn}
 
@@ -853,7 +754,7 @@ existiert. In diesem Fall heißt $D_v f(u)$ die \emph{Richtungsableitung} von $f
 Sei $U \opn \R^n$ und $j \in \{ 1, ..., n \}$. Eine Abbildung $f : U \to \R^m$ heißt
 \begin{itemize}
   \item im Punkt $u \in U$ bzgl. der $j$-ten Koordinatenrichtung \emph{partiell differenzierbar}, falls die Richtungsableitung
-  \[ D_j f(u) = \frac{\partial f}{\partial x_j}(u) := D_{e_j} f \in \R^m \]
+  \[ D_j f(u) = \frac{\partial f}{\partial x_j}(u) \coloneqq D_{e_j} f \in \R^m \]
   existiert. In diesem Fall heißt $D_j f(u)$ die \emph{$j$-te partielle Ableitung} von $f$ in $u$.
   \item (auf U) bzgl. der $j$-ten Koordinatenrichtung partiell differenzierbar, wenn $f$ in jedem Punkt $u \in U$ bzgl. der $j$-ten Koordinatenrichtung partiell differenzierbar ist.
   \item im Punkt $u \in U$ partiell differenzierbar, wenn $f$ für alle $j \in \{ 1, ..., n \}$ in $u$ bzgl. der $j$-ten Koordinatenrichtung partiell differenzierbar ist.
@@ -869,13 +770,15 @@ Eine Funktion $f : U \to \R^m$, die in $u \in U$ partiell differenzierbar ist, m
 Ist $f : U \to \R^m, U \opn \R^n,$ partiell differenzierbar, so setzen wir
 \[ D_j f = \frac{\partial f}{\partial x_j} : U \to \R^m,\quad x \mapsto D_j f(x) = \frac{\partial f}{\partial x_j}(x) \]
 Falls die Abbildungen $D_j f$ für alle $j \in \{ 1, ..., n \}$ wieder partiell differenzierbar sind, also für alle $j, k \in \{ 1, ..., n \}$ die Abbildungen
-\[ D_k D_j f := D_k (D_j f) : U \to \R^m \]
+\[ D_k D_j f \coloneqq D_k (D_j f) : U \to \R^m \]
 existieren, so nennen wir $f$ \emph{zweimal partiell differenzierbar}. Alternative Schreibweise:
 \[ D_k D_j f = \frac{\partial^2 f}{\partial x_k \partial x_j}. \]
 Analog definiert man für $l \in \N$ rekursiv die \emph{$l$-te partielle Ableitung}
 \[ D_{j_l} D_{j_{l-1}} \cdots D_{j_1} f = \frac{\partial^l f}{\partial x_{j_l} \partial x_{j_{l-1}} \cdots \partial x_{j_1}}. \]
 Falls jede $l$-te partielle Ableitung stetig ist, so heißt $f$ \emph{$l$-mal stetig partiell differenzierbar}.
 \end{defn}
+
+\begin{samepage}
 
 \begin{satz}[Schwarz / Clairaut]
 Sei $U \opn \R^n$, $u \in U$ und $f : U \to \R^m$ sowie $j, k \in \{ 1, ..., n \}$. Wenn die ersten partiellen Ableitungen $D_j f$, $D_k f$ und die zweiten partiellen Ableitungen $D_j D_k f$ und $D_k D_j f$ im Punkt $u$ stetig sind, dann gilt
@@ -887,10 +790,12 @@ Sei $U \opn \R^n$, $u \in U$ und $f : U \to \R^m$ sowie $j, k \in \{ 1, ..., n \
 
 \section{Die totale Ableitung}
 
+\end{samepage}
+
 \begin{defn}
 Sei $U \opn \R^n$ und $u \in U$. Eine Abbildung $f : U \to \R^m$ heißt \emph{in $u$ (total) differenzierbar}, wenn gilt: Es gibt eine $\R$-lineare Abbildung $A_u : \R^n \to \R^m$ und eine Abbildung $\phi_u : B_{r_u}(0) \to \R^m$ für ein hinreichend kleines $r_u > 0$, sodass gilt
 \begin{enumerate}
-  \item $\lim_{\eta \to 0} \frac{ \phi_u(\eta) }{ \| \eta \| } = 0$
+  \item $\lim_{\eta \to 0} \tfrac{ \phi_u(\eta) }{ \| \eta \| } = 0$
   \item für alle $\xi \in B_{r_u}(0)$ gilt $u + \xi \in U$ und
   \item $f(u + \xi) = f(u) + A_u(\xi) + \phi_u(\xi)$
 \end{enumerate}
@@ -919,7 +824,7 @@ Sei $f : U \to \R^m$ in $u \in U$ total differenzierbar und $v \in \R^n$ mit $\|
 
 \begin{defn}
 Sei $f : U \to \R^m$ in $u \in U$ total differenzierbar. Dann ist
-\[ D f(u) = J_u f := \left( \frac{\partial f}{\partial x_1}(u), ..., \frac{\partial f}{\partial x_n}(u) \right) \in \R^{m \times n}. \]
+\[ D f(u) = J_u f \coloneqq \left( \frac{\partial f}{\partial x_1}(u), ..., \frac{\partial f}{\partial x_n}(u) \right) \in \R^{m \times n}. \]
 Die Matrix $J_u f$ heißt \emph{Jacobimatrix} von $f$ im Punkt $u$.
 \end{defn}
 
@@ -949,32 +854,32 @@ Sei $U \opn \R^n$ und $V \opn \R^m$ sowie $g : U \to V$ und $f : V \to \R^l$ Abb
 
 \begin{satz}[MWS]
 Sei $U \opn \R^n$, $u \in U$ und $f = (f_1, ..., f_m) : U \to \R^m$ stetig differenzierbar. Sei außerdem $\xi \in \R^n$, sodass das Bild der Strecke $[0, 1] \to \R^n, t \mapsto u + t \xi$ ganz in $U$ liegt. Dann gilt
-\[ f(u + \xi) - f(u) = \left( \int_0^1 (J_{u + t \xi} f)\,\d t \right) \cdot \xi = \int_0^1 ((J_{u + t \xi} f) \cdot \xi)\,\d t \]
+\[ f(u + \xi) - f(u) = \left( \Int{0}{1}{(J_{u + t \xi} f)}{t} \right) \cdot \xi = \Int{0}{1}{((J_{u + t \xi} f) \cdot \xi)}{t} \]
 \end{satz}
 
 \begin{kor}[Schrankensatz]
 Sei $U \opn \R^n$, $u \in U$, $f = (f_1, ..., f_m) : U \to \R^m$ und $\xi \in \R^n$ wie eben. Sei
-\[ M := \sup \left\{ \| J_{u + t \xi} f \|_{\text{op}} : t \in [0, 1] \right\}, \]
+\[ M \coloneqq \sup \left\{ \| J_{u + t \xi} f \|_{\text{op}} : t \in [0, 1] \right\}, \]
 dann gilt
 \[ \| f(u + \xi) - f(u) \| \le M \| \xi \| \]
 \end{kor}
 
 \begin{nota}
 Sei $f : U \to \R$ $k$-mal stetig differenzierbar, $u \in U$ und $\xi = (\xi_1, ..., \xi_n) \in \R^n$. Dann setzen wir
-\[ d^k f(u)\,\xi^k := \sum_{j_1=1}^n \cdots \sum_{j_k=1}^n (D_{j_k} \cdots D_{j_1} f(u))\,\xi_{j_1}\cdots\xi_{j_k} \]
+\[ d^k f(u)\,\xi^k \coloneqq \sum_{j_1=1}^n \cdots \sum_{j_k=1}^n (D_{j_k} \cdots D_{j_1} f(u))\,\xi_{j_1}\cdots\xi_{j_k} \]
 und
-\[ d^0 f(u) \xi^0 := f(u). \]
+\[ d^0 f(u) \xi^0 \coloneqq f(u). \]
 \end{nota}
 
 \begin{satz}[\emph{Taylorformel} in mehreren Veränderlichen]
-Sei $U \opn \R^n$ und $f : U \to \R$ eine $(p + 1)$-mal stetig differenzierbare Funktion. Ferner sei $u \in U$ und $\xi \in \R^n$, sodass für alle $t \in [0, 1]$ gilt $h(t) := u + t \xi \in U$. Dann gibt es ein $\tau \in [0, 1]$, sodass
+Sei $U \opn \R^n$ und $f : U \to \R$ eine $(p + 1)$-mal stetig differenzierbare Funktion. Ferner sei $u \in U$ und $\xi \in \R^n$, sodass für alle $t \in [0, 1]$ gilt $h(t) \coloneqq u + t \xi \in U$. Dann gibt es ein $\tau \in [0, 1]$, sodass
 \[ f(u + \xi) = F(1) = \left( \sum_{k=0}^{p} \frac{1}{k!}\,d^k f(u)\,\xi^k \right) + \frac{1}{(p + 1)!}\,d^{p+1} f(u + \tau \xi)\,\xi^{p+1}. \]
 \end{satz}
 
 \begin{bem}[Taylorformel für $p = 2$]
 Sei $f : U \to \R$ zweimal stetig differenzierbar. Wir nennen
 \begin{align*}
-  (\mathrm{Hess} f)(u) &:= (D_j D_k f(u))_{j,k}\\
+  (\mathrm{Hess} f)(u) &\coloneqq (D_j D_k f(u))_{j,k}\\
   &= \begin{pmatrix} D_1 D_1 f(u) & \cdots & D_1 D_n f(u) \\ D_2 D_1 f(u) & \cdots & D_2 D_n f(u) \\ \vdots & \ddots & \vdots \\ D_n D_1 f(u) & \cdots & D_n D_n f(u) \end{pmatrix} \in \R^{n \times n}
 \end{align*}
 die \emph{Hesse-Matrix} von $f$ in $u$. Es folgt mit der Taylorformel für $p = 2$:
@@ -1022,6 +927,8 @@ Sei $K \subset \R^n$ ein Kompaktum mit $K^{\circ} \not= \emptyset$ und $f : K \t
 \end{enumerate}
 \end{strat}
 
+\begin{samepage}
+
 \begin{strat}[Bestimmung globaler Extrema]
 Sei $f : \R^n \to \R^m$ partiell differenzierbar.
 \begin{enumerate}
@@ -1032,6 +939,8 @@ Sei $f : \R^n \to \R^m$ partiell differenzierbar.
 
 
 \section{Satz von der Umkehrfunktion}
+
+\end{samepage}
 
 \begin{defn}
 Sei $U \opn \R^n$ und $V \opn \R^m$. Eine Abbildung $f : U \to V$ heißt \emph{($\mathcal{C}^1$-)Diffeomorphismus}, wenn $f$ invertierbar ist und sowohl $f$ als auch $f^{-1}$ stetig partiell differenzierbar sind.
@@ -1060,6 +969,8 @@ Es ist wichtig, dass $f$ stetig partiell differenzierbar ist. Für Funktionen, d
 Sei $U \opn \R^n$ und $f : U \to \R^n$ stetig partiell differenzierbar. Wenn für alle $u \in U$ die Differentiale $D f(u)$ invertierbar sind, dann ist $f(U)$ eine offene Teilmenge von $\R^n$.
 \end{kor}
 
+\begin{samepage}
+
 \begin{kor}
 Sei $U \opn \R^n$ und $f : U \to \R^n$ eine injektive stetig partiell differenzierbare Abbildung, sodass für alle $u \in U$ die Differentiale $D f(u)$ invertierbar sind. Dann ist $f$ ein Diffeomorphismus auf sein Bild, d.\,h. $f\mid_{f(U)}$ ist ein Diffeomorphismus.
 \end{kor}
@@ -1067,13 +978,15 @@ Sei $U \opn \R^n$ und $f : U \to \R^n$ eine injektive stetig partiell differenzi
 
 \section{Satz über implizite Funktionen}
 
+\end{samepage}
+
 \begin{nota}
 Seien $U \opn \R^n$ und $V \opn \R^p$ offene Teilmengen, dann ist $U \times V$ eine offene Teilmenge von $\R^n \times \R^p = \R^{n + p}$. Sei $f : U \times V \to \R^q$ stetig differenzierbar. Für ein festes $u \in U$ sei
 \[ f_u : V \to \R^q,\quad v \mapsto f(u, v). \]
 Wir definieren
-\[ D_V f(u, v) := D(f_u)(v) : \R^p \to \R^q \]
+\[ D_V f(u, v) \coloneqq D(f_u)(v) : \R^p \to \R^q \]
 bzw. als Matrix
-\[ J_V f(u, v) := J_v(f_u) \in \R^{q \times p}. \]
+\[ J_V f(u, v) \coloneqq J_v(f_u) \in \R^{q \times p}. \]
 Analog definieren wir $f^v : U \to \R^q$ und $D_U f(u, v)$ bzw. $J_U f(u, v)$.
 \end{nota}
 
@@ -1091,6 +1004,8 @@ Seien $U \opn \R^n$ und $V \opn \R^p$ und $f : U \times V \to \R^p$ stetig parti
 \end{itemize}
 sodass $f \circ G = \pi_2.$
 \end{satz}
+
+\begin{samepage}
 
 \begin{satz}[\emph{Satz über implizite Funktionen}]
 Seien $U \opn \R^n$ und $V \opn \R^p$ und $f : U \times V \to \R^p$ stetig partiell differenzierbar, welche in $(u_0, v_0) \in U \times V$ eine Nullstelle hat, d.\,h. $f(u_0, v_0) = 0 \in \R^p$. Wenn in diesem Punkt $J_V f(u_0, v_0) \in \R^{p \times p}$ invertierbar ist, dann gibt es
@@ -1110,6 +1025,8 @@ Die Funktion $g$ erfüllt dabei
 
 \section{Untermannigfaltigkeiten des $\R^n$}
 
+\end{samepage}
+
 \begin{defn}
 Eine Teilmenge $M \subset \R^n$ heißt $m$-dimensionale \emph{Untermannigfaltigkeit} von $\R^n$, wenn gilt: Für alle $u \in M$ gibt es eine offene Teilmenge $U \opn \R^n$ mit $u \in U$ und eine offene Teilmenge $V \opn \R^n$ mit $0 \in V$, sowie einen Diffeomorphismus $\Phi : U \to V$ mit $\Phi(u) = 0$, sodass gilt:
   \[ \Phi(M \cap U) = V \cap \{ (x_1, ..., x_m, 0, ..., 0) \in \R^n \} \cong V \cap \R^m. \]
@@ -1118,7 +1035,7 @@ Die Abbildung $\Phi$ heißt \emph{Karte} von $M$ um den Punkt $u$.
 
 \begin{defn}
 Sei $c : (-\epsilon, \epsilon) \to M \subset \R^n$ eine differenzierbare Kurve mit $c(0) = u \in M$, deren Bild ganz in $M$ liegt, dann heißt der Vektor $c'(0) \in \R^n$ \emph{Tangentialvektor} an $M$ in $u \in M$. Für $u \in M$ setzen wir
-\[ T_u M := \{ v \in \R^n : v \text{ Tangentialvektor an } M \text{ in } u \}. \]
+\[ T_u M \coloneqq \{ v \in \R^n : v \text{ Tangentialvektor an } M \text{ in } u \}. \]
 Die Menge $T_u M$ heißt \emph{Tangentialraum} von $M$ im Punkt $u$.
 \end{defn}
 
@@ -1139,7 +1056,7 @@ Sei $U \opn \R^n$ und $f : U \to \R^p$ mit $p \le n$ stetig partiell differenzie
 \end{defn}
 
 \begin{defn}
-Sei $U \opn \R^n$ und $f : U \to \R^p$ mit $p \le n$ stetig partiell differenzierbar. Ist $y \in \mathrm{Bild}(f)$ und $M := f^{-1}(\{ y \})$ ein reguläres Urbild, dann ist $M$ eine $m$-dimensionale Untermannigfaltigkeit des $\R^n$, wobei $m = n - p$.
+Sei $U \opn \R^n$ und $f : U \to \R^p$ mit $p \le n$ stetig partiell differenzierbar. Ist $y \in \mathrm{Bild}(f)$ und $M \coloneqq f^{-1}(\{ y \})$ ein reguläres Urbild, dann ist $M$ eine $m$-dimensionale Untermannigfaltigkeit des $\R^n$, wobei $m = n - p$.
 \end{defn}
 
 \begin{defn}
@@ -1150,7 +1067,7 @@ Sei $U \opn \R^n$ und $g : U \to \R$ partiell differenzierbar. Dann heißt die A
 \end{defn}
 
 \begin{satz}
-Sei $U \opn \R^n$ und $f = (f_1, ..., f_p) : U \to \R^p, p \le n$ stetig partiell differenzierbar. Ist $y = (y_1, ..., y_p) \in \mathrm{Bild}(f)$ und $M := f^{-1}(\{ y \})$ ein reguläres Urbild sowie $u \in M$, dann ist $\{ \nabla f_1(u), ..., \nabla f_p(u) \}$ eine Basis von $N_u M$.
+Sei $U \opn \R^n$ und $f = (f_1, ..., f_p) : U \to \R^p, p \le n$ stetig partiell differenzierbar. Ist $y = (y_1, ..., y_p) \in \mathrm{Bild}(f)$ und $M \coloneqq f^{-1}(\{ y \})$ ein reguläres Urbild sowie $u \in M$, dann ist $\{ \nabla f_1(u), ..., \nabla f_p(u) \}$ eine Basis von $N_u M$.
 \end{satz}
 
 \begin{satz}[Lokale Extrema unter Nebenbedinungen]
@@ -1161,5 +1078,4 @@ Ist $M$ sogar ein reguläres Urbild einer stetig partiell differenzierbaren Abbi
 Die Zahlen $\lambda_1, ..., \lambda_p \in \R$ heißen \emph{Lagrange-Multiplikatoren}.
 \end{satz}
 
-\end{multicols}
 \end{document}

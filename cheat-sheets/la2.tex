@@ -1,27 +1,12 @@
-\documentclass[a4paper,10pt,landscape]{article}
-\usepackage{multicol}
-\usepackage{calc}
-\usepackage{ifthen}
-\usepackage[landscape]{geometry}
-\usepackage{amsmath,amsthm,amsfonts,amssymb}
-\usepackage{color,graphicx,overpic}
-\usepackage{hyperref}
-\usepackage[utf8]{inputenc}
-\usepackage[ngerman]{babel}
-\usepackage{enumitem}
-\usepackage{mathtools}
-\usepackage{pifont}
+\documentclass{cheat-sheet}
+
 \usepackage{stmaryrd} % \varoplus
 
-\setitemize[0]{leftmargin=10pt,itemindent=0pt,itemsep=0pt}
-\setenumerate[0]{leftmargin=10pt,itemindent=0pt,itemsep=0pt}
+\pdfinfo{
+  /Title (Zusammenfassung Lineare Algebra 2)
+  /Author (Tim Baumann)
+}
 
-\newcommand{\cmark}{\ding{51}}
-\newcommand{\xmark}{\ding{55}}
-\newcommand{\R}{\mathbb{R}}
-\newcommand{\N}{\mathbb{N}}
-\newcommand{\Z}{\mathbb{Z}}
-\newcommand{\C}{\mathbb{C}}
 \newcommand{\HH}{\mathbb{H}}
 \newcommand{\GL}{\mathrm{GL}}
 \newcommand{\End}{\mathrm{End}}
@@ -39,115 +24,9 @@
 \newcommand{\BB}{\mathcal{B}}
 \newcommand{\BC}{\mathcal{C}}
 
-% Differentiator
-\renewcommand{\d}{\mathrm{d}}
-
-\pdfinfo{
-  /Title (la2.pdf)
-  /Creator (TeX)
-  /Producer (pdfTeX 1.40.0)
-  /Author (Tim Baumann)
-  /Subject (Lineare Algebra 2 Zusammenfassung)
-  /Keywords (linear-algebra,overview)}
-
-% This sets page margins to .5 inch if using letter paper, and to 1cm
-% if using A4 paper. (This probably isn't strictly necessary.)
-% If using another size paper, use default 1cm margins.
-\ifthenelse{\lengthtest { \paperwidth = 11in}}
-    { \geometry{top=.5in,left=.5in,right=.5in,bottom=.5in} }
-    {\ifthenelse{ \lengthtest{ \paperwidth = 297mm}}
-        {\geometry{top=1cm,left=1cm,right=1cm,bottom=1cm} }
-        {\geometry{top=1cm,left=1cm,right=1cm,bottom=1cm} }
-    }
-
-\theoremstyle{definition}
-
-\newtheorem*{nota}{Notation}
-\newtheorem*{defn}{Definition}
-\newtheorem*{bsp}{Beispiel}
-\newtheorem*{satz}{Satz}
-\newtheorem*{kor}{Korollar}
-\newtheorem*{acht}{Achtung}
-\newtheorem*{verf}{Verfahren}
-
-\theoremstyle{remark}
-\newtheorem*{bem}{Bemerkung}
-
-% Römische Ziffern
-\makeatletter
-\newcommand*{\rom}[1]{\expandafter\@slowromancap\romannumeral #1@}
-\makeatother
-
-% Ober- und Unterintegral, siehe
-% http://tex.stackexchange.com/questions/44237/lower-and-upper-riemann-integrals
-\def\upint{\mathchoice%
-    {\mkern13mu\overline{\vphantom{\intop}\mkern7mu}\mkern-20mu}%
-    {\mkern7mu\overline{\vphantom{\intop}\mkern7mu}\mkern-14mu}%
-    {\mkern7mu\overline{\vphantom{\intop}\mkern7mu}\mkern-14mu}%
-    {\mkern7mu\overline{\vphantom{\intop}\mkern7mu}\mkern-14mu}%
-  \int}
-\def\lowint{\mkern3mu\underline{\vphantom{\intop}\mkern7mu}\mkern-10mu\int}
-
-% Offene und abgeschlossene Teilmengen
-% http://tex.stackexchange.com/questions/22371/subseteq-circ-as-a-single-symbol-open-subset
-\newcommand\opn{\mathrel{\ooalign{$\subset$\cr
-  \hidewidth\raise.1ex\hbox{$\circ\mkern.5mu$}\cr}}}
-\newcommand\cls{\mathrel{\ooalign{$\subset$\cr
-  \hidewidth\raise.1ex\hbox{$\bullet\mkern.5mu$}\cr}}}
-
-% Färbe \emph{}
-\definecolor{Emph}{rgb}{0.2,0.2,0.8}  %softer red for display
-\renewcommand{\emph}[1]{\textcolor{Emph}{\bf{#1}}}
-
-% Display style überall!
-\everymath{\displaystyle}
-
-% Turn off header and footer
-\pagestyle{empty}
-
-% Redefine section commands to use less space
-\makeatletter
-\renewcommand{\section}{\@startsection{section}{1}{0mm}%
-                                {-1ex plus -.5ex minus 2ex}%
-                                {2.5ex plus .2ex}%x
-                                {\normalfont\large\bfseries}}
-\renewcommand{\subsection}{\@startsection{subsection}{2}{0mm}%
-                                {-1explus -.5ex minus -.2ex}%
-                                {0.5ex plus .2ex}%
-                                {\normalfont\normalsize\bfseries}}
-\renewcommand{\subsubsection}{\@startsection{subsubsection}{3}{0mm}%
-                                {-1ex plus -.5ex minus -.2ex}%
-                                {1ex plus .2ex}%
-                                {\normalfont\small\bfseries}}
-\makeatother
-
-% Don't print section numbers
-\setcounter{secnumdepth}{0}
-
-\DeclarePairedDelimiterX\Set[2]{\lbrace}{\rbrace}%
- { #1 \,\delimsize|\, #2 }
-
-\setlength{\parindent}{0pt}
-\setlength{\parskip}{0pt plus 10ex}
-
-% -----------------------------------------------------------------------
-
 \begin{document}
-\raggedright
-\footnotesize
-\begin{multicols}{3}
 
-% multicol parameters
-% These lengths are set only within the two main columns
-%\setlength{\columnseprule}{0.25pt}
-\setlength{\premulticols}{1pt}
-\setlength{\postmulticols}{1pt}
-\setlength{\multicolsep}{1pt}
-\setlength{\columnsep}{2pt}
-
-\begin{center}
-  \Large{\underline{Zusammenfassung Lineare Algebra \rom{2}}} \\
-\end{center}
+\maketitle{Zusammenfassung Lineare Algebra \rom{2}}
 
 \begin{nota}
 Sofern nicht anders angegeben, bezeichne $K$ im folgenden einen beliebigen Körper, $V$ einen (möglicherweise unendlichdim.) $K$-Vektorraum und $f$ einen Endomorphismus $V \to V$.
@@ -186,7 +65,7 @@ Sei $f \in \End(V)$ und $(v_i)_{i \in I}$ eine Familie von Eigenvektoren von $f$
 \begin{defn}
 Ist $\lambda \in K$, so setzen wir
 \begin{align*}
-\Eig(f; \lambda) &:= \Set{ v \in V }{ f(v) = \lambda v }\\
+\Eig(f; \lambda) &\coloneqq \Set{ v \in V }{ f(v) = \lambda v }\\
 &= \ker(f - \lambda \cdot \id_V).
 \end{align*}
 Dies ist der zu $\lambda$ gehörende \emph{Eigenraum}, ein UVR von $V$.
@@ -202,8 +81,8 @@ $\lambda \in K \text{ ist ein EW von } f \iff \det(f - \lambda \id_V) = 0$.
 \end{satz}
 
 \begin{defn}
-Sei $A \in K^{n \times n}$. Das Polynom $P_A(X) = \chi_A(X) := \det(A - X \cdot E_n) \in K[X]$ heißt \emph{charakteristisches Polynom} von $A$. Für die darstellende Matrix $A$ von $f$ bzgl. einer beliebigen Basis von $V$ setzen wir
-\[ P_f(X) := P_A(X) \in K[X]. \]
+Sei $A \in K^{n \times n}$. Das Polynom $P_A(X) = \chi_A(X) \coloneqq \det(A - X \cdot E_n) \in K[X]$ heißt \emph{charakteristisches Polynom} von $A$. Für die darstellende Matrix $A$ von $f$ bzgl. einer beliebigen Basis von $V$ setzen wir
+\[ P_f(X) \coloneqq P_A(X) \in K[X]. \]
 Dieses Polynom ist von der gewählten Basis von $V$ unabhängig.
 \end{defn}
 
@@ -221,7 +100,7 @@ Sei $A \in \R^{n \times n}$ eine Matrix (oder darstellende Matrix eines Endomorp
 
 \begin{defn}
 Sei $A = (a_{ij}) \in K^{n \times n}$. Dann heißt
-\[ \spur(A) := \sum_{k=1}^n a_{kk} \in K \]
+\[ \spur(A) \coloneqq \sum_{k=1}^n a_{kk} \in K \]
 die \emph{Spur} von $A$.
 \end{defn}
 
@@ -241,7 +120,7 @@ Für diagonalisierbare $f \in \End(V)$ zerfällt $P_f$ in Linearfaktoren. Zerfal
 Sei $\lambda$ ein EW von $f$.
 \begin{itemize}
   \item Dann heißt die Ordnung der Nullstelle $\lambda$ von $P_f$ \emph{algebraische Vielfachheit} von $\lambda$ (wird bezeichnet mit $\mu(f; \lambda)$).
-  \item Die Dimension $d(f; \lambda) := \dim \Eig(f; \lambda)$ heißt \emph{geometrische Vielfachheit} von $\lambda$.
+  \item Die Dimension $d(f; \lambda) \coloneqq \dim \Eig(f; \lambda)$ heißt \emph{geometrische Vielfachheit} von $\lambda$.
 \end{itemize}
 \end{defn}
 
@@ -251,7 +130,7 @@ Für alle EW $\lambda \in K$ von $f$ gilt
 \end{satz}
 
 \begin{defn}
-\[ J(\lambda, n) := \begin{pmatrix} \lambda & 1 & & 0 \\ & \ddots & \ddots & \\ & & \ddots & 1 \\ 0 & & & \lambda \end{pmatrix} \]
+\[ J(\lambda, n) \coloneqq \begin{pmatrix} \lambda & 1 & & 0 \\ & \ddots & \ddots & \\ & & \ddots & 1 \\ 0 & & & \lambda \end{pmatrix} \]
 heißt der \emph{Jordanblock} der Größe $n$ zum EW $\lambda$.
 \end{defn}
 
@@ -295,8 +174,8 @@ Sei $V$ endlichdim. und $f \in \End(V)$ mit charakteristischem Polynom $P_f(X) \
 \end{satz}
 
 \begin{defn}
-Sei $\lambda \in K$ ein EW von $f$ mit alg. Vielfachheit $\mu := \mu(P_f, \lambda)$. Dann heißt
-\[ \VEig(f, \lambda) := \ker(f - \lambda \cdot \id_V)^{\mu} \]
+Sei $\lambda \in K$ ein EW von $f$ mit alg. Vielfachheit $\mu \coloneqq \mu(P_f, \lambda)$. Dann heißt
+\[ \VEig(f, \lambda) \coloneqq \ker(f - \lambda \cdot \id_V)^{\mu} \]
 der \emph{verallgemeinerte Eigenraum} zum EW $\lambda$.
 \end{defn}
 
@@ -392,8 +271,8 @@ Dabei sind $m_1, ..., m_q \in \N$ mit $m_1 + ... + m_q = \dim V$ und $\lambda_1,
 
 \begin{defn}
 \begin{itemize}
-  \item \emph{Euklidische Norm:} Für $x = (x_1, ..., x_n) \in \C^n$ setzen wir $\| x \| := \sqrt{|x_1|^2 + ... + |x_n|^2}$
-  \item \emph{Operatornorm:} Für $A \in \C^{n \times n}$ setzen wir $\| A \| := \max \Set{ \| Av \| }{ v \in \C^n, \| v \| = 1 }$
+  \item \emph{Euklidische Norm:} Für $x = (x_1, ..., x_n) \in \C^n$ setzen wir $\| x \| \coloneqq \sqrt{|x_1|^2 + ... + |x_n|^2}$
+  \item \emph{Operatornorm:} Für $A \in \C^{n \times n}$ setzen wir $\| A \| \coloneqq \max \Set{ \| Av \| }{ v \in \C^n, \| v \| = 1 }$
 \end{itemize}
 \end{defn}
 
@@ -455,7 +334,7 @@ Es gilt:
 
 \begin{defn}
 Für $x = (x_1, ..., x_n) \in \R^n$ und $y = (y_1, ..., y_n) \in \R^n$ definieren wir
-\[ \langle x , y \rangle := x_1y_2 + ... + x_ny_n. \]
+\[ \langle x , y \rangle \coloneqq x_1y_2 + ... + x_ny_n. \]
 Dies ist das \emph{Skalarprodukt} im $\R^n$.
 \end{defn}
 
@@ -467,7 +346,7 @@ a_{11} & \cdots & a_{1n} \\
 a_{m1} & \cdots & a_{mn}
 \end{pmatrix} \in K^{m \times n} \]
 definieren wir die \emph{transponierte Matrix} durch
-\[ A^{T} := \begin{pmatrix}
+\[ A^{T} \coloneqq \begin{pmatrix}
 a_{11} & \cdots & a_{m1} \\
 \vdots & \ddots & \vdots \\
 a_{1n} & \cdots & a_{mn}
@@ -487,7 +366,7 @@ für beliebige $v, w \in V$ linear sind.
 
 \begin{defn}
 Für eine Bilinearform $\gamma$ auf einem Vektorraum $V$ und eine Basis $\BB = (b_1, ..., b_n)$ von $V$ definieren wir die \emph{darstellende Matrix} von $\gamma$ bzgl. $\BB$ durch
-\[ M_B(\gamma)_{ij} := \gamma(b_i, b_j). \]
+\[ M_B(\gamma)_{ij} \coloneqq \gamma(b_i, b_j). \]
 \end{defn}
 
 \begin{satz}
@@ -534,7 +413,7 @@ Sei $V$ ein $\C$-Vektorraum.
 
 \begin{defn}
 Sei $\gamma : V \times V \to \C$ eine Sesquilinearform auf einem $\C$-VR $V$ und $\BB = (b_1, ..., b_n)$ eine Basis von $V$. Dann ist die \emph{darstellende Matrix} von $\gamma$
-\[ (M_{\BB})_{ij} := \gamma(b_i, b_j). \]
+\[ (M_{\BB})_{ij} \coloneqq \gamma(b_i, b_j). \]
 \end{defn}
 
 \begin{bem}
@@ -543,7 +422,7 @@ Eine Bilinearform auf einem endlichdim. $\C$-VR ist genau dann hermitisch, wenn 
 
 \begin{defn}
 Für euklidische bzw. euklidische VR $V$ und $v \in V$ setzen wir
-\[ \| v \| := \sqrt{ \langle v , v \rangle }. \]
+\[ \| v \| \coloneqq \sqrt{ \langle v , v \rangle }. \]
 \end{defn}
 
 \begin{defn}
@@ -581,7 +460,7 @@ Zwei UVR $U, W \subset V$ heißen \emph{orthogonal} (geschrieben $U \perp W$), f
 
 \begin{defn}
 Ist $U \subset V$ ein UVR, so ist
-\[ U^{\perp} := \Set{ v \in V }{ v \perp u \text{ für alle } u \in U } \]
+\[ U^{\perp} \coloneqq \Set{ v \in V }{ v \perp u \text{ für alle } u \in U } \]
 ein UVR von $V$ und heißt das \emph{orthogonale Komplement} von $U$ in $V$
 \end{defn}
 
@@ -603,7 +482,7 @@ Jeder endlichdimensionale euklidische/unitäre VR besitzt eine Orthonormalbasis.
 
 \begin{defn}
 Sei $V$ ein euklidischer VR und $(v_1, ..., v_k)$ eine endliche Familie von Vektoren in $V$. Dann ist
-\[ \Gram(v_1, ..., v_k) := \det \begin{pmatrix}
+\[ \Gram(v_1, ..., v_k) \coloneqq \det \begin{pmatrix}
 \langle v_1 , v_1 \rangle & \cdots & \langle v_1 , v_k \rangle \\
 \vdots & & \vdots \\
 \langle v_k , v_1 \rangle & \cdots & \langle v_k , v_k \rangle
@@ -617,9 +496,9 @@ Es gilt $\Gram(v_1, ..., v_k) \ge 0$, wobei Gleichheit genau dann gilt, wenn $(v
 
 \begin{defn}
 Wir definieren den von der Famile $(v_1, ..., v_k)$ aufgespannten \emph{Spat} als
-\[ \Spat(v_1, ..., v_k) := \Set{ t_1 v_1 + ... + t_k v_k }{ 0 \le t_i \le 1 \text{ für } i = 1, ..., k } \]
+\[ \Spat(v_1, ..., v_k) \coloneqq \Set{ t_1 v_1 + ... + t_k v_k }{ 0 \le t_i \le 1 \text{ für } i = 1, ..., k } \]
 und dessen $k$-dimensionales Volumen als
-\[ \Vol(\Spat(v_1, ..., v_k)) := \sqrt{ \Gram(v_1, ..., v_k) }. \]
+\[ \Vol(\Spat(v_1, ..., v_k)) \coloneqq \sqrt{ \Gram(v_1, ..., v_k) }. \]
 \end{defn}
 
 \begin{defn}
@@ -632,7 +511,7 @@ Eine Linearform ist bereits eindeutig dadurch bestimmt, was sie mit den Vektoren
 
 \begin{satz}
 Sei $V$ endlichdimensional und $\BB = (v_1, ..., v_k)$ eine Basis von $V$. Wir definieren für $j \in \{ 1, ..., k \}$ die Linearform $v_j^* : V \to K$ durch
-\[ v_j^*(v_i) := \delta_{ij}. \]
+\[ v_j^*(v_i) \coloneqq \delta_{ij}. \]
 Dann ist $(v_1^*, ..., v_n^*)$ eine Basis von $V^*$ und die Abbildung $v_i \mapsto v_i^*$ ein Isomorphismus $\phi_{\BB} : V \to V^*$.
 \end{satz}
 
@@ -695,7 +574,7 @@ ein Isomorphismus.
 
 \begin{defn}
 Sei $V$ ein $K$-VR und $W \subset V$ ein UVR. Dann heißt der UVR
-\[ W^0 := \Set{ f \in V^* }{ f\mid_W = 0 } \]
+\[ W^0 \coloneqq \Set{ f \in V^* }{ f\mid_W = 0 } \]
 \emph{Annulator} von $W$ in $V^*$.
 \end{defn}
 
@@ -716,8 +595,8 @@ Dann ist die Äquivalenzklasse $[v]$ gleich dem affinen Teilraum
 
 Durch die Setzung
 \begin{align*}
-(v_1 + W) + (v_2 + W) &:= (v_1 + v_2) + W
-\lambda \cdot (v + W) &:= \lambda v_1 + W
+(v_1 + W) + (v_2 + W) &\coloneqq (v_1 + v_2) + W
+\lambda \cdot (v + W) &\coloneqq \lambda v_1 + W
 \end{align*}
 
 wird $V/W$ zu einem $K$-Vektorraum, genannt \emph{Quotientenraum} von $V$ nach $W$.
@@ -783,8 +662,8 @@ Für Matrizen $A \in \R^{n \times n}$ (bzw. $A \in \C^{n \times n}$) sind äquiv
 \begin{defn}
 Die Untergruppen
 \begin{align*}
-O(n) &:= \Set{ A \in \Mat(n, \R) }{ A \text{ orthogonal } } \subset \R^{n \times n} \\
-O(n) &:= \Set{ A \in \Mat(n, \C) }{ A \text{ unitär } } \subset \C^{n \times n} \\
+O(n) &\coloneqq \Set{ A \in \Mat(n, \R) }{ A \text{ orthogonal } } \subset \R^{n \times n} \\
+O(n) &\coloneqq \Set{ A \in \Mat(n, \C) }{ A \text{ unitär } } \subset \C^{n \times n} \\
 \end{align*}
 der multiplikativen Gruppen $\GL(n, \R)$ bzw. $\GL(n, \C)$ heißen \emph{Gruppen der orthogonalen bzw. unitären Matrizen}.
 \end{defn}
@@ -806,8 +685,8 @@ Sei $V$ ein endlichdim. $\R$-VR.
 \begin{defn}
 Die Gruppen
 \begin{align*}
-SO(n) := \Set{ A \in O(n) }{ \det A = 1 } \\
-SU(n) := \Set{ A \in U(n) }{ \det A = 1 }
+SO(n) \coloneqq \Set{ A \in O(n) }{ \det A = 1 } \\
+SU(n) \coloneqq \Set{ A \in U(n) }{ \det A = 1 }
 \end{align*}
 heißen \emph{spezielle orthogonale/unitäre Gruppe}.
 \end{defn}
@@ -886,14 +765,14 @@ z & \overline{w}
 \end{satz}
 
 \begin{defn}
-\[ \HH := \mathrm{span}_{\R} SU(2) \subset \C^{2 \times 2} \]
+\[ \HH \coloneqq \mathrm{span}_{\R} SU(2) \subset \C^{2 \times 2} \]
 \end{defn}
 
 \begin{satz}
 Die Matrizen
 \begin{align*}
-\eta_0 := E_2, \quad & \eta_1 := \begin{pmatrix} i & 0 \\ 0 & -i \end{pmatrix}, \\
-\eta_2 := \begin{pmatrix} 0 & 1 \\ -1 & 0 \end{pmatrix}, \quad & \eta_3 = \begin{pmatrix} 0 & i \\ i & 0 \end{pmatrix}
+\eta_0 \coloneqq E_2, \quad & \eta_1 \coloneqq \begin{pmatrix} i & 0 \\ 0 & -i \end{pmatrix}, \\
+\eta_2 \coloneqq \begin{pmatrix} 0 & 1 \\ -1 & 0 \end{pmatrix}, \quad & \eta_3 = \begin{pmatrix} 0 & i \\ i & 0 \end{pmatrix}
 \end{align*}
 bilden eine Basis der reellen VR $\mathbb{H}$.
 \end{satz}
@@ -904,7 +783,7 @@ $\HH$ ist ein (nicht-kommutativer) Ring mit $1 = \eta_0$. Jedes Element $x \in \
 
 \begin{defn}
 Setze
-\[ I := \eta_1, J := \eta_2, K := \eta_3. \]
+\[ I \coloneqq \eta_1, J \coloneqq \eta_2, K \coloneqq \eta_3. \]
 Dann erhalten wir:
 \begin{align*}
 I^2 = J^2 = K^2 &= -1 \\
@@ -922,7 +801,7 @@ Es gilt
 % Konstruktion der komplexen Zahlen aus SO(2)
 
 \begin{defn}
-Sei $G := \GL(n, \R)$ oder $G := \GL(n, \C)$. Eine \emph{Einparametergruppe} in $G$ ist eine differenzierbare Abbildung $\phi : \R \to G$, die außerdem ein Grupenhomomorphismus $(\R, +, 0) \to (G, \cdot, E_n)$ ist. Für die Differenzierbarkeit fassen wir $G$ als offene Teilmenge von $\R^{n \times n}$ bzw. $\C^{n \times n}$ und $\phi$ als Zusammenfassung von Komponentenfunktionen auf.
+Sei $G \coloneqq \GL(n, \R)$ oder $G \coloneqq \GL(n, \C)$. Eine \emph{Einparametergruppe} in $G$ ist eine differenzierbare Abbildung $\phi : \R \to G$, die außerdem ein Grupenhomomorphismus $(\R, +, 0) \to (G, \cdot, E_n)$ ist. Für die Differenzierbarkeit fassen wir $G$ als offene Teilmenge von $\R^{n \times n}$ bzw. $\C^{n \times n}$ und $\phi$ als Zusammenfassung von Komponentenfunktionen auf.
 \end{defn}
 
 \begin{satz}
@@ -943,7 +822,7 @@ Daher heißt $A$ \emph{infinitesimaler Erzeuger} der Einparametergruppe $\phi_A$
 
 \begin{defn}
 Der Vektorraum
-\[ \mathfrak{o}(n) := \{ A \in \R^{n \times n} \| A^T = - A \} \]
+\[ \mathfrak{o}(n) \coloneqq \{ A \in \R^{n \times n} \| A^T = - A \} \]
 heißt \emph{Vektorraum der infinitesimalen Erzeuger von $O(n)$}.
 \end{defn}
 
@@ -955,7 +834,7 @@ gilt $(\forall\,t \in \R : \det \phi_A(t) = 1) \iff \spur A = 0$.
 
 \begin{defn}
 Der Vektorraum
-\[ \mathfrak{so}(n) := \Set{ A \in \R^{n \times n} }{ A^T = - A, \spur A = 0 } \]
+\[ \mathfrak{so}(n) \coloneqq \Set{ A \in \R^{n \times n} }{ A^T = - A, \spur A = 0 } \]
 heißt \emph{Vektorraum der infinitesimalen Erzeuger von $SO(n)$}.
 \end{defn}
 
@@ -995,7 +874,7 @@ Sei $A \in \C^{n \times n}$ hermitesch bzw. $A \in \R^{n \times n}$ symmetrisch.
 % Beispiele selbstadjungierter Operatoren
 
 \begin{defn}
-Sei ein $V$ endlichdim. euklidisch/unitärer VR und $\lambda_1, ..., \lambda_k$ die (paarweise verschiedenen) reellen EWe eines selbstadjungierten Endomorphismus $f : V \to V$. Setzen wir $W_i := \Eig(f; \lambda_i)$, so haben wir nach den bisher bewiesenen Aussagen eine Summenzerlegung
+Sei ein $V$ endlichdim. euklidisch/unitärer VR und $\lambda_1, ..., \lambda_k$ die (paarweise verschiedenen) reellen EWe eines selbstadjungierten Endomorphismus $f : V \to V$. Setzen wir $W_i \coloneqq \Eig(f; \lambda_i)$, so haben wir nach den bisher bewiesenen Aussagen eine Summenzerlegung
 \[ f = \sum_{i=1}^k \lambda_i \cdot \mathrm{pr}_{W_i}^{\perp} \]
 von $f$ als Linearkombination von selbstadjungierten Projektionen. Diese Zerlegung nennt man \emph{Spektralzerlegung} von $f$.
 \end{defn}
@@ -1017,7 +896,7 @@ mit $\alpha_{ij} \in K$ für alle $i, j \in \{ 1, ..., n \}$. Man sagt auch, $Q$
 \begin{bem}
 Ist $Q$ eine quadratische Form, so definiert $Q$ eine Abbildung $\phi_Q : K^n \to K$, gegeben durch
 \[ (x_1, ..., x_n) \mapsto Q(x_1, ..., x_n) \]
-also durh Einsetzen der Körperelemente für die Unbestimmten. Wenn wir die Koeffizienten in einer Matrix $A := (\alpha_{ij})_{1 \le i, j \le n} \in K^{n \times n}$ zusammenfassen, so sehen wir, dass
+also durh Einsetzen der Körperelemente für die Unbestimmten. Wenn wir die Koeffizienten in einer Matrix $A \coloneqq (\alpha_{ij})_{1 \le i, j \le n} \in K^{n \times n}$ zusammenfassen, so sehen wir, dass
 \[ \phi_Q(x) = x^T A x. \]
 \end{bem}
 
@@ -1045,7 +924,7 @@ Eine affine Quadrik im $\R^2$ nennt man einen \emph{Kegelschnitt}.
 \begin{satz}[Trägheitssatz von Sylvester]
 Sei $V$ ein $n$-dimensionaler $\R$-Vektorraum und
 \[ \gamma : V \times V \to \R \]
-eine symmetrische Bilinearform. Es seien $\BB$ und $\BC$ zwei Basen von $V$ und $S := M_\BB(\gamma)$ und $T := M_{\BC}(\gamma)$ die entsprechenden darstellenden Matrizen. Es seien $s_+$ und $s_-$ die Anzahlen der positiven, bzw. negativen Eigenwerte von $S$. Entsprechend definieren wir $t_+$ und $t_-$. Dann gilt
+eine symmetrische Bilinearform. Es seien $\BB$ und $\BC$ zwei Basen von $V$ und $S \coloneqq M_\BB(\gamma)$ und $T \coloneqq M_{\BC}(\gamma)$ die entsprechenden darstellenden Matrizen. Es seien $s_+$ und $s_-$ die Anzahlen der positiven, bzw. negativen Eigenwerte von $S$. Entsprechend definieren wir $t_+$ und $t_-$. Dann gilt
 \[ s_+ = t_+, s_- = t_-. \]
 \end{satz}
 
@@ -1091,5 +970,4 @@ Sei $A \in \R^{n \times n}$ eine symmetrische Matrix. Für $k = 1, ..., n$ bezei
 \end{itemize}
 \end{satz}
 
-\end{multicols}
 \end{document}
