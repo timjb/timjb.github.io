@@ -5,6 +5,8 @@
   /Author (Tim Baumann)
 }
 
+\newcommand{\Intabdt}[1]{\Int{a}{b}{#1}{t}}
+
 \begin{document}
 
 \maketitle{Zusammenfassung Geometrie}
@@ -28,7 +30,7 @@
 
 \begin{defn}
   Die \emph{Bogenlänge} (BL) einer regulären Kurve $c : [a, b] \to \R^n$ ist
-  \[ L(c) \coloneqq \int_a^b\! \| c'(t) \|\,\d t. \]
+  \[ L(c) \coloneqq \Intabdt{\|c'(t)\|}. \]
 \end{defn}
 
 \begin{satz}
@@ -49,7 +51,7 @@
 
 \begin{satz}
   Sei $v : [a, b] \to \R^n$ stetig, dann gilt
-  \[ \| \int_a^b\!v(t)\,\d t \| \leq \int_a^b\!\|v(t)\|\,\d t, \]
+  \[ \| \Intabdt{v(t)} \| \leq \Intabdt{\|v(t)\|}, \]
   wobei Gleichheit genau dann gilt, falls alle $v(t)$ gleichgerichtet sind.
 \end{satz}
 
@@ -128,12 +130,12 @@
 
 \begin{defn}
   Für eine geschlossene reguläre ebene Kurve $c : [a, b] \to \R^2$ heißt die Zahl
-  \[ \overline{\kappa}(c) \coloneqq \int_a^b\!\kappa(t) \| c'(t) \| \,\d t \]
+  \[ \overline{\kappa}(c) \coloneqq \Intabdt{\kappa(t) \| c'(t) \|} \]
   \emph{Totalkrümmung} von $c$.
 \end{defn}
 
 \begin{bem}
-  Ist $c$ nach BL parametrisiert, so ist $\overline{\kappa}(c) = \int_a^b\!\kappa(t) \,\d t$.
+  Ist $c$ nach BL parametrisiert, so ist $\overline{\kappa}(c) = \Intabdt{\kappa(t)}$.
 \end{bem}
 
 \begin{satz}
@@ -150,7 +152,7 @@
 
 \begin{satz}
   Sei $c : [a, b] \to \R^2$ eine ebene reguläre geschlossene Kurve, dann heißt die ganze Zahl
-  \[ U_c \coloneqq \frac{1}{2 \pi} \overline\kappa(c) = \frac{1}{2 \pi} \int_a^b\! \kappa(t) \| c'(t) \| \,\d t \]
+  \[ U_c \coloneqq \frac{1}{2 \pi} \overline\kappa(c) = \frac{1}{2 \pi} \Intabdt{\kappa(t) \| c'(t) \|} \]
   \emph{Tangentendrehzahl} oder \emph{Umlaufzahl} von $c$.
 \end{satz}
 
@@ -235,7 +237,7 @@
 
 \begin{defn}
   Für eine glatte geschlossene reguläre Kurve $c : [a, b] \to \R^n$ ist die \emph{Totalkrümmung} definiert durch
-  \[ \overline\kappa(c) \coloneqq \int_a^b\!\kappa_c(t) \cdot \| c'(t) \|\,\d t. \]
+  \[ \overline\kappa(c) \coloneqq \Intabdt{\kappa_c(t) \cdot \| c'(t) \|}. \]
 
   Hierbei ist die Krümmung einer regulären Raumkurve $c : I \to \R^n$ wie folgt definiert:
   Sei $\phi : I \to J$ orientierungserhaltend
@@ -306,14 +308,18 @@ $\implies$ $f$ ist partiell differenzierbar
   Sei $X : U \to \R^n$ eine (glatte) Immersion. Dann heißt das Bild $f(U)$ \emph{immergierte Fläche}, immersierte Fläche oder parametrisiertes Flächenstück. Sei $\tilde{U}$ offen in $\R^n$ und $\phi : \tilde{U} \to U$ ein Diffeomorphismus, dann heißt $\tilde{X} \coloneqq X \circ \phi : \tilde{U} \to \R^n$ \emph{Umparametrisierung} von $X$.
 \end{defn}
 
+\begin{nota}
+  Sei im folgenden $X : U \to \R^n$ eine Immersion.
+\end{nota}
+
 \begin{defn}
-  Sei $f : U \to \R^n$ eine Immersion und $u \in U$. Dann heißt der Untervektorraum
+  Für $u \in U$ heißt der Untervektorraum
   \[ T_u X \coloneqq \mathrm{span}(\partial_1 X(u), ..., \partial_m X(u)) = \mathrm{Bild}(D_u X) \subset \R^n \]
   \emph{Tangentialraum} von $X$ in $u$ und sein orthogonales Komplement $N_u X \coloneqq (T_u X)^\perp \subset \R^n$ \emph{Normalraum} an $X$ in $u$.
 \end{defn}
 
 \begin{bem}
-  Sei $X : U \to \R^n$ eine Immersion und $u \in U$. Dann definiert
+  Für $u \in U$ definiert
   \[ \langle v, w \rangle_u \coloneqq \langle D_u X(v), D_u X(w) \rangle_{\mathrm{eukl}} \]
   ein Skalarprodukt auf dem $\R^m$. Die Positiv-Definitheit folgt dabei aus der Injektivität von $D_u$.
 \end{bem}
@@ -324,10 +330,95 @@ $\implies$ $f$ ist partiell differenzierbar
 
 \begin{defn}
   Die \emph{erste Fundamentalform} einer Immersion $X$ ist die Abbildung
-  \[ I : U \to \mathrm{SymBild(\R^m)}, \quad u \mapsto I_u \coloneqq \langle \cdot , \cdot \rangle_u. \]
+  \[ I : U \to \mathrm{SymBil(\R^m)}, \quad u \mapsto I_u \coloneqq \langle \cdot , \cdot \rangle_u. \]
   Äquivalent dazu wird auch die Abbildung
   \[ g : U \to \R^{m \times m}, \quad u \mapsto g_u \coloneqq (J_u X)^T (J_u X) \]
   manchmal als erste Fundamentalform bezeichnet.
 \end{defn}
+
+\begin{defn}
+  Sei $c : [a, b] \to \R^n$ eine glatte Kurve. Wir nennen $c$ eine \emph{Kurve auf X}, wenn es eine glatte Kurve $\alpha : [a, b] \to U$ gibt, sodass $c = X \circ \alpha$
+\end{defn}
+
+\begin{bem}
+  Im obigen Fall gilt
+  \[ L(c) \coloneqq \Intabdt{\|c'(t)\|} = \Intabdt{\| D_{\alpha(t)} X(\alpha'(t)) \|}. \]
+\end{bem}
+
+\begin{bem}
+  Seien $c_1 = X \circ \alpha_1$ und $c_2 = X \circ \alpha_2$ zwei reguläre Kurven auf $X$, die sich in einem Punkt schneiden, d.\,h. $\alpha_1(t_1) = \alpha_2(t_2) =: u$. Dann ist der Schnittwinkel $\measuredangle(c_1'(t), c_2'(t))$ von $c_1$ und $c_2$ in $X(u)$ gegeben durch:
+  \begin{align*}
+    \cos(\measuredangle(c_1'(t), c_2'(t))) &= \frac{\langle c_1'(t_1) , c_2'(t_2) \rangle}{\| c_1'(t_1) \| \cdot \| c_2'(t_2) \|} \\
+    &= \frac{I_u(\alpha_1'(t_1), \alpha_2'(t_2))}{\sqrt{I_u(\alpha_1'(t_1), \alpha_1'(t_1)) \cdot I_u(\alpha_2'(t_2), \alpha_2'(t_2))}}
+  \end{align*}
+\end{bem}
+
+\begin{defn}
+  Sei $C \subset U$ eine kompakte messbare Teilmenge, dann heißt
+  \[ A(X(C)) \coloneqq \Int{C}{}{ \sqrt{\det(g_u)} }{u} \]
+  der Flächeninhalt von $X(C)$.
+\end{defn}
+
+\begin{satz}[Transformation der ersten Fundamentalform]
+  Sei $\tilde{X} = X \circ \phi$ eine Umparametrisierung von $X$ mit einem Diffeo $\phi : \tilde{U} \to U$, dann gilt für $\tilde{g}_{\tilde{u}} = (J_{\tilde{u}} \tilde{X})^T (J_{\tilde{u}} \tilde{X})$:
+  \[ \tilde{g}_{\tilde{u}} = (J_{\tilde{u}}(\phi))^T \cdot g_{\phi(\tilde{u})} \cdot J_{\tilde{u}}(\phi). \]
+\end{satz}
+
+\begin{bsp}[Drehfläche]
+  Sei $c : I \to \R_{> 0} \times \R, t \mapsto (r(t), z(t))$ eine reguläre glatte Kurve. Dann heißt
+  \[ X : I \times \R \to \R^3, \quad (t, s) \mapsto (r(t) \cos(s), r(t) \sin(s), z(t)) \]
+  \emph{Drehfläche} mit Profilkurve $c$. Es gilt:
+  \[ g_{(t, s)} = \begin{pmatrix} \| c'(t) \|^2 & 0 \\ 0 & r(t)^2 \end{pmatrix} \]
+\end{bsp}
+
+\begin{bsp}[Kugelfläche] Die Einheitssphäre im $\R^3$ ist
+\[ X : \R^2 \to \R^3, \quad (s, t) \mapsto (- \sin(t) cos(t), \cos^2(t), \sin(t)). \]
+\end{bsp}
+
+\begin{defn}
+  Zwei Immersionen $X : U \to \R^n$ und $\tilde{X} : \tilde{U} \to \R^k$ heißen \emph{lokal isometrisch}, wenn es eine Umparametrisierung $\phi : U \to \tilde{U}$ gibt, sodass die ersten Fundamentalformen von $X$ und $\tilde{X} \circ \phi$ übereinstimmen. Ist eine Immersion $X$ isometrisch zu einer Immersion, deren Bild eine offene Teilmenge einer affinen Ebene ist, so heißt $X$ \emph{abwickelbar}.
+\end{defn}
+
+% Beispiel: Zylinderfläche
+% Beispiel: flacher Torus
+% Beispiel: Kegelfläche
+% Beispiel: Katenoid und Wendelfläche
+% Beispiel: Regelfläche
+
+\begin{defn}
+  Sei $X : U \to \R^n$ eine Immersion mit $U \subset \R^{n-1}$ offen. Dann heißt $X$ \emph{Hyperfläche} im $\R^n$.
+\end{defn}
+
+\begin{bem}
+  Es gilt in diesem Fall offenbar $\dim T_u = n - 1$ und $\dim N_u = 1$ für $u \in U$ und für einen Vektor $\nu_u \in N_u X \setminus \{ 0 \}$ gilt $N_u X = \R \cdot v_u$.
+\end{bem}
+
+\begin{defn}
+  $v_u \coloneqq \sum_{j=1}^{n} \det(\partial_1 X(u), ..., \partial_{n-1} X(u), e_j) e_j$
+\end{defn}
+
+\begin{bem}
+  Es gilt:
+  \begin{itemize}
+    \item $v_u \in N_u X \setminus \{ 0 \}$
+    \item $\det(\partial_1 X(u), ..., \partial_{n-1} X(u), v_u) > 0$
+  \end{itemize}
+\end{bem}
+
+\begin{bem}
+  Für $n = 3$ und $m = 2$ gilt $v_u = \partial_1 X(u) \times \partial_2 X(u)$.
+\end{bem}
+
+\begin{defn}
+  Für eine Hyperfläche $X : U \to \R^n$ heißt
+  \[ \nu : U \to S^{n-1} = \Set{ x \in \R^n }{ \| x \| = 1 }, \quad u \mapsto \nu_u \coloneqq \tfrac{v_u}{\| v_u \|} \]
+  \emph{Gaußabbildung}.
+\end{defn}
+
+\begin{satz}
+  Die Gaußabbildung einer Hyperfläche ist invariant unter orientierungserhaltenden Umparametrisierungen, d.\,h. ist $\phi : \tilde{U} \to U$ ein Diffeo mit $\det(J_{\tilde{u}} \phi) > 0$ für alle $\tilde{u} \in \tilde{U}$, dann ist $\tilde{\nu} = \nu \circ \phi$.
+\end{satz}
+
+% TODO: Zweite Fundamentalform, Weingartenabbildung, Krümmungen
 
 \end{document}
