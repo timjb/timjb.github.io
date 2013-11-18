@@ -6,6 +6,19 @@
 }
 
 \newcommand{\Intabdt}[1]{\Int{a}{b}{#1}{t}}
+\newcommand{\Bil}{\mathrm{Bil}}
+\newcommand{\SymBil}{\mathrm{SymBil}}
+\newcommand{\I}{\mathrm{I}}
+\newcommand{\II}{\mathrm{I\!I}}
+\newcommand{\spur}{\mathrm{spur}}
+\newcommand{\Graph}{\mathrm{Graph}}
+
+% Offene und abgeschlossene Teilmengen
+% http://tex.stackexchange.com/questions/22371/subseteq-circ-as-a-single-symbol-open-subset
+\newcommand\opn{\mathrel{\ooalign{$\subset$\cr
+  \hidewidth\raise.1ex\hbox{$\circ\mkern.5mu$}\cr}}}
+\newcommand\cls{\mathrel{\ooalign{$\subset$\cr
+  \hidewidth\raise.1ex\hbox{$\bullet\mkern.5mu$}\cr}}}
 
 \begin{document}
 
@@ -329,8 +342,8 @@ $\implies$ $f$ ist partiell differenzierbar
 \end{bem}
 
 \begin{defn}
-  Die \emph{erste Fundamentalform} einer Immersion $X$ ist die Abbildung
-  \[ I : U \to \mathrm{SymBil(\R^m)}, \quad u \mapsto I_u \coloneqq \langle \cdot , \cdot \rangle_u. \]
+  Die \emph{erste Fundamentalform} (FF) einer Immersion $X$ ist die Abbildung
+  \[ \I : U \to \mathrm{SymBil(\R^m)}, \quad u \mapsto \I_u \coloneqq \langle \cdot , \cdot \rangle_u. \]
   Äquivalent dazu wird auch die Abbildung
   \[ g : U \to \R^{m \times m}, \quad u \mapsto g_u \coloneqq (J_u X)^T (J_u X) \]
   manchmal als erste Fundamentalform bezeichnet.
@@ -359,7 +372,7 @@ $\implies$ $f$ ist partiell differenzierbar
   der Flächeninhalt von $X(C)$.
 \end{defn}
 
-\begin{satz}[Transformation der ersten Fundamentalform]
+\begin{satz}[Transformation der ersten FF]
   Sei $\tilde{X} = X \circ \phi$ eine Umparametrisierung von $X$ mit einem Diffeo $\phi : \tilde{U} \to U$, dann gilt für $\tilde{g}_{\tilde{u}} = (J_{\tilde{u}} \tilde{X})^T (J_{\tilde{u}} \tilde{X})$:
   \[ \tilde{g}_{\tilde{u}} = (J_{\tilde{u}}(\phi))^T \cdot g_{\phi(\tilde{u})} \cdot J_{\tilde{u}}(\phi). \]
 \end{satz}
@@ -419,6 +432,111 @@ $\implies$ $f$ ist partiell differenzierbar
   Die Gaußabbildung einer Hyperfläche ist invariant unter orientierungserhaltenden Umparametrisierungen, d.\,h. ist $\phi : \tilde{U} \to U$ ein Diffeo mit $\det(J_{\tilde{u}} \phi) > 0$ für alle $\tilde{u} \in \tilde{U}$, dann ist $\tilde{\nu} = \nu \circ \phi$.
 \end{satz}
 
-% TODO: Zweite Fundamentalform, Weingartenabbildung, Krümmungen
+\begin{nota}
+  $\Bil(\R^m, \R^n) \coloneqq \Set{ B : \R^m \times \R^m \to \R^n }{ B \text{ bilinear } }$
+\end{nota}
+
+\begin{defn}
+  Die \emph{vektorwertige zweite Fundamentalform} ist die Abbildung einer Immersion $X$ ist die Abbildung
+  \begin{align*}
+    \II : U \to \Bil(\R^m, \R^n), \quad & u \mapsto \II(u) = \II_u, \text { mit } \\
+    \II_u : \R^m \times \R^m \to \R^n, \quad & (v, w) \mapsto \II_u(v, w) \coloneqq (\partial_v \partial_w X(u))^{N_u},
+  \end{align*}
+  wobei $(\cdot)^{N_u}$ die orthogonale Projektion auf den Normalenraum bezeichnet.
+\end{defn}
+
+\begin{bem}
+  Nach dem Satz von Armandus Schwarz ist $\II_u$ eine symmetrische Bilinearform.
+\end{bem}
+
+\begin{bem}
+  Für eine Hyperfläche $X : U \to \R^n, \, (U \opn \R^{n-1})$ gilt
+  \[ \II_u(v, w) = h_u(v, w) \nu_u \quad \text{ mit } \quad h_u(v, w) = \langle \II_u(v, w) , \nu_u \rangle. \]
+\end{bem}
+
+\begin{defn}
+  Die Abbildung
+  \[ h : U \to \SymBil(\R^{n-1}), u \mapsto h_u = h(u) \]
+  mit $h_u(v, w) = \langle \II_u(v, w), \nu_u \rangle = \langle \partial_v \partial_w X(u), \nu_u \rangle$ heißt \emph{zweite Fundamentalform} der Hyperfläche $X$.
+\end{defn}
+
+\begin{bem}
+  Man kann die zweite FF auch als matrixwertige Abbildung
+  \[ h : U \to \R^{(n-1) \times (n-1)}, \quad u \mapsto (h_{jk}(u)) = \langle \partial_j \partial_k X(u), \nu_u \rangle \]
+  aufassen.
+\end{bem}
+
+\begin{satz}
+  Für die Gaussabbildung $\nu$ einer Hyperfläche $X : U \to \R^n$ gilt für alle $j, k \in \{ 1, ..., m \}$
+  \[ \langle \partial_j \nu , \partial_k X \langle = - h_{jk} \quad \text{und} \quad \langle \partial_j \nu, \nu \rangle = 0. \]
+\end{satz}
+
+\begin{defn}
+  Sei $X : U \to \R^n$ eine Hyperfläche und $u \in U$, dann heißt die lineare Abbildung
+  \[ W_u \coloneqq - D_u \nu \circ (D_u X)^{-1} : T_u X \to T_u X \]
+  \emph{Weingartenabbildung} von $X$ im Punkt $u$.
+\end{defn}
+
+\begin{bem}
+  Es gilt $W_u(\partial_j X(u)) = - \partial_j \nu(u)$.
+\end{bem}
+
+\begin{satz}
+  \begin{itemize}
+    \item $W_u$ ist selbstadjungiert bzgl. der Einschränkung $\langle \cdot , \cdot \rangle_{T_u}$.
+    \item $h_{jk}(u) = \langle W_u(\partial_j X(u)), \partial_k X(u) \rangle$
+    \item Die Weingartenabbildung ist invariant unter orientierungserhaltenden Umparametrisierungen, d.\,h. ist $\phi : \tilde{U} \to U$ ein Diffeo mit $\det(J\phi) > 0$, dann gilt für $\tilde{X} \coloneqq X \circ \phi$ und alle $\tilde{u} \in \tilde{U}$: $W_{\phi(\tilde{u})} = \tilde{W}_{\tilde{u}}$.
+  \end{itemize}
+\end{satz}
+
+\begin{satz}
+  Sei $g_u = (g_{jk}(u))$ die Matrix der ersten und $h_u = (h_{jk}(u))$ die Matrix der zweiten FF einer Hyperfläche $X$, dann gilt für die Matrix $w_u = (w_{jk}(u))$ von $W_u$ bzgl. der Basis $\{ \partial_1 X(u), ..., \partial_{n-1} X(u) \}$ von $T_u X$:
+  \[ w_u = g_u^{-1} \cdot h_u \]
+\end{satz}
+
+\begin{bem}
+  Die Weingartenabbildung ist als selbstadjungierter Endo reell diagonalisierbar (Spektralsatz).
+\end{bem}
+
+\begin{defn}
+  Sei $X : U \to \R^n$ eine Hyperfläche.
+  \begin{itemize}
+    \item Die Eigenwerte $\kappa_1(u), ..., \kappa_{n-1}(u)$ mit Vielfachheiten von $W_u$ heißen \emph{Hauptkrümmungen} von $X$ in $u$ und die dazugehörigen Eigenvektoren \emph{Hauptkrümmungsrichtungen} von $X$ in $u$.
+    \item Die \emph{mittlere Krümmung} von $X$ ist definiert als
+    \[ H : U \to \R, \quad u \mapsto \tfrac{1}{n-1} \, \spur(W_u) = \tfrac{1}{n-1} \sum_{j=1}^{n-1} \kappa_j(u). \]
+    \item Die \emph{Gauß-(Kronecker-)Krümmung} von $X$ ist die Abbildung
+    \[ K : U \to \R, \quad u \mapsto \det(W_u) = \frac{\det(h_u)}{\det{g_u}} = \prod_{j=1}^{n-1} \kappa_j(u). \]
+  \end{itemize}
+\end{defn}
+
+\begin{satz}
+  Die Hauptkrümmungen, die mittlere Krümmung und die Gauß-Kronecker-Krümmung sind invariant unter orientierungserhaltenden Umparametrisiserungen.
+\end{satz}
+
+% Beispiel: Drehfläche
+
+\begin{satz}
+  Sei $X : U \to \R^n$ eine Hyperfläche und $u_0 \in U$ ein Punkt. Dann gibt es eine offene Umgebung $U_0 \opn U$ von $u_0$ und eine Umparametrisierung $\phi : U_0 \to \tilde{U}$, sodass für $\tilde{X} \coloneqq X \circ \phi^{-1}$ gilt:
+
+  Es gibt eine glatte (bzw. $\mathcal{C}^2$) Funktion $f : \tilde{U} \to \R$ mit $D_{\phi(u_0)} f = 0$, sodass $\tilde{X} = \Graph(f)$, d.\,h. es gilt für alle $\tilde{u} \in \tilde{U}$:
+  \[ \tilde{X}(\tilde{u}) = (\tilde{u}, f(\tilde{u})). \]
+\end{satz}
+
+\begin{nota}
+  $\nabla f = (\partial_1 f, ..., \partial_k f)$ heißt \emph{Gradient} von $f : \R^k \to \R^m$.
+\end{nota}
+
+\begin{satz}
+  Sei $U \opn \R^{n-1}$ und $f : U \to \R$ glatt. Dann ist die zweite FF der Graphen-Hyperfläche $X : U \to \R^n, u \mapsto (u, f(n))$
+  \[ h_{jk}(u) = \frac{\partial_{jk} f(u)}{\sqrt{1 + |\nabla f(u)|^2}}. \]
+\end{satz}
+
+\begin{satz}
+  Sei $X : U \to \R^n$ eine Hyperfläche, $u_0 \in U$, sowie $E_{u_0} \coloneqq X(u_0) + T_{u_0} X$ die affine Tangentialebene an $X$ in $u_0$. Dann gilt:
+  \begin{itemize}
+    \item Ist $K(u_0) > 0$, so liegt für eine kleine offene Umgebung $U_0 \subset U$ von $u_0$ das Bild $X(U_0)$ ganz auf einer Seite von $E_{u_0}$.
+    \item Ist $K(u_0) < 0$, so trifft für jede Umgebung $U_0 \subset U$ von $u_0$ das Bild $X(U_0)$ beide Seiten von $E_{u_0}$.
+  \end{itemize}
+\end{satz}
 
 \end{document}
