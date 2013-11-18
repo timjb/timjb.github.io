@@ -9,8 +9,10 @@
 \newcommand{\Ring}{\mathfrak{R}}
 \newcommand{\Bor}{\mathfrak{B}} % Borel
 \newcommand{\E}{\mathbb{E}} % elementary functions
+\newcommand{\Leb}{\mathcal{L}} % Lebesgue
+\newcommand{\ind}{\mathbbm{1}} % indicator function
 
-\newcommand{\IntOmu}[1]{\Int{\Omega}{#1}{\mu}}
+\newcommand{\IntOmu}[1]{\Int{\Omega}{}{#1}{\mu}}
 
 \pdfinfo{
   /Title (Zusammenfassung Analysis 3)
@@ -161,7 +163,7 @@
 
 \begin{defn}
   Sei $A \subset \Omega$. Dann heißt die Abbildung
-  \[ \chi_A = \mathbbm{1}_A : \Omega \to \R, \quad \omega \mapsto \begin{cases} 1, & \text{ falls } \omega \in A \\ 0, & \text{ falls } \omega \not\in A \end{cases} \]
+  \[ \chi_A = ind{1}_A : \Omega \to \R, \quad \omega \mapsto \begin{cases} 1, & \text{ falls } \omega \in A \\ 0, & \text{ falls } \omega \not\in A \end{cases} \]
   \emph{Indikatorfunktion} oder \emph{charakteristische Funktion} von $A$.
 \end{defn}
 
@@ -328,16 +330,6 @@
   Sei $\mu$ ein Maß auf einer $\sigma$-Algebra $\Alg \subset \PSO$. Eine Menge $N \subset \Omega$ heißt \emph{Nullmenge}, wenn es eine Menge $A \in \Alg$ gibt mit $N \subset A$ und $\mu(A) = 0$. Die Menge aller Nullmengen wird mit $\mathfrak{N}_\mu$ bezeichnet.
 \end{defn}
 
-\begin{defn}
-  Sei $\mu$ ein Maß auf einer $\sigma$-Algebra $\Alg$. Setze
-  \[ \tilde{\Alg}_\mu \coloneqq \Set{ A \cup N }{ A \in \Alg, N \in \mathfrak{N}_\mu }. \]
-  Dann gilt:
-  \begin{itemize}
-    \item $\tilde{\Alg}_\mu = \Alg(\mathfrak{N}_\mu \cup \Alg)$, ist also eine $\sigma$-Algebra.
-    \item Die Funktion $\mu : \tilde{\Alg}_\mu \to [0, \infty]$ definiert durch $\tilde\mu(\tilde{A}) \coloneqq \mu(A)$, wenn $\tilde{\Alg}_\mu \ni A \cup N$ mit $A \in \Alg$ und $N \in \mathfrak{N}$, ist ein Maß.
-  \end{itemize}
-\end{defn}
-
 \begin{defn}[Fortsetzung auf Nullmengen]
   Sei $\mu$ das Lebesgue-Borel-Maß auf $\Bor(\R^n)$. Dann heißt die von $\Bor(\R^n)$ und den entsprechenden Nullmengen erzeugte $\sigma$-Algebra $\tilde{\Alg}_\mu$ \emph{Lebesguesche $\sigma$-Algebra}, notiert $\mathfrak{L}(\R^n)$, und das fortgesesetzte Maß \emph{Lebesgue-Maß}.
 \end{defn}
@@ -488,11 +480,15 @@
   $f = f^+ - f^-$
 \end{bem}
 
+\begin{samepage}
+
 \begin{satz}
   Falls $f : (\Omega, \Alg) \to (\ER, \overline\Bor)$ messbar, dann auch $|f|$, $f^+$ und $f^-$.
 \end{satz}
 
 \subsection{Das Lebesguesche Integral}
+
+\end{samepage}
 
 \begin{defn}
   Eine Funktion $f : (\Omega, \Alg) \to (\R, \Bor)$ heißt \emph{einfache Funktion} oder \emph{Elementarfunktion} auf $(\Omega, \Alg)$, wenn gilt:
@@ -508,7 +504,7 @@
 
 \begin{defn}
   Sei $f \in \E(\Omega, \Alg)$ und $\Omega = \sqcup_{j=1}^k A_j$ eine disjunkte Vereinigung von Mengen mit $A_j \in \Alg$ für alle $j = 1, ..., k$, sodass $f(A_j) = \{ y_j \}$, dann heißt die Darstellung
-  \[ f = \sum_{j=1}^k y_j \cdot \mathbbm{1}_{A_j} \]
+  \[ f = \sum_{j=1}^k y_j \cdot ind{1}_{A_j} \]
   \emph{kanonische Darstellung} von $f$.
 \end{defn}
 
@@ -530,7 +526,7 @@
 \end{satz}
 
 \begin{defn}
-  Sei $f \in \E(\Omega, \Alg)$ und $\textstyle f = \sum_{j=1}^k y_j \mathbbm{1}_{A_j}$ eine kanonische Darstellung von $f$. Sei ferner $\mu$ ein Maß auf $\Alg$. Dann heißt die Größe
+  Sei $f \in \E(\Omega, \Alg)$ und $\textstyle f = \sum_{j=1}^k y_j \ind{1}_{A_j}$ eine kanonische Darstellung von $f$. Sei ferner $\mu$ ein Maß auf $\Alg$. Dann heißt die Größe
   \[ \IntOmu{f} \coloneqq \sum_{j=1}^k y_j \mu(A_j) \]
   das Lebesgue-Integral von $f$ auf $\Omega$ bzgl. des Maßes $\mu$.
 \end{defn}
@@ -551,5 +547,101 @@
 \begin{satz}
   Angenommen, die Funktionen $f_n \in \E(\Omega, \Alg, \mu), n \in \N$ bilden eine monoton wachsende Funktionenfolge und für $g \in \E(\Omega, \Alg)$ gilt $g \leq \sup_{n \in \N} f_n$, dann gilt $\textstyle \IntOmu{g} \leq \sup\limits_{n \in \N} \, \IntOmu{f_n}$.
 \end{satz}
+
+\begin{kor}
+  Seien $f_n, g_n \in \E(\Omega, \Alg), n \in \N$ und die Funktionenfolgen $f_n$ und $g_n$ monoton wachsend mit $\sup_{n \in \N} f_n = \sup_{n \in \N} g_n$. Dann gilt
+  \[ \sup_{n \in \N} \IntOmu{f_n} = \sup_{n \in \N} \IntOmu{g_n}. \]
+\end{kor}
+
+\begin{defn}
+  Sei $\overline{E}(\Omega, \Alg)$ die Menge aller Funktionen $f : \Omega \to \ER$, die Grenzfunktionen (pktw. Konvergenz) monoton wachsender Funktionenfolgen in $\E(\Omega, \Alg)$ sind.
+\end{defn}
+
+\begin{defn}
+  Für eine Funktion $f \in \overline{\E}(\Omega, \Alg)$ (d.\,h. es existiert eine Folge $(g_n)_{n \in \N}$ in $\E(\Omega, \Alg)$ mit $f = \sup_{n \in \N} g_n$) und ein Maß $\mu$ auf $\Alg$ heißt
+  \[ \IntOmu{f} \coloneqq \sup_{n \in \N} \IntOmu{g_n} \]
+  \emph{Lebesgue-Integral} von $f$ über $\Omega$ bzgl. $\mu$.
+\end{defn}
+
+\begin{satz}
+  $\overline{E}(\Omega, \Alg) = \Set{ f : (\Omega, \Alg) \to (\ER, \Bor) }{ f \text{ messbar und } f \geq 0 }$
+\end{satz}
+
+\begin{satz}
+  Die Eigenschaften des Integrals für einfache Funktionen (Linearität, Monotonie) übertragen sich auf das allgemeine Lebesgue-Integral.
+\end{satz}
+
+\begin{satz}[Satz von der monotonen Konvergenz]
+  Sei $(f_n)_{n \in \N}$ eine monoton wachsende Folge von Funktionen in $\overline{E}(\Omega, \Alg)$, dann gilt für $f \coloneqq \lim_{n \to \infty} f_n = \sup_{n \in \N} f_n \in \overline{E}(\Omega, \Alg)$ und jedes Maß $\mu$ auf $\Alg$:
+  \[ \lim_{n \to \infty} \IntOmu f_n = \sup_{n \in \N} \IntOmu{f_n} = \IntOmu{f} \]
+\end{satz}
+
+\begin{bem}
+  Die Aussage ist für monoton fallende Funktionen i.\,A. falsch.
+\end{bem}
+
+\begin{defn}
+  Eine messbare Funktion $f : (\Omega, \Alg) \to (\ER, \overline{B})$ heißt \emph{integrierbar} oder genauer $\mu$-integrierbar (im Sinne von Lebesgue), wenn gilt:
+  \[ \IntOmu{f^+} < \infty \quad \text{und} \quad \IntOmu{f^-} < \infty. \]
+  In diesem Fall definieren wir das \emph{Lebesgue-Integral} von $f$ als
+  \[ \IntOmu{f} \coloneqq \IntOmu{f^+} - \IntOmu{f^-}. \]
+\end{defn}
+
+\begin{nota}
+  $\Leb^1(\Omega, \Alg, \mu) = \Leb^1(\mu)$ bezeichnet die Menge der $\mu$-integrierbaren Funktionen auf $\Omega$.
+\end{nota}
+
+\begin{satz}
+  Für eine messbare Funktion $f : (\Omega, \Alg, \mu) \to (\ER, \overline{\Bor})$ sind äquivalent:
+  \begin{itemize}
+    \begin{multicols}{2}
+      \item $f \in \Leb^1(\Omega, \Alg, \mu)$.
+      \item $f^+, f^- \in \Leb^1(\Omega, \Alg, \mu)$.
+      \item $|f| \in \Leb^1(\Omega, \Alg, \mu)$.
+      \item $\exists\,g \in \Leb^1(\Omega, \Alg, \mu)$ mit $|f| \leq g$.
+    \end{multicols}
+    \item Es gibt nicht negative $u, v \in \Leb^1(\Omega, \Alg, \mu)$ mit $f = u - v$.
+  \end{itemize}
+  Im letzten Fall gilt $\IntOmu{f} = \IntOmu{u} - \IntOmu{v}$.
+\end{satz}
+
+\begin{satz}
+  \begin{itemize}
+    \item $\Leb^1(\Omega, \Alg, \mu)$ ist ein $\R$-VR und die Abbildung ${\textstyle \int} : \Leb^1(\Omega, \Alg, \mu) \to \R, \, f \mapsto \IntOmu{f}$ ist linear.
+    \item $f, g \in \Leb^1(\Omega, \Alg, \mu) \implies \max(f, g), \, \min(f, g) \in \Leb^1(\Omega, \Alg, \mu)$
+    \item Monotonie: $f, g \in \Leb^1(\Omega, \Alg, \mu), \, f \leq g \implies \IntOmu{f} \leq \IntOmu{g}$.
+    \item Dreiecksungleichung: $\big| \IntOmu{f} \big| \leq \IntOmu{|f|}$ für alle $f \in \Leb^1(\Omega, \Alg, \mu)$
+  \end{itemize}
+\end{satz}
+
+\begin{defn}
+  Sei $(\Omega, \Alg, \mu)$ ein Maßraum, $A \in \Alg$ und $f \in \overline{E}(\Omega, \Alg, \mu)$ oder $f \in \Leb^1(\Omega, \Alg, \mu)$. Dann ist das \emph{$\mu$-Integral von $f$ über $A$}
+  \[ \Int{A}{}{f}{\mu} = \IntOmu{(\ind_A \cdot f)}. \]
+\end{defn}
+
+\begin{defn}
+  Sei $(\Omega, \Alg, \mu)$ ein Maßraum. Eine Menge $N \subset \Omega$ heißt \emph{($\mu$-)Nullmenge}, wenn es ein $A \in \Alg$ mit $\mu(A) = 0$ und $N \subset A$.
+\end{defn}
+
+\begin{defn}
+  Ein Maßraum $(\Omega, \Alg, \mu)$ heißt \emph{vollständig}, wenn jede Nullmenge $N \subset \Omega$ in $\Alg$ liegt.
+\end{defn}
+
+\begin{defn}
+  Sei $(\Omega, \Alg, \mu)$ ein Maßraum. Setze
+  \begin{align*}
+    \tilde{\mathfrak{N}}_\mu &\coloneqq \Set{N \subset \Omega}{N \text{ ist $\mu$-Nullmenge }}, \\
+    \tilde{\Alg}_\mu &\coloneqq \Set{ A \cup N }{ A \in \Alg, \, N \in \tilde{\mathfrak{N}}_\mu }.
+  \end{align*}
+  Dann ist $\tilde{\Alg}_\mu$ eine $\sigma$-Algebra und mit $\tilde{\mu}(A \cup N) \coloneqq \mu(A)$ ist $(\Omega, \tilde{\Alg}_\mu, \tilde{\mu})$ ein Maßraum, genannt \emph{Vervollständigung} von $(\Omega, \Alg, \mu)$.
+\end{defn}
+
+\begin{defn}
+  Sei $(\Omega, \Alg, \mu)$ ein Maßraum und $E(\omega)$ eine Aussage für alle $\omega \in \Omega$. Man sagt, $E$ ist \emph{($\mu$)-fast-überall wahr}, wenn $\Set{\omega \in \Omega}{\neg E(\omega)}$ eine Nullmenge ist.
+
+  Zwei Funktionen $f, g : \Omega \to X$ heißen \emph{($\mu$-)fast-überall gleich}, notiert $f \overset{\text{f.ü.}}= g$, wenn $\Set{\omega \in \Omega}{f(\omega) \not= g(\omega)}$ eine Nullmenge ist.
+
+  Eine Funktion $f : \Omega \to \ER$ heißt \emph{($\mu$)-fast-überall} endlich, wenn $\Set{\omega \in \Omega}{ f(\omega) = \infty}$ eine Nullmenge ist.
+\end{defn}
 
 \end{document}
