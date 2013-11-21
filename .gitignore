@@ -3,6 +3,9 @@
 /site.hi
 /site.o
 
+/.cabal-sandbox
+/.cabal.sandbox.config
+
 *.aux
 *.log
 *.out
