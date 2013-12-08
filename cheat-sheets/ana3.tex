@@ -1,6 +1,8 @@
 \documentclass{cheat-sheet}
 
 \usepackage{bbm}
+\usepackage{amsopn}
+\usepackage{setspace}
 
 \newcommand{\ER}{\overline\R} % extended reals
 \newcommand{\PS}{\mathcal{P}} % Powerset
@@ -11,8 +13,36 @@
 \newcommand{\E}{\mathbb{E}} % elementary functions
 \newcommand{\Leb}{\mathcal{L}} % Lebesgue
 \newcommand{\ind}{\mathbbm{1}} % indicator function
+\newcommand{\fue}{\overset{\text{f.ü.}}} % fast überall
 
 \newcommand{\IntOmu}[1]{\Int{\Omega}{}{#1}{\mu}}
+
+% Kleinere Vereinigungs-, Schnitt- und Summensymbole
+\let\myBigcup\bigcup
+\DeclareMathOperator*{\textbigcup}{{\textstyle \myBigcup}}
+\renewcommand{\bigcup}{\textbigcup\limits}
+\let\myBigcap\bigcap
+\DeclareMathOperator*{\textbigcap}{{\textstyle \myBigcap}}
+\renewcommand{\bigcap}{\textbigcap\limits}
+\let\myBigsqcup\bigsqcup
+\DeclareMathOperator*{\textbigsqcup}{{\textstyle \myBigsqcup}}
+\renewcommand{\bigsqcup}{\textbigsqcup\limits}
+%\let\myBigsqcap\bigsqcap
+%\DeclareMathOperator*{\textbigsqcap}{{\textstyle \myBigsqcap}}
+%\renewcommand{\bigsqcap}{\textbigsqcap\limits}
+\let\mySum\sum
+\DeclareMathOperator*{\textsum}{{\textstyle \mySum}}
+\renewcommand{\sum}{\textsum\limits}
+
+% Offene und abgeschlossene Teilmengen
+% http://tex.stackexchange.com/questions/22371/subseteq-circ-as-a-single-symbol-open-subset
+\newcommand\opn{\mathrel{\ooalign{$\subset$\cr
+  \hidewidth\raise.1ex\hbox{$\circ\mkern.5mu$}\cr}}}
+\newcommand\cls{\mathrel{\ooalign{$\subset$\cr
+  \hidewidth\raise.1ex\hbox{$\bullet\mkern.5mu$}\cr}}}
+
+\delimiterfactor=701
+%\setlength\delimitershortfall{10pt}
 
 \pdfinfo{
   /Title (Zusammenfassung Analysis 3)
@@ -20,6 +50,7 @@
 }
 
 \begin{document}
+
 
 \maketitle{Zusammenfassung Analysis \rom{3}}
 
@@ -77,9 +108,7 @@
 \end{defn}
 
 \begin{defn}
-  Eine Algebra $\Alg \subset \PSO)$ heißt \emph{$\sigma$-Algebra}, wenn $\Alg$ unter abzählbaren Vereinigungen abgeschlossen ist, d.\,h. für jede Folge $(A_n)_{n \in \N}$ in $\Alg$ gilt
-
-  \[ \bigcup_{n \in \N} A_n \in \Alg \]
+  Eine Algebra $\Alg \subset \PSO)$ heißt \emph{$\sigma$-Algebra}, wenn $\Alg$ unter abzählbaren Vereinigungen abgeschlossen ist, d.\,h. für jede Folge $(A_n)_{n \in \N}$ in $\Alg$ gilt $\bigcup_{n \in \N} A_n \in \Alg$.
 \end{defn}
 
 \begin{bem}
@@ -108,11 +137,7 @@
     \mathcal{R}(E) &\coloneqq \Set{ \Ring \subset \PSO }{ E \subset \Ring, \Ring \text{ Ring} } \text{ und} \\
     \mathcal{A}(E) &\coloneqq \Set{ \Alg \subset \PSO }{ E \subset \Alg, \Alg \text{ $\sigma$-Algebra} }.
   \end{align*}
-  Dann heißen
-  \[
-    \Ring(E) \coloneqq\!\bigcap_{\Ring \in \mathcal{R}(E)}\!\Ring, \qquad
-    \Alg(E)  \coloneqq\!\bigcap_{\Alg  \in \mathcal{A}(E)}\!\Alg
-  \]
+  Dann heißen $\quad\Ring(E) \coloneqq\!\bigcap_{\Ring \in \mathcal{R}(E)}\!\Ring, \quad \Alg(E)  \coloneqq\!\bigcap_{\Alg  \in \mathcal{A}(E)}\!\Alg$\\
   von $E$ \emph{erzeugter Ring} bzw. von $E$ \emph{erzeugte $\sigma$-Algebra}.
 \end{defn}
 
@@ -133,7 +158,7 @@
 \end{defn}
 
 \begin{defn}
-  Ein Inhalt $\mu : \Ring \to [0, \infty]$ heißt \emph{Prämaß} auf $\Ring$, wenn $\mu$ $\sigma$-additiv ist, d.\,h. wenn für jede Folge $(A_n)_{n \in \N}$ paarweise disjunkter Elemente von $\Ring$ mit $\sqcup_{n \in \N} A_n \in \Ring$ gilt:
+  Ein Inhalt $\mu : \Ring \to [0, \infty]$ heißt \emph{Prämaß} auf $\Ring$, wenn $\mu$ $\sigma$-additiv ist, d.\,h. wenn für jede Folge $(A_n)_{n \in \N}$ paarweise disjunkter Elemente von $\Ring$ mit $\bigsqcup_{n \in \N} A_n \in \Ring$ gilt:
   \[ \mu\left(\bigsqcup_{n \in \N} A_n\right) = \sum_{n=0}^\infty \mu(A_n) \]
 \end{defn}
 
@@ -163,20 +188,20 @@
 
 \begin{defn}
   Sei $A \subset \Omega$. Dann heißt die Abbildung
-  \[ \chi_A = ind{1}_A : \Omega \to \R, \quad \omega \mapsto \begin{cases} 1, & \text{ falls } \omega \in A \\ 0, & \text{ falls } \omega \not\in A \end{cases} \]
+  \[ \chi_A = \ind_A : \Omega \to \R, \quad \omega \mapsto \begin{cases} 1, & \text{ falls } \omega \in A \\ 0, & \text{ falls } \omega \not\in A \end{cases} \]
   \emph{Indikatorfunktion} oder \emph{charakteristische Funktion} von $A$.
 \end{defn}
 
 \begin{defn}
-  Wir sagen eine Folge $(A_n)_{n \in \N}$ \emph{konvergiert} gegen $A \subset \Omega$, notiert $\lim_{n \to \infty} A_n = A$, wenn $(1_{A_n})_{n \in \N}$ punktweise gegen $1_A$ konvergiert.
+  Wir sagen eine Folge $(A_n)_{n \in \N}$ \emph{konvergiert} gegen $A \subset \Omega$, notiert $\lim_{n \to \infty} A_n = A$, wenn $(\ind_{A_n})_{n \in \N}$ punktweise gegen $\ind_A$ konvergiert.
 \end{defn}
 
 \begin{defn}
   Für eine Folge $(A_n)_{n \in \N}$ in $\PS(\Omega)$ heißen
   \begin{align*}
-    \limsup_{n \to \infty} A_n \coloneqq&~\Set{ \omega \in \Omega }{ \omega \text{ liegt in unendlich vielen } A_n } \\
+    \limsup_{n \to \infty} A_n \coloneqq&~\Set{ \omega \in \Omega }{ \omega \text{ liegt in unendlich vielen } A_n } \\[-5pt]
     =&~\bigcap_{n = 0}^\infty \bigcup_{k = n}^\infty A_n \\
-    \liminf_{n \to \infty} A_n \coloneqq&~\Set{ \omega \in \Omega }{ \omega \text{ liegt in allen bis auf endlich vielen } A_n } \\
+    \liminf_{n \to \infty} A_n \coloneqq&~\Set{ \omega \in \Omega }{ \omega \text{ liegt in allen bis auf endlich vielen } A_n } \\[-5pt]
     =&~\bigcup_{n = 0}^\infty \bigcap_{k = n}^\infty A_n
   \end{align*}
   \emph{Limes Superior} bzw. \emph{Limes Inferior} der Folge $A_n$.
@@ -205,7 +230,7 @@
 \end{satz}
 
 \begin{satz}
-  Sei $\mu$ ein Inhalt auf $\Ring \subset \PSO$. Wir betrachten folgende Aussagen:
+  Sei $\mu$ ein Inhalt auf $\Ring \subset \PSO$. Wir betrachten die Aussagen:
 
   \begin{enumerate}[label=(\roman*),leftmargin=2em]
     \item $\mu$ ist ein Prämaß auf $\Ring$.
@@ -214,8 +239,8 @@
     \item Für jede monoton fallende Folge $(A_n)_{n \in \N}$ in $\Ring$ mit $\mu(A_0) < \infty$ und $\lim_{n \to \infty} A_n = \bigcap_{n = 0}^\infty A_n = \emptyset$ gilt $\lim_{n \to \infty} \mu(A_n) = 0$.
   \end{enumerate}
 
-  Dann gilt $(i) \iff (ii) \implies (iii) \iff (iv)$.\\
-  Falls $\mu$ endlich, gilt auch $(iii) \implies (ii)$.
+  Dann gilt (i) $\iff$ (ii) $\implies$ (iii) $\iff$ (iv).\\
+  Falls $\mu$ endlich ist, so gilt auch (iii) $\implies$ (ii).
 \end{satz}
 
 \begin{satz}
@@ -231,10 +256,12 @@
 
 \begin{defn}
   Ein Inhalt auf einem Ring $\Ring \subset \PSO$ heißt \emph{$\sigma$-endlich}, wenn gilt: Es gibt eine Folge $(S_n)_{n \in \N}$ in $\Ring$, sodass
-  \begin{itemize}
-    \item $\Omega = \bigcup_{n \in \N} S_n$ und
-    \item $\mu(S_n) < \infty$ für alle $n \in \N$
-  \end{itemize}
+  \begin{multicols}{2}
+    \begin{itemize}
+      \item $\Omega = \bigcup_{n \in \N} S_n$ und
+      \item $\mu(S_n) < \infty$ für alle $n \in \N$.
+    \end{itemize}
+  \end{multicols}
 \end{defn}
 
 \begin{defn}
@@ -271,26 +298,22 @@
   Sei $\mu$ ein Prämaß auf einem Ring $\Ring$, dann gibt es ein Maß $\tilde{\mu}$ auf der von $\Ring$ erzeugten $\sigma$-Algebra $\Alg(\Ring)$ mit $\tilde{\mu}|_\Ring = \mu$. Falls $\mu$ $\sigma$-endlich, so ist $\tilde{\mu}$ eindeutig bestimmt.
 \end{satz}
 
-\begin{samepage} % Hack
-
 \begin{bem}
-  Im Beweis wird ein äußeres Maß auf $\Omega$ wie folgt definiert:
+  Im Beweis wird ein äußeres Maß auf $\Omega$ so definiert:
 
   \[ \mu^*(Q) \coloneqq \inf \left\{ \sum_{i = 0}^\infty \mu(A_n) \,\middle|\, (A_n)_{n \in \N} \in \mathfrak{U}(Q) \right\}, \]
 
   wobei $\inf \emptyset \coloneqq \infty$ und
 
-  \[ \mathfrak{U}(Q) \coloneqq \left\{ (A_n)_{n \in \N} \middle| Q \subset \bigcup_{n = 0}^\infty A_n \text{ und } A_n \text{ Folge in } \Ring \right\}. \]
+  \[ \mathfrak{U}(Q) \coloneqq \left\{ (A_n)_{n \in \N} \,\middle|\, Q \subset \bigcup_{n = 0}^\infty A_n \text{ und } A_n \text{ Folge in } \Ring \right\}. \]
 
-  Das Prämaß $\mu^*$ eingeschränkt auf $\Alg^* \supset \Alg(\Ring)$ ist ein Maß.
+  Das äußere Maß $\mu^*$ eingeschränkt auf $\Alg^* \supset \Alg(\Ring)$ ist ein Maß.
 \end{bem}
 
 \subsection{Das Lebesgue-Borel-Maß}
 
-\end{samepage}
-
 \begin{nota}
-  Für zwei Elemente $a = (a_1, ..., a_n)$ und $b = (b_1, ..., b_n)$ schreibe
+  Für $a = (a_1, ..., a_n)$ und $b = (b_1, ..., b_n)$ schreibe
   \begin{itemize}
     \item $a \lhd b$, falls $a_j < b_j$ für alle $j = 1, ..., n$.
     \item $a \unlhd b$, falls $a_j \leq b_j$ für alle $j = 1, ..., n$.
@@ -323,15 +346,15 @@
 \end{defn}
 
 \begin{bem}
-  Das Lebesgue-Borel-Maß ist das einzige Maß auf $\Bor(\R^n)$, welches jedem Elementarquader seinen Elementarinhalt zuordnet.
+  Nur das Lebesgue-Borel-Maß ist ein Maß auf $\Bor(\R^n)$, welches jedem Elementarquader seinen Elementarinhalt zuordnet.
 \end{bem}
 
 \begin{defn}
-  Sei $\mu$ ein Maß auf einer $\sigma$-Algebra $\Alg \subset \PSO$. Eine Menge $N \subset \Omega$ heißt \emph{Nullmenge}, wenn es eine Menge $A \in \Alg$ gibt mit $N \subset A$ und $\mu(A) = 0$. Die Menge aller Nullmengen wird mit $\mathfrak{N}_\mu$ bezeichnet.
+  Sei $\mu$ ein Maß auf einer $\sigma$-Algebra $\Alg \subset \PSO$. Eine Menge $N \subset \Omega$ heißt \emph{Nullmenge}, wenn es eine Menge $A \in \Alg$ gibt mit $N \subset A$ und $\mu(A) = 0$. Die Menge aller Nullmengen ist $\mathfrak{N}_\mu \subset \PSO$.
 \end{defn}
 
 \begin{defn}[Fortsetzung auf Nullmengen]
-  Sei $\mu$ das Lebesgue-Borel-Maß auf $\Bor(\R^n)$. Dann heißt die von $\Bor(\R^n)$ und den entsprechenden Nullmengen erzeugte $\sigma$-Algebra $\tilde{\Alg}_\mu$ \emph{Lebesguesche $\sigma$-Algebra}, notiert $\mathfrak{L}(\R^n)$, und das fortgesesetzte Maß \emph{Lebesgue-Maß}.
+  Sei $\mu$ das Lebesgue- Borel-Maß auf $\Bor(\R^n)$. Dann heißt die von $\Bor(\R^n)$ und den ent\-sprech\-en\-den Nullmengen erzeugte $\sigma$-Algebra $\tilde{\Alg}_\mu$ \emph{Lebesguesche $\sigma$-Algebra}, notiert $\mathfrak{L}(\R^n)$, und das fortgesetzte Maß \emph{Lebesgue-Maß}.
 \end{defn}
 
 \begin{defn}
@@ -347,7 +370,7 @@
 \end{defn}
 
 \begin{bem}
-  Die messbaren Räume bilden eine Kategorie mit messbaren Abbildungen als Morphismen, d.\,h. die Identitätsabbildung von einem messbaren Raum zu sich selbst ist messbar und die Verkettung zweier messbarer Abbildungen ist messbar.
+  Die messbaren Räume bilden eine Kategorie mit messbaren Abbildungen als Morphismen, d.\,h. die Identitäts- abbildung von einem messbaren Raum zu sich selbst ist messbar und die Verkettung zweier messbarer Abbildungen ist messbar.
 \end{bem}
 
 % Aufgabe 1.55
@@ -388,8 +411,12 @@
 \begin{satz}
   Sei $(\Omega, \Alg, \mu)$ ein Maßraum und $(\Omega', \Alg')$ ein messbarer Raum und $f : \Omega \to \Omega'$ eine messbare Abbildung, dann ist
   \[ \mu' = f_*(\mu) = \mu \circ f^{-1} : \Alg' \to [0, \infty], \quad A' \mapsto \mu(f^{-1}(A')) \]
-  ein Maß auf $\Alg'$, genannt das \emph{Bildmaß} von $f$.
+  ein Maß auf $(\Omega', \Alg')$, genannt das \emph{Bildmaß} von $f$.
 \end{satz}
+
+\begin{bem}
+  Sei $(\Omega, \Alg, \mu)$ ein Maßraum, $(\Omega', \Alg')$ und $(\Omega'', \Alg'')$ messbare Räume und $f : \Omega' \to \Omega''$, $g : \Omega \to \Omega'$ messbare Abbildungen, dann gilt $(f \circ g)_* \mu = f_*(g_* \mu)$.
+\end{bem}
 
 \begin{defn}
   Die $\sigma$-Algebra der Borelmengen auf $\ER = \R \cup \{ \pm \infty \}$ ist
@@ -401,13 +428,13 @@
 \end{satz}
 
 \begin{nota}
-  Seien $f, g : \Omega \to \overline{R}$ zwei numerische Funktionen. Setze
+  Seien $f, g : \Omega \to \overline{\R}$ zwei numerische Funktionen. Setze
     \[ \{ f \leq g \} \coloneqq \Set{ \omega \in \Omega }{ f(\omega) \leq g(\omega) } \subset \Omega \]
   und definiere analog $\{ f < g \}$, $\{ f \geq g \}$, $\{ f > g \}$, $\{ f = g \}$, $\{ f \not= g \}$.
 \end{nota}
 
 \begin{satz}
-  Für eine numerische Funktion $f : (\Omega, \Alg) \to (\ER, \overline{\Bor})$ sind äquivalent:
+  Für eine numerische Fkt. $f : (\Omega, \Alg) \to (\ER, \overline{\Bor})$ sind äquivalent:
   \begin{itemize}
     \item $f$ ist messbar
     \item für alle $a \in \R$ gilt $\{ f \geq a \} = f^{-1}([a, \infty]) \in \Alg$
@@ -445,7 +472,7 @@
 \end{satz}
 
 \begin{satz}
-  Seien $f_n : (\Omega, \Alg) \to (\ER, \overline\Bor), n \in \N$ messbare numerische Funktionen, dann auch messbar:
+  Seien $f_n : (\Omega, \Alg) \to (\ER, \overline{\Bor}), n \in \N$ messbare numerische Funktionen, dann auch messbar:
   \begin{multicols}{4}
     \begin{itemize}
       \item $\sup_{n \in \N} f_n$
@@ -454,11 +481,12 @@
       \item $\limsup_{n \in \N} f_n$
     \end{itemize}
   \end{multicols}
+  \vspace{4pt}
   Dabei werden Infimum, Supremum, usw. punktweise gebildet.
 \end{satz}
 
 \begin{satz}
-  Seien $f_1, ..., f_n : (\Omega, \Alg) \to (\ER, \overline\Bor)$ messbare numerische Funktionen, dann auch messbar:
+  Seien $f_1, ..., f_n : (\Omega, \Alg) \to (\ER, \overline{\Bor})$ messbare numerische Funktionen, dann auch messbar:
   \begin{multicols}{2}
     \begin{itemize}
       \item $\max(f_1, ..., f_n)$
@@ -477,7 +505,7 @@
 \end{defn}
 
 \begin{bem}
-  $f = f^+ - f^-$
+  $f = f^+ - f^-$ und $|f| = f^+ + f^-$
 \end{bem}
 
 \begin{samepage}
@@ -503,8 +531,8 @@
 \end{defn}
 
 \begin{defn}
-  Sei $f \in \E(\Omega, \Alg)$ und $\Omega = \sqcup_{j=1}^k A_j$ eine disjunkte Vereinigung von Mengen mit $A_j \in \Alg$ für alle $j = 1, ..., k$, sodass $f(A_j) = \{ y_j \}$, dann heißt die Darstellung
-  \[ f = \sum_{j=1}^k y_j \cdot ind{1}_{A_j} \]
+  Sei $f \in \E(\Omega, \Alg)$ und $\Omega = A_1 \sqcup ... \sqcup A_k$ eine disjunkte Vereinigung von Mengen mit $A_j \in \Alg$ für alle $j = 1, ..., k$, sodass $f(A_j) = \{ y_j \}$, dann heißt die Darstellung
+  \[ f = \sum_{j=1}^k y_j \cdot \ind_{A_j} \]
   \emph{kanonische Darstellung} von $f$.
 \end{defn}
 
@@ -526,7 +554,7 @@
 \end{satz}
 
 \begin{defn}
-  Sei $f \in \E(\Omega, \Alg)$ und $\textstyle f = \sum_{j=1}^k y_j \ind{1}_{A_j}$ eine kanonische Darstellung von $f$. Sei ferner $\mu$ ein Maß auf $\Alg$. Dann heißt die Größe
+  Sei $f \in \E(\Omega, \Alg)$ und $\textstyle f = \sum_{j=1}^k y_j \ind_{A_j}$ eine kanonische Darstellung von $f$. Sei ferner $\mu$ ein Maß auf $\Alg$. Dann heißt die Größe
   \[ \IntOmu{f} \coloneqq \sum_{j=1}^k y_j \mu(A_j) \]
   das Lebesgue-Integral von $f$ auf $\Omega$ bzgl. des Maßes $\mu$.
 \end{defn}
@@ -554,7 +582,7 @@
 \end{kor}
 
 \begin{defn}
-  Sei $\overline{E}(\Omega, \Alg)$ die Menge aller Funktionen $f : \Omega \to \ER$, die Grenzfunktionen (pktw. Konvergenz) monoton wachsender Funktionenfolgen in $\E(\Omega, \Alg)$ sind.
+  Sei $\overline{\E}(\Omega, \Alg)$ die Menge aller Funktionen $f : \Omega \to \ER$, die Grenzfunktionen (pktw. Konvergenz) monoton wachsender Funktionenfolgen in $\E(\Omega, \Alg)$ sind.
 \end{defn}
 
 \begin{defn}
@@ -564,7 +592,7 @@
 \end{defn}
 
 \begin{satz}
-  $\overline{E}(\Omega, \Alg) = \Set{ f : (\Omega, \Alg) \to (\ER, \Bor) }{ f \text{ messbar und } f \geq 0 }$
+  $\overline{\E}(\Omega, \Alg) = \Set{ f : (\Omega, \Alg) \to (\ER, \Bor) }{ f \text{ messbar und } f \geq 0 }$
 \end{satz}
 
 \begin{satz}
@@ -572,16 +600,16 @@
 \end{satz}
 
 \begin{satz}[Satz von der monotonen Konvergenz]
-  Sei $(f_n)_{n \in \N}$ eine monoton wachsende Folge von Funktionen in $\overline{E}(\Omega, \Alg)$, dann gilt für $f \coloneqq \lim_{n \to \infty} f_n = \sup_{n \in \N} f_n \in \overline{E}(\Omega, \Alg)$ und jedes Maß $\mu$ auf $\Alg$:
+  Sei $(f_n)_{n \in \N}$ eine monoton wachsende Folge von Funktionen in $\overline{\E}(\Omega, \Alg)$, dann gilt für $f \coloneqq \lim_{n \to \infty} f_n = \sup_{n \in \N} f_n \in \overline{\E}(\Omega, \Alg)$ und jedes Maß $\mu$ auf $\Alg$:
   \[ \lim_{n \to \infty} \IntOmu f_n = \sup_{n \in \N} \IntOmu{f_n} = \IntOmu{f} \]
 \end{satz}
 
 \begin{bem}
-  Die Aussage ist für monoton fallende Funktionen i.\,A. falsch.
+  Die Aussage ist für monoton fallende Fktn. i.\,A. falsch.
 \end{bem}
 
 \begin{defn}
-  Eine messbare Funktion $f : (\Omega, \Alg) \to (\ER, \overline{B})$ heißt \emph{integrierbar} oder genauer $\mu$-integrierbar (im Sinne von Lebesgue), wenn gilt:
+  Eine messbare Funktion $f : (\Omega, \Alg) \to (\ER, \overline{\Bor})$ heißt \emph{integrierbar} oder genauer $\mu$-integrierbar (im Sinne von Lebesgue), wenn gilt:
   \[ \IntOmu{f^+} < \infty \quad \text{und} \quad \IntOmu{f^-} < \infty. \]
   In diesem Fall definieren wir das \emph{Lebesgue-Integral} von $f$ als
   \[ \IntOmu{f} \coloneqq \IntOmu{f^+} - \IntOmu{f^-}. \]
@@ -592,7 +620,7 @@
 \end{nota}
 
 \begin{satz}
-  Für eine messbare Funktion $f : (\Omega, \Alg, \mu) \to (\ER, \overline{\Bor})$ sind äquivalent:
+  Für eine messbare Fkt. $f : (\Omega, \Alg, \mu) \to (\ER, \overline{\Bor})$ sind äquivalent:
   \begin{itemize}
     \begin{multicols}{2}
       \item $f \in \Leb^1(\Omega, \Alg, \mu)$.
@@ -615,7 +643,7 @@
 \end{satz}
 
 \begin{defn}
-  Sei $(\Omega, \Alg, \mu)$ ein Maßraum, $A \in \Alg$ und $f \in \overline{E}(\Omega, \Alg, \mu)$ oder $f \in \Leb^1(\Omega, \Alg, \mu)$. Dann ist das \emph{$\mu$-Integral von $f$ über $A$}
+  Sei $(\Omega, \Alg, \mu)$ ein Maßraum, $A \in \Alg$ und $f \in \overline{\E}(\Omega, \Alg, \mu)$ oder $f \in \Leb^1(\Omega, \Alg, \mu)$. Dann ist das \emph{$\mu$-Integral von $f$ über $A$}
   \[ \Int{A}{}{f}{\mu} = \IntOmu{(\ind_A \cdot f)}. \]
 \end{defn}
 
@@ -643,5 +671,251 @@
 
   Eine Funktion $f : \Omega \to \ER$ heißt \emph{($\mu$)-fast-überall} endlich, wenn $\Set{\omega \in \Omega}{ f(\omega) = \infty}$ eine Nullmenge ist.
 \end{defn}
+
+\begin{bem}
+  Das Cantorsche Diskontinuum ist eine Menge $C \subset [0, 1]$, $C \in \Bor$, welche die bemerkenswerte Eigenschaft hat, dass sie gleichzeitig überabzählbar ist und Maß $0$ besitzt. Da außerdem $\Bor \cong \R$ gilt, folgt $\PS(C) \cong \PS(\R) \not\cong \R \cong \Bor$. Somit gibt es eine Nullmenge $N \subset C$, die nicht in $\Bor$ liegt. Es folgt:
+\end{bem}
+
+\begin{satz}
+  Der Maßraum $(\R, \Bor, \mu)$ ist nicht vollständig.
+\end{satz}
+
+\begin{defn}
+  Sei $(\R^n, \Bor_L^n, \lambda)$ die Vervollständigung von $(\R^n, \Bor^n, \mu$, dann heißt $\Bor_L$ die \emph{Lebesguesche $\sigma$-Algebra} und $\lambda$ das \emph{Lebesgue-Maß} auf $\R^n$ (analog: $(\ER, \overline{\Bor}, \lambda)$).
+\end{defn}
+
+\begin{satz}
+  Sei $f \in \overline{\E}(\Omega, \Alg, \mu)$, dann gilt $\IntOmu{f} = 0 \iff f \overset{\text{f.ü.}}= 0$.
+\end{satz}
+
+\vspace{-10pt}
+
+\begin{satz}
+  Seien $f, g : (\Omega, \Alg, \mu) \to (\ER, \overline{\Bor})$ messbar mit $f \fue= g$, dann gilt:
+  \begin{itemize}
+    \item Wenn $f, g \in \overline{\E}(\Omega, \Alg)$, dann $\IntOmu{f} = \IntOmu{g}$.
+    \item Wenn $f \in \Leb^1(\Omega, \Alg, \mu)$, dann $g \in \Leb^1(\Omega, \Alg, \mu)$ mit $\IntOmu{f} = \IntOmu{g}$.
+  \end{itemize}
+\end{satz}
+
+\begin{satz}
+  Sei $f : (\Omega, \Alg, \mu) \to (\ER, \overline{\Bor})$ eine messbare Fkt. und $g \in \Leb^1(\Omega, \Alg, \mu), g \geq 0$. Wenn $f \fue\leq g$, dann gilt $f \in \Leb^1(\Omega, \Alg, \mu)$.
+\end{satz}
+
+% \begin{doublespace} ... \end{doublespace} für einheitlichen Zeilenabstand.
+% Sonst Kraut und Rüben mit den ganzen Inline-Integralen.
+\begin{satz}[Lemma von Fatou]\begin{doublespace}
+  Sei $(f_n)_{n \in \N}$ eine Funktionenfolge mit $f_n$ $\mu$-integrierbar und $f_n \overset{\text{f.ü.}}\geq 0$. Dann $\IntOmu{(\liminf_{n \to \infty} f_n)} \leq \liminf_{n \to \infty} \IntOmu{fn}$.
+\end{doublespace}\end{satz}
+
+\vspace{-20pt}
+
+\begin{satz}
+  \begin{doublespace}
+    Sei $(f_n)_{n \in \N}$ Folge messbarer Fkt. $f_n : (\Omega, \Alg, \mu) \to (\ER, \overline{\Bor})$ und $g \in \Leb^1(\Omega, \Alg, \mu), g \geq 0$, sodass $\forall n \in \N : |f_n| \overset{\text{f.ü.}}\leq g$. Dann:\\[-16pt]
+  \end{doublespace}
+  \begin{align*}
+    \IntOmu{(\liminf_{n \to \infty} (f_n))}
+    &\leq \liminf_{n \to \infty} (\IntOmu{f_n}) \,\,\leq\\[-5pt]
+    &\leq \limsup_{n \to \infty} (\IntOmu{f_n})
+    \leq \IntOmu{(\limsup_{n \to \infty} f_n)}.
+  \end{align*}
+\end{satz}
+
+\begin{satz}[von der majorisierten Konvergenz]\begin{doublespace}
+  Sei $g \in \Leb^1(\Omega, \Alg, \mu), g \geq 0$. Sei $(f_n)_{n \in \N}$ Folge messbarer Fkt. $f_n : (\Omega, \Alg, \mu) \to (\ER, \overline{\Bor})$ mit $|f_n| \overset{\text{f.ü.}}\leq g$ (Majorisierung).
+  Sei ferner $f : \Omega \to \ER$ $(\Alg, \overline{\Bor})$-messbar mit $f_n \xrightarrow[n \to \infty]{\text{f.ü.}} f$, d.\,h. $\Set{ \omega \in \Omega }{ \lim_{n \to \infty} f_n(\omega) = f(\omega) \text{ falsch} }$ ist Nullmenge. Dann ist $f$ integrierbar mit $\IntOmu{f} = \lim_{n \to \infty} \IntOmu{f_n}$.
+\end{doublespace}\end{satz}
+
+\vspace{-20pt}
+
+\begin{satz}
+  \begin{doublespace}
+    Sei $f \in \overline{\E}(\Omega, \Alg, \mu)$ bzw. $f \in \Leb^1(\Omega, \Alg, \mu)$, $(A_n)_{n \in \N}$ Folge in $\Alg$, $A_n \cap A_m = \emptyset$ für $n \not= m$, $A = \bigsqcup_{n=1}^\infty A_n$. Dann:\\[-10pt]
+  \end{doublespace}
+  \[ \Int{A}{}{f}{\mu} \coloneqq \Int{\Omega}{}{f \cdot \ind_A}{\mu} = \sum_{n=1}^\infty \left( \Int{A_n}{}{f}{\mu} \right). \]
+\end{satz}
+
+\begin{satz}\begin{doublespace}
+  Seien $f, f_j : (\Omega, \Alg, \mu) \to (\R, \Bor), j \in \N$ messbare Funktionen, $g : (\Omega, \Alg, \mu) \to (\R, \Bor)$ integrierbar, sodass $|\sum_{j=1}^n f_j| \overset{\text{f.ü.}}\leq g \, \forall n \in \N$ und\\[-5pt]
+  $f \fue= \sum_{n=1}^\infty f_j$. Dann sind $f, f_j$ integrierbar mit $\IntOmu{f} = \sum_{j=1}^\infty \IntOmu{f_j}$.
+\end{doublespace}\end{satz}
+
+\vspace{-20pt}
+
+\begin{satz}[Ableiten unter Integral]
+  Seien $a, b \in \R$ mit $a < b$, sei $(\Omega, \Alg, \mu)$ ein Maßraum und sei $f : ]a, b[ \times \Omega \to (\R, \Bor)$ eine Funktion, sodass gilt
+  \begin{itemize}
+    \item Für alle $t \in ]a, b[$ ist die Abbildung $f(t, -) : \Omega \to \R$ $\mu$-integrierbar.
+    \item Für alle $\omega \in \Omega$ ist die Abbildung $f(-, \omega) : ]a, b[ \to \R$ differenzierbar.
+    \item Es gibt eine Funktion $g \in \Leb^1(\Omega, \Alg, \mu)$ mit $g \geq 0$, sodass für alle $t \in ]a, b[$ und fast alle $\omega \in \Omega$ gilt: $|f(-, \omega)'(t)| \leq g(\omega)$.
+  \end{itemize}
+  Dann ist die Funktion $F : ]a, b[ \to \R, t \mapsto \IntOmu{f_t}$ differenzierbar mit\\[-3pt]
+  $F'(t) = \IntOmu{h_t}$, wobei $h_t : \Omega \to \R, \, \omega \mapsto f(-, \omega)'(t)$.
+\end{satz}
+
+\begin{satz}
+  Sei $f \in \overline{\E}(\Omega, \Alg, \mu)$. Dann ist die Abbildung
+  \[ f \mu : \Alg \to [0, \infty], \quad A \mapsto \Int{A}{}{f}{\mu} \]
+  ein Maß, genannt \emph{Maß mit der Dichte $f$ bzgl. $\mu$} oder \emph{Stieltjes-Maß} zu $f$.
+\end{satz}
+
+\subsection{Zusammenhang mit dem Riemann-Integral}
+
+\begin{defn}
+  Eine \emph{Zerlegung} eines Intervalls $[a, b]$ ist eine geordnete endliche Teilmenge $\{ a = a_0 < a_1 < ... < a_k = b\} \subset [a, b]$.
+\end{defn}
+
+\begin{nota}
+  Die Menge aller Zerlegungen von $[a, b]$ ist $\mathcal{Z}([a, b])$.
+\end{nota}
+
+\begin{defn}
+  Die \emph{Feinheit} einer Zerlegung $\{ a_0, ..., a_n \} \in \mathcal{Z}([a, b])$ ist
+  \[ |Z| \coloneqq \max \Set{ x_j - x_{j-1} }{ j \in \{ 1, ..., n \} }. \]
+\end{defn}
+
+\begin{defn}
+  Für eine beschränkte Funktion $f : [a, b] \to \R$ und eine Zerlegung $Z = \{ a_0, ..., a_n \} \in \mathcal{Z}([a, b])$ bezeichnen
+  \begin{align*}
+    O(f, Z) &\coloneqq \sum_{j=1}^n (\sup \Set{ f(x) }{ x \in [x_{j-1}, x_j] })(x_j - x_{j-1}),\\
+    U(f, Z) &\coloneqq \sum_{j=1}^n (\inf \Set{ f(x) }{ x \in [x_{j-1}, x_j] })(x_j - x_{j-1})
+  \end{align*}
+  die \emph{(Darbouxschen) Ober- und Untersummen} von $f$ bzgl. $Z$.
+\end{defn}
+
+\begin{nota}
+  \begin{align*}\\[-28pt]
+    O_*(f) &\coloneqq \inf \Set{ O(f, Z) }{ Z \in \mathcal{Z}([a, b]) }\\
+    U^*(f) &\coloneqq \sup \Set{ U(f, Z) }{ Z \in \mathcal{Z}([a, b]) }\\
+  \end{align*}
+\end{nota}
+
+\begin{defn}
+  Eine beschränkte Funktion $f : [a, b] \to \R$ heißt \emph{Riemann-integrierbar}, wenn $O_*(f) = U^*(f)$. In diesem Fall heißt
+  \[ \Int{a}{b}{f(x)}{x} \coloneqq O_*(f) = U^*(f) \]
+  das \emph{Riemann-Integral} von $f$.
+\end{defn}
+
+\begin{nota}
+  Sei $(Z_k)_{k \in \N}$ eine Folge in $\mathcal{Z}([a, b])$ mit $Z_k = \{ a_0^k, a_1^k, ..., a^k_{n_k} \}$. Für eine beschränkte Funktion $f : [a, b] \to \R$ definieren wir $f^k, f_k, f^*, f_* : [a, b] \to \R$ durch
+  \begin{align*}
+    f^k &= \sup f([a, a_1^k]) \cdot \ind_{[a, a_1^k]} + \sum_{j=2}^{n_k} \sup f([a_{j-1}^k, a_j^k]) \cdot \ind_{]a_{j-1}^k, a_j^k]},\\
+    f_k &= \inf \, f([a, a_1^k]) \cdot \ind_{[a, a_1^k]} + \sum_{j=2}^{n_k} \inf \, f([a_{j-1}^k, a_j^k]) \cdot \ind_{]a_{j-1}^k, a_j^k]}\\
+    f^*(x) &= \liminf_{y \to x}\,\, f(y) = \lim_{\epsilon \downarrow 0} \inf\,\, \Set{ f(y) }{ y \in [x-\epsilon, x+\epsilon] \cap [a, b]}\\
+    f^*(x) &= \limsup_{y \to x} f(y) = \lim_{\epsilon \downarrow 0} \sup \, \Set{ f(y) }{ y \in [x-\epsilon, x+\epsilon] \cap [a, b]}
+  \end{align*}
+\end{nota}
+
+\begin{bem}
+  Es gilt: $f_* \leq f \leq f^*$ und $f_*(x_0) = f(x_0) = f^*(x_0)$ für $x_0 \in [a, b]$ genau dann, wenn $f$ in $x_0$ stetig ist.
+\end{bem}
+
+\begin{satz}
+  Sei $f : [a, b] \to \R$ beschränkt und $(Z_k)_{k \in \N}$ eine Folge in $\mathcal{Z}([a, b])$ mit $\lim_{n \to \infty} |Z_k| = 0$. Dann gilt:
+  \begin{itemize}
+    \item Sei $R = \bigcup_{k=1}^\infty \bigcup_{j=1}^{n_k} \{ a_j^k \}$ die Vereinigung aller Zerlegungen $Z_k, k \in \N$. Für alle $x \in [a, b] \setminus R$ gilt dann $\lim_{k \to \infty} f^k(x) = f^*(x)$ und $\lim_{k \to \infty} f_k(x) = f_*(x)$.
+    \item Die Funktionen $f^*$ und $f_*$ sind Borel-messbar und integrierbar bzgl. des Borel-Maßes $\mu$ mit
+    \[ \Int{[a, b]}{}{f^*}{\mu} = O_*(f) \quad \text{und} \quad \Int{[a, b]}{}{f_*}{\mu} = O^*(f). \]
+  \end{itemize}
+\end{satz}
+
+\begin{satz}
+  Sei $f : [a, b] \to \R$ beschränkt. Dann sind äquivalent:
+  \begin{itemize}
+    \item $f$ ist Riemann-integrierbar.
+    \item $f$ ist fast-überall stetig (im Sinne des Lebesgue-Borel-Maßes).
+  \end{itemize}
+\end{satz}
+
+\begin{satz}
+  Ist eine beschränkte Funktion $f : [a, b] \to \R$ Riemann-integrierbar, so ist sie auch auf $[a, b]$ Lebesgue-integrierbar bzgl. dem Lebesgue-Maß $\lambda$ und es gilt
+  \[ \Int{a}{b}{f(x)}{x} = \Int{[a, b]}{}{f}{\lambda}. \]
+\end{satz}
+
+\begin{samepage}
+\begin{satz}
+  Sei $I$ ein Intervall und $f : I \to \R$ über jedem kompakten Teilintervall von $I$ Riemann-integrierbar. Dann sind äquivalent:
+  \begin{itemize}
+    \item $|f|$ ist auf $I$ uneigentlich Riemann-integrierbar.
+    \item $f$ ist auf $I$ Lebesgue-integrierbar.
+  \end{itemize}
+  Falls eine der Bedingungen erfüllt ist, so stimmt das Riemann- Integral von $f$ auf $I$ mit dem Lebesgue-Integral von $f$ auf $I$ überein.
+\end{satz}
+
+
+\subsection{Miscellanea}
+\end{samepage}
+
+\begin{satz}
+  Sei $f : [a, b] \to \R$ Lebesgue-integrierbar. Dann ist $F : [a, b] \to \R, t \mapsto \Int{[a, t]}{}{f}{\lambda}$ stetig.
+\end{satz}
+
+\begin{satz}
+  Sei $f : [a, b \to \R$ Lebesgue-integrierbar. Wenn $\forall\,t \in [a, b]$ gilt: $\Int{[a, t]}{}{f}{\lambda} = F(t) = 0$, dann $f \fue= 0$.
+\end{satz}
+
+\begin{nota}
+  Sei $f : \R \to \R$ eine Abbildung, dann setzen wir
+  \begin{align*}
+    C(f) &= \Set{ x \in \R }{ f \text{ stetig in } x } \text{ und}\\
+    D(f) &= \Set{ x \in \R }{ f \text{ unstetig in } x } = \R \setminus C(f).
+  \end{align*}
+\end{nota}
+
+\begin{defn}
+  Sei $A \subset \R$, $A$ heißt
+  \begin{itemize}
+    \item \emph{$G_{\delta}$-Menge}, wenn gilt: $A = \cap_{n \in \N}\,O_n, \, O_n \opn \R\ \forall\,n \in \N$
+    \item \emph{$F_{\sigma}$-Menge}, wenn gilt: $A = \cup_{n \in \N}\,F_n, \,\, F_n \, \cls \R\ \forall\,n \in \N$
+  \end{itemize}
+\end{defn}
+
+\begin{bem}
+  $A $ ist $G_\delta$-Menge $\iff$ $A^C$ ist $F_\sigma$-Menge.
+\end{bem}
+
+\begin{satz}[Young]
+  Sei $f : \R \to \R$ eine beliebige Abbildung. Dann ist $C(f)$ eine $G_\delta$-Menge (und somit $D(f)$ eine $F_\sigma$-Menge).
+\end{satz}
+
+\begin{satz}
+  Es gibt keine Abbildung $f : \R \to \R$ mit $D(f) = \R \setminus \Q$.
+\end{satz}
+
+\begin{defn}
+  Ein Maß $\mu$ auf $\Bor(\R^d)$ heißt \emph{translationsinvariant}, wenn für jedes $v \in \R^d$ gilt $(T_v)_* \mu = \mu$, wobei $T_v : \R^d \to \R^d$, $x \mapsto x + v$ die Translation um den Vektor $v$ bezeichnet.
+\end{defn}
+
+\begin{nota}
+  Bezeichne mit $\mu_{LB}$ das Borel-Lebesgue-Maß auf $\R^d$.
+\end{nota}
+
+\begin{nota}
+  Der Einheitswürfel im $\R^d$ ist $W_1 \coloneqq ](0, ..., 0), (1, ..., 1)]$.
+\end{nota}
+
+\begin{satz}
+  Ist $\mu$ ein translationsinvariantes Maß auf $\Bor(\R^d)$ mit $\alpha \coloneqq \mu(W_1) < \infty$, dann gilt $\mu = \alpha \cdot \mu_{LB}$.
+\end{satz}
+
+\begin{satz}
+  Sei $A \in \mathrm{GL}_d(\R) = \Set{ A \in \R^{d \times d} }{ \det A \not= 0 }$, dann gilt
+  \[ A_* \mu_{LB} = \tfrac{1}{|\det(A)|} \cdot \mu_{LB}. \]
+\end{satz}
+
+\begin{satz}
+  Das Lebesgue-Borel-Maß $\mu_{LB}$ ist invariant unter Transformationen in $\mathrm{SL}_n(\R)$. Ferner ist $\mu_{LB}$ invariant unter Euklidischen Bewegungen.
+\end{satz}
+
+\begin{satz}[Kurt Hensel]
+  Sei $\Phi : \mathrm{GL}_n(\R) \to (\R \setminus \{0\}, \cdot)$ ein Gruppenhomomorphismus, dann gibt es einen Gruppenautomorphismus $\phi : (\R \setminus \{0\}, \cdot) \to (\R \setminus \{0\}, \cdot)$, sodass $\Phi = \phi \circ \det$.
+\end{satz}
+
+\begin{satz}
+  Sei $(\Omega, \Alg, \mu)$ ein Maßraum und $h \in \overline{\E}(\Omega, \Alg)$. Eine messbare Funktion $f : \Omega \to \overline{\R}$ ist genau dann $h\mu$-integrierbar, wenn $(f \cdot h)$ $\mu$-integrierbar ist. In diesem Fall gilt
+  \[ \Int{\Omega}{}{f}{(h \mu)} = \Int{\Omega}{}{f \cdot h}{\mu}. \]
+  Obige Gleichung ist auch erfüllt, wenn lediglich $f \geq 0$ gilt (also $f \in \overline{\E}(\Omega, \Alg)$; dann kann das Integral den Wert $\infty$ annehmen).
+\end{satz}
 
 \end{document}
