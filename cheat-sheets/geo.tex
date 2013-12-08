@@ -12,6 +12,19 @@
 \newcommand{\II}{\mathrm{I\!I}}
 \newcommand{\spur}{\mathrm{spur}}
 \newcommand{\Graph}{\mathrm{Graph}}
+\newcommand{\Span}{\mathrm{span}}
+\newcommand{\Bild}{\mathrm{Bild}}
+\newcommand{\Exp}{\mathrm{Exp}} % geodätische Exponentialabbildung
+\newcommand{\ointervall}[1]{\left]#1\right[} %offenes Intervall
+
+
+% Kleinere Produkt- und Summensymbole
+\let\myProd\prod
+\DeclareMathOperator*{\textprod}{{\textstyle \myProd}}
+\renewcommand{\prod}{\textprod}
+\let\mySum\sum
+\DeclareMathOperator*{\textsum}{{\textstyle \mySum}}
+\renewcommand{\sum}{\textsum\limits}
 
 % Offene und abgeschlossene Teilmengen
 % http://tex.stackexchange.com/questions/22371/subseteq-circ-as-a-single-symbol-open-subset
@@ -19,6 +32,10 @@
   \hidewidth\raise.1ex\hbox{$\circ\mkern.5mu$}\cr}}}
 \newcommand\cls{\mathrel{\ooalign{$\subset$\cr
   \hidewidth\raise.1ex\hbox{$\bullet\mkern.5mu$}\cr}}}
+
+% Kleinere Klammern
+\delimiterfactor=701
+
 
 \begin{document}
 
@@ -223,7 +240,7 @@
   \begin{itemize}
     \item $b_1(t) = v(t) = c'(t)$ der \emph{Tangentenvektor} an $c$ in $t$,
     \item $b_2(t) = \tfrac{c''(t)}{\| c''(t) \|}$ \emph{Normalenvektor} an $c$ in $t$,
-    \item $\mathrm{span}(b_1(t), b_2(t))$ \emph{Schmiegebene} an $c$ in $t$,
+    \item $\Span(b_1(t), b_2(t))$ \emph{Schmiegebene} an $c$ in $t$,
     \item $b_3(t) = b_1(t) \times b_2(t)$ \emph{Binormalenvektor} an $c$ in $t$,
     \item $\tau_c(t) = \tau(t) \coloneqq \kappa_2(t) = \langle b_2'(t) , b_3(t) \rangle$ \emph{Torsion} o. \emph{Windung} von~$c$.
   \end{itemize}
@@ -307,7 +324,7 @@ mit $c(0) = c(b)$, so liegt das Bild von $v$ ganz in einer offenen Hemisphäre.
 \begin{bem}
 Es gelten folgende Implikationen:\\
 $\quad\quad\,\,\, f$ ist stetig partiell differenzierbar\\
-$\implies$ $f$ ist total differenzierbar ($\implies f$ ist stetig)\\
+$\implies$ $f$ ist total differenzierbar ($\!\implies f$ ist stetig)\\
 $\implies$ $f$ ist partiell differenzierbar
 \end{bem}
 
@@ -327,7 +344,7 @@ $\implies$ $f$ ist partiell differenzierbar
 
 \begin{defn}
   Für $u \in U$ heißt der Untervektorraum
-  \[ T_u X \coloneqq \mathrm{span}(\partial_1 X(u), ..., \partial_m X(u)) = \mathrm{Bild}(D_u X) \subset \R^n \]
+  \[ T_u X \coloneqq \Span(\partial_1 X(u), ..., \partial_m X(u)) = \mathrm{Bild}(D_u X) \subset \R^n \]
   \emph{Tangentialraum} von $X$ in $u$ und sein orthogonales Komplement $N_u X \coloneqq (T_u X)^\perp \subset \R^n$ \emph{Normalraum} an $X$ in $u$.
 \end{defn}
 
@@ -467,8 +484,8 @@ $\implies$ $f$ ist partiell differenzierbar
 \end{bem}
 
 \begin{satz}
-  Für die Gaussabbildung $\nu$ einer Hyperfläche $X : U \to \R^n$ gilt für alle $j, k \in \{ 1, ..., m \}$
-  \[ \langle \partial_j \nu , \partial_k X \langle = - h_{jk} \quad \text{und} \quad \langle \partial_j \nu, \nu \rangle = 0. \]
+  Für die Gaußabbildung $\nu$ einer Hyperfläche $X : U \to \R^n$ gilt für alle $j, k \in \{ 1, ..., m \}$
+  \[ \langle \partial_j \nu , \partial_k X \rangle = - h_{jk} \quad \text{und} \quad \langle \partial_j \nu, \nu \rangle = 0. \]
 \end{satz}
 
 \begin{defn}
@@ -495,7 +512,7 @@ $\implies$ $f$ ist partiell differenzierbar
 \end{satz}
 
 \begin{bem}
-  Die Weingartenabbildung ist als selbstadjungierter Endo reell diagonalisierbar (Spektralsatz).
+  Die Weingartenabbildung ist als selbstadjungierter Endomorphismus reell diagonalisierbar (Spektralsatz).
 \end{bem}
 
 \begin{defn}
@@ -538,5 +555,293 @@ $\implies$ $f$ ist partiell differenzierbar
     \item Ist $K(u_0) < 0$, so trifft für jede Umgebung $U_0 \subset U$ von $u_0$ das Bild $X(U_0)$ beide Seiten von $E_{u_0}$.
   \end{itemize}
 \end{satz}
+
+% Sei $X : U \to \R^n$ eine Hyperfläche
+
+\begin{defn}
+  Sei $u_0 \in U, v \in T_{u_0} X, P_v \coloneqq X(u_0) + \Span(v, \nu(u_0))$.
+  Sei $U_0 \subset U$ eine offene Umgebung von $u_0$, dann heißt
+  \[ P_v \cap X(U_0) \]
+  \emph{Normalenschnitt} in $u_0$ in Richtung $v$.
+\end{defn}
+
+\begin{satz}
+  Wenn $U_0$ hinreichend klein, dann ist $P_v \cap X(U_0)$ Bild einer regulären glatten Kurve.
+\end{satz}
+
+\begin{defn}
+  Wenn $\| v \| = 1$, dann heißt
+  \[ \kappa_v(u) \coloneqq \langle W_u v, v \rangle \]
+  \emph{Normalkrümmungen} von $X$ in $u$ in Richtung $v$.
+\end{defn}
+
+\begin{bem}
+  Sei $\|v\| = 1$. Sei $c : I \to P_v \tilde{=} \R^2$ nach BL parametrisiert, sodass $\Bild(c) = P_v \cap X(U_0)$, und $c(0) = X(u_0)$ und $c'(0) = v$. Dann: $\kappa_v(u) = \kappa_c(0)$
+\end{bem}
+
+\begin{satz}
+  Die Hauptkrümmungen $\kappa_1(u_0), ..., \kappa_2(u_0)$ sind die Extrema der Abbildung
+  \[ T_{u_0} X \supset S^1 \to \R, \quad v \mapsto \kappa_v(u_0) = \langle W_{u_0} v, v \rangle. \]
+\end{satz}
+
+
+\subsection{Die Levi-Civita-Ableitung}
+
+\begin{defn}
+  Ein \emph{Vektorfeld} (VF) auf einer offenen Menge $U \opn \R^m$ ist eine Abbildung $v : U \to \R^m$.
+\end{defn}
+
+\begin{nota}
+  $\chi(U) = \Set{ v : U \to \R^n }{ \text{$v$ glatt} }$
+\end{nota}
+
+\begin{defn}
+  Sei $X : U \to \R^n$ eine immergierte Fläche, $U \opn \R^m$. Ein \emph{tangentiales Vektorfeld} längs $X$ ist eine glatte Abbildung $V : U \to \R^n$ mit $V(u) \in T_u X \, \forall u \in U$.
+\end{defn}
+
+\begin{defn}
+  Mit typtheoretischer Syntax ist ein tangentiales Vektorfeld längs $X$ eine glatte Abbildung $V : \prod_{u : U} T_u X$.
+\end{defn}
+
+\begin{nota}
+  $\chi(TX) = \Set{ V : U \to \R^n }{ \text{$V$ ist tang. VF längs $X$} }$
+\end{nota}
+
+\begin{bem}
+  Folgende Abbildung ist eine Bijektion:
+
+  \begin{align*}
+     H : \chi(U) \to \chi(TU), \quad &v \mapsto v^{\wedge} \coloneqq \partial_v X, \text{ wobei}\\
+     \partial_v X : \prod_{u : U} T_u X, \quad &u \mapsto \partial_{v(u)} X(u)
+   \end{align*} 
+\end{bem}
+
+\begin{nota}
+  Für ein glattes Vektorfeld $Y : U \to \R^n$ bezeichnet $Y^T$ das tangentiale Vektorfeld längs $X$ definiert durch
+  \[ Y^T : \prod_{u : U} T_u X, \quad u \mapsto (Y(u))^{T_u X}. \]
+\end{nota}
+
+\begin{defn}
+  Die Abbildung
+  \begin{align*}
+    \nabla : \chi(U) \times \chi(TX) &\to \chi(TX) \\
+    (w, V) &\mapsto \nabla_w V \coloneqq (\partial_w X)^T
+  \end{align*}
+  heißt \emph{Levi-Civita-Ableitung} von $V$ in Richtung $w$.
+\end{defn}
+
+\begin{acht}
+  Gradient $\not=$ Levi-Civita-Ableitung!
+\end{acht}
+
+\begin{satz}[Eigenschaften der Levi-Civita-Ableitung]
+  Sei $f : U \to \R$ glatt, $w_1, w_2, w \in \chi(U)$, $V, V_1, V_2 \in \chi(TX)$. Dann gilt:
+  \begin{itemize}
+    \item $\nabla_{f(w_1) + w_2} V = f \circ \nabla_{w_1} V + \nabla_{w_2} V$
+    \item $\nabla_w (V_1 + V_2) = \nabla_w V_1 + \nabla_w V_2$
+    \item $\nabla_w (f \cdot V) = f (\nabla_w V) + \partial_w f \cdot V $
+    \item $\partial_w \langle V_w, V_2 \rangle = \langle \nabla_w V_1 , V_2 \rangle + \langle V_1 , \nabla_w V_2 \rangle$ (Metrizität)
+  \end{itemize}
+\end{satz}
+
+\begin{nota}
+  Sei $j \in \{1, ..., m\}$, dann betrachten wir die konstante Abbildung $e_j : U \to \R^n, u \mapsto e_j$. Wir setzen $\nabla_j V \coloneqq \nabla_{e_j} V$.
+\end{nota}
+
+\begin{defn}
+  Sei $X : U \to \R^n$ eine Immersion, so können wir für $j, k \in \{ 1, ..., m\}$ schreiben:
+  \[ \nabla_j (\partial_k X) = \sum_{l=1}^m \Gamma_{jk}^l \partial_l (X). \]
+  Dabei heißen die Funktionen $\Gamma_{jk}^l : U \to \R$ \emph{Christoffel-Symbole}.
+\end{defn}
+
+\begin{nota}
+  $\Gamma_{jkl} \coloneqq \sum_{r=1}^m g_{rl} \Gamma_{jk}^r : U \to \R$
+\end{nota}
+
+\begin{satz}
+  $\Gamma_{jkl}\!=\!\sum_{r=1}^m \Gamma_{jk}^{r} \langle \partial_r X, \partial_l X \rangle\!=\!\langle \nabla_j (\partial_k X), \partial_l X \rangle\!=\!\langle \partial_j (\partial_k X), \partial_l X \rangle$
+\end{satz}
+
+\begin{satz}
+    Es gilt $\Gamma_{jk}^l = \Gamma_{kj}^l \,\, \text{und} \,\, \Gamma_{jkl} = \tfrac{1}{2} (\partial_j \cdot g_{kl} + \partial_k \cdot g_{jl} + \partial_l \cdot g_{jk})$.
+\end{satz}
+
+\begin{bem}
+  Schreiben wir $v = \sum_{k=1}^m v^k e_k$ für $v \in \chi(U)$, dann ist
+  \[ \nabla_j V = \sum_{l=1}^m \left( \partial_j v^l + \sum_{k=1}^m \Gamma_{jk}^l v^k \right) \partial_l X. \]
+\end{bem}
+
+
+% \subsection{Levi-Civita-Ableitung für Vektorfelder auf $U$}
+
+\begin{defn}[Levi-Civita-Ableitung für Vektorfelder auf $U$]
+  Sei $X : U \to \R^n$ eine immergierte Fläche, so heißt
+  \begin{align*}
+    \nabla_ : \chi(U) \times \chi(U) &\to \chi(U) \\[-12pt]
+    (w, v) &\mapsto \nabla_w v = H^{-1}(\nabla_w \overbrace{H(v)}^{=\,v^\wedge})
+  \end{align*}
+  \emph{Levi-Civita-Ableitung} von $v$ in Richtung $w$.
+\end{defn}
+
+\begin{bem}
+  Schreiben wir $v = \sum v^k \partial_k X$ für $V \in \chi(TX)$, dann ist
+  \begin{align*}
+    \nabla_j v =& \sum_{l=1}^m \left( \partial_j v^l + \sum_{k=1}^m \Gamma_{jk}^l v^k \right) e_l = \partial_j v + \Gamma_j v \text{ mit}\\
+    \Gamma_j :& \,\, U \to \R^{m \times m}, \,\, u \mapsto (\Gamma_{jk}^l(u))_{lk}.
+  \end{align*}
+\end{bem}
+
+\begin{satz}
+  Seien $v, v_1, v_2, w, w_1, w_2 \in \chi(U), f : U \to \R$ glatt. Dann:
+  \begin{itemize}
+    \item $\nabla_{f \cdot w_1 + w_2} v = f \cdot \nabla_{w_1} v + \nabla_{w_2} v$
+    \item $\nabla_w (v_1 + v_2) = \nabla_w v_1 + \nabla_w v_2$
+    \item $\nabla_w (f \cdot v) = f (\nabla_w v) + (\nabla_w f) \cdot v$
+    \item $\partial_w \I(v_1, v_2) = \I(\nabla_w v_1, v_2) + \I(v_1, \nabla_w v_2)$ (verträglich mit 1.\,FF)
+  \end{itemize}
+\end{satz}
+
+
+% \subsection{Tangentiale Vektorfelder längs Kurven}
+
+\begin{defn}
+  Sei $\alpha : [a, b] \to U$ eine glatte, reguläre Kurve, $c \coloneqq X \circ \alpha$. Eine glatte Abbildung $V : [a, b] \to \R^n$ mit $V(t) \in T_{\alpha(t)} X \forall t \in [a, b]$ \emph{tangentiales Vektorfeld} längs $c$.
+\end{defn}
+
+\begin{defn}
+  Typtheoretisch ist ein tangentiales VF längs $c$ eine glatte Abbildung $V : \prod_{t : [a, b]} T_{\alpha(t)} X$.
+\end{defn}
+
+\begin{bem}
+  Eine glatte Abbildung $v : U \to \R^m$ bestimmt eindeutig ein tang. VF vermöge
+  \[ V(t) := v^\wedge(t) = \partial_{v(t)} X(\alpha(t)) = J_{\alpha(t)} X \cdot v(t). \]
+  Schreiben wir $v = \sum v^j e_j$ und $\alpha = \sum \alpha^j e_j$, so gilt für $V = v^\wedge$:
+  \[ V' = \tfrac{\d}{\d t} V = \sum_{j=1}^m (v^j)' (\partial_j X \circ \alpha) + \sum_{j,k=1}^m v^j (\alpha^k)' (\partial_k \partial_j X \circ \alpha). \]
+\end{bem}
+
+\begin{defn}
+  Sei $X : U \to \R^n$ eine Immersion und $c = X \circ \alpha$ eine reguläre glatte Kurve auf $X$. Sei $V$ ein tang. VF längs $c$, dann heißt
+  \[ \tfrac{\nabla V}{\d t} \coloneqq (V')^T \]
+  die \emph{Levi-Civita-Ableitung} von $V$ längs $c$. Das tang. VF $V$ heißt \emph{(Levi-Civita-)parallel}, wenn gilt
+  \[ \tfrac{\nabla V}{\d t} = 0. \]
+\end{defn}
+
+\begin{bem}
+  Für $\alpha, v, V$ aus der letzten Bemerkung folgt
+  \[ \frac{\nabla V}{\d t} = \sum_{l=1}^m \left( (v^l)' + \sum_{j,k=1}^m v^j (\alpha^k)' (\Gamma_{jk}^l \circ \alpha) \right) (\partial_l X \circ \alpha). \]
+\end{bem}
+
+\begin{nota}
+  $\hat{\Gamma}_{\alpha} : [a, b] \to \R^{m \times m}, \,\, (\hat{\Gamma}_{\alpha}(t))_{jl} = \sum_{k=1}^m \Gamma_{jk}^l (\alpha(t))((\alpha^k)'(t))$
+\end{nota}
+
+\begin{defn}
+  Wir fassen eine glatte Abbildung $v : [a, b] \to \R^m$ als VF längs $\alpha : [a, b] \to U$ auf. Dann nennen wir
+  \[ \frac{\nabla v}{\d t} \coloneqq \sum_{l=1}^m \left( (v^l)' + \sum_{j,k=1}^m v^j (\alpha^k)' (\Gamma_{jk}^l \circ \alpha) \right) e_l = v' + \hat{\Gamma}_{\alpha} v \]
+  \emph{Levi-Cevita-Ableitung} von $v$ längs $\alpha$.
+\end{defn}
+
+\begin{satz}
+  Es gilt dann $\tfrac{\nabla (v^\wedge)}{\d t} = \left( \tfrac{\nabla v}{\d t} \right)^\wedge$. Ein VF $V = v^\wedge$ ist also genau dann parallel, wenn $v' + \hat{\Gamma}_\alpha v = 0$ bzw.
+  \[ (v^l)' + \sum_{j,k=1}^m v^j (\alpha^k)' (\Gamma_{jk}^l \circ \alpha) = 0 \quad \text{für alle $l = 1, ..., m$.} \]
+\end{satz}
+
+\begin{bem}
+  Es handelt sich bei $v' + \hat{\Gamma}_\alpha v = 0$ um ein System linearer Differentialgleichungen (mit nicht konstanten stetigen Koeffizienten). Damit existiert bei gegebenem Anfangswert $v(a)$ eine auf ganz $[a, b]$ definierte eindeutige Lösung der Differentialgleichung.
+\end{bem}
+
+\begin{defn}
+  Sei $X : U \to \R^n$ eine Immersion und $c = X \circ \alpha : [a, b] \to \R$ eine reguläre glatte Kurve auf $X$. Für $t \in [a, b]$ heißt die Abbildung
+  \[ P_t^c : T_{\alpha(a)} X \to T_{\alpha(t)} X, \quad x \mapsto V_x(t) \]
+  wobei $V_x : [a, b] \to \R^n$ das parallele tangentiale VF längs $c$ mit Anfangsbedingung $V_x(a) = x \in T_{\alpha(a)} X$ ist, \emph{Parallelverschiebung} längs $c$ von $c(a)$ nach $c(t)$.
+\end{defn}
+
+\begin{samepage}
+
+\begin{satz}
+  Sei $X : U \to \R^n$ eine Immersion und $c = X \circ \alpha : [a, b] \to \R^n$ eine reguläre glatte Kurve auf $X$. Für alle $t \in [a, b]$ ist die Abbildung $P_t^c : T_{\alpha(a)} X \to T_{\alpha(t)} X$ eine lineare Isometrie, d.\,h. $P_t^c$ ist linear und es gilt $\langle x, y \rangle = \langle P_t^c x, P_t^c y \rangle$ für alle $x, y \in T_{\alpha(a)} X$.
+\end{satz}
+
+
+\subsection{Geodäten}
+
+\end{samepage}
+
+\begin{defn}
+  Eine reguläre glatte Kurve $c = X \circ \alpha$ auf $X$ heißt \emph{Geodäte} auf $X$, wenn gilt
+  \[ (c'')^T = \tfrac{\nabla c'}{\d t} = 0 \quad\text{bzw.}\quad \tfrac{\nabla \alpha'}{\d t} = 0. \]
+\end{defn}
+
+\begin{satz}
+  Eine Geodäte ist immer proportional zur BL parametrisiert, d.\,h. $\|c'\|$ ist konstant.
+\end{satz}
+
+\begin{bem}
+  Sei $c = X \circ \alpha$ mit $\alpha = \sum \alpha^j e_j$ mit glatten Abb. $\alpha^j$. Dann gilt
+  \[ \frac{\nabla c'}{\d t} = \sum_{l=1}^m \left( (a^l)'' + \sum_{j,k=1}^m (a^j)' (\alpha^k)' (\Gamma_{jk}^l \circ \alpha) \right) (\partial_l X \circ \alpha). \]
+  Somit ist $c$ genau dann eine Geodäte, wenn gilt
+  \[ (a^l)'' + \sum_{j,k=1}^m (a^j)' (\alpha^k)' (\Gamma_{jk}^l \circ \alpha) \quad \text{für alle $l = 1, ..., m$} \]
+  oder $\alpha'' + \Gamma_{\alpha}(\alpha', \alpha') = 0$ (i.\,F. \emph{Geodätengleichung}), wobei
+  \begin{align*}
+    \Gamma_{\alpha} : [a, b] &\to \Bil(\R^m, \R^m), \  t \mapsto \Gamma_{\alpha(t)} \text{ mit }\\
+    \Gamma_{\alpha(t)}(v, w) &= \sum_{j,k,l=1}^m v^j w^k \Gamma_{jk}^l (\alpha(t)) e_l.
+  \end{align*}
+\end{bem}
+
+\begin{bem}
+  Es handelt sich hierbei um ein System nichtlinearer gew. DG zweiter Ordnung, welches nach dem Satz von Picard- Lindelöf bei gegebenen Anfangswerten immer eine eindeutige lokale Lösung besitzt. Es folgt:
+\end{bem}
+
+\begin{satz}[Lokale Existenz von Geodäten]
+  Sei $X : U \to \R^n$ eine Immersion, sei $u \in U$ und $w \in \R^m$. Dann gibt es eine offene Umgebung $U_w \opn \R^m$ von $w$ und eine $\epsilon > 0$, sodass gilt: Für jedes $v \in U_w$ gibt es eine eindeutige Lösung $\alpha_v : \ointervall{-\epsilon, \epsilon} \to U$ der Geodätengleichung mit $\alpha_v(0) = u$ und $\alpha_v'(0) = v$.
+
+  Anders ausgedrückt: Zu jedem $u \in U$ und zu jedem $W \in T_u X$ gibt es eine offene Umgebung $U_W \opn T_u X$ von $W$ sowie ein $\epsilon > 0$, sodass es für jedes $V \in U_W$ eine eindeutige Geodäte $c_v : \ointervall{-\epsilon, \epsilon} \to \R^n$ auf $X$ gibt mit $c_v(0) = X(u)$ und $c_v'(0) = V$.
+\end{satz}
+
+\begin{satz}[Spray-Eigenschaft]
+  Sei $\alpha_v : \ointervall{-\epsilon, \epsilon} \to U$ die eindeutige Lsg. der Geodätengleichung mit $\alpha_v(0) = u$ und $\alpha_v'(0) = v$ und $r > 0$. Dann ist die eindeutige Lösung der Geodätengleichung $\alpha_{rv}$ mit $\alpha_{rv}(0) = rv$ und $\alpha_{rv}'(0) = rv$ auf dem Intervall $\ointervall{-\tfrac{\epsilon}{r}, \tfrac{\epsilon}{r}}$ definiert und es gilt
+  \[ \alpha_{rv}(t) = \alpha_v(rt), \quad \text{für alle } t \in \ointervall{-\tfrac{\epsilon}{r}, \tfrac{\epsilon}{r}}. \]
+\end{satz}
+
+% todo: 2.48
+\begin{satz}
+  Sei $u \in U$. Dann gibt es ein $\epsilon_u > 0$, sodass für alle $v \in \overline{B_u^{\epsilon_u}}$ gilt: Die Geodätengleichung besitzt eine auf $[-1,1]$ definierte Lösung $\alpha_v$ mit $\alpha_v(0) = u$ und $\alpha_v'(0) = v$.
+\end{satz}
+
+\begin{defn}
+  Sei $u \in U$, dann heißt die Abbildung
+  \[ \Exp_u : B_u^{\epsilon_u} \to U, \quad v \mapsto \alpha_v(1) \]
+  \emph{(geodätische) Exponentialabbildung} von $X$ in $u$.
+\end{defn}
+
+\begin{defn}
+  Sei $u \in U$, dann gibt es ein $0 < \epsilon \leq \epsilon_u$, sodass $\Exp_u|B_u^\epsilon$ ein Diffeo auf sein Bild ist.
+\end{defn}
+
+\begin{defn}
+  Sei $\alpha : [a, b] \to U$ eine glatte Kurve, sodass $X \circ \alpha$ nach BL parametrisiert ist. Eine zweimal stetig differenzierbare Abbildung
+  \[ \ointervall{-\epsilon, \epsilon} \times [a, b] \to U, \quad (s, t) \mapsto \alpha_s(t) \]
+  mit $\alpha_0 = \alpha$ heißt eine \emph{Variation} von $\alpha$. Ist nun $X : U \to \R^n$ eine Immersion, so erhalten wir auch eine Variation der Kurve $c \coloneqq X \circ \alpha$ auf $X$ durch andere Kurven, nämlich $c_s \coloneqq X \circ \alpha_s$ auf $X$.
+\end{defn}
+
+\begin{nota}
+  $\delta \coloneqq \tfrac{\partial}{\partial s}|_{s=0}$.
+\end{nota}
+
+\begin{satz}[Variationsformel der Länge]
+  Unter obigen Annahmen gilt
+  \[ \delta L(c_s) = \langle c'(b), \delta c_s(b) \rangle - \langle c'(a), \delta c_s(a) \rangle - \Int{a}{b} \langle (c''(t))^T, \delta c_s(t) \rangle. \]
+\end{satz}
+
+\begin{satz}[Gaußlemma]
+  Die Parametrisierung $\widetilde{X} \coloneqq X \circ \Exp_u : B_u^\epsilon \to \R^n$ durch Exponentialkoordinaten ist eine radiale Isometrie: Seien $v \in B_u^{\epsilon_u} \setminus \{0\}$ und $w \in \R^m$ und zerlegen wir $w$ in $w = w_{\|} + w_\perp$ mit $w_{\|} \in \R v$ und $\langle w_\perp, v \rangle = 0$, dann gilt
+  \begin{align*}
+    \| D_v \widetilde{X}(w_{\|}) &= \| w_{\|} \|\\
+    D_v \widetilde{X}(w) &\perp D_v \widetilde{X}(v), \quad \text{wenn $w \perp v$  und somit }\\
+    \| D_v \widetilde{X}(w) \|^2 &= \| w_{\|} \|^2 + \| D_v \widetilde{X}(w_{\perp}) \|^2.
+  \end{align*}
+\end{satz}
+
+
 
 \end{document}
