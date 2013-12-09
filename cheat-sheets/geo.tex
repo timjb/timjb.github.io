@@ -842,6 +842,48 @@ $\implies$ $f$ ist partiell differenzierbar
   \end{align*}
 \end{satz}
 
+\begin{satz}
+  Sei $\gamma : [a, b] \to B_u^\epsilon$ reguläre glatte Kurve mit $\gamma(a) = 0, \gamma(b) = v$. Dann gilt: $L(X \circ \Exp_u \circ \gamma \geq \|v\|)$ mit $L(X \circ \Exp_u \circ \gamma) = \|v\| \iff \gamma(t) = \rho(t)v$ mit $\rho : [a, b] \to [0, 1]$ streng monoton wachsend.
+\end{satz}
 
+\begin{satz}
+  Sei $X : U \to \R^n$ eine Fläche, $u_0 \in U$, $\epsilon > 0$, sodass $\Exp_{u_0}^{\epsilon} \to U$ Diffeomorphismus. Sei $u \in \Exp_{u_0}(B_{u_0}^{\epsilon})$. Dann gibt es (bis auf Umparametrisierung) genau eine bzgl. der Länge
+  \[ L_\I(\alpha) \coloneqq \Int{a}{b}{\I_{\alpha(t)}(\alpha'(t), \alpha'(t))}{t} \]
+  kürzeste reguläre glatte Kurve $\alpha : [a, b] \to U$ mit $\alpha(a) = u_0$ und $\alpha(b) = u$ nämlich $\alpha : [0, 1] \to U, t \mapsto \Exp_{u_0}(t \cdot \Exp_{u_0}^{-1}(u))$.
+\end{satz}
+
+
+%\subsection{Krümmungstensor und Theorema egregium (Gauß)}
+
+\begin{defn}
+  Sei $X : U \to \R^n$ eine Fläche, dann heißt
+  \begin{align*}
+    [\cdot,\cdot] : \chi(U) \times \chi(U) &\to \chi(U)\\
+    (v, w) \mapsto [v, w] = \partial_v w - \partial_w v
+  \end{align*}
+  \emph{Lie-Klammer} der Vektorfelder $v$ und $w$.
+\end{defn}
+
+\begin{satz}
+  $\forall v, w \in \chi(U) : [v, w] = \nabla_v w - \nabla_w v$.
+\end{satz}
+
+% in Koordinaten: $[v, w] = \sum_{j,k=1}^m v^j \partial_j w^k e_k - \sum_{j,k=1}^m w^j \partial_j v^k e_k$
+
+\begin{defn}
+  \begin{align*}
+    R : \chi(U) \times \chi(U) \times \chi(U) &\to \chi(U)\\
+    (v, w, z) &\mapsto R(v, w) z \text{ mit }\\
+    R(v, w) z &= \nabla_v (\nabla_w z) - \nabla_w (\nabla_v z) - \nabla_{[v, w]} z
+  \end{align*}
+  heißt \emph{Krümmungstensor}.
+\end{defn}
+
+\begin{bem}
+  \[ \nabla_j = \partial_j + \Gamma_j, \text{ wobei } \Gamma_j : U \to \R^{m \times m} \]
+  \[ \nabla_j (\nabla_k z) = \partial_j \partial_k z + (\partial_j \Gamma_k) z) + \Gamma_k (\partial_j z) + \Gamma_j (\partial_k z) + \Gamma_j \Gamma_k z. \]
+  \[ R_{jk} \coloneqq R(e_j, e_k) z = \nabla_j (\nabla_k z) - \nabla_k (\nabla_j z) - \nabla_{[e_j, e_k]} z = \partial_j \partial_k z + (\partial_j \Gamma_k) z + \Gamma_k (\partial_j z) + \Gamma_j (\partial_k z) + \Gamma_j \Gamma_k z - (\partial_k \partial_j z + (\partial_k \Gamma_j) z + \Gamma_j (\partial_k z)) + \Gamma_k (\partial_j z) + \Gamma_k \Gamma_j z = \Gamma_j \Gamma_k z - \Gamma_k \Gamma_j + (\partial_j \Gamma_k - \partial_k \Gamma_j) z, \text{ wobei } \Gamma_j : U \to \R^{m \times m}, \partial_k \Gamma : U \to \R^{m \times m} \]
+  \[ R_{jk} = (\Gamma_j \cdot \Gamma_k - \Gamma_k \cdot \Gamma_j) + (\partial_j \Gamma_k - \partial_k \Gamma_j) \]
+\end{bem}
 
 \end{document}
