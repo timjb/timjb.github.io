@@ -41,8 +41,8 @@
 \newcommand\cls{\mathrel{\ooalign{$\subset$\cr
   \hidewidth\raise.1ex\hbox{$\bullet\mkern.5mu$}\cr}}}
 
+% Kleinere Klammern
 \delimiterfactor=701
-%\setlength\delimitershortfall{10pt}
 
 \pdfinfo{
   /Title (Zusammenfassung Analysis 3)
@@ -498,20 +498,20 @@
 \begin{defn}
   Für $f : \Omega \to \ER$ heißen die Funktionen
   \begin{itemize}
-    \item $|f| \coloneqq \max(f, -f) : \Omega \to [0, \infty]$ \emph{Betrag} von $f$
+    \item $\left|f\right| \coloneqq \max(f, -f) : \Omega \to [0, \infty]$ \emph{Betrag} von $f$
     \item $f^+ \coloneqq \,\,\,\, \max(f, 0) : \Omega \to [0, \infty]$ \emph{Positivteil} von $f$
-    \item $f^- \coloneqq - \min(f, 0) : \Omega \to [0, \infty]$ \emph{Negativteil} von $f$
+    \item $f^- \coloneqq -\min(f, 0) : \Omega \to [0, \infty]$ \emph{Negativteil} von $f$
   \end{itemize}
 \end{defn}
 
 \begin{bem}
-  $f = f^+ - f^-$ und $|f| = f^+ + f^-$
+  $f = f^+ - f^-$ und $\left|f\right| = f^+ + f^-$
 \end{bem}
 
 \begin{samepage}
 
 \begin{satz}
-  Falls $f : (\Omega, \Alg) \to (\ER, \overline\Bor)$ messbar, dann auch $|f|$, $f^+$ und $f^-$.
+  Falls $f : (\Omega, \Alg) \to (\ER, \overline\Bor)$ messbar, dann auch $\left|f\right|$, $f^+$ und $f^-$.
 \end{satz}
 
 \subsection{Das Lebesguesche Integral}
@@ -625,8 +625,8 @@
     \begin{multicols}{2}
       \item $f \in \Leb^1(\Omega, \Alg, \mu)$.
       \item $f^+, f^- \in \Leb^1(\Omega, \Alg, \mu)$.
-      \item $|f| \in \Leb^1(\Omega, \Alg, \mu)$.
-      \item $\exists\,g \in \Leb^1(\Omega, \Alg, \mu)$ mit $|f| \leq g$.
+      \item $\left|f\right| \in \Leb^1(\Omega, \Alg, \mu)$.
+      \item $\exists\,g \in \Leb^1(\Omega, \Alg, \mu)$ mit $\left|f\right| \leq g$.
     \end{multicols}
     \item Es gibt nicht negative $u, v \in \Leb^1(\Omega, \Alg, \mu)$ mit $f = u - v$.
   \end{itemize}
@@ -638,7 +638,7 @@
     \item $\Leb^1(\Omega, \Alg, \mu)$ ist ein $\R$-VR und die Abbildung ${\textstyle \int} : \Leb^1(\Omega, \Alg, \mu) \to \R, \, f \mapsto \IntOmu{f}$ ist linear.
     \item $f, g \in \Leb^1(\Omega, \Alg, \mu) \implies \max(f, g), \, \min(f, g) \in \Leb^1(\Omega, \Alg, \mu)$
     \item Monotonie: $f, g \in \Leb^1(\Omega, \Alg, \mu), \, f \leq g \implies \IntOmu{f} \leq \IntOmu{g}$.
-    \item Dreiecksungleichung: $\big| \IntOmu{f} \big| \leq \IntOmu{|f|}$ für alle $f \in \Leb^1(\Omega, \Alg, \mu)$
+    \item Dreiecksungleichung: $\big| \IntOmu{f} \big| \leq \IntOmu{\left|f\right|}$ für alle $f \in \Leb^1(\Omega, \Alg, \mu)$
   \end{itemize}
 \end{satz}
 
@@ -712,7 +712,7 @@
 
 \begin{satz}
   \begin{doublespace}
-    Sei $(f_n)_{n \in \N}$ Folge messbarer Fkt. $f_n : (\Omega, \Alg, \mu) \to (\ER, \overline{\Bor})$ und $g \in \Leb^1(\Omega, \Alg, \mu), g \geq 0$, sodass $\forall n \in \N : |f_n| \overset{\text{f.ü.}}\leq g$. Dann:\\[-16pt]
+    Sei $(f_n)_{n \in \N}$ Folge messbarer Fkt. $f_n : (\Omega, \Alg, \mu) \to (\ER, \overline{\Bor})$ und $g \in \Leb^1(\Omega, \Alg, \mu), g \geq 0$, sodass $\forall n \in \N : \left|f_n\right| \overset{\text{f.ü.}}\leq g$. Dann:\\[-16pt]
   \end{doublespace}
   \begin{align*}
     \IntOmu{(\liminf_{n \to \infty} (f_n))}
@@ -723,7 +723,7 @@
 \end{satz}
 
 \begin{satz}[von der majorisierten Konvergenz]\begin{doublespace}
-  Sei $g \in \Leb^1(\Omega, \Alg, \mu), g \geq 0$. Sei $(f_n)_{n \in \N}$ Folge messbarer Fkt. $f_n : (\Omega, \Alg, \mu) \to (\ER, \overline{\Bor})$ mit $|f_n| \overset{\text{f.ü.}}\leq g$ (Majorisierung).
+  Sei $g \in \Leb^1(\Omega, \Alg, \mu), g \geq 0$. Sei $(f_n)_{n \in \N}$ Folge messbarer Fkt. $f_n : (\Omega, \Alg, \mu) \to (\ER, \overline{\Bor})$ mit $\left|f_n\right| \overset{\text{f.ü.}}\leq g$ (Majorisierung).
   Sei ferner $f : \Omega \to \ER$ $(\Alg, \overline{\Bor})$-messbar mit $f_n \xrightarrow[n \to \infty]{\text{f.ü.}} f$, d.\,h. $\Set{ \omega \in \Omega }{ \lim_{n \to \infty} f_n(\omega) = f(\omega) \text{ falsch} }$ ist Nullmenge. Dann ist $f$ integrierbar mit $\IntOmu{f} = \lim_{n \to \infty} \IntOmu{f_n}$.
 \end{doublespace}\end{satz}
 
@@ -737,7 +737,7 @@
 \end{satz}
 
 \begin{satz}\begin{doublespace}
-  Seien $f, f_j : (\Omega, \Alg, \mu) \to (\R, \Bor), j \in \N$ messbare Funktionen, $g : (\Omega, \Alg, \mu) \to (\R, \Bor)$ integrierbar, sodass $|\sum_{j=1}^n f_j| \overset{\text{f.ü.}}\leq g \, \forall n \in \N$ und\\[-5pt]
+  Seien $f, f_j : (\Omega, \Alg, \mu) \to (\R, \Bor), j \in \N$ messbare Funktionen, $g : (\Omega, \Alg, \mu) \to (\R, \Bor)$ integrierbar, sodass $\left|\sum_{j=1}^n f_j\right| \overset{\text{f.ü.}}\leq g \, \forall n \in \N$ und\\[-5pt]
   $f \fue= \sum_{n=1}^\infty f_j$. Dann sind $f, f_j$ integrierbar mit $\IntOmu{f} = \sum_{j=1}^\infty \IntOmu{f_j}$.
 \end{doublespace}\end{satz}
 
@@ -748,7 +748,7 @@
   \begin{itemize}
     \item Für alle $t \in ]a, b[$ ist die Abbildung $f(t, -) : \Omega \to \R$ $\mu$-integrierbar.
     \item Für alle $\omega \in \Omega$ ist die Abbildung $f(-, \omega) : ]a, b[ \to \R$ differenzierbar.
-    \item Es gibt eine Funktion $g \in \Leb^1(\Omega, \Alg, \mu)$ mit $g \geq 0$, sodass für alle $t \in ]a, b[$ und fast alle $\omega \in \Omega$ gilt: $|f(-, \omega)'(t)| \leq g(\omega)$.
+    \item Es gibt eine Funktion $g \in \Leb^1(\Omega, \Alg, \mu)$ mit $g \geq 0$, sodass für alle $t \in ]a, b[$ und fast alle $\omega \in \Omega$ gilt: $\left|f(-, \omega)'(t)\right| \leq g(\omega)$.
   \end{itemize}
   Dann ist die Funktion $F : ]a, b[ \to \R, t \mapsto \IntOmu{f_t}$ differenzierbar mit\\[-3pt]
   $F'(t) = \IntOmu{h_t}$, wobei $h_t : \Omega \to \R, \, \omega \mapsto f(-, \omega)'(t)$.
@@ -772,7 +772,7 @@
 
 \begin{defn}
   Die \emph{Feinheit} einer Zerlegung $\{ a_0, ..., a_n \} \in \mathcal{Z}([a, b])$ ist
-  \[ |Z| \coloneqq \max \Set{ x_j - x_{j-1} }{ j \in \{ 1, ..., n \} }. \]
+  \[ \left|Z\right| \coloneqq \max \Set{ x_j - x_{j-1} }{ j \in \{ 1, ..., n \} }. \]
 \end{defn}
 
 \begin{defn}
@@ -785,7 +785,7 @@
 \end{defn}
 
 \begin{nota}
-  \begin{align*}\\[-28pt]
+  \begin{align*}\\[-24pt]
     O_*(f) &\coloneqq \inf \Set{ O(f, Z) }{ Z \in \mathcal{Z}([a, b]) }\\
     U^*(f) &\coloneqq \sup \Set{ U(f, Z) }{ Z \in \mathcal{Z}([a, b]) }\\
   \end{align*}
@@ -812,7 +812,7 @@
 \end{bem}
 
 \begin{satz}
-  Sei $f : [a, b] \to \R$ beschränkt und $(Z_k)_{k \in \N}$ eine Folge in $\mathcal{Z}([a, b])$ mit $\lim_{n \to \infty} |Z_k| = 0$. Dann gilt:
+  Sei $f : [a, b] \to \R$ beschränkt und $(Z_k)_{k \in \N}$ eine Folge in $\mathcal{Z}([a, b])$ mit $\lim_{n \to \infty} \left|Z_k\right| = 0$. Dann gilt:
   \begin{itemize}
     \item Sei $R = \bigcup_{k=1}^\infty \bigcup_{j=1}^{n_k} \{ a_j^k \}$ die Vereinigung aller Zerlegungen $Z_k, k \in \N$. Für alle $x \in [a, b] \setminus R$ gilt dann $\lim_{k \to \infty} f^k(x) = f^*(x)$ und $\lim_{k \to \infty} f_k(x) = f_*(x)$.
     \item Die Funktionen $f^*$ und $f_*$ sind Borel-messbar und integrierbar bzgl. des Borel-Maßes $\mu$ mit
@@ -837,7 +837,7 @@
 \begin{satz}
   Sei $I$ ein Intervall und $f : I \to \R$ über jedem kompakten Teilintervall von $I$ Riemann-integrierbar. Dann sind äquivalent:
   \begin{itemize}
-    \item $|f|$ ist auf $I$ uneigentlich Riemann-integrierbar.
+    \item $\left|f\right|$ ist auf $I$ uneigentlich Riemann-integrierbar.
     \item $f$ ist auf $I$ Lebesgue-integrierbar.
   \end{itemize}
   Falls eine der Bedingungen erfüllt ist, so stimmt das Riemann- Integral von $f$ auf $I$ mit dem Lebesgue-Integral von $f$ auf $I$ überein.
@@ -901,7 +901,7 @@
 
 \begin{satz}
   Sei $A \in \mathrm{GL}_d(\R) = \Set{ A \in \R^{d \times d} }{ \det A \not= 0 }$, dann gilt
-  \[ A_* \mu_{LB} = \tfrac{1}{|\det(A)|} \cdot \mu_{LB}. \]
+  \[ A_* \mu_{LB} = \tfrac{1}{\left|\det(A)\right|} \cdot \mu_{LB}. \]
 \end{satz}
 
 \begin{satz}
@@ -917,5 +917,63 @@
   \[ \Int{\Omega}{}{f}{(h \mu)} = \Int{\Omega}{}{f \cdot h}{\mu}. \]
   Obige Gleichung ist auch erfüllt, wenn lediglich $f \geq 0$ gilt (also $f \in \overline{\E}(\Omega, \Alg)$; dann kann das Integral den Wert $\infty$ annehmen).
 \end{satz}
+
+\begin{bem}
+  Somit ist $g (h \mu) = (g \cdot h) \mu$.
+\end{bem}
+
+\begin{satz}
+  Sei $U, \widetilde{U} \opn \R^d$, $\phi : U \to \widetilde{u}$ ein $\mathcal{C}^1$-Diffeomorphismus, dann gilt:
+    \[ \phi_*^{-1} \mu_{LB}|_{\widetilde{U}} = \underbrace{\left|\det(D \phi)\right|}_{U \to \R_{> 0} \text{ stetig}} \mu_{LB}|_U \]
+\end{satz}
+
+% Lemma
+\begin{satz}
+  Situation wie im Satz. Sei $Q = ]a, b[ \subset U$ Elementarquader mit $a \lhd b$, dann gilt
+  \[ \mu_{LB}(Q) \cdot \inf_{q \in Q} \left|\det D \phi(q)\right| \leq \mu_{LB}(\phi(Q)) \leq \mu_{LB}(Q) \cdot \sup_{q \in Q} \left|\det(D(\phi(q)))\right|. \]
+\end{satz}
+
+\begin{satz}[Transformationssatz]
+  Sei $U, \widetilde{U} \opn \R^d$ und sei $\phi : U \to \widetilde{U}$ ein $\mathcal{C}^1$-Diffeomorphismus. Dann ist eine Funktion $f : \widetilde{U} \to \ER$ genau dann auf $\widetilde{U}$ Lebesgue-Borel-integrierbar, wenn $(f \circ \phi) \cdot \left|\det(D\phi)\right| : U \to \ER$ auf $U$ Lebesgue-Borel-interierbar ist. In diesem Fall gilt
+  \[ \Int{U}{}{(f \circ \phi) \cdot \left|\det(D\phi)\right|}{\mu_{LB}} = \Int{\phi(U)}{}{f}{\mu_{LB}} = \Int{\widetilde{U}}{}{f}{\mu_{LB}}. \]
+  Obige Gleichung ist auch erfüllt, wenn lediglich $f \geq 0$ gilt (also $f \in \overline{\E}(\widetilde{U}, \Bor(\widetilde{U}))$; dann kann das Integral auch den Wert $\infty$ annehmen).
+\end{satz}
+
+\begin{bem}
+  Im Transformationssatz kann man "`Lebesgue-Borel"' durch "`Lebesgue"' ersetzen.
+\end{bem}
+
+
+% Produktstrukturen
+
+% Ziel: $(\Omega_j, \Alg_j, \mu_j)$ Maßräume $j = 1, ..., n$.
+% Betrachte: \Omega_1 \times ... \times \Omega_n = \Omega
+% 1. Definiere $\sigma$-Algebra auf $\omega$, die die $\Alg_j$ "`respektiert"'.
+% 2. Definiere Maß auf $\widetilde{A}$, welches von $\mu_j$ "`induziert"' wird.
+% 
+% Genauer:
+% Zu 1.: Wir haben kanonische Projektionen
+%   \Pi_j : \Omega = \Omega_1 \times ... \times \Omega_n \to \Omega_j
+%           (\omega_1, ..., \omega_n) \mapsto \omega_j
+
+\begin{defn}
+  Seien $(\Omega_j, \Alg_j, \mu_j)$ Maßräume für $j = 1, ..., n$. Die kleinste $\sigma$-Algebra $\Alg$ auf $\sigma$, sodass alle $\Pi_j, j = 1, ..., n$ $(\Alg, \Alg_j)$-messbar sind, heißt \emph{Produkt} der $\sigma$-Algebren $\Alg_1, ..., \Alg_n$, notiert $\Alg =: \Alg_1 \times ... \times \Alg_n$.
+\end{defn}
+
+\begin{satz}
+  Sei $\mathcal{E}_j$ Erzeugendensystem von $\Alg_j, j = 1, ..., n$, d.\,h. $\Alg(\mathcal{E}_j) = \Alg_j$. Annahme: Für alle $j \in \{ 1, ..., n \}$ gibt es eine monoton gegen $\Omega_j$ wachsende Folge $(E^j_k)_{k \in \N}$ in $\mathcal{E}_j$. Dann ist
+  \begin{align*}
+    \Alg_1 \times ... \times \Alg_n &= \Alg(\mathcal{E}_1 \times ... \times \mathcal{E}_n) \text{ mit }\\
+    \mathcal{E}_1 \times ... \times \mathcal{E}_n &= \Set{ E_1 \times ... \times E_n }{ E_j \in \mathcal{E}_j, j = 1, ..., n }
+  \end{align*}
+\end{satz}
+
+% Korollar
+\begin{satz}
+  $\Bor(\R^n) = \underbrace{\Bor(\R) \times ... \times \Bor(\R)}_{\text{$n$-mal}}$.
+\end{satz}
+
+% Ziel: Maß \mu auf \Omega mit
+% $\mu(E_1 \times ... \times E_n) = \mu_1(E_1) \cdot ... \cdot \mu_n(E_n)$ für alle $E_j \in \mathcal{E}_j$.
 
 \end{document}
