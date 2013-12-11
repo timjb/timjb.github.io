@@ -886,4 +886,59 @@ $\implies$ $f$ ist partiell differenzierbar
   \[ R_{jk} = (\Gamma_j \cdot \Gamma_k - \Gamma_k \cdot \Gamma_j) + (\partial_j \Gamma_k - \partial_k \Gamma_j) \]
 \end{bem}
 
+
+% Krümmungstensor in lokalen Variablen
+
+$v = \sum v^j e_j, w = w^k e_k, v^j, w^k : U \to \R$ glatt
+
+\begin{align*}
+  R(v, w) z &= \nabla_v \nabla_w z - \nabla_w \nabla_v z - \nabla_{[v, w]} z =\\
+  &= \sum v^k \nabla_k (\sum w^j \nabla_j z) - \sum w^k \nabla_k (\sum v^j \nabla_j z) - \sum (v^j \partial_j w^k - w^j \partial_j v^k) \nabla_k z =\\
+  &= \sum v^k \nabla_k (w^j \nabla_j z) - \sum w^k \nabla_k (v^j \nabla_j z) - \sum (v^j \partial_j w^k - w^j \partial_j v^k) \nabla_k z\\
+  &= \sum_{j,k=1}^{m} v^k w^j \nabla_k \nabla_j z - \sum_{k, j = 1}{m} w^j v^k \nabla_j \nabla_k z\\
+  &= \sum_{k,j = 1}^m v^k w^j (\nabla_k \nabla_j z - \nabla_j \nabla_k z)\\
+  &= \sum_{k,j=1}^m v^k w^j (R_{kj} z)
+\end{align*}
+
+Setze $z = \sum z^l e_l, z^l : U \to \R$ glatt. Dann
+also $R_{ij}(e_k) = \sum R_{ijk}^l e_l$.
+
+\begin{align*}
+  R(v, w) z &= \sum_{i,j=1}^m v^i w^j R_{ij} z\\
+  &= \sum_{i,j=1}^m v^i w^j R_{ij}(\sum_{k=1}^m z^k e_k)\\
+  &= \sum_{k,i,j}^m v^i w^j z^k R_{ij}(e_k)\\
+  &= \sum_{i,j,k,l}^m v^i w^j z^k R_{ijk}^l e_l
+\end{align*}
+
+\begin{satz}
+  Die Abbildung
+  \begin{align*}
+    \I_{R_{ij}} : \chi(U) \times \chi(U) &\to \mathcal{C}^\infty(U, \R)
+    (v, w) &\mapsto \underbrace{\I(R_{ij}, v, w)}_{u \mapsto \I_u((R_{ij} v)(u), w(u))}
+  \end{align*}
+  ist eine antisymmetrische Bilinearform.
+\end{satz}
+
+\begin{nota}
+  $R_{ijkl} \coloneqq \I_u(R_{ij}(u) e_k, e_l)$
+\end{nota}
+
+\begin{satz}[Gaußgleichung]
+  \[ R_{ijkl}(u) = \langle \II_{jk} (u) \II_{kl}(u) \rangle - \langle \II_{ik}(u), \II_{jl}(u) \rangle, \]
+  wobei $\II_{jk}(u) = \left( \partial_j \partial_k X(u) \right)^{N_u}$
+\end{satz}
+
+\begin{bem}
+  Spezialfall: $X$ Hyperfläche, dann
+  \[ \II_{jk} = h_{jk} \nu, \]
+  Da $\langle \nu, \nu \rangle = 1$, folgt
+  \[ R_{ijkl} = h_{jk} h_{ie} - h_{ik} h_{jl}. \]
+\end{bem}
+
+\begin{satz}[Theorema egregium (Gauß)]
+  Sei $X : U \to \R^3$ eine Hyperfläche, dann gilt:
+  \[ K(u) = \frac{\det(h(u))}{\det(g(u))} = \frac{R_{1221}(u)}{\det(g(u))} \]
+  Letzter Ausdruck ist nur abhängig von der 1.\,FF und ihren Ableitungen.
+\end{satz}
+
 \end{document}
