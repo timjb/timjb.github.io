@@ -9,6 +9,7 @@
 \newcommand{\PSO}{\PS(\Omega)} % Powerset
 \newcommand{\Alg}{\mathfrak{A}}
 \newcommand{\Ring}{\mathfrak{R}}
+\newcommand{\Dyn}{\mathfrak{D}}
 \newcommand{\Bor}{\mathfrak{B}} % Borel
 \newcommand{\E}{\mathbb{E}} % elementary functions
 \newcommand{\Leb}{\mathcal{L}} % Lebesgue
@@ -975,5 +976,56 @@
 
 % Ziel: Maß \mu auf \Omega mit
 % $\mu(E_1 \times ... \times E_n) = \mu_1(E_1) \cdot ... \cdot \mu_n(E_n)$ für alle $E_j \in \mathcal{E}_j$.
+
+\begin{satz}
+  Seien $(\Omega_j, \Alg_j, \mu_j)$ Maßräume und $E_j$ ein Erzeugendensystem von $\Alg_j$ für $j = 1, ..., n$. Angenommen, $E_j$ ist stabil unter Schnitten und $\exists (E_k^{(j)})_{k \in \N} \uparrow \Omega_j$ mit $\mu_j(E_k^{(j)}) < \infty$ für alle $j$.
+  Dann gibt es höchstens ein Maß $\nu : \Alg_1 \times ... \times \Alg_n \to [0, \infty]$ mit $\nu(E_1 \times ... \times E_n) = \mu_1(E_1) \cdot ... \cdot \mu_n(E_n), E_j \in \mathcal{E}_j$.
+\end{satz}
+
+\begin{defn}
+  $\Omega$ sei Menge eine Teilmenge $\Dyn \subset \Omega$ heißt \emph{Dynkin-System}, wenn gilt:
+  \begin{itemize}
+    \item $\Omega \in \Dyn$
+    \item $D \in \Dyn \implies D^C = \Omega \setminus D \in \Dyn$
+    \item $(D_n)_{n \in \N}$ Folge pw. disjunkter Mengen in $\Dyn$. Dann: $\bigcup_{n \in \N} D_n \in \Dyn$
+  \end{itemize}
+\end{defn}
+
+\iffalse
+\begin{aufg}
+  Zeigen Sie:
+  \begin{itemize}
+    \item Die zweite Forderung kann durch die Forderung
+    \[ (D_1, D_2 \in \mathfrak{D}, D_2 \subset D_1) \implies (D_1 \setminus D_2 \in \mathfrak{D}) \]
+    \item Es sind äquivalent:
+      \begin{itemize}
+        \item $\Dyn$ ist ein unter $\bigcap$ stabiles Dynkin-System
+        \item $\Dyn$ ist $\sigma$-Algebra
+      \end{itemize}
+    \item $\mathcal{E} \subset \PSO, \mathcal{E}$ stabil unter $\bigcap$, dann: $\Dyn(\mathcal{E}) = \Alg(\mathcal{E})$, wobei $\Dyn(\mathcal{E})$ das von $\mathcal{E}$ erzeugte Dynkin-System bezeichnet.
+  \end{itemize}
+\end{aufg}
+\fi
+
+\begin{nota}
+  Seien $\Omega_1, \Omega_2$ Mengen, $\Omega \subset \Omega_1 \times \Omega_2, \omega_1 \in \Omega_1, \omega_2 \in \Omega_2$
+  \begin{align*}
+    Q_{\omega_1} &\coloneqq \Set{ \omega_2 \in \Omega_2 }{ (\omega_1, \omega_2) \in Q } = \pi_2(\pi_1^{-1}(\{ \omega_1 \}) \cap Q)\\
+    Q_{\omega_2} &\coloneqq \Set{ \omega_1 \in \Omega_1 }{ (\omega_1, \omega_2) \in Q } = \pi_1(\pi_2^{-1}(\{ \omega_2 \}) \cap Q)
+  \end{align*}
+\end{nota}
+
+\begin{satz} % Lemma
+  $Q \subset \Alg_1 \times \Alg_2, \omega_1 \in \Omega_1, \omega_2 \in \Omega_2$
+  $\implies Q_{\omega_1} \in \Alg_2, Q_{\omega_2} \in \Alg_1$.
+\end{satz}
+
+\begin{satz}(Cavalieri 1) % Proposition
+  Seien $(\Omega_1, \Alg_1, \mu_1)$ und $(\Omega_2, \Alg_2, \mu_2)$ $\sigma$-endliche Maßräume, $Q \in \Alg_1 \times \Alg_2$. Dann:
+  \begin{itemize}
+    \item $h_Q^1 : \Omega_1 \to [0, \infty], \omega_1 \mapsto \mu_2(Q_{\omega_1})$ ist $(\Alg_1, \overline{\Bor})$-messbar.
+    \item $h_Q^2 : \Omega_2 \to [0, \infty], \omega_2 \mapsto \mu_1(Q_{\omega_2})$ ist $(\Alg_2, \overline{\Bor})$-messbar.
+  \end{itemize}
+\end{satz}
 
 \end{document}
