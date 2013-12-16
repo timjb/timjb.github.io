@@ -941,4 +941,59 @@ also $R_{ij}(e_k) = \sum R_{ijk}^l e_l$.
   Letzter Ausdruck ist nur abhängig von der 1.\,FF und ihren Ableitungen.
 \end{satz}
 
+\begin{satz}[Codazzi-Mainardi-Gleichungen]
+  Sei $X : U \to \R^n$ eine Hyperfläche, dann gilt
+  \[ \partial_i h_{jk}(u) - \sum_{l=1}^{n-1} \Gamma_{ik}^l(u) h_{e_j}(u) = \partial_j h_{ik}(u) - \sum_{l=1}^{n-1} \Gamma_{jk}^l(u) h_{e_i}(u). \]
+\end{satz}
+
+\begin{satz}[Hauptsatz der lokalen Flächentheorie (Bonnet)]
+  Sei $U \opn \R^m$ einfach zusammenhängend und
+  \[ g, h : U \to \Set{ A \in \R^{m \times m} }{ A^T = A, \, A \text{ positiv definit } } \text{ glatt}. \]
+  Dann sind äquivalent:
+  \begin{itemize}
+    \item $\exists \, X : U \to \R^{m+1}$ Hyperfläche mit $g$ und $h$ als 1.\,FF bzw. 2.\,FF.
+    \item $g, h$ erfüllen Gaußgleichung der die Codazzi-Mainardi-Gleichung.
+  \end{itemize}
+\end{satz}
+
+
+% 2.10. Winkeltrue Abbildungen
+
+\begin{defn}
+  Sei $X : U \to \R^n$ eine Hyperfläche. Ein Punkt $u \in U$ heißt \emph{Nabelpunkt}, wenn in $u$ alle Hauptkrümmungen gleich sind, also $W_u = \mu I$ für ein $\mu \in \R$. Wenn alle $u \in U$ Nabelpunkte sind, so heißt $X$ \emph{Nabelpunkthyperfläche}.
+\end{defn}
+
+\begin{satz}
+  Sei $n \geq 3$ und $X : U \to \R^n$ eine Nabelpunkthyperfläche in $\mathcal{C}^3$, dann ist $X(U)$ Teilmenge einer Hyperebene oder einer Hypersphäre im $\R^n$.
+\end{satz}
+
+\begin{defn}
+  Sei $O \opn \R^n$. Eine $\mathcal{C}^2$-Abbildung $\Phi : O \to \R^n$ heißt \emph{orthogonales Hyperflächensystem}, wenn für alle $x \in O$ und alle $j, k \in \{ 1, ..., n \}, j \not= k$ gilt:
+  \[
+    \langle \partial_j \Phi(x), \partial_k \Phi(x) \rangle = 0
+    \quad \text{und} \quad
+    \langle \partial_j \Phi(x), \partial_j \Phi(x) \rangle \not= 0
+  \]
+\end{defn}
+
+\begin{nota}
+  Für $t \in \R$ ist $U^{j,t} = \Set{ (x_1, ..., x_n) \in O }{ x_j = t }$.
+\end{nota}
+
+\begin{bem}
+  Wenn $U^{j,t}$ offen in $\Set{ (x_1, ..., x_n) \in \R^n }{ x_j = t }$ ist, dann ist
+  \[ X^{j,t} \coloneqq \Phi|_{U^{j,t}} : U^{j,t} \to \R^n \]
+  eine Hyperfläche und $\partial_j \Phi(x) \perp T_x X^{j,t} = \mathrm{Spann} \Set{ \partial_k \Phi(x) }{ k \in \{ 1, ..., n \} \setminus \{ j \} } \forall x \in U^{j,t}$.
+\end{bem}
+
+\begin{defn}
+  Sei $X : U \to \R^n$ eine Hyperfläche und $c \coloneqq X \circ \alpha : I \to \R^n, I$ Intervall und $\alpha : I \to U$ glatt. Dann heißt $c$ \emph{Krümmungslinie}, wenn für alle $c'(t)$ für alle $t \in I$ eine Hauptkrümmungsrichtung von $X$ ist, d.\,h. ein Eigenvektor von $W_{\alpha(t)}$.
+\end{defn}
+
+\begin{satz}
+  Ist $\Phi : O \to \R^n$ orth. Hyperflächensystem, dann sind die Koordinatenlinien
+  \[ h \mapsto \Phi(t_1, ..., t_{j-1}, t_j + h, t_{j+1}, ..., t_n) \text{ mit } (t_1, ..., t_n) \in O \text{ fest} \]
+  Krümmungslinien von $X^{k, t_k}$ mit $k \not= j$.
+\end{satz}
+
 \end{document}
