@@ -5,6 +5,11 @@
   /Author (Tim Baumann)
 }
 
+\newcommand{\Alg}{\mathfrak{A}}
+\newcommand{\LebAlg}{\mathfrak{L}} % Lebesgue-Borel-Mengen
+\renewcommand{\P}{\mathbb{P}}
+\newcommand{\PD}[2]{\P(#1\,|\,#2)}
+
 \begin{document}
 
 \maketitle{Zusammenfassung Stochastik \rom{1}}
@@ -103,5 +108,107 @@ Zu jeder Booleschen Algebra $\mathfrak{A}$ gibt es eine Menge $\Omega$ derart, d
 %\begin{defn}
 %  Sei $$
 %\end{defn}
+
+% ...
+
+\begin{satz}
+  Sei $A_1, A_2, ...$ eine Zerlegung von $\Omega$ und $B \in \Alg$. Dann gilt
+  \begin{align*}
+    \P(B) &= \sum_{n=1}^\infty \PD{B}{A_n} \P(A_n) \quad \text{(Formel der totalen Wkt.)}\\
+    \PD{A_n}{B} &= \frac{\PD{B}{A_n} \cdot \P(A_n)}{\P(B)} \quad \text{(Formel von Bayes)}
+  \end{align*}
+\end{satz}
+
+\begin{defn}
+  Zwei Ereignisse $A, B \in \Alg$ heißen (stochastisch) ($\P$-)unabhängig, falls
+  \[ \P(A \cap B) = \P(A) \cdot \P(B). \]
+\end{defn}
+
+\begin{satz}
+  $A, B$ unabhängig $\iff$ $\PD{B}{A} = \P(B)$.
+\end{satz}
+
+\begin{defn}
+  Eine Familie $A_i)_{i \in I} \subset \Alg$ ($I$ endlich, abzählbar oder überabzählbar) heißt \emph{vollständig unabhhängig}, falls
+  \[ \P(A_{i_1} \cap A_{i_2} \cap ... \cap A_{i_m}) = \P(A_{i_1}) \cdot \P(A_{i_2}) \cdots \P(A_{i_n}) \]
+  für beliebige $i_1, ..., i_n \in I, 2 \leq n < \infty$ und \emph{paarweise unabh.}, falls
+  \[ \P(A_i \cap A_j) = \P(A_i) \cdot \P(A_j) \text{ für } i, j \in I, i \not= j. \]
+\end{defn}
+
+\begin{acht}
+  Aus paarweiser Unabhängigkeit folgt nicht vollständige Unabhängigkeit (Gegenbeispiel: Bernsteins Tetraeder).
+\end{acht}
+
+\begin{defn}
+  Sei $(\Omega, \Alg, \P)$ ein Wahrscheinlichkeitsraum und $\Alg_1, \Alg_2 \subset \Alg$ zwei Ereignissysteme. Dann sind $\Alg_1$ und $\Alg_2$ unabhängig, falls $\P(A_1 \cap A_2) = \P(A_1) \cdot \P(A_2)$ für alle $A_1 \in \Alg_1, A_2 \in \Alg_2$.
+\end{defn}
+
+\begin{satz}
+  Seien $\Alg_1, \Alg_2$ zwei unabhängige Ereignisalgebren. Dann sind die $\sigma$-Algebren $\tilde{\Alg_1} = \sigma(\Alg_1)$ und $\tilde{\Alg_2} = \sigma(\Alg_2)$ unabhängig.
+\end{satz}
+
+
+\begin{satz}[von Lusin]
+  $f : ([a, b], \LebAlg([a, b])) \to (\R^1, \LebAlg(\R^1))$ ist Borel-messbar $\iff$ $\forall \epsilon > 0 : \exists K\epsilon \subset [a, b]$ abgeschlossen mit $\lambda_1(\R^1 \setminus K_\epsilon)$ und $f|_{K_\epsilon}$ stetig.
+\end{satz}
+
+\begin{satz}
+  Folgerung: Es sind messbar
+  \begin{itemize}
+    \item monotone Funktionen
+    \item Funktionen mit endlicher Variation
+    \item Càdlàg-Funktionen, das sind Funktionen $f : [a, b] \to \R$ mit $\lim_{\epsilon \downarrow 0} f(x+\epsilon) = f(x)$ für alle $x \in \left[a, b\right[$.
+  \end{itemize}
+\end{satz}
+
+\begin{defn}
+  Eine $\Alg$-messbare numerische Funktion $X$ über einem Wahrscheinlichkeitsraum $(\Omega, \Alg, \P)$ heißt \emph{Zufallsgrüße} oder \emph{Zufallsvariable}.
+\end{defn}
+
+\begin{defn}
+  Die durch die ZG $X$ auf $(\R^1, \LebAlg(\R^1))$ induzierte Bildmaß $P_X$
+  \[ P_X(B) = \P(X^{-1}(B)) = \P(\Set{ \omega \in \Omega  }{ X(\omega) \in B }) \]
+  heißt \emph{Verteilung} der ZG $X$.
+  \[ F_X(x) = P_X(\left]-\infty, x\right]) = \P(\Set{ \omega \in \Omega }{ X(\omega) \leq x }) \]
+  heißt die \emph{Verteilungsfunktion} der ZG $X$.
+\end{defn}
+
+\begin{satz}
+  $F$ sei eine VF auf $\R^1$. Dann existiert ein Wahrscheinlichkeits-Raum $(\Omega, \Alg, \P$ und eine ZG $X$ derart, dass
+  \[ F_X(x) = F(x) \text{ für } x \in \R^1 \]
+\end{satz}
+
+\begin{nota}
+  Sei $X$ eine Zufallsgröße und $B \in \LebAlg(\overline{\R}^1)$. Dann schreibe
+  \[ \{ X \in B \} = X^{-1}(B). \]
+\end{nota}
+
+\begin{defn}
+  Eine endliche Familie von Zufallsgrößen $X_1, ..., X_n$ heißt \emph{stochastisch unabhängig}, falls
+  \[ \P(\bigcap_{i=1}^n \{ X_i \in B_i \}) = \prod_{i=1}^n \P(\{ X_i \in B_i \}) \text{ für alle } B_i \in \mathcal{L}(\overline{R}^1), i = 1, ..., n. \]
+\end{defn}
+
+\begin{satz}
+  Seien $X_1, ..., X_n$ unabhängige Zufallsgrößen über $(\Omega, \Alg, \P)$ von $g_1, ..., g_n$ Borel-messbare Funktionen von $\R^1$ nach $\R^1$. Dann sind auch die Zufallsgrößen $Y_i \coloneqq g_i \circ X_i$ unabhängig über $(\Omega, \Alg, \P)$.
+\end{satz}
+
+% Definition: einfache Funktionen
+% Definition: $\mu$-Integral für einfache Funktionen
+
+% Eigenschaften: Linearität, Monotonie, \Int{\Omega}{}{\ind_A}{\mu} = \mu(A)
+
+\begin{satz}
+  Sei $0 \leq f_1 \leq f_2 \leq ...$ eine isotone Folge elementarer Funktionen über $(\Omega, \Alg)$. Dann gilt für jede elementare Funktion $f$ mit $f \leq \sup_{n \in N} f_n$ die Ungleichung $\Int{\Omega}{}{f}{\mu} \leq \sup_{n \in \N} \Int{\Omega}{}{f_n}{\mu}$.
+\end{satz}
+
+% Folgerung
+\begin{satz}
+  Seien $(f_n)_{n \in \N}$ und $(g_n)_{n \in \N}$ isotone Folgen elementarer Funktionen mit $\sup_{n \in \N} f_n = \sup_{n \in \N} g_n$. Dann ist $\sup_{n \in \N} \Int{\Omega}{}{f_n}{\mu} = \sup_{n \in \N} \Int{\Omega}{}{g_n}{\mu}$.
+\end{satz}
+
+% Satz: Jede nichtnegative, messbare, numerische Funktion ist Grenzwert einer Folge einfacher Funktionen
+% Def: $\mu$-Integral von solchen Funktionen
+
+% Integral von nicht unbedingt nicht-negativen messbaren Funktionen
 
 \end{document}
