@@ -384,14 +384,16 @@ Sei im folgenden $(X, d)$ ein metrischer Raum.
 % Beispiel: diskrete Metrik
 
 \begin{defn}
-\begin{itemize}
-  \item \[ B_r(m) = B_r^d(m) = \{ x \in X : d(x, m) < r \} \]
-  heißt \emph{offener Ball} oder \emph{offene Kugel} um $m$ von Radius $r$.
-  \item \[ B_r^a(m) = B_r^{a,d}(m) = \{ x \in X : d(x, m) \le r \} \]
-  heißt \emph{abgeschlossener Ball} oder \emph{abgeschlossene Kugel} um $m$.
-  \item $Y \subset X$ heißt eine Umgebung von $m$ bzgl. $d$, wenn gilt:
+  Für $r \in \R$ und $m \in X$ heißt
+  \[ B_r(m) = B_r^d(m) = \{ x \in X : d(x, m) < r \} \]
+  \emph{offener Ball} oder \emph{offene Kugel} um $m$ von Radius $r$ und
+  \[ B_r^a(m) = B_r^{a,d}(m) = \{ x \in X : d(x, m) \le r \} \]
+  \emph{abgeschlossener Ball} oder \emph{abgeschlossene Kugel} um $m$.
+\end{defn}
+
+\begin{defn}
+  $Y \subset X$ heißt eine Umgebung von $m$ bzgl. $d$, wenn gilt:
   \[ \exists\,\epsilon > 0 : B_{\epsilon}(m) \subset Y. \]
-\end{itemize}
 \end{defn}
 
 \begin{defn}
@@ -406,7 +408,7 @@ Sei im folgenden $(X, d)$ ein metrischer Raum.
 \end{defn}
 
 \begin{bem}
-Die leere Menge $\emptyset$ und $X$ sind jeweils sowohl offen als auch abgeschlossen in $X$. Es gilt außerdem $\partial Y = \partial (X \backslash Y)$ für alle $Y \subset X$.
+Die Mengen $\emptyset$ und $X$ sind jeweils sowohl offen als auch abgeschlossen in $X$. Es gilt außerdem $\partial Y = \partial (X \backslash Y)$ für alle $Y \subset X$.
 \end{bem}
 
 \begin{defn}
@@ -837,7 +839,7 @@ Sei $f : U \to \R^m$ partiell diffbar und alle partiellen Ableitungen in $u \in 
 \begin{bem}
 Es gelten folgende Implikationen:\\
 $\quad\quad\,\,\, f$ ist stetig partiell differenzierbar\\
-$\implies$ $f$ ist total differenzierbar ($\implies f$ ist stetig)\\
+$\implies$ $f$ ist total differenzierbar ($\!\implies f$ ist stetig)\\
 $\implies$ $f$ ist partiell differenzierbar
 \end{bem}
 
