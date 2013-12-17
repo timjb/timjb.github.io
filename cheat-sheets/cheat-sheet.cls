@@ -92,6 +92,13 @@
 \DeclarePairedDelimiterX\Set[2]{\lbrace}{\rbrace}%
  { #1 \,\delimsize|\, #2 }
 
+% Offene und abgeschlossene Teilmengen
+% http://tex.stackexchange.com/questions/22371/subseteq-circ-as-a-single-symbol-open-subset
+\newcommand\opn{\mathrel{\ooalign{$\subset$\cr
+  \hidewidth\raise.1ex\hbox{$\circ\mkern.5mu$}\cr}}}
+\newcommand\cls{\mathrel{\ooalign{$\subset$\cr
+  \hidewidth\raise.1ex\hbox{$\bullet\mkern.5mu$}\cr}}}
+
 % Kleinere Vereinigungs-, Schnitt-, Summen- und Produktsymbole
 \let\myBigcup\bigcup
 \DeclareMathOperator*{\textbigcup}{{\textstyle \myBigcup}}
