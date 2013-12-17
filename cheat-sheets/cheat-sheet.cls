@@ -92,6 +92,26 @@
 \DeclarePairedDelimiterX\Set[2]{\lbrace}{\rbrace}%
  { #1 \,\delimsize|\, #2 }
 
+% Kleinere Vereinigungs-, Schnitt-, Summen- und Produktsymbole
+\let\myBigcup\bigcup
+\DeclareMathOperator*{\textbigcup}{{\textstyle \myBigcup}}
+\renewcommand{\bigcup}{\textbigcup\limits}
+\let\myBigcap\bigcap
+\DeclareMathOperator*{\textbigcap}{{\textstyle \myBigcap}}
+\renewcommand{\bigcap}{\textbigcap\limits}
+\let\myBigsqcup\bigsqcup
+\DeclareMathOperator*{\textbigsqcup}{{\textstyle \myBigsqcup}}
+\renewcommand{\bigsqcup}{\textbigsqcup\limits}
+%\let\myBigsqcap\bigsqcap
+%\DeclareMathOperator*{\textbigsqcap}{{\textstyle \myBigsqcap}}
+%\renewcommand{\bigsqcap}{\textbigsqcap\limits}
+\let\myProd\prod
+\DeclareMathOperator*{\textprod}{{\textstyle \myProd}}
+\renewcommand{\prod}{\textprod}
+\let\mySum\sum
+\DeclareMathOperator*{\textsum}{{\textstyle \mySum}}
+\renewcommand{\sum}{\textsum\limits}
+
 \usepackage{multicol}
 \AtBeginDocument{
   \raggedright % Flattersatz
