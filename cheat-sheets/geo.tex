@@ -980,4 +980,33 @@ also $R_{ij}(e_k) = \sum R_{ijk}^l e_l$.
   Krümmungslinien von $X^{k, t_k}$ mit $k \not= j$.
 \end{satz}
 
+\begin{defn}
+  Eine lineare Abbildung $F : \R^n \to \R^n$ heißt \emph{konform}, wenn
+  \[ \measuredangle (v, w) = \measuredangle (F(v), F(w)) \quad \forall v, w \in \R^n. \]
+\end{defn}
+
+\begin{bem}
+  Jede lineare Abbildung lässt sich darstellen als
+  \[ F(x) = A_F \cdot x, \text{ mit } A_F \in \R^{n \times n} \]
+  und es gilt $F$ konform $\iff$ $\tfrac{1}{\mu} A_F \in O(n)$ für ein $\mu \in \R_{> 0}$. Dieses $\mu$ wird Streckungsfaktor genannt.
+
+\end{bem}
+
+\begin{defn}
+  Seien $O, \widetilde{O} \opn \R^n$. Ein $\mathcal{C}^1$-Diffeomorphismus $f : O \to \widetilde{O}$ heißt \emph{konform}, wenn für alle $x \in O$ die Abbildung $D_x f$ konform ist.
+\end{defn}
+
+\begin{bem}
+  $\lambda : O \to \R_{> 0}$, $\tfrac{1}{\lambda(x)} D_x f \in O(n)$ sei der konforme Faktor.
+\end{bem}
+
+% Konforme Abbildungen im $\R^2$
+
+Sei $O \opn \C$ zusammenhängend und $f : O \to \widetilde{O}$ konform. Ohne Einschränkung ist $\det(D_x f) > 0$ für alle $x \in O$ (sonst $\widetilde{f} = f \circ \overline{\cdot}$).
+Es folgt: $D_x f = \lambda(x) \begin{psmallmatrix} \cos \alpha_x & \sin \alpha_x \\ -\sin \alpha_x & \cos \alpha_x \end{psmallmatrix} = \lambda(x) \cdot e^{i \alpha_x} \in \C$ und somit ist $f$ holomorph.
+
+\begin{satz}[Liouville]
+  Sei $n \geq 3$. Wenn $f : O \to \widetilde{O}$ konform, dann ist $f$ kugeltrue, d.\,h. Wenn $X : U \to O$ eine Nabelpunkt-HF, dann ist $f \circ X : U \to \widetilde{O}$ auch eine Nabelpunkt-HF.
+\end{satz}
+
 \end{document}

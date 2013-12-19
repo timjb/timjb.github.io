@@ -1004,4 +1004,42 @@
   \end{itemize}
 \end{satz}
 
+\begin{satz}[Existenz von Produktmaßen]
+  Die Abbildungen
+  \begin{align*}
+    \nu_1 : \Alg_1 \times \Alg_2 \to [0, \infty], \quad & Q \mapsto \Int{\Omega_1}{}{\mu_2(Q \omega_1)}{\mu_1} \\
+    \nu_2 : \Alg_2 \times \Alg_1 \to [0, \infty], \quad & Q \mapsto \Int{\Omega_2}{}{\mu_1(Q \omega_2)}{\mu_2}
+  \end{align*}
+  sind Maße und es gilt für alle $A_1 \in \Alg_1$ und $A_2 \in \Alg_2$
+  \[ \nu_1(A_1 \times A_2) = \mu_1(A_1) \cdot \mu_2(A_2) = \nu_2(A_1 \times A_2) \]
+  und somit $\nu_1 = \nu_2$.
+\end{satz}
+
+% Name: Schnitte
+\begin{nota}
+  Für $f : \Omega_1 \times \Omega_2 \to \ER$ und $\omega_1 \in \Omega_1, \omega_2 \in \Omega_2$ schreibe
+  \begin{align*}
+    f_{\omega_1} : \Omega_2 \to \ER, \, \omega_2 \mapsto f(\omega_1, \omega_2), \qquad
+    f_{\omega_2} : \Omega_1 \to \ER, \, \omega_1 \mapsto f(\omega_1, \omega_2)
+  \end{align*}
+\end{nota}
+
+\begin{lem}
+  Angenommen, $f : \Omega_1 \times \Omega_2 \to \ER$ ist $(\Alg_1 \times \Alg_2, \overline{B})$-messbar. Dann ist auch für alle $\omega_1 \in \Omega_1$ die Abbildung $f_{\omega_1}$ $(\Alg_2, \overline{B})$-messbar und für alle $\omega_2 \in \Omega_2$ die Abbildung $f_{\omega_2}$ $(\Alg_1, \overline{B})$-messbar.
+\end{lem}
+
+\begin{satz}[Tonelli]
+  Sei $f \in \overline{\E}(\Omega_1 \times \Omega_2, \Alg_1 \times \Alg_2)$, dann:
+  \begin{itemize}
+    \item $\Omega_2 \to [0, \infty], \, \omega_2 \mapsto \Int{\Omega_1}{}{f_{\omega_2}}{\mu_1}$ ist $(\Alg_2, \overline{B})$-messbar,
+    \item $\Omega_1 \to [0, \infty], \, \quad \omega_1 \mapsto \Int{\Omega_2}{}{f_{\omega_1}}{\mu_2}$ ist $(\Alg_1, \overline{B})$-messbar.
+  \end{itemize}
+\end{satz}
+
+\begin{satz}[Fubini]
+  Sei $f : \Omega_1 \times \Omega_2 \to \ER$ $(\mu_1 \times \mu_2)$-integrierbar. Dann ist für $\mu_1$-fast-alle $\omega_1$ ist $f_{\omega_1}$ $\mu_2$-integrierbar, und die für $\mu_1$-fast alle definierte Funktionen $\omega_1 \mapsto \Int{\Omega_2}{}{f_{\omega_1}}{\mu_2}$ ist $\mu_1$-integrierbar. Es gilt:
+    \[ \Int{\Omega_1 \times \Omega_2}{}{f}{(\mu_1 \times \mu_2)} = \Int{\Omega_1}{}{(\Int{\Omega_2}{}{f_{\omega_1}}{\mu_2})}{\mu_1} = \Int{\Omega_2}{}{(\Int{\Omega_1}{}{f_{\omega_2}}{\mu_1})}{\mu_2}. \]
+  Analoges gilt mit $1$ und $2$ vertauscht.
+\end{satz}
+
 \end{document}
