@@ -39,6 +39,7 @@
 \newtheorem*{defn}{Definition}
 \newtheorem*{bsp}{Beispiel}
 \newtheorem*{satz}{Satz}
+\newtheorem*{lem}{Lemma}
 \newtheorem*{kor}{Korollar}
 \newtheorem*{acht}{Achtung}
 \newtheorem*{strat}{Strategie}
@@ -54,16 +55,28 @@
 \setitemize[0]{leftmargin=10pt,itemindent=0pt,itemsep=0pt}
 \setenumerate[0]{leftmargin=10pt,itemindent=0pt,itemsep=0pt}
 
-% Färbe \emph{}
+% Färbe \emph{} violett
 \usepackage{color,graphicx,overpic}
 \definecolor{Emph}{rgb}{0.2,0.2,0.8} % softer red for display
 \renewcommand{\emph}[1]{\textcolor{Emph}{\bf{#1}}}
+
+\usepackage{cclicenses}
+\usepackage{hyperref}
+
+\definecolor{gray}{rgb}{0.5,0.5,0.5}
+
+\makeatletter
+\def\url@foostyle{%
+  \@ifundefined{selectfont}{\def\UrlFont{\sf}}{\def\UrlFont{\small\ttfamily}}}
+\makeatother
 
 % Titel
 \renewcommand{\maketitle}[1]{
   \begin{center}
     \Large{\underline{#1}} \\
-  \end{center}}
+    {\footnotesize \color{gray} \cc \!\!\!\!\!\! \ccby \!\! Tim Baumann, \scriptsize \href{http://timbaumann.info/uni-spicker}{http://timbaumann.info/uni-spicker}}
+  \end{center}
+}
 
 \everymath{\displaystyle} % Display style überall!
 
@@ -73,11 +86,11 @@
 \makeatother
 
 % Mathematische Symbole
-\newcommand{\R}{\mathbb{R}}
-\newcommand{\N}{\mathbb{N}}
-\newcommand{\Z}{\mathbb{Z}}
-\newcommand{\C}{\mathbb{C}}
-\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\R}{\mathbb{R}} % Reelle Zahlen
+\newcommand{\N}{\mathbb{N}} % Natürliche Zahlen
+\newcommand{\Z}{\mathbb{Z}} % Ganze Zahlen
+\newcommand{\C}{\mathbb{C}} % Komplexe Zahlen
+\newcommand{\Q}{\mathbb{Q}} % Rationale Zahlen
 \renewcommand{\d}{\mathrm{d}} % Differentiator
 
 % Integrale
