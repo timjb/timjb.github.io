@@ -12,7 +12,7 @@ main = hakyll $ do
   match "CNAME"          copyRule
   match "images/*"       copyRule
   match "cv/*"           copyRule
-  match "cheat-sheets/*" copyRule
+  match "uni-spicker/*"  copyRule
 
   match "css/*" $ do
     route idRoute
