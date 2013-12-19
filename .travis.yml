@@ -6,19 +6,18 @@ env:
   global:
     - secure: "FEsCB2nrnBN8Nm2UZJoUfLQOFqdIAlB5+Tlt6ORUhVdpGpKn2bQ5rOPB0Fd/aEGcgWf09Rg38VB4ZajwUoNeC0zOv6aX5M6Fwa6yvkQEO4jhmWw/snpuGaff1CFSTO8VNeZPLnx3KjjW7Y4H5mTKGK6w16kR+jQLHgiA8lCup/I="
 install:
-  - cabal install hakyll
-  - ghc --make site.hs
+  - cabal install
 before_script:
   - cd _site
   - git checkout master
   - git pull origin master
   - cd ..
-script: ./site build
+script: ./dist/build/timbaumann/timbaumann
 after_script:
   - cd _site
   - git status
   - git add --all
-  - git config --global user.email "tim@timbaumann.info"
+  - git confiug --global user.email "tim@timbaumann.info"
   - git config --global user.name "Travis"
   - git commit -m "snapshot $(date '+%m/%d/%y %H:%M')"
   - git push "$REPO_URL" master | grep -v http
