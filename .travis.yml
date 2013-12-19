@@ -12,7 +12,7 @@ before_script:
   - git checkout master
   - git pull origin master
   - cd ..
-script: ./dist/build/timbaumann/timbaumann
+script: ./dist/build/timbaumann/timbaumann build
 after_script:
   - cd _site
   - git status
