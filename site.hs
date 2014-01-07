@@ -12,7 +12,6 @@ main = hakyll $ do
   match "CNAME"          copyRule
   match "images/*"       copyRule
   match "cv/*"           copyRule
-  match "uni-spicker/*"  copyRule
 
   match "css/*" $ do
     route idRoute
