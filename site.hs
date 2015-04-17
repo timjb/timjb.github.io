@@ -3,6 +3,7 @@
 import           Control.Applicative ((<$>))
 import           Data.Monoid         (mappend)
 import           Hakyll
+import           System.FilePath.Posix (replaceExtension, takeFileName)
 
 
 --------------------------------------------------------------------------------
@@ -12,6 +13,11 @@ main = hakyll $ do
   match "CNAME"          copyRule
   match "images/*"       copyRule
   match "cv/*"           copyRule
+
+  match "redirects/*" $ do
+    route $ customRoute $ flip replaceExtension "html" . takeFileName . toFilePath
+    compile $ pandocCompiler
+      >>= loadAndApplyTemplate "templates/redirect.html" defaultContext
 
   match "css/*" $ do
     route idRoute
