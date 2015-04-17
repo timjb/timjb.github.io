@@ -18,7 +18,7 @@ after_script:
   - cd _site
   - git status
   - git add --all
-  - git confiug --global user.email "tim@timbaumann.info"
+  - git config --global user.email "tim@timbaumann.info"
   - git config --global user.name "Travis"
   - git commit -m "snapshot $(date '+%m/%d/%y %H:%M')"
   - git push "$REPO_URL" master | grep -v http
