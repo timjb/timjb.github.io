@@ -7,9 +7,10 @@ branches:
     - source
 
 env:
-  - CABALVER=1.22 GHCVER=7.10.2
   global:
     - secure: "iaTdH46PsxpIn2cPUjl1rQl1aLgeSjVGRi3cHQ6ikQIni0isuMnXwAh9Poml1tWkMOzuivORxkrJQ8/OAILlA4AjDnkwZJOmP+XMmq100yyjecS/QI6KHYEha8FqgwDxg8YuICfle0gdSik2gTIpGqWvZdtgvCfZRyCqEoTW14k="
+  matrix:
+    - CABALVER=1.22 GHCVER=7.10.2
 
 before_install:
   - travis_retry sudo add-apt-repository -y ppa:hvr/ghc
