@@ -1,25 +1,30 @@
-language: haskell
-ghc: 7.8
+language: c
+
+# See also https://github.com/hvr/multi-ghc-travis for more information
+
 branches:
   only:
     - source
+
 env:
+  - CABALVER=1.22 GHCVER=7.10.2
   global:
-    - secure: "FEsCB2nrnBN8Nm2UZJoUfLQOFqdIAlB5+Tlt6ORUhVdpGpKn2bQ5rOPB0Fd/aEGcgWf09Rg38VB4ZajwUoNeC0zOv6aX5M6Fwa6yvkQEO4jhmWw/snpuGaff1CFSTO8VNeZPLnx3KjjW7Y4H5mTKGK6w16kR+jQLHgiA8lCup/I="
+    - secure: "iaTdH46PsxpIn2cPUjl1rQl1aLgeSjVGRi3cHQ6ikQIni0isuMnXwAh9Poml1tWkMOzuivORxkrJQ8/OAILlA4AjDnkwZJOmP+XMmq100yyjecS/QI6KHYEha8FqgwDxg8YuICfle0gdSik2gTIpGqWvZdtgvCfZRyCqEoTW14k="
+
+before_install:
+  - travis_retry sudo add-apt-repository -y ppa:hvr/ghc
+  - travis_retry sudo apt-get update
+  - travis_retry sudo apt-get install cabal-install-$CABALVER ghc-$GHCVER
+  - export PATH=/opt/ghc/$GHCVER/bin:/opt/cabal/$CABALVER/bin:$PATH
+
 install:
-  - cabal install
+  - cabal --version
+  - echo "$(ghc --version) [$(ghc --print-project-git-commit-id 2> /dev/null || echo '?')]"
+  - travis_retry cabal update
+  - cabal install --only-dependencies --enable-tests --enable-benchmarks
+
 before_script:
-  - cd _site
-  - git checkout master
-  - git pull origin master
-  - cd ..
-script: ./dist/build/timbaumann/timbaumann build
-after_script:
-  - cd _site
-  - git status
-  - git add --all
   - git config --global user.email "tim@timbaumann.info"
   - git config --global user.name "Travis"
-  - git commit -m "snapshot $(date '+%m/%d/%y %H:%M')"
-  - git push "$REPO_URL" master | grep -v http
-  - cd ..
+
+script: ./deploy "$REPO_URL"
