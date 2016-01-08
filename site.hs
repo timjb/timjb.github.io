@@ -1,23 +1,20 @@
---------------------------------------------------------------------------------
 {-# LANGUAGE OverloadedStrings #-}
-import           Control.Applicative ((<$>))
-import           Data.Monoid         (mappend)
-import           Hakyll
-import           System.FilePath.Posix (replaceExtension, takeFileName)
 
+import Hakyll
+import System.FilePath.Posix (replaceExtension, takeFileName, takeBaseName)
+import Data.Monoid ((<>))
 
---------------------------------------------------------------------------------
 main :: IO ()
 main = hakyll $ do
   let copyRule = route idRoute >> compile copyFileCompiler
-  match "CNAME"          copyRule
-  match "images/*"       copyRule
-  match "cv/*"           copyRule
+  match "CNAME"    copyRule
+  match "images/*" copyRule
+  match "cv/*"     copyRule
 
   match "redirects/*" $ do
     route $ customRoute $ flip replaceExtension "html" . takeFileName . toFilePath
     compile $ pandocCompiler
-      >>= loadAndApplyTemplate "templates/redirect.html" defaultContext
+      >>= loadAndApplyTemplate "templates/redirect.html" siteCtx
 
   match "css/*" $ do
     route idRoute
@@ -26,7 +23,7 @@ main = hakyll $ do
   match (fromList ["projects.markdown", "about.markdown"]) $ do
     route   $ setExtension "html"
     compile $ pandocCompiler
-      >>= loadAndApplyTemplate "templates/default.html" defaultContext
+      >>= loadAndApplyTemplate "templates/default.html" siteCtx
       >>= relativizeUrls
 
   match "posts/*" $ do
@@ -41,9 +38,9 @@ main = hakyll $ do
     route idRoute
     compile $ do
       let archiveCtx =
-            field "posts" (\_ -> postList recentFirst) `mappend`
-            constField "title" "Archives"              `mappend`
-            defaultContext
+            field "posts" (\_ -> postList recentFirst) <>
+            constField "title" "Archives"              <>
+            siteCtx
 
       makeItem ""
         >>= loadAndApplyTemplate "templates/archive.html" archiveCtx
@@ -64,8 +61,19 @@ main = hakyll $ do
 
 postCtx :: Context String
 postCtx =
-  dateField "date" "%B %e, %Y" `mappend`
+  dateField "date" "%B %e, %Y" <>
+  siteCtx
+
+siteCtx :: Context String
+siteCtx = 
+  activeClassField <>
   defaultContext
+
+-- https://groups.google.com/forum/#!searchin/hakyll/if$20class/hakyll/WGDYRa3Xg-w/nMJZ4KT8OZUJ 
+activeClassField :: Context a 
+activeClassField = functionField "activeClass" $ \[p] _ -> do 
+  path <- takeBaseName . toFilePath <$> getUnderlying
+  return $ if path == p then "active" else path 
 
 postList :: ([Item String] -> Compiler [Item String]) -> Compiler String
 postList sortFilter = do
