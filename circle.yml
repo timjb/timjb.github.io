@@ -1,0 +1,16 @@
+machine:
+  ghc:
+    version: 7.10.2
+
+general:
+  branches:
+    only:
+      - source
+
+deployment:
+  production:
+    branch: master
+    commands:
+      - git config --global user.email "tim@timbaumann.info"
+      - git config --global user.name "CircleCI"
+      - "./deploy.sh https://github.com/timjb/timjb.github.com.git"
