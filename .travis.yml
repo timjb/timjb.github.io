@@ -28,4 +28,4 @@ before_script:
   - git config --global user.email "tim@timbaumann.info"
   - git config --global user.name "Travis"
 
-script: ./deploy "$REPO_URL"
+script: ./deploy.sh "$REPO_URL"

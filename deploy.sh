@@ -1,5 +1,16 @@
 #!/bin/bash
 
+# configuration
+TARGET_BRANCH=master
+if which timbaumann; then
+  SITE=timbaumann
+elif [ -e ./dist/build/timbaumann/timbaumann ]; then
+  SITE=./dist/build/timbaumann/timbaumann
+else
+  echo "executable `timbaumann` not found"
+  exit 1
+fi
+
 cd $(dirname "$0")
 CURR_REPO=$(git rev-parse --show-toplevel)
 CURR_ORIGIN=$(git config --get remote.origin.url)
@@ -14,7 +25,6 @@ fi
 
 ORIGIN=${1:-$CURR_ORIGIN}
 BUILD_DIR=$(mktemp -d builddir-XXXX)
-TARGET_BRANCH=master
 
 function onerr() {
   rm -rf "$BUILD_DIR"
@@ -31,10 +41,10 @@ else
   git clone -b "$TARGET_BRANCH" --single-branch "$ORIGIN" "$BUILD_DIR"
 fi
 
-./site clean
-./site build
+$SITE clean
+$SITE build
 cp -R ./_site/* "$BUILD_DIR"
-./site clean
+$SITE clean
 
 cd "$BUILD_DIR"
 git add --all
