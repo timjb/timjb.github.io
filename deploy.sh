@@ -7,7 +7,7 @@ if which timbaumann; then
 elif [ -e ./dist/build/timbaumann/timbaumann ]; then
   SITE=./dist/build/timbaumann/timbaumann
 else
-  echo "executable `timbaumann` not found"
+  echo "executable 'timbaumann' not found"
   exit 1
 fi
 
