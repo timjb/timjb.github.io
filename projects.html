@@ -3,192 +3,353 @@ title: Projects
 ---
 
 <div class="project">
-  <h3>
-    SVD Demo
-    <a class="icon-link" href="https://github.com/timjb/svd-image-compression-demo">
-      <img alt="Github" class="icon" src="images/icons/github.png" />
+  <div class="project-desc">
+    <h3>
+      <a href="http://timbaumann.info/svd-image-compression-demo/">
+        Demo: Image Compression with SVD
+      </a>
+      <a class="icon-link" href="https://github.com/timjb/svd-image-compression-demo">
+        <img alt="Github" class="icon" src="images/icons/github.png" />
+      </a>
+    </h3>
+    <p>
+      <a href="https://en.wikipedia.org/wiki/Singular_value_decomposition">Singular value decomposition</a> is an important matrix factorisation.
+      It can be used to approximate a matrix by a matrix of lower rank, which can be stored and processed more efficiently.
+      This interactive webpage allows the user to compress images (which can be regarded as combination of three matrices, one for each color channel) using SVD and see how the quality of the compressed image depends on the number of singular values.
+    </p>
+    <p>
+      <span class="tag tag-design">visualization</span>
+      <span class="tag tag-theory">math</span>
+      <span class="tag tag-webtech">react</span>
+    </p>
+  </div>
+  <div class="project-img">
+    <a href="http://timbaumann.info/svd-image-compression-demo/">
+      <img src="images/projects/svd-mountains.jpg" />
     </a>
-  </h3>
-  <p>
-    <span class="tag tag-design">visualization</span>
-    <span class="tag tag-webtech">react</span>
-    <span class="tag tag-theory">math</span>
-  </p>
+  </div>
+  <div class="clear"></div>
 </div>
 
 <div class="project">
-  <h3>
-    OT Demo
-    <a class="icon-link" href="https://github.com/Operational-Transformation">
-      <img alt="Github" class="icon" src="images/icons/github.png" />
+  <div class="project-desc">
+    <h3>
+      <a href="http://operational-transformation.github.io/visualization.html">
+        Operational Transformation
+      </a>
+      <a class="icon-link" href="https://github.com/Operational-Transformation">
+        <img alt="Github" class="icon" src="images/icons/github.png" />
+      </a>
+      <a class="icon-link" href="https://hackage.haskell.org/package/ot">
+        <img alt="Hackage" class="icon" src="images/icons/haskell.png" />
+      </a>
+    </h3>
+    <p>
+      <a href="https://en.wikipedia.org/wiki/Operational_transformation">OT</a> is the synchronization algorithm used in many real-time collaborative applications like Etherpad and Google Docs.
+      It is based on a transform function for merging concurrent changes.
+      I've implemented a family of OT libraries
+      <a href="https://github.com/Operational-Transformation/ot.js">in</a>
+      <a href="https://github.com/Operational-Transformation/ot.hs">several</a>
+      <a href="https://github.com/Operational-Transformation/ot.v">programming</a>
+      <a href="https://github.com/Operational-Transformation/ot.lua">languages</a>, wich include a transform function for text documents and client/server modules.
+      I have also created an <a href="http://operational-transformation.github.io/visualization.html">interactive visualization</a>, which helps understanding OT.
+    </p>
+    <p>
+      <span class="tag tag-haskell">haskell</span>
+      <span class="tag tag-design">visualization</span>
+      <span class="tag tag-theory">algorithms</span>
+      <span class="tag tag-webtech">d3</span>
+    </p>
+  </div>
+  <div class="project-img">
+    <a href="http://operational-transformation.github.io/visualization.html">
+      <img src="images/projects/ot-visualization-large.png" />
     </a>
-  </h3>
-  <p>
-    <span class="tag tag-design">visualization</span>
-    <span class="tag tag-theory">algorithms</span>
-    <span class="tag tag-webtech">d3</span>
-  </p>
+  </div>
+  <div class="clear"></div>
 </div>
 
 <div class="project">
-  <h3>
-    <a href="http://curry-club-augsburg.de">Curry Club Website</a>
-    <a class="icon-link" href="https://github.com/curry-club-aux/curry-club-augsburg.de">
-      <img alt="Github" class="icon" src="images/icons/github.png" />
-    </a>
-  </h3>
-  <p>
-    <span class="tag tag-design">webdesign</span>
-    <span class="tag tag-haskell">hakyll</span>
-  </p>
+  <div class="project-desc">
+    <h3>
+      quantities
+      <a class="icon-link" href="https://github.com/timjb/quantities">
+        <img alt="Github" class="icon" src="images/icons/github.png" />
+      </a>
+    </h3>
+    <p>
+      A library for type-safe physical computations in the dependently typed programming language <a href="http://idris-lang.org/">Idris</a>.
+      It makes unit errors impossible by tagging each float that represents a physical measurement with its unit.
+      A value can be converted from one unit to another unit provided that the units have the same quantity (e.g. area).
+      To ensure this at compile time, units are indexed by their quantity.
+      The library uses the observation that both units and quantities are a <a href="https://en.wikipedia.org/wiki/Free_abelian_group">free abelian group</a> and the existence of a natural group homomorphism &phi; : Units &#8594; Quantities.
+    </p>
+    <p>
+      <span class="tag tag-idris">idris</span>
+      <span class="tag tag-api">api-design</span>
+    </p>
+  </div>
+  <div class="project-img">
+    <img src="images/projects/new-cuyama.jpg" />
+  </div>
+  <div class="clear"></div>
 </div>
 
 <div class="project">
-  <h3>
-    Rubiks-Cube
-    <a class="icon-link" href="https://github.com/timjb/diagrams-rubiks-cube">
-      <img alt="Github" class="icon" src="images/icons/github.png" />
-    </a>
-    <a class="icon-link" href="https://hackage.haskell.org/package/diagrams-rubiks-cube">
-      <img alt="Hackage" class="icon" src="images/icons/haskell.png" />
-    </a>
-  </h3>
-  <p>
-    <span class="tag tag-haskell">haskell</span>
-    <span class="tag tag-theory">math</span>
-    <span class="tag tag-writing">writing</span>
-  </p>
+  <div class="project-desc">
+    <h3>
+      diagrams-rubiks-cube
+      <a class="icon-link" href="https://github.com/timjb/diagrams-rubiks-cube">
+        <img alt="Github" class="icon" src="images/icons/github.png" />
+      </a>
+      <a class="icon-link" href="https://hackage.haskell.org/package/diagrams-rubiks-cube">
+        <img alt="Hackage" class="icon" src="images/icons/haskell.png" />
+      </a>
+    </h3>
+    <p>
+      This library draws Rubik's Cubes using <a href="http://hackage.haskell.org/package/diagrams"><code>diagrams</code></a>.
+      Given a start (or end state) and a series of steps to follow, it can produce images like the one on the right.
+      I used Edward Kmett's <a href="http://hackage.haskell.org/package/lens"><code>lens</code></a> library to succinctly express the calculation of the new facets after a rotation.
+      I used this library to generate the images for <a href="http://timbaumann.info/zauberwuerfel">this solution guide</a>.
+    </p>
+    <p>
+      <span class="tag tag-haskell">haskell</span>
+      <span class="tag tag-theory">math</span>
+      <span class="tag tag-writing">writing</span>
+    </p>
+  </div>
+  <div class="project-img">
+    <img src="images/projects/rubiks-cube.png" />
+  </div>
+  <div class="clear"></div>
+</div>
+
+<div id="more-projects">
+
+<div class="project">
+  <div class="project-desc">
+    <h3>
+      Purely Functional Data Structures in Idris
+      <a class="icon-link" href="https://github.com/timjb/idris-pfds">
+        <img alt="Github" class="icon" src="images/icons/github.png" />
+      </a>
+    </h3>
+    <p>
+      Implementations of various functional data structures from Okasaki's book and elsewhere in the dependently typed programming language <a href="http://idris-lang.org">Idris</a>.
+      Where possible, I tried to use size-indices.
+      All implementations have been verified as total by the Idris compiler.
+    </p>
+    <p>
+      <span class="tag tag-idris">idris</span>
+      <span class="tag tag-theory">algorithms</span>
+    </p>
+  </div>
+  <div class="project-img">
+    <img src="images/projects/pfds-cover.png" />
+  </div>
+  <div class="clear"></div>
 </div>
 
 <div class="project">
-  <h3>
-    Halma
-    <a class="icon-link" href="https://github.com/timjb/halma">
-      <img alt="Github" class="icon" src="images/icons/github.png" />
+  <div class="project-desc">
+    <h3>
+      <a href="http://timbaumann.info/uni-spicker">uni-spicker</a>
+      <a class="icon-link" href="https://github.com/timjb/uni-spicker">
+        <img alt="Github" class="icon" src="images/icons/github.png" />
+      </a>
+    </h3>
+    <p>
+      Cheat sheets which I'm writing to prepare for exams and as a reference for later.
+      All together, they comprise over 150 pages of dense mathematics and computer science!
+    </p>
+    <p>
+      <span class="tag tag-tex">latex</span>
+      <span class="tag tag-theory">math</span>
+      <span class="tag tag-writing">writing</span>
+    </p>
+  </div>
+  <div class="project-img">
+    <a href="http://timbaumann.info/uni-spicker/homoalg.pdf">
+      <img src="images/projects/komm-diagramm.png" />
     </a>
-    <a class="icon-link" href="https://hackage.haskell.org/package/halma">
-      <img alt="Hackage" class="icon" src="images/icons/haskell.png" />
-    </a>
-  </h3>
-  <p>
-    <span class="tag tag-haskell">haskell</span>
-  </p>
+  </div>
+  <div class="clear"></div>
 </div>
 
 <div class="project">
-  <h3>
-    pfds-idris
-    <a class="icon-link" href="https://github.com/timjb/idris-pfds">
-      <img alt="Github" class="icon" src="images/icons/github.png" />
+  <div class="project-desc">
+    <h3>
+      <a href="http://curry-club-augsburg.de">Curry Club Augsburg</a>
+      <a class="icon-link" href="https://github.com/curry-club-aux/curry-club-augsburg.de">
+        <img alt="Github" class="icon" src="images/icons/github.png" />
+      </a>
+    </h3>
+    <p>
+      I designed the logo and website for the local Haskell/FP user group which I have co-founded.
+    </p>
+    <p>
+      <span class="tag tag-design">webdesign</span>
+      <span class="tag tag-haskell">hakyll</span>
+    </p>
+  </div>
+  <div class="project-img">
+    <a href="http://curry-club-augsburg.de/">
+      <img src="images/projects/curry-club-website.png" />
     </a>
-  </h3>
-  <p>
-    <span class="tag tag-idris">idris</span>
-    <span class="tag tag-theory">algorithms</span>
-  </p>
+  </div>
+  <div class="clear"></div>
 </div>
 
 <div class="project">
-  <h3>
-    quantities
-    <a class="icon-link" href="https://github.com/timjb/quantities">
-      <img alt="Github" class="icon" src="images/icons/github.png" />
-    </a>
-  </h3>
-  <p>
-    <span class="tag tag-idris">idris</span>
-    <span class="tag tag-api">api-design</span>
-  </p>
+  <div class="project-desc">
+    <h3>
+      Halma
+      <a class="icon-link" href="https://github.com/timjb/halma">
+        <img alt="Github" class="icon" src="images/icons/github.png" />
+      </a>
+      <a class="icon-link" href="https://hackage.haskell.org/package/halma">
+        <img alt="Hackage" class="icon" src="images/icons/haskell.png" />
+      </a>
+    </h3>
+    <p>
+      I implemented the game rules and a simple <a href="http://hackage.haskell.org/package/diagrams"><code>diagrams</code></a>-based GUI for my favorite board game.
+      A friend of mine wrote a simple AI using search trees, which is actually quite hard to beat!
+    </p>
+    <p>
+      <span class="tag tag-haskell">haskell</span>
+    </p>
+  </div>
+  <div class="project-img">
+    <img src="images/projects/halma.png" />
+  </div>
+  <div class="clear"></div>
+</div>
+
+</div>
+
+<h1>Open Source Contributions</h1>
+
+<div class="project">
+  <div class="project-desc">
+    <h3>
+      reroute
+      <a class="icon-link" href="https://github.com/agrafix/reroute">
+        <img alt="Github" class="icon" src="images/icons/github.png" />
+      </a>
+      <a class="icon-link" href="https://hackage.haskell.org/package/reroute">
+        <img alt="Hackage" class="icon" src="images/icons/haskell.png" />
+      </a>
+    </h3>
+    <p>
+      This library implements the routing in the <a href="https://www.spock.li/">Spock</a> Haskell web framework.
+      It uses type-level lists to index routes by thy types of their parameters.
+      I've implemented it together with Alexander Thiemann, the author of Spock, during <a href="https://wiki.haskell.org/HacBerlin2014">HacBerlin2014</a>.
+      I've also written a <a href="https://www.spock.li/2015/04/19/type-safe_routing.html">tutorial</a> on the new routing system for the Spock blog.
+    </p>
+    <p>
+      <span class="tag tag-haskell">haskell</span>
+      <span class="tag tag-api">api-design</span>
+      <span class="tag tag-writing">writing</span>
+    </p>
+  </div>
+  <div class="clear"></div>
 </div>
 
 <div class="project">
-  <h3>
-    <a href="http://timbaumann.info/uni-spicker">uni-spicker</a>
-    <a class="icon-link" href="https://github.com/timjb/uni-spicker">
-      <img alt="Github" class="icon" src="images/icons/github.png" />
-    </a>
-  </h3>
-  <p>
-    <span class="tag tag-tex">latex</span>
-    <span class="tag tag-theory">math</span>
-    <span class="tag tag-writing">writing</span>
-  </p>
-</div>
-
-<h2>Open Source Contributions</h2>
-
-<div class="project">
-  <h3>
-    reroute
-    <a class="icon-link" href="https://github.com/timjb/uni-spicker">
-      <img alt="Github" class="icon" src="images/icons/github.png" />
-    </a>
-  </h3>
-  <p>
-    <span class="tag tag-haskell">haskell</span>
-    <span class="tag tag-api">api-design</span>
-    <span class="tag tag-writing">writing</span>
-  </p>
-</div>
-
-<div class="project">
-  <h3>
-    Timsort
-    <a class="icon-link" href="https://hackage.haskell.org/package/vector-algorithms/docs/Data-Vector-Algorithms-Tim.html">
-      <img alt="Hackage" class="icon" src="images/icons/haskell.png" />
-    </a>
-  </h3>
-  <p>I implemented my favorite sorting algorithm.</p>
-  <p>
-    <span class="tag tag-haskell">haskell</span>
-    <span class="tag tag-theory">algorithms</span>
-  </p>
+  <div class="project-desc">
+    <h3>
+      Timsort
+      <a class="icon-link" href="https://hackage.haskell.org/package/vector-algorithms/docs/Data-Vector-Algorithms-Tim.html">
+        <img alt="Hackage" class="icon" src="images/icons/haskell.png" />
+      </a>
+    </h3>
+    <p>
+      I contributed an implementation of my <a href="https://en.wikipedia.org/wiki/Timsort">favorite sorting algorithm</a> to <a href="http://hackage.haskell.org/package/vector-algorithms"><code>vector-algorithms</code></a>. The great thing about Timsort is <del>its name</del> that it is very fast (meaning linear time) on data that is already (partially) sorted.
+    </p>
+    <p>
+      <span class="tag tag-haskell">haskell</span>
+      <span class="tag tag-theory">algorithms</span>
+    </p>
+  </div>
+  <div class="clear"></div>
 </div>
 
 
 <div class="project">
-  <h3>
-    engine-io
-    <a class="icon-link" href="https://github.com/ocharles/engine.io">
-      <img alt="Github" class="icon" src="images/icons/github.png" />
-    </a>
-    <a class="icon-link" href="https://hackage.haskell.org/package/engine-io">
-      <img alt="Hackage" class="icon" src="images/icons/haskell.png" />
-    </a>
-  </h3>
-  <p>
-    This Haskell library by Oliver Charles provides the server component for <a href="https://github.com/socketio/engine.io">engine-io</a>, a protocol communicating to web clients with a socket-like abstraction.
-  I wrote the <a href="http://hackage.haskell.org/package/engine-io-yesod"><code>engine-io-yesod</code></a> backend.
-    I'm also a co-maintainer of the library.
-  </p>
-  <p>
-    <span class="tag tag-haskell">haskell</span>
-  </p>
+  <div class="project-desc">
+    <h3>
+      engine-io
+      <a class="icon-link" href="https://github.com/ocharles/engine.io">
+        <img alt="Github" class="icon" src="images/icons/github.png" />
+      </a>
+      <a class="icon-link" href="https://hackage.haskell.org/package/engine-io">
+        <img alt="Hackage" class="icon" src="images/icons/haskell.png" />
+      </a>
+    </h3>
+    <p>
+      This Haskell library by Oliver Charles provides the server component for <a href="https://github.com/socketio/engine.io">engine-io</a>, a protocol providing a socket-like communication channel between web clients and servers.
+    I wrote the <a href="http://hackage.haskell.org/package/engine-io-yesod"><code>engine-io-yesod</code></a> backend.
+      I'm also a co-maintainer of the library.
+    </p>
+    <p>
+      <span class="tag tag-haskell">haskell</span>
+    </p>
+  </div>
+  <div class="clear"></div>
 </div>
 
 <div class="project">
-  <h3>
-    lightyear
-    <a class="icon-link" href="https://github.com/ziman/lightyear">
-      <img alt="Github" class="icon" src="images/icons/github.png" />
-    </a>
-  </h3>
-  <p> (Idris parser combinator library) switched to continuation-style parsing:
-  https://github.com/ziman/lightyear/pull/8</p>
-  <p>
-    <span class="tag tag-idris">idris</span>
-    <span class="tag tag-theory">algorithms</span>
-  </p>
+  <div class="project-desc">
+    <h3>
+      lightyear
+      <a class="icon-link" href="https://github.com/ziman/lightyear">
+        <img alt="Github" class="icon" src="images/icons/github.png" />
+      </a>
+    </h3>
+    <p>
+      This parser combinator library is the Idris equivalent to <a href="http://hackage.haskell.org/package/parsec"><code>parsec</code></a>.
+      I've <a href="https://github.com/ziman/lightyear/pull/8">converted</a> it to continuation-passing style, which solved a stack overflow problem, and <a href="https://github.com/ziman/lightyear/pull/9">contributed</a> a JSON parser as an example.
+    </p>
+    <p>
+      <span class="tag tag-idris">idris</span>
+      <span class="tag tag-theory">algorithms</span>
+    </p>
+  </div>
+  <div class="clear"></div>
 </div>
 
 <div class="project">
-  <h3>
-    aeson-schema
-    <a class="icon-link" href="https://github.com/timjb/aeson-schema">
-      <img alt="Github" class="icon" src="images/icons/github.png" />
-    </a>
-  </h3>
+  <div class="project-desc">
+    <h3>
+      aeson-schema
+      <a class="icon-link" href="https://github.com/timjb/aeson-schema">
+        <img alt="Github" class="icon" src="images/icons/github.png" />
+      </a>
+    </h3>
+    <p>
+      An implementation of the JSON schema specification.
+      Includes a code-generator that produces Haskell data types and parsers for a given schema.
+    </p>
+  </div>
+  <div class="clear"></div>
 </div>
 
 
 (more projects and contributions on my <a href="https://github.com/timjb"><img class="icon" src="images/icons/github.png" /> Github profile</a>)
+
+<script>
+(function () {
+  var moreProjects = document.getElementById('more-projects');
+  moreProjects.style.display = 'none';
+  var moreProjectsLink = document.createElement('a');
+  moreProjectsLink.href = "#";
+  moreProjectsLink.id = 'more-projects-link';
+  moreProjectsLink.innerHTML = "+++ Show more projects +++";
+  moreProjects.parentNode.insertBefore(moreProjectsLink, moreProjects);
+  moreProjectsLink.addEventListener('click', function (evt) {
+    moreProjectsLink.parentNode.removeChild(moreProjectsLink);
+    moreProjects.style.display = 'block';
+    evt.preventDefault();
+  });
+})();
+</script>
