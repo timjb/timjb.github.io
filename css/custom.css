@@ -1,0 +1,34 @@
+/* Projects page */
+
+.icon-link { margin-left: 5px; }
+.icon-link:hover { opacity: 0.5; }
+img.icon { height: 16px; width: 16px; }
+
+.project {
+  width: 600px;
+}
+
+.project h3 {
+  font-size: 22px;
+  border-top: 1px solid #eee;
+  padding-top: 10px;
+}
+
+.tag {
+  display: inline-block;
+  font: 12px "Museo Sans", "Avenir Next", Avenir, helvetica, arial, sans-serif;
+  color: #fff;
+  border-radius: 5px;
+  line-height: 22px;
+  padding: 0 8px;
+  background: #000;
+}
+
+.tag-webtech { background: #FF4136; }
+.tag-haskell { background: #682071; }
+.tag-design { background: #0074D9; }
+.tag-idris { background: #85144b; }
+.tag-tex { background: #FF4136; }
+.tag-writing { background: #3D9970; }
+.tag-theory { background: #2ECC40; }
+.tag-api { background: #F012BE; }
