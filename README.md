@@ -1,4 +1,4 @@
-[![Build Status][circleci-img]][circleci-url]
+[![Build Status][travis-img]][travis-url]
 
-[circleci-img]: https://img.shields.io/circleci/project/timjb/timjb.github.com/soure.svg
-[circleci-url]: https://circleci.com/gh/timjb/timjb.github.com/tree/source
+[travis-img]: https://travis-ci.org/timjb/timjb.github.io.svg?branch=source
+[travis-url]: https://travis-ci.org/timjb/timjb.github.io
