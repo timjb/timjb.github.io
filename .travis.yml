@@ -1,32 +1,94 @@
+# Use new container infrastructure to enable caching
+sudo: false
+
+# Choose a lightweight base image; we provide our own build tools.
 language: c
 
-# See also https://github.com/hvr/multi-ghc-travis for more information
+# Caching so the next build will be fast too.
+cache:
+  directories:
+  - $HOME/.ghc
+  - $HOME/.cabal
+  - $HOME/.stack
 
 branches:
   only:
     - source
 
-env:
-  global:
-    - secure: "iaTdH46PsxpIn2cPUjl1rQl1aLgeSjVGRi3cHQ6ikQIni0isuMnXwAh9Poml1tWkMOzuivORxkrJQ8/OAILlA4AjDnkwZJOmP+XMmq100yyjecS/QI6KHYEha8FqgwDxg8YuICfle0gdSik2gTIpGqWvZdtgvCfZRyCqEoTW14k="
-  matrix:
-    - CABALVER=1.22 GHCVER=7.10.2
+# The different configurations we want to test. We have BUILD=cabal which uses
+# cabal-install, and BUILD=stack which uses Stack. More documentation on each
+# of those below.
+#
+# We set the compiler values here to tell Travis to use a different
+# cache file per set of arguments.
+#
+# If you need to have different apt packages for each combination in the
+# matrix, you can use a line such as:
+#     addons: {apt: {packages: [libfcgi-dev,libgmp-dev]}}
+matrix:
+  include:
+  # The Stack builds. We can pass in arbitrary Stack arguments via the ARGS
+  # variable, such as using --stack-yaml to point to a different file.
+  - env: BUILD=stack ARGS="--resolver lts-6"
+    compiler: ": #stack 7.10.3"
+    addons: {apt: {packages: [ghc-7.10.3], sources: [hvr-ghc]}}
+
+  exclude:
+  # We grab the appropriate GHC and cabal-install versions from hvr's PPA. See:
+  # https://github.com/hvr/multi-ghc-travis
+  - env: BUILD=cabal GHCVER=7.10.3 CABALVER=1.22
+    compiler: ": #GHC 7.10.3"
+    addons: {apt: {packages: [cabal-install-1.22,ghc-7.10.3], sources: [hvr-ghc]}}
+
+  # Build with the newest GHC and cabal-install. This is an accepted failure,
+  # see below.
+  - env: BUILD=cabal GHCVER=head  CABALVER=head
+    compiler: ": #GHC HEAD"
+    addons: {apt: {packages: [cabal-install-head,ghc-head], sources: [hvr-ghc]}}
+
+  # Nightly builds are allowed to fail
+  - env: BUILD=stack ARGS="--resolver nightly"
+    compiler: ": #stack nightly"
+    addons: {apt: {packages: [libgmp-dev]}}
+
+  allow_failures:
+  - env: BUILD=cabal GHCVER=head  CABALVER=head
+  - env: BUILD=stack ARGS="--resolver nightly"
 
 before_install:
-  - travis_retry sudo add-apt-repository -y ppa:hvr/ghc
-  - travis_retry sudo apt-get update
-  - travis_retry sudo apt-get install cabal-install-$CABALVER ghc-$GHCVER
-  - export PATH=/opt/ghc/$GHCVER/bin:/opt/cabal/$CABALVER/bin:$PATH
+# Using compiler above sets CC to an invalid value, so unset it
+- unset CC
+
+# We want to always allow newer versions of packages when building on GHC HEAD
+- CABALARGS=""
+- if [ "x$GHCVER" = "xhead" ]; then CABALARGS=--allow-newer; fi
+
+# Download and unpack the stack executable
+- export PATH=/opt/ghc/$GHCVER/bin:/opt/cabal/$CABALVER/bin:$HOME/.local/bin:$PATH
+- mkdir -p ~/.local/bin
+- curl -L https://www.stackage.org/stack/linux-x86_64 | tar xz --wildcards --strip-components=1 -C ~/.local/bin '*/stack'
 
 install:
-  - cabal --version
-  - echo "$(ghc --version) [$(ghc --print-project-git-commit-id 2> /dev/null || echo '?')]"
-  - travis_retry cabal update
-  - cabal install --only-dependencies --enable-tests --enable-benchmarks
-  - cabal build
+- echo "$(ghc --version) [$(ghc --print-project-git-commit-id 2> /dev/null || echo '?')]"
+- if [ -f configure.ac ]; then autoreconf -i; fi
+- |
+  case "$BUILD" in
+    stack)
+      stack --no-terminal --install-ghc $ARGS install
+      ;;
+    cabal)
+      cabal --version
+      travis_retry cabal update
+      cabal install --force-reinstalls --ghc-options=-O0 --reorder-goals --max-backjumps=-1 $CABALARGS
+      ;;
+  esac
 
 before_script:
-  - git config --global user.email "tim@timbaumann.info"
+  - git config --global user.email "travis@timbaumann.info"
   - git config --global user.name "Travis"
+  - mkdir -m 700 -p $HOME/.ssh
+  - echo "$SSH_DEPLOY_KEY" | base64 -d > $HOME/.ssh/id_rsa
+  - chmod 600 $HOME/.ssh/id_rsa
 
-script: ./deploy.sh "$REPO_URL"
+script:
+- ./deploy.sh git@github.com:timjb/timbaumann.info.git
