@@ -68,4 +68,4 @@ before_script:
   - chmod 600 $HOME/.ssh/id_rsa
 
 script:
-- ./deploy.sh git@github.com:timjb/timbaumann.info.git
+- ./deploy.sh git@github.com:timjb/timjb.github.io.git
