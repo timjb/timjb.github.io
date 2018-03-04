@@ -1,5 +1,6 @@
 flags: {}
 packages:
 - '.'
-extra-deps: []
+extra-deps:
+- hakyll-4.11.0.0 # https://github.com/jaspervdj/hakyll/issues/612
 resolver: lts-10.7
