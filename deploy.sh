@@ -12,18 +12,20 @@ else
 fi
 
 cd $(dirname "$0")
-CURR_REPO=$(git rev-parse --show-toplevel)
-CURR_ORIGIN=$(git config --get remote.origin.url)
+DEFAULT_ORIGIN="git@github.com:timjb/timjb.github.io.git"
+DEFAULT_TARGET_BRANCH="master"
 
 if [ "$1" == "-h" -o "$1" == "--help" -o $# -gt 1 ]; then
-  echo "Usage: ./deploy.sh [REMOTE-REPO-URL]"
+  echo "Usage: ./deploy.sh [REMOTE-REPO-URL] [TARGET-BRANCH]"
   echo ""
-  echo "By default, REMOTE-REPO-URL is '$CURR_ORIGIN',"
-  echo "the 'origin' of the git repository at '$CURR_REPO'."
+  echo "By default, REMOTE-REPO-URL is '$DEFAULT_ORIGIN',"
+  echo "and TARGET-BRANCH is '$DEFAULT_TARGET_BRANCH'."
   exit 0
 fi
 
-ORIGIN=${1:-$CURR_ORIGIN}
+ORIGIN=${1:-$DEFAULT_ORIGIN}
+TARGET_BRANCH=${2:-$DEFAULT_TARGET_BRANCH}
+
 BUILD_DIR=$(mktemp -d builddir-XXXX)
 
 function onerr() {

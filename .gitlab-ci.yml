@@ -25,5 +25,15 @@ gen-site:
     paths:
       - _cache
       - _site
+  before_script:
+    - 'which ssh-agent || ( apt-get update -y && apt-get install openssh-client -y )'
+    - eval $(ssh-agent -s)
+    - git config --global user.email "gitlab@timbaumann.info"
+    - git config --global user.name "GitLab CI"
+    - mkdir -m 700 -p $HOME/.ssh
+    - echo "$SSH_DEPLOY_KEY" | tr -d '\r' > ~/.ssh/id_rsa
+    - chmod 600 ~/.ssh/id_rsa
+    - ssh-add ~/.ssh/id_rsa
+    - ssh-keyscan -H 'github.com' >> ~/.ssh/known_hosts
   script:
     - ./deploy.sh
