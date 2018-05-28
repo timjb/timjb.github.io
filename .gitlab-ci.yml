@@ -28,8 +28,6 @@ pages:
   script:
     - ./binaries/timbaumann build
     - cp -R _site public
-    - mkdir -p public/.well-known/acme-challenge/
-    - echo "bCQ3zZ46yhYj_kI-cUTMCiTxuIOqbpX9r0pB2sG1jRc.iDLyYOIG4KYO8AnWTp3YWHQ6jG-wTVRCBo0bOUVhGJk" > public/.well-known/acme-challenge/bCQ3zZ46yhYj_kI-cUTMCiTxuIOqbpX9r0pB2sG1jRc
   artifacts:
     paths:
       - public
