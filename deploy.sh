@@ -4,8 +4,8 @@
 TARGET_BRANCH=master
 if which timbaumann; then
   SITE=timbaumann
-elif [ -e ./dist/build/timbaumann/timbaumann ]; then
-  SITE=./dist/build/timbaumann/timbaumann
+elif [ -e ./binaries/timbaumann ]; then
+  SITE=./binaries/timbaumann
 else
   echo "executable 'timbaumann' not found"
   exit 1
@@ -32,19 +32,10 @@ function onerr() {
 }
 trap onerr ERR
 
-# may fail if "$CURR_REPO" is a 'shallow' repository
-if git clone -b "$TARGET_BRANCH" --single-branch "$CURR_REPO" "$BUILD_DIR"; then
-  pushd "$BUILD_DIR"
-  git pull "$ORIGIN" "$TARGET_BRANCH"
-  popd
-else
-  git clone -b "$TARGET_BRANCH" --single-branch "$ORIGIN" "$BUILD_DIR"
-fi
+git clone -b "$TARGET_BRANCH" --single-branch "$ORIGIN" "$BUILD_DIR"
 
-$SITE clean
 $SITE build
 cp -R ./_site/* "$BUILD_DIR"
-$SITE clean
 
 cd "$BUILD_DIR"
 git add --all

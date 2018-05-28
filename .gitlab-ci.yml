@@ -19,15 +19,11 @@ build:
     - mkdir -p .stack binaries
     - stack install --system-ghc --local-bin-path binaries
 
-pages:
+gen-site:
   stage: deploy
   cache:
     paths:
       - _cache
       - _site
   script:
-    - ./binaries/timbaumann build
-    - cp -R _site public
-  artifacts:
-    paths:
-      - public
+    - ./deploy.sh
