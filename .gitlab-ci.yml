@@ -1,0 +1,24 @@
+image: fpco/stack-build:lts-10.10
+
+stages:
+  - build
+  - deploy
+
+build:
+  stage: build
+  cache:
+    paths:
+      - .stack-work
+  script:
+    - stack build
+
+pages:
+  stage: deploy
+  cache:
+    paths:
+      - _cache
+  script:
+    - stack exec timbaumann build
+  artifacts:
+    paths:
+      - _site
