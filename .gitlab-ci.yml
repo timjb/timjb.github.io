@@ -6,19 +6,30 @@ stages:
 
 build:
   stage: build
+  variables:
+    STACK_ROOT: "${CI_PROJECT_DIR}/.stack"
   cache:
     paths:
       - .stack-work
+      - .stack
+  artifacts:
+    paths:
+      - binaries
   script:
-    - stack build
+    - mkdir -p .stack binaries
+    - stack install --system-ghc --local-bin-path binaries
 
 pages:
   stage: deploy
   cache:
     paths:
       - _cache
+      - _site
   script:
-    - stack exec timbaumann build
+    - ./binaries/timbaumann build
+    - cp -R _site public
+    - mkdir -p public/.well-known/acme-challenge/
+    - echo "bCQ3zZ46yhYj_kI-cUTMCiTxuIOqbpX9r0pB2sG1jRc.iDLyYOIG4KYO8AnWTp3YWHQ6jG-wTVRCBo0bOUVhGJk" > public/.well-known/acme-challenge/bCQ3zZ46yhYj_kI-cUTMCiTxuIOqbpX9r0pB2sG1jRc
   artifacts:
     paths:
-      - _site
+      - public

@@ -13,3 +13,5 @@
 *.log
 *.out
 .DS_Store
+
+public
