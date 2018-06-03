@@ -1,7 +1,5 @@
 flags: {}
 packages:
 - '.'
-extra-deps:
-- hakyll-4.11.0.0 # https://github.com/jaspervdj/hakyll/issues/612
-- pandoc-citeproc-0.13.0.1
-resolver: lts-10.10
+extra-deps: []
+resolver: lts-11.11

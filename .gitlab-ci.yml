@@ -1,4 +1,4 @@
-image: fpco/stack-build:lts-10.10
+image: fpco/stack-build:lts-11.11
 
 stages:
   - build
