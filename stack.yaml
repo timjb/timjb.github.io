@@ -1,3 +1,6 @@
+nix:
+  enable: true
+  packages: [unzip zlib]
 flags: {}
 packages:
 - '.'
