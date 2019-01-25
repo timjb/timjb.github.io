@@ -17,7 +17,7 @@ build:
       - binaries
   script:
     - mkdir -p .stack binaries
-    - stack install --system-ghc --local-bin-path binaries
+    - stack install --no-nix --system-ghc --local-bin-path binaries
 
 gen-site:
   stage: deploy
