@@ -1,3 +1,3 @@
 ---
-target: http://timbaumann.info/mathezirkel-kurs/rubiks-wuerfel-workshop/anleitung.pdf
+target: https://timbaumann.info/mathezirkel-kurs/rubiks-wuerfel-workshop/anleitung.pdf
 ---

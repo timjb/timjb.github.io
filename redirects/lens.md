@@ -1,3 +1,3 @@
 ---
-target: http://timbaumann.info/presentations/lens/lens.pdf
+target: https://timbaumann.info/presentations/lens/lens.pdf
 ---

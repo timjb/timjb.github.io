@@ -1,3 +1,3 @@
 ---
-target: http://timbaumann.info/svd-image-compression-demo/
+target: https://timbaumann.info/svd-image-compression-demo/
 ---
