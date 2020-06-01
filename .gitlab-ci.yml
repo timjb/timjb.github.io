@@ -33,6 +33,10 @@ gen-site:
     - mkdir -m 700 -p $HOME/.ssh
     - echo "$SSH_DEPLOY_KEY" | tr -d '\r' > ~/.ssh/id_rsa
     - chmod 600 ~/.ssh/id_rsa
+    # see https://stackoverflow.com/a/33065287/767120
+    - echo $'!/bin/sh\n' "echo $SSH_DEPLOY_KEY_PASSPHRASE" > ap-helper.sh
+    - chmod +x ap-helper.sh
+    - cat ~/.ssh/id_rsa | SSH_ASKPASS=./ap-helper.sh ssh-add -
     - ssh-add ~/.ssh/id_rsa
     - ssh-keyscan -H 'github.com' >> ~/.ssh/known_hosts
   script:
