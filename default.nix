@@ -1,4 +1,4 @@
-{ nixpkgs ? import <nixpkgs> { config = { allowUnfree = true; }; }, compiler ? "ghc865" }:
+{ nixpkgs ? import ./nix/nixpkgs.nix { config = { allowUnfree = true; }; }, compiler ? "ghc865" }:
 
 let
   inherit (nixpkgs) pkgs;

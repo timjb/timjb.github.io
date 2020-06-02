@@ -1,4 +1,4 @@
-{ nixpkgs ? import <nixpkgs> { config = { allowUnfree = true; }; }, compiler ? "default" }:
+{ nixpkgs ? import ./nix/nixpkgs.nix { config = { allowUnfree = true; }; }, compiler ? "default" }:
 
 let
   inherit (nixpkgs) pkgs;
