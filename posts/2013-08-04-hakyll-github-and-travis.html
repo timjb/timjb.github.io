@@ -38,8 +38,8 @@
 <p>So, for a first post, I’ll share my blogging setup. Being a Haskell fan and proponent of simple systems, I had no other choice but to use Jasper van der Jeugt’s excellent <a href="http://jaspervdj.be/hakyll/">Hakyll</a> static site generator. And since I like version control and Github, I’m hosting both the <a href="https://github.com/timjb/timjb.github.com">source</a> and the generated site on Github using <a href="http://pages.github.com/">Github Pages</a>.</p>
 <h2 id="the-basic-setup">The basic setup</h2>
 <p>After <a href="http://jaspervdj.be/hakyll/tutorials/01-installation.html">installing Hakyll</a>, you can create a simple site by running</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb1-1" data-line-number="1">$ <span class="ex">hakyll-init</span> your-name.github.com</a>
-<a class="sourceLine" id="cb1-2" data-line-number="2">$ <span class="bu">cd</span> your-name.github.com</a></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1"></a>$ <span class="ex">hakyll-init</span> your-name.github.com</span>
+<span id="cb1-2"><a href="#cb1-2"></a>$ <span class="bu">cd</span> your-name.github.com</span></code></pre></div>
 <p>This generates a directory structure that looks like this:</p>
 <pre><code>$ tree
 .
@@ -62,58 +62,58 @@
     ├── post-item.html
     └── post.html</code></pre>
 <p>The file <code>site.hs</code> contains the rules for building the site, specified in Hakyll’s DSL. I won’t go into the details of this, as there are <a href="http://yannesposito.com/Scratch/en/blog/Hakyll-setup/">already</a> <a href="http://jaspervdj.be/hakyll/">many</a> <a href="http://mark.reid.name/blog/switching-to-hakyll.html">tutorials</a> <a href="https://benjeffrey.com/posts/building-benjeffrey.com-with-hakyll">explaining</a> how to set up routes and build rules. Let’s quickly initialize a git repository and set up synchronization with it’s github counterpart with</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb3-1" data-line-number="1">$ <span class="fu">git</span> init</a>
-<a class="sourceLine" id="cb3-2" data-line-number="2">$ <span class="fu">git</span> remote add origin https://github.com/your-name/your-name.github.com.git</a></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1"></a>$ <span class="fu">git</span> init</span>
+<span id="cb3-2"><a href="#cb3-2"></a>$ <span class="fu">git</span> remote add origin https://github.com/your-name/your-name.github.com.git</span></code></pre></div>
 <p>You can now build the site with</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb4-1" data-line-number="1">$ <span class="ex">ghc</span> --make site.hs</a>
-<a class="sourceLine" id="cb4-2" data-line-number="2">$ <span class="ex">./site</span> build</a></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1"></a>$ <span class="ex">ghc</span> --make site.hs</span>
+<span id="cb4-2"><a href="#cb4-2"></a>$ <span class="ex">./site</span> build</span></code></pre></div>
 <p>This outputs the final site in the directory <code>_site</code>. But here we have a problem. Github Pages serves the content of the repository <code>your-name/your-name.github.com</code> on the same domain. Our content, however, is in subfolder <code>_site</code>! One neat trick that I learned from <a href="http://agam.github.io/posts/beginning-with-hakyll.html">Agam Brahma</a> to deal with this, is the following: You create one extra branch in the repository, named <code>source</code>, that will contain the source code for your static site. The static site itself will reside in the default <code>main</code> branch. To synchronize them, you add your repository (the <code>main</code> branch) as a git submodule under the directory <code>_site</code> to the <code>source</code> branch of the same repository. If you didn’t understand the last sentence, no problem. Just run the following:</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb5-1" data-line-number="1">$ <span class="fu">git</span> commit --allow-empty -m <span class="st">&quot;dummy first commit&quot;</span></a>
-<a class="sourceLine" id="cb5-2" data-line-number="2">$ <span class="fu">git</span> push origin master</a>
-<a class="sourceLine" id="cb5-3" data-line-number="3">$ <span class="fu">git</span> checkout --orphan source</a>
-<a class="sourceLine" id="cb5-4" data-line-number="4">$ <span class="fu">git</span> submodule add https://github.com/your-name/your-name.github.com.git _site</a></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1"></a>$ <span class="fu">git</span> commit --allow-empty -m <span class="st">&quot;dummy first commit&quot;</span></span>
+<span id="cb5-2"><a href="#cb5-2"></a>$ <span class="fu">git</span> push origin master</span>
+<span id="cb5-3"><a href="#cb5-3"></a>$ <span class="fu">git</span> checkout --orphan source</span>
+<span id="cb5-4"><a href="#cb5-4"></a>$ <span class="fu">git</span> submodule add https://github.com/your-name/your-name.github.com.git _site</span></code></pre></div>
 <p>Now you can build your site and push it to Github:</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb6-1" data-line-number="1">$ <span class="ex">vim</span> about.rst</a>
-<a class="sourceLine" id="cb6-2" data-line-number="2">$ <span class="fu">git</span> add --all</a>
-<a class="sourceLine" id="cb6-3" data-line-number="3">$ <span class="fu">git</span> commit -m <span class="st">&quot;edited about page&quot;</span></a>
-<a class="sourceLine" id="cb6-4" data-line-number="4">$ <span class="fu">git</span> push origin source</a>
-<a class="sourceLine" id="cb6-5" data-line-number="5">$ <span class="ex">./site</span> build</a>
-<a class="sourceLine" id="cb6-6" data-line-number="6">$ <span class="bu">cd</span> _site</a>
-<a class="sourceLine" id="cb6-7" data-line-number="7">$ <span class="fu">git</span> add --all</a>
-<a class="sourceLine" id="cb6-8" data-line-number="8">$ <span class="fu">git</span> commit -m <span class="st">&quot;new about page&quot;</span></a>
-<a class="sourceLine" id="cb6-9" data-line-number="9">$ <span class="fu">git</span> push origin master</a>
-<a class="sourceLine" id="cb6-10" data-line-number="10">$ <span class="bu">cd</span> ..</a></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1"></a>$ <span class="ex">vim</span> about.rst</span>
+<span id="cb6-2"><a href="#cb6-2"></a>$ <span class="fu">git</span> add --all</span>
+<span id="cb6-3"><a href="#cb6-3"></a>$ <span class="fu">git</span> commit -m <span class="st">&quot;edited about page&quot;</span></span>
+<span id="cb6-4"><a href="#cb6-4"></a>$ <span class="fu">git</span> push origin source</span>
+<span id="cb6-5"><a href="#cb6-5"></a>$ <span class="ex">./site</span> build</span>
+<span id="cb6-6"><a href="#cb6-6"></a>$ <span class="bu">cd</span> _site</span>
+<span id="cb6-7"><a href="#cb6-7"></a>$ <span class="fu">git</span> add --all</span>
+<span id="cb6-8"><a href="#cb6-8"></a>$ <span class="fu">git</span> commit -m <span class="st">&quot;new about page&quot;</span></span>
+<span id="cb6-9"><a href="#cb6-9"></a>$ <span class="fu">git</span> push origin master</span>
+<span id="cb6-10"><a href="#cb6-10"></a>$ <span class="bu">cd</span> ..</span></code></pre></div>
 <p>The website should now be live at <code>your-name.github.com</code>.</p>
 <h2 id="building-the-static-site-with-travis-ci">Building the static site with Travis CI</h2>
-<p>One cool thing about using Github Pages and the <a href="http://jekyllrb.com/">Jekyll</a> static site generator is that you can push your source code to Github and Github will take care of building and publishing your site. You can achieve a similar effect by using <a href="http://travis-ci.org">Travis CI</a>, a hosted continouos integration service for open source projects. We’re not going to use Travis for testing, though. Instead, we will misuse it as a tool that runs our builds our website whenever we push some changes to our repository and publish.<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a> Specifically, we will make Travis install Hakyll, build the <code>site</code> executable, generate the static site and publish the changes to Github. For the last step, we will need to authorize Travis to publish changes to the Github repository. We will use a url to the Github repository with HTTP authentication information to do this. To make sure nobody sees your password, run</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb7-1" data-line-number="1">$ <span class="ex">gem</span> install travis</a>
-<a class="sourceLine" id="cb7-2" data-line-number="2">$ <span class="ex">travis</span> encrypt <span class="st">&quot;REPO_URL=https://your-name:password@github.com/your-name/your-name.github.com.git&quot;</span></a></code></pre></div>
+<p>One cool thing about using Github Pages and the <a href="http://jekyllrb.com/">Jekyll</a> static site generator is that you can push your source code to Github and Github will take care of building and publishing your site. You can achieve a similar effect by using <a href="http://travis-ci.org">Travis CI</a>, a hosted continouos integration service for open source projects. We’re not going to use Travis for testing, though. Instead, we will misuse it as a tool that runs our builds our website whenever we push some changes to our repository and publish.<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> Specifically, we will make Travis install Hakyll, build the <code>site</code> executable, generate the static site and publish the changes to Github. For the last step, we will need to authorize Travis to publish changes to the Github repository. We will use a url to the Github repository with HTTP authentication information to do this. To make sure nobody sees your password, run</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1"></a>$ <span class="ex">gem</span> install travis</span>
+<span id="cb7-2"><a href="#cb7-2"></a>$ <span class="ex">travis</span> encrypt <span class="st">&quot;REPO_URL=https://your-name:password@github.com/your-name/your-name.github.com.git&quot;</span></span></code></pre></div>
 <p>Travis uses a configuration file named <code>.travis.ci</code> in the main folder of your repository. After many trial builds and configuration changes, I arrived at this version of <code>.travis.ci</code>:</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode yaml"><code class="sourceCode yaml"><a class="sourceLine" id="cb8-1" data-line-number="1"><span class="fu">language:</span><span class="at"> haskell</span></a>
-<a class="sourceLine" id="cb8-2" data-line-number="2"><span class="fu">branches:</span></a>
-<a class="sourceLine" id="cb8-3" data-line-number="3">  <span class="fu">only:</span></a>
-<a class="sourceLine" id="cb8-4" data-line-number="4">    <span class="kw">-</span> source</a>
-<a class="sourceLine" id="cb8-5" data-line-number="5"><span class="fu">env:</span></a>
-<a class="sourceLine" id="cb8-6" data-line-number="6">  <span class="fu">global:</span></a>
-<a class="sourceLine" id="cb8-7" data-line-number="7">    <span class="kw">-</span> <span class="fu">secure:</span><span class="at"> </span><span class="st">&quot;the secret you just generated&quot;</span></a>
-<a class="sourceLine" id="cb8-8" data-line-number="8"><span class="fu">install:</span></a>
-<a class="sourceLine" id="cb8-9" data-line-number="9">  <span class="kw">-</span> cabal install hakyll</a>
-<a class="sourceLine" id="cb8-10" data-line-number="10">  <span class="kw">-</span> ghc --make site.hs</a>
-<a class="sourceLine" id="cb8-11" data-line-number="11"><span class="fu">before_script:</span></a>
-<a class="sourceLine" id="cb8-12" data-line-number="12">  <span class="kw">-</span> cd _site</a>
-<a class="sourceLine" id="cb8-13" data-line-number="13">  <span class="kw">-</span> git checkout master</a>
-<a class="sourceLine" id="cb8-14" data-line-number="14">  <span class="kw">-</span> git pull origin master</a>
-<a class="sourceLine" id="cb8-15" data-line-number="15">  <span class="kw">-</span> cd ..</a>
-<a class="sourceLine" id="cb8-16" data-line-number="16"><span class="fu">script:</span><span class="at"> ./site build</span></a>
-<a class="sourceLine" id="cb8-17" data-line-number="17"><span class="fu">after_script:</span></a>
-<a class="sourceLine" id="cb8-18" data-line-number="18">  <span class="kw">-</span> cd _site</a>
-<a class="sourceLine" id="cb8-19" data-line-number="19">  <span class="kw">-</span> git status</a>
-<a class="sourceLine" id="cb8-20" data-line-number="20">  <span class="kw">-</span> git add --all</a>
-<a class="sourceLine" id="cb8-21" data-line-number="21">  <span class="kw">-</span> git config --global user.email <span class="st">&quot;your@mailaddress.com&quot;</span></a>
-<a class="sourceLine" id="cb8-22" data-line-number="22">  <span class="kw">-</span> git config --global user.name <span class="st">&quot;Travis&quot;</span></a>
-<a class="sourceLine" id="cb8-23" data-line-number="23">  <span class="kw">-</span> <span class="fu">git commit -m &quot;snapshot $(date '+%m/%d/%y %H:</span><span class="at">%M')&quot;</span></a>
-<a class="sourceLine" id="cb8-24" data-line-number="24">  <span class="kw">-</span> git push <span class="st">&quot;$REPO_URL&quot;</span> master | grep -v http</a>
-<a class="sourceLine" id="cb8-25" data-line-number="25">  <span class="kw">-</span> cd ..</a></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb8-1"><a href="#cb8-1"></a><span class="fu">language</span><span class="kw">:</span><span class="at"> haskell</span></span>
+<span id="cb8-2"><a href="#cb8-2"></a><span class="fu">branches</span><span class="kw">:</span></span>
+<span id="cb8-3"><a href="#cb8-3"></a><span class="at">  </span><span class="fu">only</span><span class="kw">:</span></span>
+<span id="cb8-4"><a href="#cb8-4"></a><span class="at">    </span><span class="kw">-</span><span class="at"> source</span></span>
+<span id="cb8-5"><a href="#cb8-5"></a><span class="fu">env</span><span class="kw">:</span></span>
+<span id="cb8-6"><a href="#cb8-6"></a><span class="at">  </span><span class="fu">global</span><span class="kw">:</span></span>
+<span id="cb8-7"><a href="#cb8-7"></a><span class="at">    </span><span class="kw">-</span><span class="at"> </span><span class="fu">secure</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;the secret you just generated&quot;</span></span>
+<span id="cb8-8"><a href="#cb8-8"></a><span class="fu">install</span><span class="kw">:</span></span>
+<span id="cb8-9"><a href="#cb8-9"></a><span class="at">  </span><span class="kw">-</span><span class="at"> cabal install hakyll</span></span>
+<span id="cb8-10"><a href="#cb8-10"></a><span class="at">  </span><span class="kw">-</span><span class="at"> ghc --make site.hs</span></span>
+<span id="cb8-11"><a href="#cb8-11"></a><span class="fu">before_script</span><span class="kw">:</span></span>
+<span id="cb8-12"><a href="#cb8-12"></a><span class="at">  </span><span class="kw">-</span><span class="at"> cd _site</span></span>
+<span id="cb8-13"><a href="#cb8-13"></a><span class="at">  </span><span class="kw">-</span><span class="at"> git checkout master</span></span>
+<span id="cb8-14"><a href="#cb8-14"></a><span class="at">  </span><span class="kw">-</span><span class="at"> git pull origin master</span></span>
+<span id="cb8-15"><a href="#cb8-15"></a><span class="at">  </span><span class="kw">-</span><span class="at"> cd ..</span></span>
+<span id="cb8-16"><a href="#cb8-16"></a><span class="fu">script</span><span class="kw">:</span><span class="at"> ./site build</span></span>
+<span id="cb8-17"><a href="#cb8-17"></a><span class="fu">after_script</span><span class="kw">:</span></span>
+<span id="cb8-18"><a href="#cb8-18"></a><span class="at">  </span><span class="kw">-</span><span class="at"> cd _site</span></span>
+<span id="cb8-19"><a href="#cb8-19"></a><span class="at">  </span><span class="kw">-</span><span class="at"> git status</span></span>
+<span id="cb8-20"><a href="#cb8-20"></a><span class="at">  </span><span class="kw">-</span><span class="at"> git add --all</span></span>
+<span id="cb8-21"><a href="#cb8-21"></a><span class="at">  </span><span class="kw">-</span><span class="at"> git config --global user.email &quot;your@mailaddress.com&quot;</span></span>
+<span id="cb8-22"><a href="#cb8-22"></a><span class="at">  </span><span class="kw">-</span><span class="at"> git config --global user.name &quot;Travis&quot;</span></span>
+<span id="cb8-23"><a href="#cb8-23"></a><span class="at">  </span><span class="kw">-</span><span class="at"> git commit -m &quot;snapshot $(date '+%m/%d/%y %H:%M')&quot;</span></span>
+<span id="cb8-24"><a href="#cb8-24"></a><span class="at">  </span><span class="kw">-</span><span class="at"> git push &quot;$REPO_URL&quot; master | grep -v http</span></span>
+<span id="cb8-25"><a href="#cb8-25"></a><span class="at">  </span><span class="kw">-</span><span class="at"> cd ..</span></span></code></pre></div>
 <p>Some details requiring some explaining about this:</p>
 <ul>
 <li>We use Travis only on the <code>source</code> branch.</li>
@@ -122,18 +122,18 @@
 <li>The tool <code>grep</code> is used to hide the line with the repository url and the HTTP authentication information.</li>
 </ul>
 <figure>
-<img src="../images/blog-travis.png" alt="A build on Travis CI" /><figcaption>A build on Travis CI</figcaption>
+<img src="../images/blog-travis.png" alt /><figcaption>A build on Travis CI</figcaption>
 </figure>
 <p>Commit this file, and <a href="http://about.travis-ci.org/docs/user/getting-started/">set up</a> Travis. Now you should be ready to go! Edit some file, push it to Github and your changes should be live … about 15 Minutes later. Yeah, that’s a bit long, but installing Hakyll on Travis takes some time. I’ll try to reduce that time and will let you know when I have found out how to do so.</p>
 <h2 id="bonus-editing-on-github">Bonus: Editing on Github</h2>
 <figure>
-<img src="../images/blog-github.png" alt="Editing this post on Github" /><figcaption>Editing this post on Github</figcaption>
+<img src="../images/blog-github.png" alt /><figcaption>Editing this post on Github</figcaption>
 </figure>
 <p>Since Github supports <a href="https://github.com/blog/1327-creating-files-on-github">creating</a>, <a href="https://github.com/blog/1436-moving-and-renaming-files-on-github">renaming</a> and <a href="https://github.com/blog/1545-deleting-files-on-github">removing</a> files, I can now update my site from any computer in the world which has a web browser, without needing to have Git or Hakyll installed.</p>
-<section class="footnotes">
+<section class="footnotes" role="doc-endnotes">
 <hr />
 <ol>
-<li id="fn1"><p>Apparently, I’m <a href="http://wesleyhales.com/blog/2013/03/29/Fun-with-Static-Site-Generators-and-Travis/">not the first one</a> to have the idea of using Travis CI for this purpose.<a href="#fnref1" class="footnote-back">↩</a></p></li>
+<li id="fn1" role="doc-endnote"><p>Apparently, I’m <a href="http://wesleyhales.com/blog/2013/03/29/Fun-with-Static-Site-Generators-and-Travis/">not the first one</a> to have the idea of using Travis CI for this purpose.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 </ol>
 </section>
 
