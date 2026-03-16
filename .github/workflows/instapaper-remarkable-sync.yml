@@ -1,0 +1,29 @@
+name: Sync Instapaper to reMarkable
+
+on:
+  schedule:
+    - cron: '0 11 * * *'  # ~12:00 CET / ~13:00 CEST
+    - cron: '0 17 * * *'  # ~18:00 CET / ~19:00 CEST
+    - cron: '0 21 * * *'  # ~22:00 CET / ~23:00 CEST
+  workflow_dispatch: {} # Manual trigger
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    environment: instapaper-remarkable-sync
+    steps:
+      - name: Install Sprites CLI
+        run: |
+          curl -fsSL https://sprites.dev/install.sh | bash
+          echo "$HOME/.local/bin" >> $GITHUB_PATH
+
+      - name: Setup Sprites auth
+        run: sprite auth setup --token "$SPRITES_TOKEN"
+        env:
+          SPRITES_TOKEN: ${{ secrets.SPRITES_TOKEN }}
+
+      - name: Run sync
+        run: |
+          sprite exec -s remarkable-instapaper-sync \
+            --dir /home/sprite/instapaper-remarkable-sync \
+            /.sprite/bin/python3 sync.py
